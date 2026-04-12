@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procurement & Vendor Opportunities — Detroit-Wayne Joint Building Authority</title>
+  <meta name="description" content="The Detroit-Wayne Joint Building Authority procurement page. View active bid opportunities, vendor resources, and learn how to do business with DWJBA.">
+  <meta property="og:title" content="Procurement & Vendor Opportunities — DWJBA">
+  <meta property="og:description" content="Transparent, competitive procurement from the Detroit-Wayne Joint Building Authority. View RFPs, IFBs, and vendor resources.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+<!-- ALERT BANNER -->
+<div class="alert-banner" id="alertBanner">
+  <div class="alert-inner">
+    <i data-lucide="info" class="alert-icon"></i>
+    <span>The DWJBA Board of Commissioners meeting is scheduled for <strong>April 24, 2026 at 10:00 AM</strong> in the 13th Floor Auditorium.</span>
+    <button class="alert-close" onclick="document.getElementById('alertBanner').style.display='none'" aria-label="Dismiss alert">
+      <i data-lucide="x"></i>
+    </button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Detroit-Wayne Joint Building Authority Home">
+      <svg class="logo-seal" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <circle cx="24" cy="24" r="23" fill="var(--brand-brown)" stroke="var(--brand-tan)" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="19" fill="none" stroke="var(--brand-tan)" stroke-width="0.75" stroke-dasharray="2 2"/>
+        <path d="M24 8 L26.5 16 L35 16 L28.5 21 L31 29 L24 24 L17 29 L19.5 21 L13 16 L21.5 16 Z" fill="var(--brand-tan)" opacity="0.9"/>
+        <rect x="12" y="30" width="24" height="9" rx="1" fill="none" stroke="var(--brand-tan)" stroke-width="0.75"/>
+        <line x1="12" y1="33.5" x2="36" y2="33.5" stroke="var(--brand-tan)" stroke-width="0.5"/>
+        <text x="24" y="38" text-anchor="middle" fill="var(--brand-tan)" font-size="4" font-family="Georgia" letter-spacing="0.5">DWJBA</text>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-title">Detroit-Wayne</span>
+        <span class="logo-sub">Joint Building Authority</span>
+      </div>
+    </a>
+
+    <nav class="nav" id="mainNav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li class="nav-item has-dropdown">
+          <button class="nav-link nav-btn" aria-expanded="false">About <i data-lucide="chevron-down" class="nav-chevron"></i></button>
+          <div class="dropdown">
+            <a href="about.html" class="dropdown-item">Overview & Mission</a>
+            <a href="about.html#leadership" class="dropdown-item">Leadership</a>
+            <a href="about.html#governance" class="dropdown-item">Governance</a>
+            <a href="about.html#services" class="dropdown-item">Services & Operations</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <button class="nav-link nav-btn" aria-expanded="false">CAYMC <i data-lucide="chevron-down" class="nav-chevron"></i></button>
+          <div class="dropdown">
+            <a href="#" class="dropdown-item">Building Overview</a>
+            <a href="#" class="dropdown-item">Departments & Offices</a>
+            <a href="#" class="dropdown-item">Visitor Information</a>
+            <a href="#" class="dropdown-item">Security & Safety</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <button class="nav-link nav-btn" aria-expanded="false">Procurement <i data-lucide="chevron-down" class="nav-chevron"></i></button>
+          <div class="dropdown">
+            <a href="procurement.html" class="dropdown-item">How to Do Business</a>
+            <a href="procurement.html#bids" class="dropdown-item">Bid Opportunities</a>
+            <a href="procurement.html#vendors" class="dropdown-item">Vendor Resources</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="capital-projects.html" class="nav-link">Capital Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="ai-demo.html" class="btn-ask-caymc">
+        <i data-lucide="bot"></i>
+        Ask CAYMC
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-header">
+    <span class="mobile-nav-title">Menu</span>
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+      <i data-lucide="x"></i>
+    </button>
+  </div>
+  <nav class="mobile-nav-list">
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="about.html#leadership" class="mobile-nav-link">Leadership</a>
+    <a href="#" class="mobile-nav-link">CAYMC</a>
+    <a href="procurement.html" class="mobile-nav-link">Procurement</a>
+    <a href="capital-projects.html" class="mobile-nav-link">Capital Projects</a>
+    <a href="contact.html" class="mobile-nav-link">Contact</a>
+    <a href="ai-demo.html" class="mobile-nav-link mobile-nav-cta">Ask CAYMC AI</a>
+  </nav>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero" aria-label="Procurement & Vendor Opportunities">
+  <div class="container">
+    <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <i data-lucide="chevron-right"></i>
+      <span>Procurement</span>
+    </nav>
+    <div class="eyebrow eyebrow-light">Do Business With Us</div>
+    <h1>Procurement &amp; Vendor Opportunities</h1>
+    <p class="page-hero-sub">The Detroit-Wayne Joint Building Authority is committed to transparent, competitive procurement that creates opportunities for businesses of all sizes — with special outreach to minority-owned, women-owned, and Detroit-based enterprises.</p>
+  </div>
+</section>
+
+<!-- PAGE CONTENT -->
+<section class="page-content">
+  <div class="container">
+    <div class="proc-page-grid">
+
+      <!-- LEFT COLUMN: Main Content -->
+      <div class="proc-main">
+
+        <!-- HOW TO DO BUSINESS -->
+        <div class="proc-section section-pad" style="padding-top: 0;">
+          <div class="eyebrow">Getting Started</div>
+          <h2 class="section-title">How to Do Business With DWJBA</h2>
+          <p style="color: var(--color-text-muted); margin-bottom: var(--space-8); line-height: 1.7;">Follow these four steps to participate in the Authority's competitive procurement process. All solicitations are publicly posted through the Michigan Intergovernmental Trade Network (MITN) powered by BidNet Direct.</p>
+          <ol class="proc-step-list">
+            <li class="proc-step">
+              <div class="proc-step-num">01</div>
+              <div class="proc-step-body">
+                <h3>Register as a Vendor</h3>
+                <p>Create a free account on <strong>BidNet Direct / MITN</strong> (Michigan Intergovernmental Trade Network). Registration allows you to receive automatic bid notifications, download solicitation documents, and submit electronic responses for opportunities matching your business categories.</p>
+              </div>
+            </li>
+            <li class="proc-step">
+              <div class="proc-step-num">02</div>
+              <div class="proc-step-body">
+                <h3>Review Opportunities</h3>
+                <p>Monitor posted RFPs (Requests for Proposals), IFBs (Invitations for Bids), and other procurement notices. Read each solicitation document carefully — including scope, technical specifications, insurance requirements, and submission instructions before preparing your response.</p>
+              </div>
+            </li>
+            <li class="proc-step">
+              <div class="proc-step-num">03</div>
+              <div class="proc-step-body">
+                <h3>Submit Your Response</h3>
+                <p>Follow all submission requirements and deadlines exactly as stated in the solicitation. Late or non-conforming submissions cannot be accepted. Contact the DWJBA Procurement Office with questions during the designated Q&A window prior to each deadline.</p>
+              </div>
+            </li>
+            <li class="proc-step">
+              <div class="proc-step-num">04</div>
+              <div class="proc-step-body">
+                <h3>Award &amp; Contract</h3>
+                <p>Responses are evaluated by an internal review committee against the criteria outlined in each solicitation. Qualified firms are selected, and award notices are posted publicly. Successful vendors will be contacted to begin contract negotiations and execution.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <!-- ACTIVE BID OPPORTUNITIES -->
+        <div class="proc-section section-pad bg-alt" id="bids" style="padding: var(--space-10) var(--space-8); border-radius: var(--radius-md); margin-bottom: var(--space-12);">
+          <div class="eyebrow">Current Solicitations</div>
+          <h2 class="section-title">Active Bid Opportunities</h2>
+          <p style="color: var(--color-text-muted); margin-bottom: var(--space-6); line-height: 1.7;">All open solicitations are listed below and posted on BidNet Direct / MITN. Click any opportunity title to access the full solicitation documents and submission instructions.</p>
+          <div class="bid-table-wrap">
+            <table class="bid-table">
+              <thead>
+                <tr>
+                  <th>Opportunity</th>
+                  <th>Type</th>
+                  <th>Posted</th>
+                  <th>Deadline</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="#" style="color: var(--brand-brown); font-weight: 500;">A&amp;E Services — CAYMC Facility Master Plan</a></td>
+                  <td>RFP</td>
+                  <td>March 2026</td>
+                  <td>April 30, 2026</td>
+                  <td><span class="bid-status bid-status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#" style="color: var(--brand-brown); font-weight: 500;">Janitorial Services Contract</a></td>
+                  <td>IFB</td>
+                  <td>April 2026</td>
+                  <td>May 15, 2026</td>
+                  <td><span class="bid-status bid-status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#" style="color: var(--brand-brown); font-weight: 500;">HVAC System Upgrade — Floors 8–12</a></td>
+                  <td>RFP</td>
+                  <td>April 2026</td>
+                  <td>May 22, 2026</td>
+                  <td><span class="bid-status bid-status-open">Open</span></td>
+                </tr>
+                <tr>
+                  <td><a href="#" style="color: var(--brand-brown); font-weight: 500;">Security Camera System Modernization</a></td>
+                  <td>RFP</td>
+                  <td>March 2026</td>
+                  <td>April 18, 2026</td>
+                  <td><span class="bid-status bid-status-closing">Closing Soon</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-4);">
+            <i data-lucide="info" style="width:14px;height:14px;display:inline;vertical-align:middle;margin-right:4px;"></i>
+            New solicitations are posted on a rolling basis. Register on BidNet Direct to receive automatic notifications when new opportunities are published.
+          </p>
+        </div>
+
+        <!-- VENDOR RESOURCES -->
+        <div class="proc-section" id="vendors">
+          <div class="eyebrow">Resources for Vendors</div>
+          <h2 class="section-title">Vendor Resources</h2>
+          <p style="color: var(--color-text-muted); margin-bottom: var(--space-8); line-height: 1.7;">The DWJBA is committed to fostering an inclusive vendor community. We actively encourage participation from minority-owned, women-owned, and Detroit-based businesses in all procurement activities.</p>
+
+          <div class="proc-resources-grid">
+            <div class="proc-resource-card">
+              <div class="proc-resource-icon">
+                <i data-lucide="award"></i>
+              </div>
+              <h3>MBE / WBE Certification</h3>
+              <p>The Authority recognizes and encourages certified Minority Business Enterprises (MBE) and Women Business Enterprises (WBE). Relevant certifications should be included with your bid submission. Certification through the Michigan Unified Certification Program (MUCP) or comparable agency is accepted.</p>
+            </div>
+            <div class="proc-resource-card">
+              <div class="proc-resource-icon">
+                <i data-lucide="map-pin"></i>
+              </div>
+              <h3>Detroit-Based Business Priority</h3>
+              <p>In accordance with the City of Detroit's local purchasing policies, the DWJBA gives priority consideration to Detroit-based businesses where applicable under state procurement law. Firms with a principal place of business within the City of Detroit should indicate this in their submission.</p>
+            </div>
+            <div class="proc-resource-card">
+              <div class="proc-resource-icon">
+                <i data-lucide="globe"></i>
+              </div>
+              <h3>BidNet Direct / MITN</h3>
+              <p>All DWJBA solicitations are posted through BidNet Direct on the Michigan Intergovernmental Trade Network (MITN). A free vendor account provides access to all open solicitations, addenda, Q&amp;A responses, and bid results. Registration is required to submit a formal response.</p>
+            </div>
+            <div class="proc-resource-card">
+              <div class="proc-resource-icon">
+                <i data-lucide="shield"></i>
+              </div>
+              <h3>Insurance Requirements</h3>
+              <p>All vendors awarded contracts must carry appropriate insurance coverage including general liability, workers' compensation, and professional liability where applicable. Specific requirements are detailed in each solicitation. The DWJBA must be named as an additional insured on all policies.</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end proc-main -->
+
+      <!-- RIGHT COLUMN: Sidebar -->
+      <aside class="proc-sidebar">
+
+        <!-- Quick Links -->
+        <div class="vendor-sidebar-card">
+          <h3><i data-lucide="external-link" style="width:16px;height:16px;display:inline;vertical-align:middle;margin-right:6px;color:var(--brand-tan);"></i>Quick Links</h3>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-2);">
+            <li>
+              <a href="https://www.bidnetdirect.com" target="_blank" rel="noopener">
+                <i data-lucide="arrow-right" style="width:13px;height:13px;display:inline;vertical-align:middle;margin-right:5px;"></i>BidNet Direct
+              </a>
+            </li>
+            <li>
+              <a href="https://www.mitn.info" target="_blank" rel="noopener">
+                <i data-lucide="arrow-right" style="width:13px;height:13px;display:inline;vertical-align:middle;margin-right:5px;"></i>MITN — Michigan Intergovernmental Trade Network
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i data-lucide="arrow-right" style="width:13px;height:13px;display:inline;vertical-align:middle;margin-right:5px;"></i>Vendor Registration Form
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i data-lucide="arrow-right" style="width:13px;height:13px;display:inline;vertical-align:middle;margin-right:5px;"></i>Insurance Requirements
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- AI Vendor Assistant -->
+        <div class="vendor-sidebar-card" style="background: var(--brand-brown); color: var(--brand-cream);">
+          <h3 style="color: var(--brand-tan-light);"><i data-lucide="bot" style="width:16px;height:16px;display:inline;vertical-align:middle;margin-right:6px;color:var(--brand-tan);"></i>Need Help?</h3>
+          <p style="font-size: var(--text-sm); color: var(--brand-tan-light); line-height: 1.6; margin-bottom: var(--space-4);">Our AI Vendor Assistant can guide you through the procurement process step by step — from vendor registration to bid submission. Especially helpful for small and first-time bidders.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 var(--space-5);display:flex;flex-direction:column;gap:var(--space-2);font-size:var(--text-sm);">
+            <li style="display:flex;align-items:center;gap:6px;color:var(--brand-cream);"><i data-lucide="check-circle" style="width:14px;height:14px;color:var(--brand-tan);flex-shrink:0;"></i> Understand bid requirements</li>
+            <li style="display:flex;align-items:center;gap:6px;color:var(--brand-cream);"><i data-lucide="check-circle" style="width:14px;height:14px;color:var(--brand-tan);flex-shrink:0;"></i> Prepare your submission</li>
+            <li style="display:flex;align-items:center;gap:6px;color:var(--brand-cream);"><i data-lucide="check-circle" style="width:14px;height:14px;color:var(--brand-tan);flex-shrink:0;"></i> MBE/WBE certification guidance</li>
+            <li style="display:flex;align-items:center;gap:6px;color:var(--brand-cream);"><i data-lucide="check-circle" style="width:14px;height:14px;color:var(--brand-tan);flex-shrink:0;"></i> Insurance requirement questions</li>
+          </ul>
+          <a href="ai-demo.html#vendor-bot" class="btn btn-tan" style="width:100%;text-align:center;justify-content:center;display:flex;gap:6px;">
+            <i data-lucide="bot"></i> Try AI Vendor Assistant
+          </a>
+        </div>
+
+        <!-- Contact Procurement -->
+        <div class="vendor-sidebar-card">
+          <h3><i data-lucide="phone" style="width:16px;height:16px;display:inline;vertical-align:middle;margin-right:6px;color:var(--brand-tan);"></i>Contact Procurement</h3>
+          <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-4); line-height:1.6;">Have a question about an active solicitation or the vendor registration process? Reach our Procurement Office directly.</p>
+          <div style="display:flex;flex-direction:column;gap:var(--space-3);">
+            <div style="display:flex;align-items:flex-start;gap:var(--space-3);">
+              <i data-lucide="phone" style="width:15px;height:15px;color:var(--brand-tan);margin-top:2px;flex-shrink:0;"></i>
+              <div>
+                <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-muted);margin-bottom:2px;">Phone</div>
+                <a href="tel:3133092300" style="font-size:var(--text-sm);color:var(--brand-brown);font-weight:500;">313-309-2300</a>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:var(--space-3);">
+              <i data-lucide="mail" style="width:15px;height:15px;color:var(--brand-tan);margin-top:2px;flex-shrink:0;"></i>
+              <div>
+                <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-muted);margin-bottom:2px;">Email</div>
+                <a href="mailto:procurement@dwjba.com" style="font-size:var(--text-sm);color:var(--brand-brown);font-weight:500;">procurement@dwjba.com</a>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:var(--space-3);">
+              <i data-lucide="clock" style="width:15px;height:15px;color:var(--brand-tan);margin-top:2px;flex-shrink:0;"></i>
+              <div>
+                <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-muted);margin-bottom:2px;">Office Hours</div>
+                <span style="font-size:var(--text-sm);color:var(--color-text);">Mon – Fri, 8:00 AM – 5:00 PM</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:var(--space-3);">
+              <i data-lucide="map-pin" style="width:15px;height:15px;color:var(--brand-tan);margin-top:2px;flex-shrink:0;"></i>
+              <div>
+                <div style="font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-text-muted);margin-bottom:2px;">Location</div>
+                <span style="font-size:var(--text-sm);color:var(--color-text);">2 Woodward Ave, Suite 1314<br>Detroit, MI 48226</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </aside><!-- end proc-sidebar -->
+
+    </div><!-- end proc-page-grid -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <svg viewBox="0 0 48 48" fill="none" width="36" aria-hidden="true">
+            <circle cx="24" cy="24" r="23" fill="var(--brand-tan)" stroke="var(--brand-cream)" stroke-width="1"/>
+            <path d="M24 8 L26.5 16 L35 16 L28.5 21 L31 29 L24 24 L17 29 L19.5 21 L13 16 L21.5 16 Z" fill="var(--brand-cream)"/>
+          </svg>
+          <span>Detroit-Wayne Joint Building Authority</span>
+        </a>
+        <p>Responsible Stewardship. Trusted Leadership.</p>
+        <p class="footer-addr">2 Woodward Ave, Suite 1314<br>Detroit, MI 48226</p>
+      </div>
+      <div class="footer-nav-col">
+        <h4>About</h4>
+        <a href="about.html">Mission & Overview</a>
+        <a href="about.html#leadership">Leadership</a>
+        <a href="about.html#governance">Governance</a>
+        <a href="about.html#services">Services</a>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Procurement</h4>
+        <a href="procurement.html">How to Do Business</a>
+        <a href="procurement.html#bids">Bid Opportunities</a>
+        <a href="procurement.html#vendors">Vendor Resources</a>
+        <a href="#">BidNet / MITN</a>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Facilities</h4>
+        <a href="#">CAYMC Overview</a>
+        <a href="#">Spirit of Detroit</a>
+        <a href="#">Veterans Memorial Plaza</a>
+        <a href="capital-projects.html">Capital Projects</a>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Resources</h4>
+        <a href="#">Document Center</a>
+        <a href="#">News & Announcements</a>
+        <a href="contact.html">Contact</a>
+        <a href="ai-demo.html">Ask CAYMC AI</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

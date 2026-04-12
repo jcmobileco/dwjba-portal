@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spirit of Detroit — DWJBA</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="main.js" defer></script>
+  <style>
+    /* ── Page-level overrides ────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f9f7f4; color: #1a0d06; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Tokens ─────────────────────────────────────────────── */
+    :root {
+      --brown:        #3d1a08;   /* brand-brown — nav, hero pill, cards */
+      --green:        #3d6b52;   /* civic-blue/brand-green */
+      --tan:          #c4956a;   /* brand-tan */
+      --cream:        #f5ede0;   /* brand-cream */
+      --zinc-950:     #0c0c0e;
+      --zinc-900:     #18181b;
+      --zinc-800:     #27272a;
+      --zinc-600:     #52525b;
+      --zinc-500:     #71717a;
+      --zinc-200:     #e4e4e7;
+      --zinc-100:     #f4f4f5;
+      --zinc-50:      #fafafa;
+      --stone-50:     #fafaf9;
+      --border:       #e2d9cc;
+      --fg:           #1a0d06;
+      --muted:        #6b5a4a;
+      --slate-accent: #5c3a22;
+      --section-alt:  #f0e8dc;
+    }
+
+    /* ── Shared utilities ───────────────────────────────────── */
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+    @media (min-width:640px)  { .wrap { padding: 0 1.5rem; } }
+    @media (min-width:1024px) { .wrap { padding: 0 2rem; } }
+
+    .eyebrow {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--zinc-500);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       TOP BAR
+    ════════════════════════════════════════════════════════ */
+    .topbar {
+      background: var(--zinc-950);
+      color: white;
+      font-size: 11px;
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .45rem 1rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    @media (min-width:640px)  { .topbar-inner { padding-left:1.5rem; padding-right:1.5rem; } }
+    @media (min-width:1024px) { .topbar-inner { padding-left:2rem; padding-right:2rem; } }
+    .topbar-left { display:flex; align-items:center; gap:1.1rem; color:rgba(255,255,255,.75); }
+    .topbar-left a { display:flex; align-items:center; gap:5px; transition:color .2s; }
+    .topbar-left a:hover { color:white; }
+    .topbar-left svg { width:11px; height:11px; color:rgba(255,255,255,.4); flex-shrink:0; }
+    .tb-address { display:none; align-items:center; gap:5px; }
+    @media (min-width:1024px){ .tb-address { display:flex; } }
+    .topbar-right { display:flex; align-items:center; gap:2px; color:rgba(255,255,255,.55); }
+    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.35); }
+    @media (min-width:640px){ .tb-connect { display:block; } }
+    .topbar-right a { padding:3px 7px; border-radius:4px; font-weight:600; transition:color .15s, background .15s; }
+    .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
+
+    /* ════════════════════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════════════════════ */
+    .site-header {
+      background: var(--brown);
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      transition: box-shadow .3s;
+    }
+    .site-header.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.35); }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      height: 80px;
+      position: relative;
+    }
+    @media (min-width:640px)  { .header-inner { padding:0 1.5rem; } }
+    @media (min-width:1024px) { .header-inner { padding:0 2rem; } }
+
+    /* Left + Right nav */
+    .nav-left, .nav-right {
+      display: none;
+      align-items: center;
+      gap: 1px;
+      flex: 1;
+    }
+    @media (min-width:1280px){ .nav-left,.nav-right { display:flex; } }
+    .nav-right { justify-content:flex-end; }
+
+    /* Center logo */
+    .nav-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @media (min-width:1280px){
+      .nav-logo { position:relative; left:auto; transform:none; flex-shrink:0; }
+    }
+    .nav-logo img { height:64px; width:64px; object-fit:contain; display:block; }
+
+    /* Nav item */
+    .nav-item { position:relative; }
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 7px 9px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: white;
+      border-radius: 5px;
+      white-space: nowrap;
+      cursor: default;
+      transition: color .15s;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+    .nav-btn svg { width:11px; height:11px; transition:transform .2s; }
+    .nav-item:hover .nav-btn { color:rgba(255,255,255,.78); }
+    .nav-item:hover .nav-btn svg { transform:rotate(180deg); }
+
+    .nav-drop {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 600;
+      min-width: 210px;
+    }
+    .nav-item:hover .nav-drop { display:block; }
+    .nav-drop-inner {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+    .nav-drop-inner a {
+      display: block;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(26,13,6,.8);
+      transition: background .12s;
+    }
+    .nav-drop-inner a:hover { background: var(--zinc-50); }
+
+    /* Search btn */
+    .nav-search {
+      margin-left: .4rem;
+      padding: 7px;
+      color: white;
+      border-radius: 7px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: color .15s;
+    }
+    .nav-search:hover { color:rgba(255,255,255,.7); }
+    .nav-search svg { width:15px; height:15px; }
+
+    /* Mobile toggle */
+    .mob-controls {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin-left: auto;
+    }
+    @media (min-width:1280px){ .mob-controls { display:none; } }
+    .mob-controls button {
+      padding:7px; color:white; border-radius:7px;
+      background:none; border:none; cursor:pointer;
+      transition:color .15s;
+    }
+    .mob-controls button:hover { color:rgba(255,255,255,.7); }
+    .mob-controls button svg { width:18px; height:18px; display:block; }
+
+    /* Mobile nav */
+    .mob-nav {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 300px;
+      background: white;
+      z-index: 700;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      box-shadow: -4px 0 30px rgba(0,0,0,.2);
+    }
+    .mob-nav.open { transform:translateX(0); }
+    .mob-nav-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      background: var(--brown);
+      color: white;
+    }
+    .mob-nav-head span { font-size:14px; font-weight:700; }
+    .mob-nav-head button { color:white; background:none; border:none; cursor:pointer; }
+    .mob-nav-head button svg { width:20px; height:20px; display:block; }
+    .mob-nav-body { padding:.75rem 0; }
+    .mob-group { border-bottom:1px solid var(--border); padding:.4rem 0; }
+    .mob-label { display:block; padding:.55rem 1.5rem; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--brown); }
+    .mob-link { display:block; padding:.45rem 1.5rem .45rem 2rem; font-size:14px; color:var(--fg); transition:background .12s; }
+    .mob-link:hover { background:var(--section-alt); }
+    .scrim {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 650;
+    }
+    .scrim.visible { display:block; }
+
+    /* ════════════════════════════════════════════════════════
+       SPIRIT HERO — cinematic
+    ════════════════════════════════════════════════════════ */
+    .spirit-hero {
+      position: relative;
+      overflow: hidden;
+      background: #0c0c0e;
+      height: 600px;
+      display: flex;
+      align-items: center;
+    }
+    .spirit-hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .spirit-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(9,9,11,0.80) 0%, rgba(9,9,11,0.50) 50%, rgba(9,9,11,0.20) 100%);
+    }
+    .spirit-hero-body {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+      animation: fadeUp .7s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* Pill badge */
+    .spirit-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: .3rem .875rem;
+      background: var(--tan);
+      color: var(--brown);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      border-radius: 9999px;
+    }
+
+    /* Headline */
+    .spirit-hero-headline {
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.0;
+      letter-spacing: -.04em;
+    }
+
+    /* Subtitle */
+    .spirit-hero-sub {
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,.78);
+      line-height: 1.6;
+      max-width: 30rem;
+      font-weight: 400;
+    }
+
+    /* CTA */
+    .btn-spirit-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .875rem 2rem;
+      font-size: .875rem;
+      font-weight: 700;
+      border-radius: .5rem;
+      background: var(--brown);
+      color: white;
+      box-shadow: 0 8px 32px rgba(0,0,0,.4);
+      cursor: pointer;
+      transition: opacity .2s;
+      border: none;
+      font-family: inherit;
+      margin-top: .25rem;
+    }
+    .btn-spirit-hero:hover { opacity:.88; }
+
+    /* Breadcrumb */
+    .spirit-breadcrumb {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: rgba(255,255,255,.45);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: .25rem;
+    }
+    .spirit-breadcrumb a { color: rgba(255,255,255,.45); transition: color .15s; }
+    .spirit-breadcrumb a:hover { color: rgba(255,255,255,.75); }
+    .spirit-breadcrumb span { color: rgba(255,255,255,.6); }
+
+    /* ════════════════════════════════════════════════════════
+       QUICK FACTS BAR
+    ════════════════════════════════════════════════════════ */
+    .facts-bar {
+      background: var(--zinc-950);
+      padding: 2.5rem 0;
+    }
+    .facts-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (min-width:768px) { .facts-inner { grid-template-columns: repeat(4, 1fr); } }
+
+    .fact-item {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+      border-left: 2px solid rgba(196,149,106,.25);
+      padding-left: 1.25rem;
+    }
+    .fact-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--tan);
+    }
+    .fact-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION 1 — ABOUT THE LANDMARK
+    ════════════════════════════════════════════════════════ */
+    .about-landmark {
+      background: white;
+      padding: 6rem 0;
+    }
+    .about-landmark-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (min-width:1024px) {
+      .about-landmark-grid { grid-template-columns: 55fr 45fr; gap: 5rem; align-items: start; }
+    }
+
+    .al-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--tan);
+      display: block;
+      margin-bottom: .875rem;
+    }
+    .al-heading {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 900;
+      color: var(--brown);
+      letter-spacing: -.035em;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+    }
+    .al-body { color: #2a1a10; line-height: 1.75; }
+    .al-body p { font-size: 1.0625rem; }
+    .al-body p + p { margin-top: 1.5rem; }
+
+    .al-sidenote {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--section-alt);
+      border-left: 3px solid var(--tan);
+      border-radius: 0 8px 8px 0;
+    }
+    .al-sidenote p {
+      font-size: .9375rem;
+      color: var(--brown);
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    /* Right col image card */
+    .al-image-card {
+      position: relative;
+    }
+    .al-image-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.15);
+    }
+    .al-caption {
+      margin-top: .875rem;
+      font-size: .8125rem;
+      color: var(--muted);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION 2 — JERSEY PROGRAM
+    ════════════════════════════════════════════════════════ */
+    .jersey-section {
+      background: #f5ede0;
+      padding: 6rem 0;
+    }
+    .jersey-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--brown);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .jersey-heading {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 900;
+      color: var(--brown);
+      letter-spacing: -.04em;
+      line-height: 1.08;
+      margin-bottom: 1.5rem;
+      max-width: 20ch;
+    }
+    .jersey-body {
+      font-size: 1.0625rem;
+      color: #4a2a10;
+      line-height: 1.75;
+      max-width: 52rem;
+      margin-bottom: 3rem;
+    }
+
+    .jersey-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width:768px) { .jersey-cards { grid-template-columns: repeat(3, 1fr); } }
+
+    .jersey-card {
+      background: var(--tan);
+      border-radius: 12px;
+      padding: 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .jersey-card::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -20px;
+      width: 120px;
+      height: 120px;
+      background: rgba(61,26,8,.08);
+      border-radius: 50%;
+    }
+    .jersey-card-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(61,26,8,.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: .25rem;
+    }
+    .jersey-card-icon svg { width: 22px; height: 22px; color: var(--brown); }
+    .jersey-card-title {
+      font-size: 1.125rem;
+      font-weight: 800;
+      color: var(--brown);
+      line-height: 1.3;
+    }
+    .jersey-card-desc {
+      font-size: .875rem;
+      color: rgba(61,26,8,.72);
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION 3 — PROGRAM & STEWARDSHIP
+    ════════════════════════════════════════════════════════ */
+    .stewardship-section {
+      background: white;
+      padding: 6rem 0;
+    }
+    .stewardship-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--tan);
+      display: block;
+      margin-bottom: .875rem;
+    }
+    .stewardship-heading {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      color: var(--brown);
+      letter-spacing: -.035em;
+      line-height: 1.15;
+      margin-bottom: 3rem;
+    }
+
+    .stewardship-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    @media (min-width:1024px) { .stewardship-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .stew-card {
+      background: var(--section-alt);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .875rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .stew-card:hover { box-shadow: 0 8px 32px rgba(61,26,8,.12); transform: translateY(-2px); }
+    .stew-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--brown);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stew-icon svg { width: 22px; height: 22px; color: white; }
+    .stew-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--brown);
+      line-height: 1.3;
+    }
+    .stew-desc {
+      font-size: .875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION 4 — REQUEST PROCESS (DRAMATIC)
+    ════════════════════════════════════════════════════════ */
+    .process-section {
+      background: var(--zinc-950);
+      padding: 7rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .process-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(61,26,8,.35) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 80% 50%, rgba(196,149,106,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .process-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--tan);
+      display: block;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .process-heading {
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 900;
+      color: white;
+      letter-spacing: -.035em;
+      line-height: 1.15;
+      margin-bottom: 4rem;
+      max-width: 30ch;
+      position: relative;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      position: relative;
+    }
+    @media (min-width:768px) {
+      .process-steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (min-width:1024px) {
+      .process-steps {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* Connecting line on desktop */
+    @media (min-width:1024px) {
+      .process-steps::before {
+        content: '';
+        position: absolute;
+        top: 2.25rem;
+        left: calc(12.5% + 1.5rem);
+        right: calc(12.5% + 1.5rem);
+        height: 2px;
+        background: linear-gradient(to right, rgba(196,149,106,.2), rgba(196,149,106,.6), rgba(196,149,106,.2));
+        z-index: 0;
+      }
+    }
+
+    .process-step {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: .875rem;
+      position: relative;
+      z-index: 1;
+      transition: background .25s, border-color .25s;
+    }
+    .process-step:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(196,149,106,.25);
+    }
+
+    .process-num {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--tan);
+      line-height: 1;
+      letter-spacing: -.05em;
+      opacity: .7;
+    }
+    .process-step-title {
+      font-size: 1.0625rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.3;
+    }
+    .process-step-desc {
+      font-size: .875rem;
+      color: rgba(255,255,255,.55);
+      line-height: 1.65;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION 5 — GALLERY
+    ════════════════════════════════════════════════════════ */
+    .gallery-section {
+      background: white;
+      padding: 6rem 0;
+    }
+    .gallery-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--tan);
+      display: block;
+      margin-bottom: .875rem;
+    }
+    .gallery-heading {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      color: var(--brown);
+      letter-spacing: -.035em;
+      line-height: 1.15;
+      margin-bottom: 2.5rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width:640px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width:1024px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .gallery-card {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: white;
+      display: flex;
+      flex-direction: column;
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 224px;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .gallery-card:hover img { transform: scale(1.04); }
+    .gallery-card-cap {
+      padding: .875rem 1rem;
+      font-size: .8125rem;
+      color: var(--muted);
+      font-weight: 500;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       SECTION 6 — CTA
+    ════════════════════════════════════════════════════════ */
+    .spirit-cta {
+      background: var(--brown);
+      padding: 6rem 0;
+    }
+    .spirit-cta-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .spirit-cta-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      color: var(--tan);
+    }
+    .spirit-cta-heading {
+      font-size: clamp(1.875rem, 4vw, 3rem);
+      font-weight: 900;
+      color: white;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+      max-width: 20ch;
+    }
+    .spirit-cta-body {
+      font-size: 1.0625rem;
+      color: rgba(255,255,255,.72);
+      line-height: 1.7;
+      max-width: 38rem;
+    }
+    .spirit-cta-btns {
+      display: flex;
+      flex-direction: column;
+      gap: .875rem;
+      align-items: center;
+      margin-top: .5rem;
+    }
+    @media (min-width:500px) { .spirit-cta-btns { flex-direction: row; justify-content: center; } }
+
+    .btn-cta-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .9rem 2.25rem;
+      background: white;
+      color: var(--brown);
+      font-size: .9375rem;
+      font-weight: 700;
+      border-radius: .5rem;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: opacity .2s;
+    }
+    .btn-cta-primary:hover { opacity: .9; }
+
+    .btn-cta-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .9rem 2.25rem;
+      background: transparent;
+      color: white;
+      font-size: .9375rem;
+      font-weight: 700;
+      border-radius: .5rem;
+      cursor: pointer;
+      border: 2px solid rgba(255,255,255,.45);
+      font-family: inherit;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-cta-outline:hover { border-color: white; background: rgba(255,255,255,.08); }
+
+    /* ════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════ */
+    .site-footer { background:var(--zinc-950); color:white; }
+    .footer-main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 1rem 3rem;
+    }
+    @media (min-width:640px)  { .footer-main { padding-left:1.5rem; padding-right:1.5rem; } }
+    @media (min-width:1024px) { .footer-main { padding-left:2rem; padding-right:2rem; } }
+
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    @media (min-width:1024px){ .footer-top { flex-direction:row; gap:5rem; } }
+
+    .footer-brand { flex-shrink:0; }
+    @media (min-width:1024px){ .footer-brand { width:18rem; } }
+    .footer-logo { height:64px; width:auto; margin-bottom:1rem; }
+    .footer-desc { font-size:.875rem; color:white; line-height:1.7; margin-bottom:1.75rem; }
+    .footer-contacts { display:flex; flex-direction:column; gap:.625rem; }
+    .footer-ci { display:flex; align-items:flex-start; gap:.625rem; font-size:.875rem; color:white; }
+    .footer-ci svg { width:14px; height:14px; color:rgba(255,255,255,.3); flex-shrink:0; margin-top:3px; }
+    .footer-ci a:hover { color:white; text-decoration:underline; }
+
+    .footer-nav {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 2rem;
+    }
+    @media (min-width:640px)  { .footer-nav { grid-template-columns:repeat(3,1fr); } }
+    @media (min-width:1024px) { .footer-nav { grid-template-columns:repeat(4,1fr); } }
+
+    .fn-col h3 { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:white; margin-bottom:1rem; }
+    .fn-col ul { display:flex; flex-direction:column; gap:.625rem; }
+    .fn-col li span,
+    .fn-col li a { font-size:.875rem; color:white; line-height:1.4; display:block; cursor:default; transition:color .15s; }
+    .fn-col li a:hover { color:rgba(255,255,255,.7); }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    @media (min-width:640px){
+      .footer-bottom { flex-direction:row; justify-content:space-between; padding-left:1.5rem; padding-right:1.5rem; }
+    }
+    @media (min-width:1024px){ .footer-bottom { padding-left:2rem; padding-right:2rem; } }
+    .footer-copy { font-size:.75rem; color:white; }
+    .footer-legal { display:flex; align-items:center; gap:1.25rem; font-size:.75rem; color:white; }
+    .footer-legal a,
+    .footer-legal button { color:white; background:none; border:none; font-family:inherit; font-size:inherit; cursor:pointer; transition:color .15s; }
+    .footer-legal a:hover,
+    .footer-legal button:hover { color:rgba(255,255,255,.7); }
+    .footer-legal-ext { display:flex; align-items:center; gap:3px; }
+    .footer-legal-ext svg { width:11px; height:11px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOP BAR
+════════════════════════════════════════════════════════ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <a href="tel:+13132243540">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+        (313) 224-3540
+      </a>
+      <a href="mailto:info@dwjba.com">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+        info@dwjba.com
+      </a>
+      <span class="tb-address">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:11px;height:11px;color:rgba(255,255,255,.4)"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+        2 Woodward Ave, Suite 200, Detroit MI 48226
+      </span>
+    </div>
+    <div class="topbar-right">
+      <span class="tb-connect">Connect:</span>
+      <a href="https://facebook.com" target="_blank" rel="noopener">FB</a>
+      <a href="https://twitter.com" target="_blank" rel="noopener">X</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LI</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <!-- Left Nav -->
+    <nav class="nav-left">
+      <div class="nav-item">
+        <button class="nav-btn">About <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="about.html">Overview</a>
+          <a href="about.html#leadership">Leadership &amp; Governance</a>
+          <a href="about.html#services">Services &amp; Operations</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">CAYMC <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="directory.html">Overview</a>
+          <a href="directory.html">Departments &amp; Offices</a>
+          <a href="contact.html">Visitor Information</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Tenants &amp; Access <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="directory.html">Tenant Directory</a>
+          <a href="contact.html">Building Access &amp; Security</a>
+          <a href="contact.html">Visitor FAQs</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Spirit of Detroit <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="spirit.html">Overview</a>
+          <a href="spirit.html#request">Request Form</a>
+          <a href="spirit.html#gallery">Gallery</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Procurement <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Overview</a>
+          <a href="#">Bid Opportunities</a>
+          <a href="#">Vendor Resources</a>
+        </div></div>
+      </div>
+    </nav>
+
+    <!-- Center Logo -->
+    <div class="nav-logo">
+      <a href="index.html">
+        <img src="images/logo-nav.png" alt="Detroit-Wayne Joint Building Authority" />
+      </a>
+    </div>
+
+    <!-- Right Nav -->
+    <nav class="nav-right">
+      <div class="nav-item">
+        <button class="nav-btn">Capital Projects <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Current Projects</a>
+          <a href="#">Completed Projects</a>
+          <a href="#">Upcoming Projects</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Real Estate <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Portfolio Overview</a>
+          <a href="#">Properties &amp; Listings</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Documents <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Public Documents</a>
+          <a href="#">Reports &amp; Policies</a>
+          <a href="#">Procurement Documents</a>
+          <a href="#">Board Materials</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">News <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">All News</a>
+          <a href="#">Project Updates</a>
+          <a href="#">Procurement Notices</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Contact <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="contact.html">Contact Us</a>
+          <a href="directory.html">Department Directory</a>
+        </div></div>
+      </div>
+      <button class="nav-search" aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile controls -->
+    <div class="mob-controls">
+      <button aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+      </button>
+      <button id="mobMenuBtn" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<div class="scrim" id="scrim"></div>
+<nav class="mob-nav" id="mobNav">
+  <div class="mob-nav-head">
+    <span>Menu</span>
+    <button id="mobCloseBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+    </button>
+  </div>
+  <div class="mob-nav-body">
+    <div class="mob-group"><span class="mob-label">About</span><a class="mob-link" href="about.html">Overview</a><a class="mob-link" href="about.html#leadership">Leadership &amp; Governance</a></div>
+    <div class="mob-group"><span class="mob-label">CAYMC</span><a class="mob-link" href="directory.html">Departments &amp; Offices</a><a class="mob-link" href="contact.html">Visitor Information</a></div>
+    <div class="mob-group"><span class="mob-label">Spirit of Detroit</span><a class="mob-link" href="spirit.html">Overview</a></div>
+    <div class="mob-group"><span class="mob-label">Procurement</span><a class="mob-link" href="#">Bid Opportunities</a><a class="mob-link" href="#">Vendor Resources</a></div>
+    <div class="mob-group"><span class="mob-label">Contact</span><a class="mob-link" href="contact.html">Contact Us</a><a class="mob-link" href="directory.html">Department Directory</a></div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO — CINEMATIC
+════════════════════════════════════════════════════════ -->
+<section class="spirit-hero">
+  <img class="spirit-hero-bg" src="images/spirit-spotlight.png" alt="The Spirit of Detroit sculpture" />
+  <div class="spirit-hero-overlay"></div>
+  <div class="spirit-hero-body">
+    <!-- Breadcrumb -->
+    <nav class="spirit-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">HOME</a>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:10px;height:10px"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+      <span>SPIRIT OF DETROIT</span>
+    </nav>
+
+    <!-- Badge -->
+    <span class="spirit-badge">Civic Landmark</span>
+
+    <!-- Headline -->
+    <h1 class="spirit-hero-headline">
+      The Spirit<br>of Detroit
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="spirit-hero-sub">
+      Detroit's most recognizable landmark — a 26-foot bronze sculpture symbolizing the strength, dynamism, and spirit of the city and its people.
+    </p>
+
+    <!-- CTA -->
+    <a href="#gallery" class="btn-spirit-hero">
+      View Gallery
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     QUICK FACTS BAR
+════════════════════════════════════════════════════════ -->
+<div class="facts-bar">
+  <div class="facts-inner">
+    <div class="fact-item">
+      <span class="fact-label">Height</span>
+      <span class="fact-value">26 feet</span>
+    </div>
+    <div class="fact-item">
+      <span class="fact-label">Material</span>
+      <span class="fact-value">Bronze</span>
+    </div>
+    <div class="fact-item">
+      <span class="fact-label">Artist</span>
+      <span class="fact-value">Marshall Fredericks</span>
+    </div>
+    <div class="fact-item">
+      <span class="fact-label">Dedicated</span>
+      <span class="fact-value">July 26, 1958</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 1 — ABOUT THE LANDMARK
+════════════════════════════════════════════════════════ -->
+<section class="about-landmark">
+  <div class="wrap">
+    <div class="about-landmark-grid">
+
+      <!-- Left: editorial -->
+      <div>
+        <span class="al-eyebrow">Detroit's Icon</span>
+        <h2 class="al-heading">About the Landmark</h2>
+        <div class="al-body">
+          <p>The Spirit of Detroit stands as one of America's most beloved public sculptures — a monumental 26-foot bronze figure positioned at the entrance of the Coleman A. Young Municipal Center at 2 Woodward Avenue. For more than six decades, the Spirit has been a symbol of resilience, civic pride, and the enduring strength of Detroit and its people.</p>
+          <p>Sculpted by renowned artist Marshall Fredericks and dedicated July 26, 1958, the Spirit of Detroit has become the city's most recognizable symbol. The figure is depicted seated, holding a gilt sphere representing God in one hand and a family group in the other — a powerful statement of community, faith, and shared humanity. The Latin inscription reads: "Now the Lord is that Spirit: and where the Spirit of the Lord is, there is Liberty."</p>
+          <p>From championship celebrations to public health campaigns, the Spirit of Detroit participates in the full life of the city. Through custom jerseys, illuminated displays, and community gatherings at its base, the sculpture remains a living landmark — not merely a monument, but an active participant in Detroit's ongoing story.</p>
+        </div>
+        <div class="al-sidenote">
+          <p>DWJBA stewards this landmark, ensuring it remains a vibrant center of civic pride and public engagement. The Authority manages all requests for jersey programs, special events, and ceremonial use of the Spirit of Detroit site.</p>
+        </div>
+      </div>
+
+      <!-- Right: image card -->
+      <div class="al-image-card">
+        <img src="images/facility-spirit-plaza.png" alt="The Spirit of Detroit sculpture at the Coleman A. Young Municipal Center" />
+        <p class="al-caption">The Spirit of Detroit, 2 Woodward Avenue, Detroit MI</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 2 — JERSEY PROGRAM
+════════════════════════════════════════════════════════ -->
+<section class="jersey-section">
+  <div class="wrap">
+    <span class="jersey-eyebrow">The Jersey Program</span>
+    <h2 class="jersey-heading">Dress the Spirit of Detroit</h2>
+    <p class="jersey-body">Organizations, sports teams, and community groups request custom jerseys to honor milestones, celebrate victories, and mark cultural moments. The Spirit of Detroit has worn jerseys for championship teams, public health campaigns, and community celebrations — becoming an active participant in the city's shared triumphs.</p>
+
+    <div class="jersey-cards">
+
+      <!-- Sports Teams -->
+      <div class="jersey-card">
+        <div class="jersey-card-icon">
+          <!-- Trophy icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0" /></svg>
+        </div>
+        <div class="jersey-card-title">Sports Teams</div>
+        <div class="jersey-card-desc">Championship celebrations for Detroit's beloved professional and collegiate athletic teams — Lions, Tigers, Pistons, Red Wings, and more.</div>
+      </div>
+
+      <!-- Community Organizations -->
+      <div class="jersey-card">
+        <div class="jersey-card-icon">
+          <!-- Users icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>
+        </div>
+        <div class="jersey-card-title">Community Organizations</div>
+        <div class="jersey-card-desc">Cultural events, awareness campaigns, and neighborhood milestones — community groups can dress the Spirit to amplify their message citywide.</div>
+      </div>
+
+      <!-- Government & Civic -->
+      <div class="jersey-card">
+        <div class="jersey-card-icon">
+          <!-- Building icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" /></svg>
+        </div>
+        <div class="jersey-card-title">Government &amp; Civic</div>
+        <div class="jersey-card-desc">Official ceremonies, proclamation days, and government recognition programs that honor public service and civic achievement across Detroit and Wayne County.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 3 — PROGRAM & STEWARDSHIP
+════════════════════════════════════════════════════════ -->
+<section class="stewardship-section">
+  <div class="wrap">
+    <span class="stewardship-eyebrow">Our Role</span>
+    <h2 class="stewardship-heading">Program &amp; Stewardship</h2>
+    <div class="stewardship-grid">
+
+      <!-- Jersey Program -->
+      <div class="stew-card">
+        <div class="stew-icon">
+          <!-- Shirt icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m9 3 1.5 3h3L15 3M9 3H6L3 7.5l3 1.5v12h12V9l3-1.5L18 3h-3M9 3h6" /></svg>
+        </div>
+        <div class="stew-title">Jersey Program</div>
+        <div class="stew-desc">Coordinating custom jersey requests for organizations seeking to celebrate milestones and connect with Detroit's iconic landmark.</div>
+      </div>
+
+      <!-- Year-Round Events -->
+      <div class="stew-card">
+        <div class="stew-icon">
+          <!-- Calendar icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>
+        </div>
+        <div class="stew-title">Year-Round Events</div>
+        <div class="stew-desc">Supporting seasonal activations, holiday ceremonies, and civic gatherings that animate the Spirit's plaza throughout the year.</div>
+      </div>
+
+      <!-- Public Access -->
+      <div class="stew-card">
+        <div class="stew-icon">
+          <!-- Users icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>
+        </div>
+        <div class="stew-title">Public Access</div>
+        <div class="stew-desc">Ensuring the Spirit of Detroit remains freely accessible to all visitors, residents, and tourists as a centerpiece of civic life.</div>
+      </div>
+
+      <!-- Cultural Icon -->
+      <div class="stew-card">
+        <div class="stew-icon">
+          <!-- Trophy icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0" /></svg>
+        </div>
+        <div class="stew-title">Cultural Icon</div>
+        <div class="stew-desc">Preserving and promoting the Spirit of Detroit as an irreplaceable piece of Detroit's cultural identity and architectural heritage.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 4 — REQUEST PROCESS (DRAMATIC)
+════════════════════════════════════════════════════════ -->
+<section class="process-section" id="request">
+  <div class="wrap">
+    <span class="process-eyebrow">Getting Started</span>
+    <h2 class="process-heading">How to Request Use of the Spirit of Detroit</h2>
+
+    <div class="process-steps">
+
+      <!-- Step 01 -->
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div class="process-step-title">Submit Request</div>
+        <div class="process-step-desc">Complete the online request form with your organization's details, proposed dates, and the nature of your event or jersey program. All submissions are reviewed by DWJBA staff.</div>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div class="process-step-title">Review Period</div>
+        <div class="process-step-desc">DWJBA reviews all requests to ensure alignment with the Spirit's civic mission and community values. You can expect a response within 5–7 business days.</div>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div class="process-step-title">Approval &amp; Agreement</div>
+        <div class="process-step-desc">Upon approval, DWJBA will issue a formal agreement outlining the terms of use, event logistics, installation requirements, and any applicable guidelines.</div>
+      </div>
+
+      <!-- Step 04 -->
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <div class="process-step-title">Execution</div>
+        <div class="process-step-desc">DWJBA coordinates with your team on installation, event staffing, and site management. Our team ensures every activation honors the dignity and significance of the landmark.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 5 — GALLERY
+════════════════════════════════════════════════════════ -->
+<section class="gallery-section" id="gallery">
+  <div class="wrap">
+    <span class="gallery-eyebrow">Photography</span>
+    <h2 class="gallery-heading">Gallery</h2>
+
+    <div class="gallery-grid">
+
+      <!-- Featured: spirit-spotlight -->
+      <div class="gallery-card">
+        <img src="images/spirit-spotlight.png" alt="Spirit of Detroit — spotlight view" />
+        <div class="gallery-card-cap">Spirit of Detroit — 2 Woodward Avenue</div>
+      </div>
+
+      <!-- Unsplash fill images -->
+      <div class="gallery-card">
+        <img src="images/facility-caymc.png" alt="Detroit skyline at dusk" />
+        <div class="gallery-card-cap">Detroit skyline at dusk</div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="images/news-1.png" alt="Championship jersey celebration" />
+        <div class="gallery-card-cap">Championship jersey program</div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="images/news-2.png" alt="Civic gathering at the Spirit of Detroit" />
+        <div class="gallery-card-cap">Civic gathering at the landmark</div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="images/news-3.png" alt="Public event at Coleman A. Young Municipal Center plaza" />
+        <div class="gallery-card-cap">Plaza events &amp; activations</div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="images/facility-spirit-plaza.png" alt="Detroit community celebration" />
+        <div class="gallery-card-cap">Community celebrations</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 6 — CTA
+════════════════════════════════════════════════════════ -->
+<section class="spirit-cta">
+  <div class="spirit-cta-inner">
+    <span class="spirit-cta-eyebrow">Partner With DWJBA</span>
+    <h2 class="spirit-cta-heading">Interested in Using the Spirit of Detroit?</h2>
+    <p class="spirit-cta-body">Whether you're celebrating a championship, honoring a cause, or organizing a civic event, the Spirit of Detroit can amplify your moment. DWJBA reviews all requests and works closely with organizations to bring meaningful activations to life.</p>
+    <div class="spirit-cta-btns">
+      <button class="btn-cta-primary">
+        Submit a Request
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+      </button>
+      <a href="contact.html" class="btn-cta-outline">Contact DWJBA</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-top">
+
+      <!-- Brand / Contact -->
+      <div class="footer-brand">
+        <img class="footer-logo" src="images/seal-large.png" alt="Detroit-Wayne Joint Building Authority" />
+        <p class="footer-desc">Managing and maintaining critical public facilities that support city and county government, court functions, and essential public services since 1924.</p>
+        <div class="footer-contacts">
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+            <span>2 Woodward Avenue, Suite 200<br>Detroit, MI 48226</span>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+            <a href="tel:+13132243540">(313) 224-3540</a>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+            <a href="mailto:info@dwjba.com">info@dwjba.com</a>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            <span>Mon–Fri, 8:00 AM to 5:00 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav grid -->
+      <div class="footer-nav">
+        <div class="fn-col">
+          <h3>About</h3>
+          <ul>
+            <li><a href="about.html">Overview</a></li>
+            <li><a href="about.html#leadership">Leadership &amp; Governance</a></li>
+            <li><a href="about.html#services">Services &amp; Operations</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>CAYMC</h3>
+          <ul>
+            <li><a href="directory.html">Building Overview</a></li>
+            <li><a href="directory.html">Departments &amp; Offices</a></li>
+            <li><a href="contact.html">Visitor Information</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Tenants &amp; Access</h3>
+          <ul>
+            <li><a href="directory.html">Tenant Directory</a></li>
+            <li><a href="contact.html">Building Access &amp; Security</a></li>
+            <li><a href="contact.html">Visitor FAQs</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Procurement</h3>
+          <ul>
+            <li><span>Overview</span></li>
+            <li><span>Bid Opportunities</span></li>
+            <li><span>Vendor Resources</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Capital Projects</h3>
+          <ul>
+            <li><span>Current Projects</span></li>
+            <li><span>Completed Projects</span></li>
+            <li><span>Upcoming Projects</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Real Estate</h3>
+          <ul>
+            <li><span>Portfolio Overview</span></li>
+            <li><span>Properties &amp; Listings</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Documents</h3>
+          <ul>
+            <li><span>Public Documents</span></li>
+            <li><span>Reports &amp; Policies</span></li>
+            <li><span>Board Materials</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>News &amp; Contact</h3>
+          <ul>
+            <li><span>All News</span></li>
+            <li><span>Project Updates</span></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="directory.html">Department Directory</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</p>
+    <div class="footer-legal">
+      <button>Accessibility</button>
+      <button>Privacy Policy</button>
+      <button>Terms of Use</button>
+      <a href="https://detroitmi.gov" target="_blank" rel="noopener" class="footer-legal-ext">
+        City of Detroit
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Header scroll shadow ───────────────────────────────────
+const hdr = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// ── Mobile nav ────────────────────────────────────────────
+const mobNav   = document.getElementById('mobNav');
+const scrim    = document.getElementById('scrim');
+const openBtn  = document.getElementById('mobMenuBtn');
+const closeBtn = document.getElementById('mobCloseBtn');
+
+function openMob()  { mobNav.classList.add('open'); scrim.classList.add('visible'); document.body.style.overflow='hidden'; }
+function closeMob() { mobNav.classList.remove('open'); scrim.classList.remove('visible'); document.body.style.overflow=''; }
+
+openBtn.addEventListener('click', openMob);
+closeBtn.addEventListener('click', closeMob);
+scrim.addEventListener('click', closeMob);
+</script>
+</body>
+</html>

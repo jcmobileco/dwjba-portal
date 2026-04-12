@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capital Projects — Detroit-Wayne Joint Building Authority</title>
+  <meta name="description" content="The Authority is investing in the future of the Coleman A. Young Municipal Center through strategic capital improvements.">
+  <meta property="og:title" content="Capital Projects — Detroit-Wayne Joint Building Authority">
+  <meta property="og:description" content="The Authority is investing in the future of the Coleman A. Young Municipal Center through strategic capital improvements.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+<!-- ALERT BANNER -->
+<div class="alert-banner" id="alertBanner">
+  <div class="alert-inner">
+    <i data-lucide="info" class="alert-icon"></i>
+    <span>The DWJBA Board of Commissioners meeting is scheduled for <strong>April 24, 2026 at 10:00 AM</strong> in the 13th Floor Auditorium.</span>
+    <button class="alert-close" onclick="document.getElementById('alertBanner').style.display='none'" aria-label="Dismiss alert">
+      <i data-lucide="x"></i>
+    </button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Detroit-Wayne Joint Building Authority Home">
+      <svg class="logo-seal" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <circle cx="24" cy="24" r="23" fill="var(--brand-brown)" stroke="var(--brand-tan)" stroke-width="1.5"/>
+        <circle cx="24" cy="24" r="19" fill="none" stroke="var(--brand-tan)" stroke-width="0.75" stroke-dasharray="2 2"/>
+        <path d="M24 8 L26.5 16 L35 16 L28.5 21 L31 29 L24 24 L17 29 L19.5 21 L13 16 L21.5 16 Z" fill="var(--brand-tan)" opacity="0.9"/>
+        <rect x="12" y="30" width="24" height="9" rx="1" fill="none" stroke="var(--brand-tan)" stroke-width="0.75"/>
+        <line x1="12" y1="33.5" x2="36" y2="33.5" stroke="var(--brand-tan)" stroke-width="0.5"/>
+        <text x="24" y="38" text-anchor="middle" fill="var(--brand-tan)" font-size="4" font-family="Georgia" letter-spacing="0.5">DWJBA</text>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-title">Detroit-Wayne</span>
+        <span class="logo-sub">Joint Building Authority</span>
+      </div>
+    </a>
+
+    <nav class="nav" id="mainNav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li class="nav-item has-dropdown">
+          <button class="nav-link nav-btn" aria-expanded="false">About <i data-lucide="chevron-down" class="nav-chevron"></i></button>
+          <div class="dropdown">
+            <a href="about.html" class="dropdown-item">Overview & Mission</a>
+            <a href="about.html#leadership" class="dropdown-item">Leadership</a>
+            <a href="about.html#governance" class="dropdown-item">Governance</a>
+            <a href="about.html#services" class="dropdown-item">Services & Operations</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <button class="nav-link nav-btn" aria-expanded="false">CAYMC <i data-lucide="chevron-down" class="nav-chevron"></i></button>
+          <div class="dropdown">
+            <a href="#" class="dropdown-item">Building Overview</a>
+            <a href="#" class="dropdown-item">Departments & Offices</a>
+            <a href="#" class="dropdown-item">Visitor Information</a>
+            <a href="#" class="dropdown-item">Security & Safety</a>
+          </div>
+        </li>
+        <li class="nav-item has-dropdown">
+          <button class="nav-link nav-btn" aria-expanded="false">Procurement <i data-lucide="chevron-down" class="nav-chevron"></i></button>
+          <div class="dropdown">
+            <a href="procurement.html" class="dropdown-item">How to Do Business</a>
+            <a href="procurement.html#bids" class="dropdown-item">Bid Opportunities</a>
+            <a href="procurement.html#vendors" class="dropdown-item">Vendor Resources</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="capital-projects.html" class="nav-link">Capital Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="ai-demo.html" class="btn-ask-caymc">
+        <i data-lucide="bot"></i>
+        Ask CAYMC
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav-header">
+    <span class="mobile-nav-title">Menu</span>
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+      <i data-lucide="x"></i>
+    </button>
+  </div>
+  <nav class="mobile-nav-list">
+    <a href="about.html" class="mobile-nav-link">About</a>
+    <a href="about.html#leadership" class="mobile-nav-link">Leadership</a>
+    <a href="#" class="mobile-nav-link">CAYMC</a>
+    <a href="procurement.html" class="mobile-nav-link">Procurement</a>
+    <a href="capital-projects.html" class="mobile-nav-link">Capital Projects</a>
+    <a href="contact.html" class="mobile-nav-link">Contact</a>
+    <a href="ai-demo.html" class="mobile-nav-link mobile-nav-cta">Ask CAYMC AI</a>
+  </nav>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero" aria-label="Capital Projects">
+  <div class="container">
+    <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Capital Projects</span>
+    </nav>
+    <h1>Capital Projects</h1>
+    <p class="page-hero-sub">The Authority is investing in the future of the Coleman A. Young Municipal Center through strategic capital improvements.</p>
+  </div>
+</section>
+
+<!-- PAGE CONTENT -->
+<div class="page-content">
+
+  <!-- CURRENT PROJECTS -->
+  <section class="section-pad" aria-labelledby="current-projects-heading">
+    <div class="container">
+      <div class="eyebrow">Active Initiatives</div>
+      <h2 class="section-title" id="current-projects-heading">Current Projects</h2>
+      <div class="project-grid">
+
+        <!-- Card 1 -->
+        <div class="project-card">
+          <div class="project-status status-active">Active</div>
+          <h3>CAYMC Facility Master Plan</h3>
+          <p>The Authority has issued an RFP for comprehensive A&E services to develop a long-term facility master plan for the Municipal Center.</p>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <strong>Timeline</strong>
+              2026–2027
+            </div>
+            <div class="project-meta-item">
+              <strong>Scope</strong>
+              Full Building Assessment
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="project-card">
+          <div class="project-status status-active">Active</div>
+          <h3>HVAC Modernization — Floors 8–12</h3>
+          <p>Upgrading heating, ventilation, and air conditioning systems to improve energy efficiency and occupant comfort.</p>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <strong>Timeline</strong>
+              Q2–Q4 2026
+            </div>
+            <div class="project-meta-item">
+              <strong>Scope</strong>
+              Floors 8–12
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="project-card">
+          <div class="project-status status-active">Active</div>
+          <h3>Security Infrastructure Upgrade</h3>
+          <p>Modernizing the building's security camera network and access control systems across all floors.</p>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <strong>Timeline</strong>
+              2026
+            </div>
+            <div class="project-meta-item">
+              <strong>Scope</strong>
+              Building-Wide
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="project-card">
+          <div class="project-status status-completed">Completed</div>
+          <h3>13th Floor Auditorium Renovation</h3>
+          <p>Previously completed renovation expanded capacity from 477 to 553 seats with modern AV and accessibility improvements.</p>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <strong>Status</strong>
+              Completed
+            </div>
+            <div class="project-meta-item">
+              <strong>Capacity</strong>
+              553 Seats
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPLETED PROJECTS -->
+  <section class="section-pad bg-alt" aria-labelledby="completed-projects-heading">
+    <div class="container">
+      <div class="eyebrow">Track Record</div>
+      <h2 class="section-title" id="completed-projects-heading">Completed Projects</h2>
+      <div class="project-grid">
+
+        <!-- Card: Spirit of Detroit -->
+        <div class="project-card">
+          <div class="project-status status-completed">Completed</div>
+          <h3>Spirit of Detroit Restoration</h3>
+          <p>Full restoration of the iconic Marshall Fredericks bronze sculpture, including structural reinforcement and surface treatment.</p>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <strong>Completed</strong>
+              2018
+            </div>
+            <div class="project-meta-item">
+              <strong>Artist</strong>
+              Marshall Fredericks
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Energy Efficiency -->
+        <div class="project-card">
+          <div class="project-status status-completed">Completed</div>
+          <h3>Energy Efficiency Program</h3>
+          <p>Comprehensive energy reduction initiative achieving 50% utility cost savings and three Energy Star designations.</p>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <strong>Savings</strong>
+              50% Utilities
+            </div>
+            <div class="project-meta-item">
+              <strong>Designations</strong>
+              3x Energy Star
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING PROJECTS -->
+  <section class="section-pad" aria-labelledby="upcoming-projects-heading">
+    <div class="container">
+      <div class="eyebrow">Looking Ahead</div>
+      <h2 class="section-title" id="upcoming-projects-heading">Upcoming Projects</h2>
+      <div class="project-grid">
+
+        <!-- Card: Exterior Facade -->
+        <div class="project-card">
+          <div class="project-status status-upcoming">Upcoming</div>
+          <h3>Exterior Facade Assessment</h3>
+          <p>Planned assessment of the building's exterior envelope including windows, masonry, and waterproofing systems.</p>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <strong>Projected</strong>
+              2027
+            </div>
+            <div class="project-meta-item">
+              <strong>Scope</strong>
+              Exterior
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Elevator Modernization -->
+        <div class="project-card">
+          <div class="project-status status-upcoming">Upcoming</div>
+          <h3>Elevator Modernization</h3>
+          <p>Planned modernization of passenger and freight elevator systems to improve reliability and ADA compliance.</p>
+          <div class="project-meta">
+            <div class="project-meta-item">
+              <strong>Projected</strong>
+              2027–2028
+            </div>
+            <div class="project-meta-item">
+              <strong>Scope</strong>
+              All Elevators
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div><!-- end .page-content -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <svg viewBox="0 0 48 48" fill="none" width="36" aria-hidden="true">
+            <circle cx="24" cy="24" r="23" fill="var(--brand-tan)" stroke="var(--brand-cream)" stroke-width="1"/>
+            <path d="M24 8 L26.5 16 L35 16 L28.5 21 L31 29 L24 24 L17 29 L19.5 21 L13 16 L21.5 16 Z" fill="var(--brand-cream)"/>
+          </svg>
+          <span>Detroit-Wayne Joint Building Authority</span>
+        </a>
+        <p>Responsible Stewardship. Trusted Leadership.</p>
+        <p class="footer-addr">2 Woodward Ave, Suite 1314<br>Detroit, MI 48226</p>
+      </div>
+      <div class="footer-nav-col">
+        <h4>About</h4>
+        <a href="about.html">Mission & Overview</a>
+        <a href="about.html#leadership">Leadership</a>
+        <a href="about.html#governance">Governance</a>
+        <a href="about.html#services">Services</a>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Procurement</h4>
+        <a href="procurement.html">How to Do Business</a>
+        <a href="procurement.html#bids">Bid Opportunities</a>
+        <a href="procurement.html#vendors">Vendor Resources</a>
+        <a href="#">BidNet / MITN</a>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Facilities</h4>
+        <a href="#">CAYMC Overview</a>
+        <a href="#">Spirit of Detroit</a>
+        <a href="#">Veterans Memorial Plaza</a>
+        <a href="capital-projects.html">Capital Projects</a>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Resources</h4>
+        <a href="#">Document Center</a>
+        <a href="#">News & Announcements</a>
+        <a href="contact.html">Contact</a>
+        <a href="ai-demo.html">Ask CAYMC AI</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
