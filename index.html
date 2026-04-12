@@ -3,78 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Detroit-Wayne Joint Building Authority — CAYMC</title>
+  <title>Detroit-Wayne Joint Building Authority — Official Portal</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   <script src="main.js" defer></script>
   <style>
-    /* ── Page-level overrides ────────────────────────────────── */
+    /* ── Reset & Base ─────────────────────────────────────── */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: #f9f7f4; color: #1a0d06; -webkit-font-smoothing: antialiased; }
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
 
-    /* ── Tokens ─────────────────────────────────────────────── */
+    /* ── Tokens ──────────────────────────────────────────── */
     :root {
-      --brown:        #3d1a08;   /* brand-brown — nav, hero pill, cards */
-      --green:        #3d6b52;   /* civic-blue/brand-green */
-      --tan:          #c4956a;   /* brand-tan */
-      --cream:        #f5ede0;   /* brand-cream */
-      --zinc-950:     #0c0c0e;
-      --zinc-900:     #18181b;
-      --zinc-800:     #27272a;
-      --zinc-600:     #52525b;
-      --zinc-500:     #71717a;
-      --zinc-200:     #e4e4e7;
-      --zinc-100:     #f4f4f5;
-      --zinc-50:      #fafafa;
-      --stone-50:     #fafaf9;
-      --border:       #e2d9cc;
-      --fg:           #1a0d06;
-      --muted:        #6b5a4a;
-      --slate-accent: #5c3a22;
-      --section-alt:  #f0e8dc;
+      --brown:       #3d1a08;
+      --green:       #3d6b52;
+      --tan:         #c4956a;
+      --cream:       #f5ede0;
+      --zinc-950:    #0c0c0e;
+      --zinc-900:    #18181b;
+      --zinc-800:    #27272a;
+      --zinc-600:    #52525b;
+      --zinc-500:    #71717a;
+      --zinc-200:    #e4e4e7;
+      --zinc-100:    #f4f4f5;
+      --zinc-50:     #fafafa;
+      --stone-50:    #fafaf9;
+      --border:      #e2d9cc;
+      --fg:          #1a0d06;
+      --muted:       #6b5a4a;
+      --section-alt: #f0e8dc;
     }
 
-    /* ── Shared utilities ───────────────────────────────────── */
+    /* ── Layout helpers ──────────────────────────────────── */
     .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
     @media (min-width:640px)  { .wrap { padding: 0 1.5rem; } }
     @media (min-width:1024px) { .wrap { padding: 0 2rem; } }
 
     .eyebrow {
       display: block;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .18em;
-      color: var(--zinc-500);
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .28em;
+      color: var(--tan);
     }
 
     /* ════════════════════════════════════════════════════════
-       TOP BAR
+       TOP BAR — brown utility strip
     ════════════════════════════════════════════════════════ */
     .topbar {
-      background: var(--zinc-950);
+      background: var(--brown);
       color: white;
       font-size: 11px;
     }
     .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem;
       padding: .45rem 1rem;
-      max-width: 1280px;
-      margin: 0 auto;
+      max-width: 1280px; margin: 0 auto;
     }
     @media (min-width:640px)  { .topbar-inner { padding-left:1.5rem; padding-right:1.5rem; } }
-    @media (min-width:1024px) { .topbar-inner { padding-left:2rem; padding-right:2rem; } }
+    @media (min-width:1024px) { .topbar-inner { padding-left:2rem;   padding-right:2rem;   } }
     .topbar-left { display:flex; align-items:center; gap:1.1rem; color:rgba(255,255,255,.75); }
     .topbar-left a { display:flex; align-items:center; gap:5px; transition:color .2s; }
     .topbar-left a:hover { color:white; }
-    .topbar-left svg { width:11px; height:11px; color:rgba(255,255,255,.4); flex-shrink:0; }
+    .topbar-left svg { width:11px; height:11px; color:rgba(255,255,255,.45); flex-shrink:0; }
     .tb-address { display:none; align-items:center; gap:5px; }
     @media (min-width:1024px){ .tb-address { display:flex; } }
     .topbar-right { display:flex; align-items:center; gap:2px; color:rgba(255,255,255,.55); }
@@ -84,152 +78,112 @@
     .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
 
     /* ════════════════════════════════════════════════════════
-       HEADER
+       HEADER — WHITE nav (homepage edition)
     ════════════════════════════════════════════════════════ */
     .site-header {
-      background: var(--brown);
+      background: #ffffff;
       position: sticky;
-      top: 0;
-      z-index: 500;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      transition: box-shadow .3s;
+      top: 0; z-index: 500;
+      border-bottom: 1px solid rgba(44,36,32,.10);
+      transition: box-shadow .3s, transform .35s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
     }
-    .site-header.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.35); }
+    .site-header.scrolled { box-shadow: 0 4px 28px rgba(0,0,0,.10); }
+    .site-header.nav-hidden { transform: translateY(-100%); }
+
     .header-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1rem;
-      display: flex;
-      align-items: center;
-      height: 80px;
+      max-width: 1280px; margin: 0 auto; padding: 0 1rem;
+      display: flex; align-items: center; height: 72px;
       position: relative;
     }
     @media (min-width:640px)  { .header-inner { padding:0 1.5rem; } }
     @media (min-width:1024px) { .header-inner { padding:0 2rem; } }
 
-    /* Left + Right nav */
+    /* Left + right nav */
     .nav-left, .nav-right {
-      display: none;
-      align-items: center;
-      gap: 1px;
-      flex: 1;
+      display: none; align-items: center; gap: 1px; flex: 1;
     }
     @media (min-width:1280px){ .nav-left,.nav-right { display:flex; } }
     .nav-right { justify-content:flex-end; }
 
     /* Center logo */
     .nav-logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      position: absolute; left: 50%; transform: translateX(-50%);
     }
     @media (min-width:1280px){
       .nav-logo { position:relative; left:auto; transform:none; flex-shrink:0; }
     }
-    .nav-logo img { height:64px; width:64px; object-fit:contain; display:block; }
+    .nav-logo img { height:60px; width:60px; object-fit:contain; display:block; }
 
-    /* Nav item */
+    /* Nav button — dark text on white */
     .nav-item { position:relative; }
     .nav-btn {
-      display: flex;
-      align-items: center;
-      gap: 2px;
+      display: flex; align-items: center; gap: 2px;
       padding: 7px 9px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      color: white;
-      border-radius: 5px;
-      white-space: nowrap;
-      cursor: default;
-      transition: color .15s;
-      background: none;
-      border: none;
-      font-family: inherit;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .05em;
+      color: #2c2420;
+      border-radius: 5px; white-space: nowrap;
+      cursor: default; background: none; border: none;
+      font-family: inherit; transition: color .15s, background .15s;
     }
-    .nav-btn svg { width:11px; height:11px; transition:transform .2s; }
-    .nav-item:hover .nav-btn { color:rgba(255,255,255,.78); }
-    .nav-item:hover .nav-btn svg { transform:rotate(180deg); }
+    .nav-btn svg { width:11px; height:11px; transition:transform .2s; color: #6b5a4a; }
+    .nav-item:hover .nav-btn { color: var(--brown); background: rgba(61,26,8,.05); }
+    .nav-item:hover .nav-btn svg { transform:rotate(180deg); color: var(--brown); }
 
+    /* Dropdown */
     .nav-drop {
-      display: none;
-      position: absolute;
-      top: calc(100% + 4px);
-      left: 0;
-      z-index: 600;
-      min-width: 210px;
+      display: none; position: absolute;
+      top: calc(100% + 6px); left: 0; z-index: 600; min-width: 210px;
     }
     .nav-item:hover .nav-drop { display:block; }
     .nav-drop-inner {
       background: white;
       border: 1px solid var(--border);
       border-radius: 12px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+      box-shadow: 0 12px 40px rgba(0,0,0,.15);
       overflow: hidden;
     }
     .nav-drop-inner a {
-      display: block;
-      padding: 10px 16px;
-      font-size: 14px;
-      font-weight: 500;
-      color: rgba(26,13,6,.8);
-      transition: background .12s;
+      display: block; padding: 10px 16px;
+      font-size: 14px; font-weight: 500;
+      color: rgba(26,13,6,.8); transition: background .12s;
     }
-    .nav-drop-inner a:hover { background: var(--zinc-50); }
+    .nav-drop-inner a:hover { background: var(--zinc-50); color: var(--brown); }
 
-    /* Search btn */
+    /* Search */
     .nav-search {
-      margin-left: .4rem;
-      padding: 7px;
-      color: white;
-      border-radius: 7px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      transition: color .15s;
+      margin-left: .4rem; padding: 7px;
+      color: #2c2420; border-radius: 7px;
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; transition: color .15s;
     }
-    .nav-search:hover { color:rgba(255,255,255,.7); }
-    .nav-search svg { width:15px; height:15px; }
+    .nav-search:hover { color: var(--brown); }
+    .nav-search svg { width:16px; height:16px; }
 
-    /* Mobile toggle */
+    /* Mobile controls */
     .mob-controls {
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      margin-left: auto;
+      display: flex; align-items: center; gap: .4rem; margin-left: auto;
     }
     @media (min-width:1280px){ .mob-controls { display:none; } }
     .mob-controls button {
-      padding:7px; color:white; border-radius:7px;
-      background:none; border:none; cursor:pointer;
-      transition:color .15s;
+      padding:7px; color:#2c2420; border-radius:7px;
+      background:none; border:none; cursor:pointer; transition:color .15s;
     }
-    .mob-controls button:hover { color:rgba(255,255,255,.7); }
+    .mob-controls button:hover { color: var(--brown); }
     .mob-controls button svg { width:18px; height:18px; display:block; }
 
-    /* Mobile nav */
+    /* Mobile nav drawer */
     .mob-nav {
-      position: fixed;
-      top: 0; right: 0; bottom: 0;
-      width: 300px;
-      background: white;
-      z-index: 700;
-      overflow-y: auto;
-      transform: translateX(100%);
-      transition: transform .3s ease;
+      position: fixed; top:0; right:0; bottom:0; width:300px;
+      background: white; z-index:700; overflow-y:auto;
+      transform: translateX(100%); transition: transform .3s ease;
       box-shadow: -4px 0 30px rgba(0,0,0,.2);
     }
     .mob-nav.open { transform:translateX(0); }
     .mob-nav-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 1.5rem;
-      background: var(--brown);
-      color: white;
+      display: flex; align-items:center; justify-content:space-between;
+      padding: 1.25rem 1.5rem; background: var(--brown); color:white;
     }
     .mob-nav-head span { font-size:14px; font-weight:700; }
     .mob-nav-head button { color:white; background:none; border:none; cursor:pointer; }
@@ -239,671 +193,701 @@
     .mob-label { display:block; padding:.55rem 1.5rem; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--brown); }
     .mob-link { display:block; padding:.45rem 1.5rem .45rem 2rem; font-size:14px; color:var(--fg); transition:background .12s; }
     .mob-link:hover { background:var(--section-alt); }
-    .scrim {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.5);
-      z-index: 650;
-    }
+    .scrim { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:650; }
     .scrim.visible { display:block; }
 
     /* ════════════════════════════════════════════════════════
-       HERO
+       HERO — CAYMC full-bleed, slow zoom, editorial headline
     ════════════════════════════════════════════════════════ */
     .hero {
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
+      height: 90vh; min-height: 640px;
+      display: flex; align-items: flex-end;
       background: #18181b;
-      height: 65vh;
-      min-height: 640px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 60%;
-    }
-    .hero-overlay { position:absolute; inset:0; background:rgba(9,9,11,.20); }
-    .hero-blur {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-    .hero-blur-ball {
-      width: 380px;
-      height: 260px;
-      background: linear-gradient(to bottom, rgba(0,0,0,.20), rgba(0,0,0,.15), rgba(0,0,0,.30));
-      filter: blur(40px);
-      border-radius: 9999px;
-    }
-    .hero-body {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      text-align: center;
-      padding: 0 1rem;
-      animation: fadeUp .7s ease both;
-    }
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(24px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    .hero-seal {
-      height: 14rem;
-      width: auto;
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,.55));
-    }
-    @media (min-width:640px)  { .hero-seal { height:18rem; } }
-    @media (min-width:768px)  { .hero-seal { height:22rem; } }
+    @media (min-width:768px) { .hero { height: 88vh; min-height: 720px; } }
 
-    .hero-pill {
-      background: linear-gradient(to right, rgba(61,26,8,.90), rgba(61,26,8,.75));
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 1.1rem 2rem;
-      border-radius: 1rem;
-      max-width: 30rem;
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    /* Slow zoom bg image */
+    .hero-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center 30%;
+      animation: heroZoom 12s ease-out both;
+      transform-origin: center center;
     }
-    .hero-pill-title {
-      font-size: 1.875rem;
-      font-weight: 900;
-      color: white;
-      line-height: 1.2;
-      letter-spacing: -.02em;
+    @keyframes heroZoom {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1.00); }
     }
-    .hero-pill-sub {
-      font-size: .875rem;
-      color: rgba(255,255,255,.9);
-      margin-top: .4rem;
-      font-weight: 500;
+
+    /* Dual overlay for depth */
+    .hero-ov1 {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(10,6,3,.15) 0%,
+        rgba(10,6,3,.08) 35%,
+        rgba(10,6,3,.72) 75%,
+        rgba(10,6,3,.94) 100%
+      );
     }
+    .hero-ov2 {
+      position: absolute; inset: 0;
+      background: linear-gradient(110deg, rgba(61,26,8,.5) 0%, transparent 55%);
+    }
+    /* Thin tan accent bottom line */
+    .hero-accent {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px; z-index: 3;
+      background: linear-gradient(to right, var(--tan), rgba(196,149,106,.15));
+    }
+
+    /* Content */
+    .hero-content {
+      position: relative; z-index: 2;
+      width: 100%; padding: 0 0 5rem;
+      animation: heroFadeUp .9s .2s ease both;
+    }
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;
+    }
+    @media (min-width:1024px) { .hero-inner { padding: 0 2.5rem; } }
+
+    .hero-eyebrow {
+      display: block; font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .28em;
+      color: var(--tan); margin-bottom: 1.25rem;
+      text-align: left;
+    }
+    .hero-h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900; color: white;
+      letter-spacing: -.04em; line-height: .97;
+      margin-bottom: 1.25rem; max-width: 860px;
+      text-align: left;
+    }
+    .hero-sub {
+      font-size: clamp(.9375rem, 1.5vw, 1.125rem);
+      color: rgba(255,255,255,.65);
+      line-height: 1.65; max-width: 540px;
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
+
+    /* CTA buttons */
     .hero-btns {
-      display: flex;
-      flex-direction: column;
-      gap: .7rem;
-      margin-top: .25rem;
+      display: flex; flex-wrap: wrap; gap: .75rem;
+      margin-bottom: 3rem;
     }
-    @media (min-width:500px){ .hero-btns { flex-direction:row; } }
-    .btn-hero {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      padding: .8rem 1.875rem;
-      font-size: .875rem;
-      font-weight: 700;
-      border-radius: .5rem;
-      background: var(--brown);
-      color: white;
-      box-shadow: 0 8px 32px rgba(0,0,0,.35);
-      cursor: default;
+    .hero-btn-primary {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .875rem 1.875rem;
+      background: var(--brown); color: white;
+      font-size: .875rem; font-weight: 700;
+      border-radius: .5rem; border: none; font-family: inherit; cursor: default;
+      box-shadow: 0 8px 28px rgba(0,0,0,.35);
       transition: opacity .2s;
-      border: none;
-      font-family: inherit;
     }
-    .btn-hero:hover { opacity:.88; }
-    .btn-hero.secondary { font-weight:600; }
+    .hero-btn-primary:hover { opacity: .88; }
+    .hero-btn-primary svg { width:15px; height:15px; }
+    .hero-btn-secondary {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .875rem 1.875rem;
+      border: 1px solid rgba(255,255,255,.25); color: white;
+      font-size: .875rem; font-weight: 600;
+      border-radius: .5rem; font-family: inherit; cursor: default;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(8px); transition: background .2s;
+    }
+    .hero-btn-secondary:hover { background: rgba(255,255,255,.12); }
+
+    /* Stat strip */
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 0;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      background: rgba(0,0,0,.38);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      overflow: hidden;
+      max-width: 720px;
+    }
+    .hero-stat {
+      flex: 1; min-width: 130px;
+      padding: 1rem 1.5rem;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-size: 1.625rem; font-weight: 900;
+      color: white; letter-spacing: -.04em; line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 9px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .14em;
+      color: rgba(255,255,255,.42); margin-top: .3rem;
+    }
 
     /* ════════════════════════════════════════════════════════
-       QUICK ACCESS  — "Find What You Need"
+       QUICK ACCESS — Editorial tile grid
+       No heavy colored blocks. Clean, minimal, functional.
     ════════════════════════════════════════════════════════ */
     .qa-section {
-      padding: 4rem 0 5rem;
-      background: var(--stone-50);
+      background: #faf8f5;
+      padding: 6rem 0;
+      border-bottom: 1px solid var(--border);
     }
-    .qa-hd { margin-bottom: 2.5rem; }
-    .qa-hd .eyebrow { margin-bottom:.3rem; }
-    .qa-hd h2 {
-      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
-      font-weight: 700;
-      color: var(--brown);
-      letter-spacing: -.025em;
+    .qa-header { margin-bottom: 4rem; }
+    .qa-header .eyebrow { margin-bottom: .875rem; }
+    .qa-header h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 900; color: var(--fg);
+      letter-spacing: -.04em; line-height: 1.05;
+    }
+    .qa-header p {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.7; margin-top: .75rem;
+      max-width: 520px;
     }
 
     .qa-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1px;
-      background: var(--border);
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,.08);
+      border-top: 2px solid var(--fg);
+      background: white;
     }
-    @media (min-width:640px)  { .qa-grid { grid-template-columns:repeat(2,1fr); } }
-    @media (min-width:1024px) { .qa-grid { grid-template-columns:repeat(3,1fr); } }
+    @media (min-width: 640px)  { .qa-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .qa-grid { grid-template-columns: repeat(3, 1fr); } }
 
-    .qa-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 220px;
-      padding: 1.75rem;
+    .qa-tile {
+      padding: 2.5rem 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      gap: 1rem;
+      background: white;
+      transition: background .2s;
       cursor: default;
       position: relative;
-      transition: filter .2s;
     }
-    .qa-card:hover { filter:brightness(.96); }
-
-    .qa-c-brown  { background: var(--brown); }
-    .qa-c-green  { background: var(--green); }
-    .qa-c-white  { background: white; }
-    .qa-c-slate  { background: var(--slate-accent); }
-    .qa-c-alt    { background: var(--section-alt); }
-
-    .qa-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: auto;
+    .qa-tile:hover { background: #fdfaf6; }
+    /* Remove right border on last col */
+    @media (min-width: 1024px) {
+      .qa-tile:nth-child(3n) { border-right: none; }
     }
-    .qa-tag { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
-    .qa-tag-light { color:rgba(255,255,255,.5); }
-    .qa-tag-dark  { color:var(--muted); }
-
-    .qa-arrow {
-      width: 32px; height: 32px;
-      border-radius: 9999px;
-      border: 1px solid;
-      display: flex; align-items:center; justify-content:center;
-      flex-shrink: 0;
-      opacity: 0;
-      transition: opacity .2s, transform .2s;
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .qa-tile:nth-child(2n) { border-right: none; }
     }
-    .qa-card:hover .qa-arrow { opacity:1; transform:translate(2px,-2px); }
-    .qa-arrow-light { border-color:rgba(255,255,255,.3); color:white; }
-    .qa-arrow-dark  { border-color:var(--border); color:var(--fg); }
-    .qa-arrow svg   { width:15px; height:15px; }
-
-    .qa-num {
-      font-size: 3.75rem;
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -.04em;
-      margin: 1rem 0 .75rem;
-      user-select: none;
+    @media (max-width: 639px) {
+      .qa-tile { border-right: none; }
     }
-    .qa-num-light { color:rgba(255,255,255,.5); }
-    .qa-num-dark  { color:var(--muted); }
 
-    .qa-title { font-size:1.125rem; font-weight:700; line-height:1.3; margin-bottom:.5rem; }
-    .qa-title-light { color:white; }
-    .qa-title-dark  { color:var(--fg); }
-
-    .qa-desc { font-size:.875rem; line-height:1.6; }
-    .qa-desc-light { color:rgba(255,255,255,.5); }
-    .qa-desc-dark  { color:var(--muted); }
-
-    /* ════════════════════════════════════════════════════════
-       ABOUT — green band
-    ════════════════════════════════════════════════════════ */
-    .about-section {
-      padding: 4rem 0 5rem;
-      background: var(--green);
+    .qa-tile-num {
+      font-size: .6875rem; font-weight: 700;
+      letter-spacing: .1em; color: var(--tan);
     }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    @media (min-width:1024px){ .about-grid { grid-template-columns:1fr 1fr; gap:5rem; } }
-
-    .about-h2 {
-      font-size: clamp(1.375rem,3vw,1.875rem);
-      font-weight: 900;
-      color: white;
-      line-height: 1.25;
-      letter-spacing: -.02em;
-      margin-bottom: 2rem;
-    }
-    .about-body { color:rgba(255,255,255,.9); font-size:1rem; line-height:1.7; }
-    .about-body p+p { margin-top:1.5rem; }
-
-    .btn-about {
-      display: inline-flex;
-      align-items: center;
-      padding: .825rem 2rem;
-      background: white;
-      color: var(--green);
-      font-size: .875rem;
-      font-weight: 700;
-      border-radius: .5rem;
-      margin-top: 2rem;
-      cursor: default;
-      box-shadow: 0 4px 14px rgba(0,0,0,.12);
-      transition: background .2s;
-      border: none;
-      font-family: inherit;
-    }
-    .btn-about:hover { background:rgba(255,255,255,.9); }
-
-    .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
-    .about-stat { display:flex; align-items:flex-start; gap:1rem; }
-    .about-stat-icon { flex-shrink:0; margin-top:3px; }
-    .about-stat-icon svg { width:32px; height:32px; color:white; }
-    .about-stat-val { font-size:clamp(1.75rem,3vw,2.25rem); font-weight:900; color:white; line-height:1; margin-bottom:4px; }
-    .about-stat-lbl { font-size:.875rem; font-weight:700; color:white; margin-bottom:2px; }
-    .about-stat-sub { font-size:.75rem; color:rgba(255,255,255,.7); }
-
-    /* ════════════════════════════════════════════════════════
-       FEATURED FACILITIES
-    ════════════════════════════════════════════════════════ */
-    .fac-section { background:white; }
-
-    .fac-intro { padding:5rem 0 7rem; }
-    .fac-intro-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-    @media (min-width:1024px){ .fac-intro-grid { grid-template-columns:2fr 1fr; } }
-
-    .fac-eyebrow { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.2em; color:var(--zinc-500); display:block; margin-bottom:1rem; }
-    .fac-h2 {
-      font-size: clamp(2.5rem,5vw,3.75rem);
-      font-weight: 900;
+    .qa-tile-icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      border-radius: .625rem;
+      display: flex; align-items: center; justify-content: center;
       color: var(--brown);
-      letter-spacing: -.04em;
-      line-height: 1.08;
-      margin-bottom: 1.5rem;
+      transition: border-color .2s;
     }
-    .fac-body { color:black; line-height:1.7; }
-    .fac-body p { font-size:1.0625rem; }
-    .fac-body p+p { margin-top:1.25rem; font-size:1rem; }
+    .qa-tile:hover .qa-tile-icon { border-color: rgba(61,26,8,.3); }
+    .qa-tile-icon svg { width: 18px; height: 18px; }
 
+    .qa-tile-title {
+      font-size: 1.0625rem; font-weight: 700;
+      color: var(--fg); line-height: 1.3;
+    }
+    .qa-tile-desc {
+      font-size: .875rem; color: var(--muted);
+      line-height: 1.65; flex: 1;
+    }
+    .qa-tile-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .6875rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--brown); margin-top: .25rem;
+      opacity: 0; transition: opacity .2s;
+    }
+    .qa-tile:hover .qa-tile-link { opacity: 1; }
+    .qa-tile-link svg { width: 12px; height: 12px; }
+
+    /* ════════════════════════════════════════════════════════
+       AUTHORITY BAND — Dark editorial 2-col
+       Replaces the old green band
+    ════════════════════════════════════════════════════════ */
+    .authority-section {
+      background: var(--fg);
+      padding: 7rem 0;
+    }
+    .authority-grid {
+      display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: center;
+    }
+    @media (min-width:1024px){ .authority-grid { grid-template-columns: 1fr 1fr; gap: 6rem; } }
+
+    .auth-eyebrow {
+      display: block; font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .28em;
+      color: var(--tan); margin-bottom: 1.25rem;
+    }
+    .auth-h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900; color: white;
+      letter-spacing: -.04em; line-height: 1.05;
+      margin-bottom: 1.75rem;
+    }
+    .auth-body {
+      color: rgba(255,255,255,.65);
+      font-size: 1rem; line-height: 1.75;
+    }
+    .auth-body p + p { margin-top: 1.25rem; }
+    .auth-divider {
+      width: 2.5rem; height: 2px;
+      background: var(--tan); margin: 2rem 0;
+    }
+    .auth-btn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .875rem 2rem;
+      background: white; color: var(--fg);
+      font-size: .875rem; font-weight: 700;
+      border-radius: .5rem; transition: opacity .2s; cursor: default;
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+    }
+    .auth-btn:hover { opacity: .92; }
+    .auth-btn svg { width:15px; height:15px; }
+
+    /* Right: large stat numbers */
+    .auth-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 1rem; overflow: hidden;
+    }
+    .auth-stat {
+      padding: 2.25rem 2rem;
+      border-right: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .auth-stat:nth-child(2n) { border-right: none; }
+    .auth-stat:nth-child(3), .auth-stat:nth-child(4) { border-bottom: none; }
+    .auth-stat-num {
+      font-size: clamp(2.25rem, 4vw, 3.25rem);
+      font-weight: 900; color: white;
+      letter-spacing: -.05em; line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .auth-stat-label {
+      font-size: .8125rem; font-weight: 600;
+      color: rgba(255,255,255,.5); line-height: 1.4;
+    }
+    .auth-stat-sub {
+      font-size: .6875rem; color: rgba(255,255,255,.28);
+      margin-top: .2rem; font-weight: 500;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       FACILITIES — Full-width editorial showcase
+    ════════════════════════════════════════════════════════ */
+    .fac-section {
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Intro block */
+    .fac-intro { padding: 6rem 0 5rem; }
+    .fac-intro-grid {
+      display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start;
+    }
+    @media (min-width:1024px){ .fac-intro-grid { grid-template-columns: 2fr 1fr; gap: 5rem; } }
+
+    .fac-eyebrow {
+      display: block; font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .28em;
+      color: var(--tan); margin-bottom: 1.25rem;
+    }
+    .fac-h2 {
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-weight: 900; color: var(--fg);
+      letter-spacing: -.04em; line-height: 1.0;
+      margin-bottom: 1.75rem;
+    }
+    .fac-body { color: rgba(0,0,0,.65); line-height: 1.75; }
+    .fac-body p { font-size: 1rem; }
+    .fac-body p + p { margin-top: 1.25rem; font-size: .9375rem; }
+
+    /* Stats sidebar */
     .fac-stats-box {
-      background: var(--zinc-50);
-      border-radius: .75rem;
-      padding: 2rem;
-      border: 1px solid var(--zinc-200);
+      background: #faf8f5;
+      border-radius: .75rem; padding: 2rem;
+      border: 1px solid var(--border);
     }
-    .fs-item+.fs-item { border-top:1px solid var(--zinc-200); padding-top:1.5rem; margin-top:1.5rem; }
-    .fs-val { font-size:1.875rem; font-weight:900; color:black; margin-bottom:4px; }
-    .fs-lbl { font-size:.875rem; font-weight:600; color:black; }
-    .fs-sub { font-size:.75rem; color:var(--zinc-600); margin-top:4px; }
+    .fs-item + .fs-item { border-top:1px solid var(--border); padding-top:1.5rem; margin-top:1.5rem; }
+    .fs-val { font-size: 2rem; font-weight: 900; color: var(--fg); margin-bottom: 4px; }
+    .fs-lbl { font-size: .875rem; font-weight: 700; color: var(--fg); }
+    .fs-sub { font-size: .75rem; color: var(--muted); margin-top: 4px; }
 
-    /* Image cards grid */
+    /* Full-bleed 2-card grid */
     .fac-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      border: 1px solid var(--zinc-300);
+      display: grid; grid-template-columns: 1fr;
+      border-top: 1px solid var(--border);
     }
-    @media (min-width:1024px){ .fac-cards { grid-template-columns:1fr 1fr; } }
+    @media (min-width:768px){ .fac-cards { grid-template-columns: 1fr 1fr; } }
 
     .fac-card {
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
       background: var(--zinc-900);
-      min-height: 420px;
-      display: flex;
-      flex-direction: column;
+      min-height: 480px; display: flex; flex-direction: column;
       cursor: default;
     }
-    .fac-card+.fac-card { border-top:1px solid var(--zinc-300); }
-    @media (min-width:1024px){
-      .fac-card+.fac-card { border-top:none; border-left:1px solid var(--zinc-300); }
+    .fac-card + .fac-card { border-top: 1px solid var(--border); }
+    @media (min-width:768px) {
+      .fac-card + .fac-card { border-top: none; border-left: 1px solid var(--border); }
     }
     .fac-card-img {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform .7s ease;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .8s cubic-bezier(.25,.46,.45,.94);
     }
-    .fac-card:hover .fac-card-img { transform:scale(1.05); }
+    .fac-card:hover .fac-card-img { transform: scale(1.05); }
     .fac-card-grad {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.55) 40%, rgba(0,0,0,.15) 70%, transparent 100%);
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(0,0,0,.82) 0%, rgba(0,0,0,.6) 40%,
+        rgba(0,0,0,.15) 70%, transparent 100%);
     }
     .fac-card-hov {
-      position: absolute;
-      inset: 0;
-      background: transparent;
-      transition: background .4s;
+      position: absolute; inset: 0;
+      background: transparent; transition: background .4s;
     }
-    .fac-card:hover .fac-card-hov { background:rgba(0,0,0,.15); }
+    .fac-card:hover .fac-card-hov { background: rgba(0,0,0,.12); }
     .fac-card-body {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      height: 100%;
-      padding: 1.5rem;
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      height: 100%; padding: 2rem;
     }
-    @media (min-width:640px)  { .fac-card-body { padding:2rem; } }
-    @media (min-width:768px)  { .fac-card-body { padding:2.5rem; } }
-    .fac-card-type { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:rgba(255,255,255,.9); margin-bottom:.65rem; }
-    .fac-card-name { font-size:clamp(1.25rem,3vw,1.875rem); font-weight:900; color:white; line-height:1.2; margin-bottom:.65rem; text-shadow:0 4px 12px rgba(0,0,0,.8); }
-    .fac-card-desc { font-size:.8125rem; color:white; line-height:1.6; margin-bottom:1.25rem; text-shadow:0 3px 8px rgba(0,0,0,.7); }
+    @media (min-width:768px) { .fac-card-body { padding: 3rem; } }
+    .fac-card-type {
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .18em; color: var(--tan); margin-bottom: .75rem;
+    }
+    .fac-card-name {
+      font-size: clamp(1.375rem, 2.5vw, 1.875rem);
+      font-weight: 900; color: white; line-height: 1.15;
+      margin-bottom: .75rem;
+      text-shadow: 0 4px 16px rgba(0,0,0,.7);
+    }
+    .fac-card-desc {
+      font-size: .875rem; color: rgba(255,255,255,.75);
+      line-height: 1.6; margin-bottom: 1.5rem;
+      text-shadow: 0 2px 8px rgba(0,0,0,.6);
+    }
     .fac-card-foot { display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
-    .fac-card-loc  { font-size:.75rem; color:rgba(255,255,255,.7); font-weight:500; }
+    .fac-card-loc  { font-size:.75rem; color:rgba(255,255,255,.5); font-weight:500; }
     .btn-explore {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .55rem 1.4rem;
-      background: rgba(255,255,255,.95);
-      color: var(--zinc-900);
-      font-size: .75rem;
-      font-weight: 600;
-      border-radius: 9999px;
-      flex-shrink: 0;
-      cursor: default;
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .55rem 1.375rem;
+      background: rgba(255,255,255,.95); color: var(--zinc-900);
+      font-size: .75rem; font-weight: 700; border-radius: 9999px;
+      flex-shrink: 0; cursor: default;
+      transition: background .2s;
     }
-    .btn-explore svg { width:15px; height:15px; }
+    .btn-explore:hover { background: white; }
+    .btn-explore svg { width:14px; height:14px; }
 
     /* ════════════════════════════════════════════════════════
-       PROCUREMENT — "Doing Business with DWJBA"
+       PROCUREMENT — Clean minimal 4-col grid
     ════════════════════════════════════════════════════════ */
     .proc-section {
-      padding: 5rem 0 7rem;
-      background: white;
+      padding: 6rem 0 7rem;
+      background: #faf8f5;
+      border-top: 1px solid var(--border);
     }
-    .proc-hd { margin-bottom:3.5rem; }
-    .proc-hd-row {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: .75rem;
+    .proc-header { margin-bottom: 4rem; }
+    .proc-header-row {
+      display: flex; flex-direction: column; gap: 1rem; margin-top: .875rem;
     }
-    @media (min-width:640px){ .proc-hd-row { flex-direction:row; align-items:flex-end; justify-content:space-between; } }
-    .proc-h2 { font-size:clamp(2.25rem,5vw,3rem); font-weight:900; color:var(--fg); letter-spacing:-.04em; line-height:1.05; }
+    @media (min-width:640px){
+      .proc-header-row { flex-direction:row; align-items:flex-end; justify-content:space-between; }
+    }
+    .proc-h2 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 900; color: var(--fg);
+      letter-spacing: -.04em; line-height: 1.0;
+    }
     .btn-proc {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .6rem 1.25rem;
-      background: var(--green);
-      color: white;
-      font-size: .875rem;
-      font-weight: 600;
-      border-radius: .5rem;
-      flex-shrink: 0;
-      white-space: nowrap;
-      cursor: default;
-      margin-bottom: 4px;
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .65rem 1.375rem;
+      background: var(--brown); color: white;
+      font-size: .8125rem; font-weight: 600;
+      border-radius: .5rem; flex-shrink: 0; white-space: nowrap;
+      cursor: default; transition: opacity .2s;
     }
-    .btn-proc svg { width:15px; height:15px; }
-    .proc-desc { font-size:1rem; color:rgba(0,0,0,.6); line-height:1.7; max-width:40rem; margin-top:1.25rem; }
+    .btn-proc:hover { opacity: .88; }
+    .btn-proc svg { width:14px; height:14px; }
+    .proc-desc {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.7; max-width: 40rem; margin-top: 1.25rem;
+    }
 
     .proc-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1px;
-      background: var(--border);
-      border-radius: 1rem;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      display: grid; grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 2px solid var(--fg);
     }
-    @media (min-width:640px)  { .proc-grid { grid-template-columns:repeat(2,1fr); } }
-    @media (min-width:1024px) { .proc-grid { grid-template-columns:repeat(4,1fr); } }
+    @media (min-width:640px)  { .proc-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width:1024px) { .proc-grid { grid-template-columns: repeat(4,1fr); } }
 
     .proc-card {
-      padding: 2rem 2rem 2.25rem;
-      display: flex;
-      flex-direction: column;
-      transition: filter .2s;
+      padding: 2.5rem 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      background: white; transition: background .2s;
       cursor: default;
     }
-    .proc-card:hover { filter:brightness(.97); }
-    .pc-white  { background:white; }
-    .pc-stone  { background:#f9f9f8; }
-    .pc-amber  { background:#fffbeb; }
-    .pc-stone2 { background:#f5f4f3; }
+    .proc-card:hover { background: #fdfcfb; }
+    @media (min-width:1024px){ .proc-card:nth-child(4n) { border-right: none; } }
+    @media (min-width:640px) and (max-width:1023px){ .proc-card:nth-child(2n) { border-right: none; } }
+    @media (max-width:639px){ .proc-card { border-right: none; } }
 
     .proc-icon {
-      width: 44px; height: 44px;
-      border-radius: .75rem;
+      width: 44px; height: 44px; border-radius: .75rem;
       border: 1px solid var(--border);
       display: flex; align-items:center; justify-content:center;
       margin-bottom: 1.75rem;
       transition: border-color .2s;
     }
-    .proc-card:hover .proc-icon { border-color:rgba(61,26,8,.28); }
+    .proc-card:hover .proc-icon { border-color: rgba(61,26,8,.28); }
     .proc-icon svg { width:20px; height:20px; color:var(--brown); }
-
-    .proc-title { font-size:1rem; font-weight:700; color:var(--fg); margin-bottom:.75rem; line-height:1.3; }
-    .proc-desc-t { font-size:.875rem; color:rgba(0,0,0,.6); line-height:1.6; flex:1; margin-bottom:1.75rem; }
+    .proc-title { font-size: 1rem; font-weight: 700; color:var(--fg); margin-bottom: .75rem; line-height:1.3; }
+    .proc-body  { font-size:.875rem; color:var(--muted); line-height:1.65; flex:1; margin-bottom:1.75rem; }
     .proc-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: .72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--green);
-      cursor: default;
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .6875rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: var(--brown);
+      opacity: 0; transition: opacity .2s; cursor: default;
     }
-    .proc-cta svg { width:13px; height:13px; }
+    .proc-card:hover .proc-cta { opacity: 1; }
+    .proc-cta svg { width:12px; height:12px; }
 
     /* ════════════════════════════════════════════════════════
-       SPIRIT OF DETROIT
+       SPIRIT OF DETROIT — Cinematic full-bleed
     ════════════════════════════════════════════════════════ */
     .spirit-section {
-      position: relative;
-      overflow: hidden;
-      background: var(--zinc-800);
+      position: relative; overflow: hidden;
+      background: var(--zinc-900);
     }
     .spirit-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: .85;
-      object-position: center 20%;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: .78; object-position: center 20%;
     }
-    .spirit-grad-lr {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(9,9,11,.80) 0%, rgba(9,9,11,.60) 50%, rgba(9,9,11,.20) 100%);
+    .spirit-ov-lr {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right,
+        rgba(9,9,11,.85) 0%, rgba(9,9,11,.55) 55%, rgba(9,9,11,.1) 100%);
     }
-    @media (min-width:768px){
-      .spirit-grad-lr { background:linear-gradient(to right, rgba(9,9,11,.75) 0%, rgba(9,9,11,.45) 50%, rgba(9,9,11,0) 100%); }
-    }
-    .spirit-grad-tb {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(9,9,11,.5) 0%, rgba(9,9,11,.15) 50%, transparent 100%);
-    }
-    @media (min-width:768px){
-      .spirit-grad-tb { background:linear-gradient(to top, rgba(9,9,11,.35) 0%, transparent 50%, transparent 100%); }
+    .spirit-ov-tb {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top,
+        rgba(9,9,11,.5) 0%, rgba(9,9,11,.15) 55%, transparent 100%);
     }
     .spirit-content {
-      position: relative;
-      z-index: 2;
-      padding: 6rem 0 9rem;
+      position: relative; z-index: 2;
+      padding: 7rem 0 9rem;
     }
-    @media (min-width:768px){ .spirit-content { padding:9rem 0; } }
-    .spirit-inner { max-width:34rem; }
+    @media (min-width:768px){ .spirit-content { padding: 9rem 0 11rem; } }
+    .spirit-inner { max-width: 34rem; }
 
     .spirit-badge {
       display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .25em;
-      color: var(--tan);
-      border: 1px solid rgba(196,149,106,.4);
-      padding: .45rem 1rem;
-      border-radius: 9999px;
-      margin-bottom: 1.5rem;
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .25em;
+      color: var(--tan); border: 1px solid rgba(196,149,106,.35);
+      padding: .45rem 1rem; border-radius: 9999px; margin-bottom: 1.75rem;
     }
     .spirit-h2 {
-      font-size: clamp(3rem,7vw,4.5rem);
-      font-weight: 900;
-      color: white;
-      letter-spacing: -.05em;
-      line-height: 1;
+      font-size: clamp(3rem, 7vw, 5rem);
+      font-weight: 900; color: white;
+      letter-spacing: -.05em; line-height: .95;
       margin-bottom: 1.5rem;
     }
-    .spirit-h2-tan { color:var(--tan); }
+    .spirit-h2-tan { color: var(--tan); }
     .spirit-body {
-      font-size: 1rem;
-      color: white;
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-      max-width: 28rem;
+      font-size: 1rem; color: rgba(255,255,255,.65);
+      line-height: 1.75; margin-bottom: 2.5rem; max-width: 30rem;
     }
-    @media (min-width:768px){ .spirit-body { font-size:1.0625rem; } }
+    @media (min-width:768px){ .spirit-body { font-size: 1.0625rem; } }
 
     .spirit-facts { display:flex; flex-wrap:wrap; gap:2rem; margin-bottom:3rem; }
     .spirit-fact { border-left:2px solid var(--tan); padding-left:1rem; }
-    .spirit-fact-val { font-size:1.25rem; font-weight:900; color:white; }
-    .spirit-fact-lbl { font-size:.72rem; color:rgba(255,255,255,.4); margin-top:2px; font-weight:500; }
+    .spirit-fact-val { font-size:1.25rem; font-weight:900; color:white; letter-spacing:-.02em; }
+    .spirit-fact-lbl { font-size:.6875rem; color:rgba(255,255,255,.38); margin-top:3px; font-weight:500; text-transform:uppercase; letter-spacing:.06em; }
 
     .spirit-btns { display:flex; flex-wrap:wrap; gap:.75rem; }
     .btn-spirit-w {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .825rem 1.75rem;
-      background: white;
-      color: var(--zinc-900);
-      font-size: .875rem;
-      font-weight: 700;
-      border-radius: .5rem;
-      box-shadow: 0 4px 16px rgba(0,0,0,.2);
-      cursor: default;
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .875rem 1.875rem;
+      background: white; color: var(--zinc-900);
+      font-size: .875rem; font-weight: 700;
+      border-radius: .5rem; cursor: default;
+      box-shadow: 0 4px 18px rgba(0,0,0,.25);
+      transition: opacity .2s;
     }
+    .btn-spirit-w:hover { opacity: .9; }
     .btn-spirit-w svg { width:15px; height:15px; }
     .btn-spirit-o {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .825rem 1.75rem;
-      border: 1px solid rgba(255,255,255,.22);
-      color: white;
-      font-size: .875rem;
-      font-weight: 600;
-      border-radius: .5rem;
-      cursor: default;
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .875rem 1.875rem;
+      border: 1px solid rgba(255,255,255,.22); color: white;
+      font-size: .875rem; font-weight: 600;
+      border-radius: .5rem; cursor: default;
+      backdrop-filter: blur(8px); background: rgba(255,255,255,.04);
+      transition: background .2s;
     }
+    .btn-spirit-o:hover { background: rgba(255,255,255,.1); }
 
     /* ════════════════════════════════════════════════════════
        NEWS & ANNOUNCEMENTS
     ════════════════════════════════════════════════════════ */
     .news-section {
-      padding: 5rem 0 7rem;
-      background: var(--stone-50);
+      padding: 6rem 0 7rem;
+      background: white;
+      border-top: 1px solid var(--border);
     }
-    .news-hd { margin-bottom:3.5rem; }
-    .news-eyebrow { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.2em; color:var(--muted); display:block; }
-    .news-hd-row {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: .75rem;
+    .news-header { margin-bottom: 4rem; }
+    .news-header-row {
+      display: flex; flex-direction:column; gap:1rem; margin-top: .875rem;
     }
-    @media (min-width:640px){ .news-hd-row { flex-direction:row; align-items:flex-end; justify-content:space-between; } }
-    .news-h2 { font-size:clamp(2rem,5vw,3rem); font-weight:900; color:var(--fg); letter-spacing:-.04em; line-height:1.05; }
+    @media (min-width:640px){
+      .news-header-row { flex-direction:row; align-items:flex-end; justify-content:space-between; }
+    }
+    .news-h2 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 900; color: var(--fg);
+      letter-spacing: -.04em; line-height: 1.0;
+    }
     .btn-news {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .6rem 1.25rem;
-      background: var(--green);
-      color: white;
-      font-size: .875rem;
-      font-weight: 600;
-      border-radius: .5rem;
-      flex-shrink: 0;
-      white-space: nowrap;
-      margin-bottom: 4px;
-      cursor: default;
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .65rem 1.375rem;
+      border: 1.5px solid var(--border); color: var(--fg);
+      font-size: .8125rem; font-weight: 600;
+      border-radius: .5rem; flex-shrink:0; white-space:nowrap;
+      cursor: default; background: white; transition: border-color .2s;
     }
-    .btn-news svg { width:15px; height:15px; }
-    .news-sub { font-size:1rem; color:rgba(0,0,0,.6); line-height:1.7; max-width:40rem; margin-top:1.25rem; }
+    .btn-news:hover { border-color: var(--brown); color: var(--brown); }
+    .btn-news svg { width:14px; height:14px; }
 
     .news-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+      display: grid; grid-template-columns: 1fr; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: .75rem; overflow: hidden;
     }
-    @media (min-width:640px)  { .news-grid { grid-template-columns:repeat(2,1fr); } }
-    @media (min-width:1024px) { .news-grid { grid-template-columns:repeat(4,1fr); } }
+    @media (min-width:640px)  { .news-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (min-width:1024px) { .news-grid { grid-template-columns: repeat(4,1fr); } }
 
     .news-card {
-      background: white;
-      border-radius: .75rem;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      cursor: default;
+      background: white; display: flex;
+      flex-direction: column; cursor: default;
+      transition: background .15s;
     }
+    .news-card:hover { background: #fdfcfb; }
     .nc-img { position:relative; overflow:hidden; height:180px; flex-shrink:0; }
-    .nc-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+    .nc-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
     .news-card:hover .nc-img img { transform:scale(1.05); }
-    .nc-img-ov { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,.3), transparent); }
-    .nc-body { padding:1.25rem; flex:1; }
+    .nc-img-ov { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.3),transparent); }
+    .nc-body { padding:1.5rem; flex:1; }
     .nc-meta { display:flex; align-items:center; gap:.5rem; margin-bottom:.75rem; }
     .nc-cat {
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--brown);
-      background: var(--cream);
-      padding: 2px 8px;
-      border-radius: 9999px;
+      font-size: 9px; font-weight: 700; text-transform:uppercase; letter-spacing:.1em;
+      color: var(--brown); background: var(--cream);
+      padding: 2px 8px; border-radius: 9999px;
     }
     .nc-date { font-size:10px; color:var(--muted); }
     .nc-title {
-      font-size: .875rem;
-      font-weight: 700;
-      color: var(--fg);
-      line-height: 1.4;
-      margin-bottom: .5rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-size: .875rem; font-weight: 700; color: var(--fg);
+      line-height: 1.4; margin-bottom: .5rem;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
       transition: color .2s;
     }
-    .news-card:hover .nc-title { color:var(--brown); }
+    .news-card:hover .nc-title { color: var(--brown); }
     .nc-desc {
-      font-size: .75rem;
-      color: rgba(0,0,0,.55);
-      line-height: 1.6;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-size: .75rem; color: rgba(0,0,0,.5); line-height: 1.6;
+      display: -webkit-box; -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; overflow: hidden;
     }
 
     /* ════════════════════════════════════════════════════════
-       FOOTER
+       CTA CLOSE — Light, breathable
     ════════════════════════════════════════════════════════ */
-    .site-footer { background:var(--zinc-950); color:white; }
+    .cta-section {
+      padding: 7rem 0 8rem;
+      background: #faf8f5;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .cta-eyebrow {
+      display: block; font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .28em;
+      color: var(--tan); margin-bottom: 1.25rem;
+    }
+    .cta-h2 {
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-weight: 900; color: var(--fg);
+      letter-spacing: -.04em; line-height: 1.0;
+      margin-bottom: 1rem; max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .cta-sub {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.7; max-width: 440px;
+      margin: 0 auto 3rem;
+    }
+    .cta-btns {
+      display: flex; flex-wrap: wrap; gap: .875rem;
+      justify-content: center;
+    }
+    .cta-btn-primary {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .9375rem 2.125rem;
+      background: var(--brown); color: white;
+      font-size: .875rem; font-weight: 700;
+      border-radius: .5rem; border: none; font-family: inherit; cursor: default;
+      box-shadow: 0 4px 18px rgba(61,26,8,.25);
+      transition: opacity .2s;
+    }
+    .cta-btn-primary:hover { opacity: .88; }
+    .cta-btn-primary svg { width:15px; height:15px; }
+    .cta-btn-secondary {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .9375rem 2.125rem;
+      background: white; color: var(--fg);
+      font-size: .875rem; font-weight: 600;
+      border-radius: .5rem; border: 1.5px solid var(--border);
+      font-family: inherit; cursor: default;
+      transition: border-color .2s;
+    }
+    .cta-btn-secondary:hover { border-color: var(--brown); color: var(--brown); }
+
+    /* ════════════════════════════════════════════════════════
+       FOOTER — shared via style.css
+    ════════════════════════════════════════════════════════ */
+    .site-footer { background: var(--zinc-950); color: white; }
     .footer-main {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 4rem 1rem 3rem;
+      max-width: 1280px; margin: 0 auto; padding: 4rem 1rem 3rem;
     }
     @media (min-width:640px)  { .footer-main { padding-left:1.5rem; padding-right:1.5rem; } }
-    @media (min-width:1024px) { .footer-main { padding-left:2rem; padding-right:2rem; } }
+    @media (min-width:1024px) { .footer-main { padding-left:2rem;   padding-right:2rem;   } }
 
     .footer-top {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
+      display: flex; flex-direction: column; gap: 3rem;
       padding-bottom: 3rem;
       border-bottom: 1px solid rgba(255,255,255,.1);
     }
@@ -912,54 +896,40 @@
     .footer-brand { flex-shrink:0; }
     @media (min-width:1024px){ .footer-brand { width:18rem; } }
     .footer-logo { height:64px; width:auto; margin-bottom:1rem; }
-    .footer-desc { font-size:.875rem; color:white; line-height:1.7; margin-bottom:1.75rem; }
+    .footer-desc { font-size:.875rem; color:rgba(255,255,255,.6); line-height:1.7; margin-bottom:1.75rem; }
     .footer-contacts { display:flex; flex-direction:column; gap:.625rem; }
-    .footer-ci { display:flex; align-items:flex-start; gap:.625rem; font-size:.875rem; color:white; }
+    .footer-ci { display:flex; align-items:flex-start; gap:.625rem; font-size:.875rem; color:rgba(255,255,255,.65); }
     .footer-ci svg { width:14px; height:14px; color:rgba(255,255,255,.3); flex-shrink:0; margin-top:3px; }
     .footer-ci a:hover { color:white; text-decoration:underline; }
 
     .footer-nav {
-      flex: 1;
-      display: grid;
-      grid-template-columns: repeat(2,1fr);
-      gap: 2rem;
+      flex: 1; display: grid;
+      grid-template-columns: repeat(2,1fr); gap: 2rem;
     }
     @media (min-width:640px)  { .footer-nav { grid-template-columns:repeat(3,1fr); } }
     @media (min-width:1024px) { .footer-nav { grid-template-columns:repeat(4,1fr); } }
 
     .fn-col h3 { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:white; margin-bottom:1rem; }
-    .fn-col ul { display:flex; flex-direction:column; gap:.625rem; }
-    .fn-col li span,
-    .fn-col li a { font-size:.875rem; color:white; line-height:1.4; display:block; cursor:default; transition:color .15s; }
-    .fn-col li a:hover { color:rgba(255,255,255,.7); }
+    .fn-col ul { display:flex; flex-direction:column; gap:.625rem; list-style:none; padding:0; }
+    .fn-col li a { font-size:.875rem; color:rgba(255,255,255,.5); display:block; cursor:default; transition:color .15s; }
+    .fn-col li a:hover { color:white; }
 
     .footer-bottom {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem 1rem 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
+      max-width: 1280px; margin: 0 auto; padding: 2rem 1rem 0;
+      display: flex; flex-direction:column; align-items:center; gap:1rem;
     }
-    @media (min-width:640px){
-      .footer-bottom { flex-direction:row; justify-content:space-between; padding-left:1.5rem; padding-right:1.5rem; }
-    }
+    @media (min-width:640px){ .footer-bottom { flex-direction:row; justify-content:space-between; padding-left:1.5rem; padding-right:1.5rem; } }
     @media (min-width:1024px){ .footer-bottom { padding-left:2rem; padding-right:2rem; } }
-    .footer-copy { font-size:.75rem; color:white; }
-    .footer-legal { display:flex; align-items:center; gap:1.25rem; font-size:.75rem; color:white; }
-    .footer-legal a,
-    .footer-legal button { color:white; background:none; border:none; font-family:inherit; font-size:inherit; cursor:pointer; transition:color .15s; }
-    .footer-legal a:hover,
-    .footer-legal button:hover { color:rgba(255,255,255,.7); }
-    .footer-legal-ext { display:flex; align-items:center; gap:3px; }
-    .footer-legal-ext svg { width:11px; height:11px; }
+    .footer-copy { font-size:.75rem; color:rgba(255,255,255,.4); }
+    .footer-legal { display:flex; align-items:center; gap:1.25rem; font-size:.75rem; color:rgba(255,255,255,.4); }
+    .footer-legal a { color:rgba(255,255,255,.4); transition:color .15s; }
+    .footer-legal a:hover { color:white; }
   </style>
 </head>
 <body>
 
 <!-- ═══════════════════════════════════════════════════════
-     TOP BAR
+     TOP BAR — brown utility strip
 ════════════════════════════════════════════════════════ -->
 <div class="topbar">
   <div class="topbar-inner">
@@ -987,12 +957,12 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
-     HEADER
+     HEADER — White nav
 ════════════════════════════════════════════════════════ -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
 
-    <!-- Left Nav -->
+    <!-- Left nav -->
     <nav class="nav-left">
       <div class="nav-item">
         <button class="nav-btn">About <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
@@ -1036,14 +1006,14 @@
       </div>
     </nav>
 
-    <!-- Center Logo -->
+    <!-- Center logo -->
     <div class="nav-logo">
       <a href="index.html">
         <img src="images/logo-nav.png" alt="Detroit-Wayne Joint Building Authority" />
       </a>
     </div>
 
-    <!-- Right Nav -->
+    <!-- Right nav -->
     <nav class="nav-right">
       <div class="nav-item">
         <button class="nav-btn">Capital Projects <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
@@ -1121,118 +1091,127 @@
 </nav>
 
 <!-- ═══════════════════════════════════════════════════════
-     HERO
+     HERO — Full-bleed CAYMC, slow zoom, editorial headline
 ════════════════════════════════════════════════════════ -->
 <section class="hero">
-  <img class="hero-bg" src="images/hero-banner.png" alt="Coleman A. Young Municipal Center — Detroit" />
-  <div class="hero-overlay"></div>
-  <div class="hero-blur"><div class="hero-blur-ball"></div></div>
-  <div class="hero-body">
-    <!-- Large seal -->
-    <img class="hero-seal" src="images/seal-large.png" alt="Detroit-Wayne Joint Building Authority Seal" />
-    <!-- Welcome pill -->
-    <div class="hero-pill">
-      <p class="hero-pill-title">Welcome to the DWJBA</p>
-      <p class="hero-pill-sub">Detroit-Wayne Joint Building Authority</p>
-    </div>
-    <!-- CTA buttons -->
-    <div class="hero-btns">
-      <button class="btn-hero">
-        Explore the Municipal Center
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-      </button>
-      <button class="btn-hero secondary" onclick="location.href='about.html'">About DWJBA</button>
+  <img class="hero-bg" src="images/caymc-hero.jpg" alt="Coleman A. Young Municipal Center — Detroit" />
+  <div class="hero-ov1"></div>
+  <div class="hero-ov2"></div>
+  <div class="hero-accent"></div>
+
+  <div class="hero-content">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Detroit-Wayne Joint Building Authority</span>
+      <h1 class="hero-h1">Detroit's Civic<br>Infrastructure,<br>Managed for All.</h1>
+      <p class="hero-sub">The bi-jurisdictional authority that manages, maintains, and modernizes the public buildings that power city and county government — every day, for every Detroiter.</p>
+
+      <div class="hero-btns">
+        <a href="about.html" class="hero-btn-primary">
+          Explore the Authority
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+        </a>
+        <a href="contact.html" class="hero-btn-secondary">Visitor Information</a>
+      </div>
+
+      <!-- Stat strip -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">780K</div>
+          <div class="hero-stat-label">Sq Ft Managed</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">20+</div>
+          <div class="hero-stat-label">Agencies Served</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">1,000s</div>
+          <div class="hero-stat-label">Daily Visitors</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">Est. 1955</div>
+          <div class="hero-stat-label">Years of Service</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     QUICK ACCESS — Find What You Need
+     QUICK ACCESS — Editorial tile grid
 ════════════════════════════════════════════════════════ -->
 <section class="qa-section">
   <div class="wrap">
-    <div class="qa-hd">
+    <div class="qa-header">
       <span class="eyebrow">Quick Access</span>
       <h2>Find What You Need</h2>
+      <p>Everything the public, tenants, vendors, and civic partners need — in one place.</p>
     </div>
     <div class="qa-grid">
 
-      <!-- 01 — Visitor Info -->
-      <div class="qa-card qa-c-brown">
-        <div class="qa-top">
-          <span class="qa-tag qa-tag-light">Building Access</span>
-          <span class="qa-arrow qa-arrow-light">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
-          </span>
+      <!-- 01 Visitor Info -->
+      <div class="qa-tile">
+        <span class="qa-tile-num">01</span>
+        <div class="qa-tile-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
         </div>
-        <div class="qa-num qa-num-light">01</div>
-        <h3 class="qa-title qa-title-light">Visitor Information</h3>
-        <p class="qa-desc qa-desc-light">Hours, entry requirements, directions, and guidelines for visiting the Municipal Center.</p>
+        <h3 class="qa-tile-title">Visitor Information</h3>
+        <p class="qa-tile-desc">Hours, entry requirements, directions, and guidelines for visiting the Municipal Center.</p>
+        <span class="qa-tile-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
-      <!-- 02 — Tenant Resources -->
-      <div class="qa-card qa-c-green">
-        <div class="qa-top">
-          <span class="qa-tag qa-tag-light">Facilities</span>
-          <span class="qa-arrow qa-arrow-light">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
-          </span>
+      <!-- 02 Tenant Resources -->
+      <div class="qa-tile">
+        <span class="qa-tile-num">02</span>
+        <div class="qa-tile-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" /></svg>
         </div>
-        <div class="qa-num qa-num-light">02</div>
-        <h3 class="qa-title qa-title-light">Tenant Resources</h3>
-        <p class="qa-desc qa-desc-light">Information and services for agencies, departments, and offices within DWJBA facilities.</p>
+        <h3 class="qa-tile-title">Tenant Resources</h3>
+        <p class="qa-tile-desc">Information and services for agencies, departments, and offices within DWJBA facilities.</p>
+        <span class="qa-tile-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
-      <!-- 03 — Document Center -->
-      <div class="qa-card qa-c-white">
-        <div class="qa-top">
-          <span class="qa-tag qa-tag-dark">Public Records</span>
-          <span class="qa-arrow qa-arrow-dark">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
-          </span>
+      <!-- 03 Document Center -->
+      <div class="qa-tile">
+        <span class="qa-tile-num">03</span>
+        <div class="qa-tile-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
         </div>
-        <div class="qa-num qa-num-dark">03</div>
-        <h3 class="qa-title qa-title-dark">Document Center</h3>
-        <p class="qa-desc qa-desc-dark">Access public documents, reports, board materials, policies, and procurement records.</p>
+        <h3 class="qa-tile-title">Document Center</h3>
+        <p class="qa-tile-desc">Access public documents, reports, board materials, policies, and procurement records.</p>
+        <span class="qa-tile-link">Browse Documents <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
-      <!-- 04 — Procurement -->
-      <div class="qa-card qa-c-white">
-        <div class="qa-top">
-          <span class="qa-tag qa-tag-dark">Vendors</span>
-          <span class="qa-arrow qa-arrow-dark">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
-          </span>
+      <!-- 04 Procurement -->
+      <div class="qa-tile">
+        <span class="qa-tile-num">04</span>
+        <div class="qa-tile-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" /></svg>
         </div>
-        <div class="qa-num qa-num-dark">04</div>
-        <h3 class="qa-title qa-title-dark">Procurement Opportunities</h3>
-        <p class="qa-desc qa-desc-dark">Current bid opportunities, vendor resources, and guidance for doing business with DWJBA.</p>
+        <h3 class="qa-tile-title">Procurement Opportunities</h3>
+        <p class="qa-tile-desc">Current bid opportunities, vendor resources, and guidance for doing business with DWJBA.</p>
+        <span class="qa-tile-link">View Bids <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
-      <!-- 05 — Security -->
-      <div class="qa-card qa-c-slate">
-        <div class="qa-top">
-          <span class="qa-tag qa-tag-light">Security</span>
-          <span class="qa-arrow qa-arrow-light">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
-          </span>
+      <!-- 05 Security -->
+      <div class="qa-tile">
+        <span class="qa-tile-num">05</span>
+        <div class="qa-tile-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
         </div>
-        <div class="qa-num qa-num-light">05</div>
-        <h3 class="qa-title qa-title-light">Building Access &amp; Security</h3>
-        <p class="qa-desc qa-desc-light">Security procedures, entry protocols, and building access information for visitors and staff.</p>
+        <h3 class="qa-tile-title">Building Access &amp; Security</h3>
+        <p class="qa-tile-desc">Security procedures, entry protocols, and building access information for visitors and staff.</p>
+        <span class="qa-tile-link">Access Info <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
-      <!-- 06 — Contact -->
-      <div class="qa-card qa-c-alt">
-        <div class="qa-top">
-          <span class="qa-tag qa-tag-dark">Get in Touch</span>
-          <span class="qa-arrow qa-arrow-dark">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
-          </span>
+      <!-- 06 Contact -->
+      <div class="qa-tile">
+        <span class="qa-tile-num">06</span>
+        <div class="qa-tile-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
         </div>
-        <div class="qa-num qa-num-dark">06</div>
-        <h3 class="qa-title qa-title-dark">Contact DWJBA</h3>
-        <p class="qa-desc qa-desc-dark">Reach our offices, submit inquiries, and find department-specific contact information.</p>
+        <h3 class="qa-tile-title">Contact DWJBA</h3>
+        <p class="qa-tile-desc">Reach our offices, submit inquiries, and find department-specific contact information.</p>
+        <span class="qa-tile-link">Get in Touch <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
     </div>
@@ -1240,115 +1219,72 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     ABOUT — Green band
+     AUTHORITY — Dark editorial 2-col with large stat numbers
 ════════════════════════════════════════════════════════ -->
-<section class="about-section">
+<section class="authority-section">
   <div class="wrap">
-    <div class="about-grid">
+    <div class="authority-grid">
 
-      <!-- Left: text -->
+      <!-- Left: editorial text -->
       <div>
-        <h2 class="about-h2">Detroit-Wayne Joint Building Authority</h2>
-        <div class="about-body">
-          <p>Since 1924, we have been stewards of Detroit's most critical civic infrastructure. The Coleman A. Young Municipal Center stands as a testament to our commitment to excellence, serving the City of Detroit and Wayne County government operations.</p>
-          <p>We manage facilities that house essential services including executive and legislative branches, judicial operations, and public services. Through meticulous facility management and unwavering dedication to public service, we create environments where Detroit's government and community thrive.</p>
+        <span class="auth-eyebrow">Our Authority</span>
+        <h2 class="auth-h2">Stewards of Detroit's Most Critical Public Buildings</h2>
+        <div class="auth-body">
+          <p>The Detroit-Wayne Joint Building Authority is the bi-jurisdictional body responsible for managing, maintaining, and modernizing the civic infrastructure shared by the City of Detroit and Wayne County. We operate under a mandate of excellence — serving the government agencies, courts, and members of the public who rely on these buildings every day.</p>
+          <p>From 24/7 security and facilities management to capital improvement programs and sustainability initiatives, the DWJBA operates at the highest standards of public accountability.</p>
         </div>
-        <button class="btn-about">Learn More About DWJBA</button>
+        <div class="auth-divider"></div>
+        <a href="about.html" class="auth-btn">
+          Learn About the Authority
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+        </a>
       </div>
 
-      <!-- Right: stats 2×3 grid -->
-      <div class="about-stats">
-
-        <div class="about-stat">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" /></svg>
-          </div>
-          <div>
-            <div class="about-stat-val">100+</div>
-            <div class="about-stat-lbl">Years of Excellence</div>
-            <div class="about-stat-sub">Established in 1924</div>
-          </div>
+      <!-- Right: stat grid -->
+      <div class="auth-stats">
+        <div class="auth-stat">
+          <div class="auth-stat-num">1955</div>
+          <div class="auth-stat-label">Year Established</div>
+          <div class="auth-stat-sub">Seven decades of service</div>
         </div>
-
-        <div class="about-stat">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>
-          </div>
-          <div>
-            <div class="about-stat-val">2</div>
-            <div class="about-stat-lbl">Government Partners</div>
-            <div class="about-stat-sub">City &amp; Wayne County</div>
-          </div>
+        <div class="auth-stat">
+          <div class="auth-stat-num">780K</div>
+          <div class="auth-stat-label">Sq Ft Under Management</div>
+          <div class="auth-stat-sub">Two-tower civic complex</div>
         </div>
-
-        <div class="about-stat">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>
-          </div>
-          <div>
-            <div class="about-stat-val">4M+</div>
-            <div class="about-stat-lbl">Square Feet Managed</div>
-            <div class="about-stat-sub">Across Multiple Facilities</div>
-          </div>
+        <div class="auth-stat">
+          <div class="auth-stat-num">20+</div>
+          <div class="auth-stat-label">Government Agencies</div>
+          <div class="auth-stat-sub">City &amp; County tenants</div>
         </div>
-
-        <div class="about-stat">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" /></svg>
-          </div>
-          <div>
-            <div class="about-stat-val">10K+</div>
-            <div class="about-stat-lbl">Daily Visitors</div>
-            <div class="about-stat-sub">Public &amp; Government</div>
-          </div>
+        <div class="auth-stat">
+          <div class="auth-stat-num">3×</div>
+          <div class="auth-stat-label">EPA Energy Star</div>
+          <div class="auth-stat-sub">Consecutive certifications</div>
         </div>
-
-        <div class="about-stat">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" /></svg>
-          </div>
-          <div>
-            <div class="about-stat-val">50+</div>
-            <div class="about-stat-lbl">Departments</div>
-            <div class="about-stat-sub">City &amp; County Agencies</div>
-          </div>
-        </div>
-
-        <div class="about-stat">
-          <div class="about-stat-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>
-          </div>
-          <div>
-            <div class="about-stat-val">24/7</div>
-            <div class="about-stat-lbl">Security Operations</div>
-            <div class="about-stat-sub">Around the Clock</div>
-          </div>
-        </div>
-
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     FEATURED FACILITIES
+     FACILITIES — Full-width editorial showcase
 ════════════════════════════════════════════════════════ -->
 <section class="fac-section">
-  <!-- Intro block -->
   <div class="fac-intro">
     <div class="wrap">
       <div class="fac-intro-grid">
         <!-- Left: text -->
         <div>
           <span class="fac-eyebrow">Our Portfolio</span>
-          <h2 class="fac-h2">Two Premier Civic Facilities</h2>
+          <h2 class="fac-h2">Two Premier<br>Civic Facilities</h2>
           <div class="fac-body">
-            <p>At the heart of Detroit's civic operations stand two extraordinary facilities, each playing a critical role in serving the City and Wayne County. These are more than buildings. They are anchors of public service, innovation, and community trust.</p>
-            <p>The Coleman A. Young Municipal Center, housed in one of the region's most architecturally significant structures, serves as the primary government facility for the City of Detroit and Wayne County. It accommodates essential operations including executive, legislative, and judicial functions, while providing critical public services to thousands of residents daily.</p>
-            <p>The Spirit of Detroit Plaza complements our civic portfolio, offering a historic landmark and vibrant public space. This iconic plaza surrounding the legendary Spirit of Detroit statue creates a gathering place for civic events, celebrations, and community engagement.</p>
+            <p>At the heart of Detroit's civic operations stand two extraordinary facilities, each playing a critical role in serving the City and Wayne County. These are more than buildings — they are anchors of public service, innovation, and community trust.</p>
+            <p>The Coleman A. Young Municipal Center houses essential government operations including executive, legislative, and judicial functions, while the Spirit of Detroit Plaza stands as an iconic cultural landmark open to all Detroiters.</p>
           </div>
         </div>
-        <!-- Right: stats box -->
+        <!-- Right: stats -->
         <div class="fac-stats-box">
           <div class="fs-item">
             <div class="fs-val">2</div>
@@ -1356,8 +1292,8 @@
             <div class="fs-sub">Serving city &amp; county</div>
           </div>
           <div class="fs-item">
-            <div class="fs-val">4M+</div>
-            <div class="fs-lbl">Combined Square Feet</div>
+            <div class="fs-val">780K+</div>
+            <div class="fs-lbl">Square Feet</div>
             <div class="fs-sub">Modern, secure, managed</div>
           </div>
           <div class="fs-item">
@@ -1370,29 +1306,26 @@
     </div>
   </div>
 
-  <!-- Image cards -->
+  <!-- Full-bleed image cards -->
   <div class="fac-cards">
-
-    <!-- CAYMC -->
     <div class="fac-card">
-      <img class="fac-card-img" src="images/facility-caymc.png" alt="Coleman A. Young Municipal Center" />
+      <img class="fac-card-img" src="images/caymc-hero.jpg" alt="Coleman A. Young Municipal Center" />
       <div class="fac-card-grad"></div>
       <div class="fac-card-hov"></div>
       <div class="fac-card-body">
         <p class="fac-card-type">Primary Government Facility</p>
         <h3 class="fac-card-name">Coleman A. Young Municipal Center</h3>
-        <p class="fac-card-desc">The region's most significant public building, housing essential government functions and public services.</p>
+        <p class="fac-card-desc">The region's most significant public building, housing essential government functions and public services for thousands of Detroiters daily.</p>
         <div class="fac-card-foot">
           <span class="fac-card-loc">2 Woodward Ave, Detroit</span>
-          <span class="btn-explore">
+          <a href="about.html" class="btn-explore">
             Explore
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-          </span>
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- Spirit Plaza -->
     <div class="fac-card">
       <img class="fac-card-img" src="images/facility-spirit-plaza.png" alt="Spirit of Detroit Plaza" />
       <div class="fac-card-grad"></div>
@@ -1400,100 +1333,93 @@
       <div class="fac-card-body">
         <p class="fac-card-type">Civic Landmark &amp; Public Space</p>
         <h3 class="fac-card-name">Spirit of Detroit Plaza</h3>
-        <p class="fac-card-desc">Iconic public plaza surrounding the historic Spirit of Detroit statue, managed for civic events and public use.</p>
+        <p class="fac-card-desc">Iconic public plaza surrounding the historic Spirit of Detroit statue, managed for civic events, public access, and cultural programming.</p>
         <div class="fac-card-foot">
           <span class="fac-card-loc">Woodward Ave Plaza</span>
-          <span class="btn-explore">
+          <a href="spirit.html" class="btn-explore">
             Explore
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-          </span>
+          </a>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     PROCUREMENT — Doing Business with DWJBA
+     PROCUREMENT — Minimal editorial grid
 ════════════════════════════════════════════════════════ -->
 <section class="proc-section">
   <div class="wrap">
-    <div class="proc-hd">
+    <div class="proc-header">
       <span class="eyebrow">Procurement &amp; Vendors</span>
-      <div class="proc-hd-row">
+      <div class="proc-header-row">
         <h2 class="proc-h2">Doing Business<br>with DWJBA</h2>
-        <span class="btn-proc">
+        <a href="#" class="btn-proc">
           All Procurement Info
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-        </span>
+        </a>
       </div>
       <p class="proc-desc">Transparent procurement processes open to qualified vendors, contractors, and service providers. DWJBA is committed to fair, competitive, and accountable contracting.</p>
     </div>
 
     <div class="proc-grid">
-
-      <!-- Current Opportunities -->
-      <div class="proc-card pc-white">
+      <div class="proc-card">
         <div class="proc-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>
         </div>
         <h3 class="proc-title">Current Opportunities</h3>
-        <p class="proc-desc-t">Browse active bids, RFPs, and open contract solicitations. DWJBA posts all competitive procurement opportunities publicly and transparently.</p>
+        <p class="proc-body">Browse active bids, RFPs, and open contract solicitations. All competitive procurement opportunities are posted publicly and transparently.</p>
         <span class="proc-cta">View Bid Opportunities <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
-      <!-- Vendor Resources -->
-      <div class="proc-card pc-stone">
+      <div class="proc-card">
         <div class="proc-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" /></svg>
         </div>
         <h3 class="proc-title">Vendor Resources</h3>
-        <p class="proc-desc-t">Access registration forms, insurance requirements, compliance documentation, and step-by-step guidance for first-time and returning vendors.</p>
-        <span class="proc-cta">Explore Vendor Resources <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
+        <p class="proc-body">Access registration forms, insurance requirements, compliance documentation, and step-by-step guidance for first-time and returning vendors.</p>
+        <span class="proc-cta">Explore Resources <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
-      <!-- Procurement Process -->
-      <div class="proc-card pc-amber">
+      <div class="proc-card">
         <div class="proc-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
         </div>
         <h3 class="proc-title">Procurement Process</h3>
-        <p class="proc-desc-t">Understand how DWJBA evaluates and awards contracts. Our process is competitive, accountable, and open to all qualified businesses.</p>
+        <p class="proc-body">Understand how DWJBA evaluates and awards contracts. Our process is competitive, accountable, and open to all qualified businesses.</p>
         <span class="proc-cta">Learn the Process <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
 
-      <!-- External Platforms -->
-      <div class="proc-card pc-stone2">
+      <div class="proc-card">
         <div class="proc-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" /></svg>
         </div>
         <h3 class="proc-title">External Bid Platforms</h3>
-        <p class="proc-desc-t">DWJBA also partners with state and regional platforms. Access supplemental bidding portals and notification services used alongside our postings.</p>
+        <p class="proc-body">DWJBA partners with state and regional bid platforms. Access supplemental bidding portals and notification services used alongside our postings.</p>
         <span class="proc-cta">Find Platform Links <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></span>
       </div>
-
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     SPIRIT OF DETROIT
+     SPIRIT OF DETROIT — Cinematic full-bleed
 ════════════════════════════════════════════════════════ -->
 <section class="spirit-section">
-  <img class="spirit-bg" src="images/spirit-spotlight.png" alt="Spirit of Detroit" />
-  <div class="spirit-grad-lr"></div>
-  <div class="spirit-grad-tb"></div>
+  <img class="spirit-bg" src="images/facility-spirit-plaza.png" alt="Spirit of Detroit" />
+  <div class="spirit-ov-lr"></div>
+  <div class="spirit-ov-tb"></div>
   <div class="spirit-content">
     <div class="wrap">
       <div class="spirit-inner">
         <span class="spirit-badge">Cultural Landmark · DWJBA Managed</span>
         <h2 class="spirit-h2">The Spirit<br><span class="spirit-h2-tan">of Detroit</span></h2>
-        <p class="spirit-body">A 26-foot bronze monument standing at the heart of Detroit since 1958, one of the city's most enduring symbols of strength, resilience, and civic pride. The DWJBA manages the Spirit of Detroit program including public access, event coordination, and media permitting.</p>
+        <p class="spirit-body">A 26-foot bronze monument standing at the heart of Detroit since 1958 — one of the city's most enduring symbols of strength, resilience, and civic pride. The DWJBA manages the Spirit of Detroit program including public access, event coordination, and media permitting.</p>
         <div class="spirit-facts">
           <div class="spirit-fact">
             <div class="spirit-fact-val">26 ft</div>
-            <div class="spirit-fact-lbl">Bronze Statue Height</div>
+            <div class="spirit-fact-lbl">Bronze Height</div>
           </div>
           <div class="spirit-fact">
             <div class="spirit-fact-val">1958</div>
@@ -1505,11 +1431,11 @@
           </div>
         </div>
         <div class="spirit-btns">
-          <span class="btn-spirit-w">
+          <a href="spirit.html" class="btn-spirit-w">
             Explore the Program
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-          </span>
-          <span class="btn-spirit-o">Event &amp; Permit Requests</span>
+          </a>
+          <a href="spirit.html#request" class="btn-spirit-o">Event &amp; Permit Requests</a>
         </div>
       </div>
     </div>
@@ -1521,80 +1447,68 @@
 ════════════════════════════════════════════════════════ -->
 <section class="news-section">
   <div class="wrap">
-    <div class="news-hd">
-      <span class="news-eyebrow">Updates</span>
-      <div class="news-hd-row">
+    <div class="news-header">
+      <span class="eyebrow">Updates</span>
+      <div class="news-header-row">
         <h2 class="news-h2">Latest News &amp; Announcements</h2>
-        <span class="btn-news">
+        <a href="#" class="btn-news">
           All News
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-        </span>
+        </a>
       </div>
-      <p class="news-sub">Latest updates, announcements, and news from the Detroit-Wayne Joint Building Authority.</p>
     </div>
-
     <div class="news-grid">
-
       <div class="news-card">
-        <div class="nc-img">
-          <img src="images/news-1.png" alt="DWJBA Board Approves Capital Improvement Plan" />
-          <div class="nc-img-ov"></div>
-        </div>
+        <div class="nc-img"><img src="images/news-1.png" alt="Board Capital Improvement Plan" /><div class="nc-img-ov"></div></div>
         <div class="nc-body">
-          <div class="nc-meta">
-            <span class="nc-cat">Board Action</span>
-            <span class="nc-date">March 18, 2026</span>
-          </div>
+          <div class="nc-meta"><span class="nc-cat">Board Action</span><span class="nc-date">March 18, 2026</span></div>
           <h3 class="nc-title">DWJBA Board Approves 2026 Capital Improvement Plan</h3>
           <p class="nc-desc">The Board has unanimously approved a new capital improvement plan addressing critical infrastructure needs across all managed facilities.</p>
         </div>
       </div>
-
       <div class="news-card">
-        <div class="nc-img">
-          <img src="images/news-2.png" alt="Elevator Modernization Project" />
-          <div class="nc-img-ov"></div>
-        </div>
+        <div class="nc-img"><img src="images/news-2.png" alt="Elevator Modernization" /><div class="nc-img-ov"></div></div>
         <div class="nc-body">
-          <div class="nc-meta">
-            <span class="nc-cat">Building Update</span>
-            <span class="nc-date">March 10, 2026</span>
-          </div>
+          <div class="nc-meta"><span class="nc-cat">Building Update</span><span class="nc-date">March 10, 2026</span></div>
           <h3 class="nc-title">Elevator Modernization Project Reaches Phase 2</h3>
           <p class="nc-desc">The multi-phase elevator modernization project has entered its second phase, with upgrades now underway on floors 12–20.</p>
         </div>
       </div>
-
       <div class="news-card">
-        <div class="nc-img">
-          <img src="images/news-3.png" alt="Updated Security Screening Procedures" />
-          <div class="nc-img-ov"></div>
-        </div>
+        <div class="nc-img"><img src="images/news-3.png" alt="Security Screening" /><div class="nc-img-ov"></div></div>
         <div class="nc-body">
-          <div class="nc-meta">
-            <span class="nc-cat">Public Notice</span>
-            <span class="nc-date">March 5, 2026</span>
-          </div>
+          <div class="nc-meta"><span class="nc-cat">Public Notice</span><span class="nc-date">March 5, 2026</span></div>
           <h3 class="nc-title">Updated Security Screening Procedures Now in Effect</h3>
           <p class="nc-desc">New entry screening protocols are now in effect for all visitors entering the Coleman A. Young Municipal Center.</p>
         </div>
       </div>
-
       <div class="news-card">
-        <div class="nc-img">
-          <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80&auto=format&fit=crop" alt="RFP Released HVAC" />
-          <div class="nc-img-ov"></div>
-        </div>
+        <div class="nc-img"><img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80&auto=format&fit=crop" alt="RFP HVAC" /><div class="nc-img-ov"></div></div>
         <div class="nc-body">
-          <div class="nc-meta">
-            <span class="nc-cat">Procurement</span>
-            <span class="nc-date">Feb 28, 2026</span>
-          </div>
+          <div class="nc-meta"><span class="nc-cat">Procurement</span><span class="nc-date">Feb 28, 2026</span></div>
           <h3 class="nc-title">RFP Released: HVAC System Assessment Services</h3>
           <p class="nc-desc">DWJBA has released a Request for Proposals for HVAC system assessment and engineering services for critical facility upgrades.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
+<!-- ═══════════════════════════════════════════════════════
+     CTA CLOSE
+════════════════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="wrap">
+    <span class="cta-eyebrow">Continue Exploring</span>
+    <h2 class="cta-h2">Learn More About<br>the Authority</h2>
+    <p class="cta-sub">Discover our facilities, review public documents, meet our leadership, or get in touch with the Detroit-Wayne Joint Building Authority.</p>
+    <div class="cta-btns">
+      <a href="about.html" class="cta-btn-primary">
+        About DWJBA
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+      </a>
+      <a href="leadership.html" class="cta-btn-secondary">Leadership &amp; Governance</a>
+      <a href="contact.html" class="cta-btn-secondary">Contact Us</a>
     </div>
   </div>
 </section>
@@ -1605,11 +1519,9 @@
 <footer class="site-footer">
   <div class="footer-main">
     <div class="footer-top">
-
-      <!-- Brand / Contact -->
       <div class="footer-brand">
         <img class="footer-logo" src="images/seal-large.png" alt="Detroit-Wayne Joint Building Authority" />
-        <p class="footer-desc">Managing and maintaining critical public facilities that support city and county government, court functions, and essential public services since 1924.</p>
+        <p class="footer-desc">Managing and maintaining critical public facilities that support city and county government, court functions, and essential public services since 1955.</p>
         <div class="footer-contacts">
           <div class="footer-ci">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
@@ -1623,17 +1535,12 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
             <a href="mailto:info@dwjba.com">info@dwjba.com</a>
           </div>
-          <div class="footer-ci">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-            <span>Mon–Fri, 8:00 AM to 5:00 PM</span>
-          </div>
         </div>
       </div>
 
-      <!-- Nav grid -->
-      <div class="footer-nav">
+      <nav class="footer-nav">
         <div class="fn-col">
-          <h3>About</h3>
+          <h3>About DWJBA</h3>
           <ul>
             <li><a href="about.html">Overview</a></li>
             <li><a href="about.html#leadership">Leadership &amp; Governance</a></li>
@@ -1643,98 +1550,76 @@
         <div class="fn-col">
           <h3>CAYMC</h3>
           <ul>
-            <li><a href="directory.html">Building Overview</a></li>
             <li><a href="directory.html">Departments &amp; Offices</a></li>
             <li><a href="contact.html">Visitor Information</a></li>
+            <li><a href="contact.html">Building Access</a></li>
           </ul>
         </div>
         <div class="fn-col">
-          <h3>Tenants &amp; Access</h3>
+          <h3>Spirit of Detroit</h3>
           <ul>
-            <li><a href="directory.html">Tenant Directory</a></li>
-            <li><a href="contact.html">Building Access &amp; Security</a></li>
-            <li><a href="contact.html">Visitor FAQs</a></li>
+            <li><a href="spirit.html">Overview</a></li>
+            <li><a href="spirit.html#gallery">Gallery</a></li>
+            <li><a href="spirit.html#request">Request Form</a></li>
           </ul>
         </div>
         <div class="fn-col">
-          <h3>Procurement</h3>
+          <h3>Resources</h3>
           <ul>
-            <li><span>Overview</span></li>
-            <li><span>Bid Opportunities</span></li>
-            <li><span>Vendor Resources</span></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>Capital Projects</h3>
-          <ul>
-            <li><span>Current Projects</span></li>
-            <li><span>Completed Projects</span></li>
-            <li><span>Upcoming Projects</span></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>Real Estate</h3>
-          <ul>
-            <li><span>Portfolio Overview</span></li>
-            <li><span>Properties &amp; Listings</span></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>Documents</h3>
-          <ul>
-            <li><span>Public Documents</span></li>
-            <li><span>Reports &amp; Policies</span></li>
-            <li><span>Board Materials</span></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>News &amp; Contact</h3>
-          <ul>
-            <li><span>All News</span></li>
-            <li><span>Project Updates</span></li>
+            <li><a href="#">Public Documents</a></li>
+            <li><a href="#">Reports &amp; Policies</a></li>
             <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="directory.html">Department Directory</a></li>
           </ul>
         </div>
-      </div>
-
+      </nav>
     </div>
-  </div>
 
-  <!-- Bottom bar -->
-  <div class="footer-bottom">
-    <p class="footer-copy">© 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</p>
-    <div class="footer-legal">
-      <button>Accessibility</button>
-      <button>Privacy Policy</button>
-      <button>Terms of Use</button>
-      <a href="https://detroitmi.gov" target="_blank" rel="noopener" class="footer-legal-ext">
-        City of Detroit
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-      </a>
+    <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,.08); margin-top:0; padding-top:2rem;">
+      <p class="footer-copy">© 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Accessibility</a>
+      </div>
     </div>
   </div>
 </footer>
 
+<!-- ═══════════════════════════════════════════════════════
+     JS — Nav scroll-hide + mobile drawer
+════════════════════════════════════════════════════════ -->
 <script>
-// ── Header scroll shadow ───────────────────────────────────
-const hdr = document.getElementById('siteHeader');
-window.addEventListener('scroll', () => {
-  hdr.classList.toggle('scrolled', window.scrollY > 10);
-}, { passive: true });
+(function() {
+  var header  = document.getElementById('siteHeader');
+  var lastY   = window.scrollY;
+  var ticking = false;
 
-// ── Mobile nav ────────────────────────────────────────────
-const mobNav   = document.getElementById('mobNav');
-const scrim    = document.getElementById('scrim');
-const openBtn  = document.getElementById('mobMenuBtn');
-const closeBtn = document.getElementById('mobCloseBtn');
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      requestAnimationFrame(function() {
+        var y = window.scrollY;
+        if (y > 80) header.classList.add('scrolled');
+        else        header.classList.remove('scrolled');
 
-function openMob()  { mobNav.classList.add('open'); scrim.classList.add('visible'); document.body.style.overflow='hidden'; }
-function closeMob() { mobNav.classList.remove('open'); scrim.classList.remove('visible'); document.body.style.overflow=''; }
+        if (y > lastY && y > 160) header.classList.add('nav-hidden');
+        else                       header.classList.remove('nav-hidden');
+        lastY   = y;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 
-openBtn.addEventListener('click', openMob);
-closeBtn.addEventListener('click', closeMob);
-scrim.addEventListener('click', closeMob);
+  // Mobile drawer
+  var btn   = document.getElementById('mobMenuBtn');
+  var close = document.getElementById('mobCloseBtn');
+  var nav   = document.getElementById('mobNav');
+  var scrim = document.getElementById('scrim');
+  function openNav()  { nav.classList.add('open');    scrim.classList.add('visible');    document.body.style.overflow = 'hidden'; }
+  function closeNav() { nav.classList.remove('open'); scrim.classList.remove('visible'); document.body.style.overflow = ''; }
+  if (btn)   btn.addEventListener('click', openNav);
+  if (close) close.addEventListener('click', closeNav);
+  if (scrim) scrim.addEventListener('click', closeNav);
+})();
 </script>
 </body>
 </html>
