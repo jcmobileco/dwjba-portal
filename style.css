@@ -145,8 +145,8 @@ ul { list-style: none; }
    HEADER / NAV
    ============================================================ */
 .site-header {
-  background: var(--brand-brown);
-  border-bottom: 1px solid var(--brand-brown);
+  background: #2c2420;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
   position: sticky;
   top: 0;
   z-index: 500;
@@ -228,10 +228,11 @@ ul { list-style: none; }
 .nav-dropdown {
   display: none;
   position: absolute;
-  top: calc(100% + 4px);
+  top: 100%;
   left: 0;
   z-index: 600;
   min-width: 200px;
+  padding-top: 8px; /* invisible bridge so mouse doesn't slip off */
 }
 .nav-item:hover .nav-dropdown { display: block; }
 .nav-dropdown-inner {
@@ -301,7 +302,7 @@ ul { list-style: none; }
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.5rem;
-  background: var(--brand-brown);
+  background: #2c2420;
   color: white;
 }
 .mobile-nav-header button { color: white; padding: 4px; }

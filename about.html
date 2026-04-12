@@ -1336,6 +1336,215 @@
       border: 1px solid rgba(196,149,106,.25);
     }
 
+    /* ═══════════════════════════════════════════════════════
+       GOVERNANCE — Full Width Redesign (.gov-fw)
+    ════════════════════════════════════════════════════════ */
+    .gov-fw {
+      background: var(--green);
+      padding: 5rem 0 5.5rem;
+    }
+    .gov-fw-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .gov-fw-hd {
+      margin-bottom: 1.5rem;
+    }
+    .gov-fw-eyebrow {
+      display: block;
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .22em;
+      color: rgba(255,255,255,.55);
+      margin-bottom: .75rem;
+    }
+    .gov-fw-h2 {
+      font-size: clamp(2rem, 3.5vw, 3.25rem);
+      font-weight: 900; color: white;
+      letter-spacing: -.04em; line-height: 1.05;
+    }
+    .gov-fw-body-row {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 768px) { .gov-fw-body-row { flex-direction: column; gap: 1.5rem; align-items: flex-start; } }
+    .gov-fw-body {
+      flex: 1;
+      font-size: 1rem; color: rgba(255,255,255,.75);
+      line-height: 1.75; max-width: 640px;
+    }
+    .gov-fw-btn {
+      display: inline-block; flex-shrink: 0;
+      background: white; color: var(--green);
+      font-size: .875rem; font-weight: 700;
+      padding: .875rem 2rem; border-radius: 6px;
+      transition: opacity .2s;
+      white-space: nowrap;
+    }
+    .gov-fw-btn:hover { opacity: .9; }
+    /* 3 horizontal cards */
+    .gov-fw-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 900px) { .gov-fw-cards { grid-template-columns: 1fr; } }
+    .gov-fw-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: 2rem 1.75rem;
+      transition: background .2s;
+    }
+    .gov-fw-card:hover { background: rgba(255,255,255,.13); }
+    .gov-fw-card-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,.12);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .gov-fw-card-icon svg { width: 20px; height: 20px; color: var(--tan); }
+    .gov-fw-card-tag {
+      font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .18em;
+      color: var(--tan); margin-bottom: .5rem;
+    }
+    .gov-fw-card-title {
+      font-size: 1rem; font-weight: 800;
+      color: white; line-height: 1.3;
+      margin-bottom: .625rem;
+    }
+    .gov-fw-card-desc {
+      font-size: .875rem; color: rgba(255,255,255,.6);
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       HORIZONTAL TIMELINE (.htl-section)
+    ════════════════════════════════════════════════════════ */
+    .htl-section {
+      background: var(--zinc-950);
+      padding: 5rem 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .htl-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    .htl-header {
+      margin-bottom: 3rem;
+      position: relative; z-index: 1;
+    }
+    .htl-eyebrow {
+      display: block; font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .22em;
+      color: var(--tan); margin-bottom: .875rem;
+    }
+    .htl-h2 {
+      font-size: clamp(1.75rem, 3vw, 2.75rem);
+      font-weight: 900; color: white;
+      letter-spacing: -.035em; line-height: 1.05;
+      margin-bottom: .625rem;
+    }
+    .htl-sub {
+      font-size: 1rem; color: rgba(255,255,255,.45);
+      line-height: 1.65; max-width: 36rem;
+    }
+    /* Scroll container */
+    .htl-scroll-outer {
+      overflow-x: auto;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(196,149,106,.3) transparent;
+      position: relative;
+      padding-bottom: 3rem;
+    }
+    .htl-scroll-outer::-webkit-scrollbar { height: 4px; }
+    .htl-scroll-outer::-webkit-scrollbar-track { background: transparent; }
+    .htl-scroll-outer::-webkit-scrollbar-thumb { background: rgba(196,149,106,.3); border-radius: 2px; }
+    /* The horizontal track */
+    .htl-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      padding: 0 2rem 0 2rem;
+      min-width: max-content;
+      position: relative;
+    }
+    /* Connecting line through all items */
+    .htl-track::before {
+      content: '';
+      position: absolute;
+      top: 22px; /* center of the dot */
+      left: calc(2rem + 22px);
+      right: calc(2rem + 22px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(196,149,106,.5) 5%, rgba(196,149,106,.5) 95%, transparent);
+      z-index: 0;
+    }
+    .htl-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 260px;
+      flex-shrink: 0;
+      padding: 0 2rem 0 0;
+      position: relative;
+      z-index: 1;
+    }
+    .htl-item:last-child { padding-right: 0; }
+    .htl-dot {
+      width: 44px; height: 44px;
+      background: var(--brown);
+      border: 2px solid var(--tan);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 0 6px rgba(196,149,106,.1);
+    }
+    .htl-dot svg { width: 18px; height: 18px; color: var(--tan); }
+    .htl-year {
+      font-size: 2rem; font-weight: 900;
+      color: var(--tan); letter-spacing: -.04em; line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .htl-title {
+      font-size: .9375rem; font-weight: 800;
+      color: white; line-height: 1.3;
+      margin-bottom: .5rem;
+    }
+    .htl-desc {
+      font-size: .8125rem; color: rgba(255,255,255,.5);
+      line-height: 1.65; margin-bottom: .75rem;
+      max-width: 220px;
+    }
+    .htl-badge {
+      display: inline-block;
+      font-size: 8px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .14em;
+      padding: .25rem .65rem; border-radius: 9999px;
+      background: rgba(196,149,106,.15);
+      color: var(--tan);
+      border: 1px solid rgba(196,149,106,.25);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       CTA BAR — Slate variant (not black)
+    ════════════════════════════════════════════════════════ */
+    .cta-bar-slate {
+      background: #1e3a2f !important;  /* deep forest green — distinct from zinc-950 footer */
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+
 </style>
 </head>
 <body>
@@ -1508,7 +1717,7 @@
 <section class="about-hero">
   <img
     class="about-hero-bg"
-    src="images/about-hero.png"
+    src="images/caymc-hero.jpg"
     alt="Detroit-Wayne Joint Building Authority — Civic Center"
   />
   <div class="about-hero-overlay"></div>
@@ -1604,12 +1813,6 @@
      SECTION 2 — MISSION & VISION
 ════════════════════════════════════════════════════════ -->
 <section class="mission-section">
-
-  <!-- Top label bar -->
-  <div class="mission-topbar">
-    <h2>Purpose &amp; Direction</h2>
-    <p>Our mission, vision, and core responsibilities guide every decision we make as stewards of Detroit's civic infrastructure.</p>
-  </div>
 
   <!-- 3 full-bleed panels -->
   <div class="mission-panels">
@@ -1764,51 +1967,47 @@
 <!-- ═══════════════════════════════════════════════════════
      SECTION 5 — GOVERNANCE CALLOUT
 ════════════════════════════════════════════════════════ -->
-<section class="gov-section" id="leadership">
-  <div class="gov-layout">
+<section class="gov-fw" id="leadership">
+  <div class="gov-fw-inner">
 
-    <!-- Left: text -->
-    <div class="gov-left">
-      <span class="gov-eyebrow">Oversight &amp; Accountability</span>
-      <h2 class="gov-h2">Leadership &amp;<br>Governance</h2>
-      <p class="gov-body">The DWJBA is governed by a bi-jurisdictional board composed of appointed representatives from both the City of Detroit and Wayne County. This unique structure ensures balanced oversight, shared fiscal responsibility, and full public transparency.</p>
-      <p class="gov-body">Board meetings are open to the public in accordance with Michigan's Open Meetings Act. Agendas, minutes, and financial documents are available through our Documents portal.</p>
-      <a href="leadership.html" class="btn-gov">
-        Meet the Board
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-      </a>
+    <!-- Eyebrow + headline -->
+    <div class="gov-fw-hd">
+      <span class="gov-fw-eyebrow">Oversight &amp; Accountability</span>
+      <h2 class="gov-fw-h2">Leadership &amp; Governance</h2>
     </div>
 
-    <!-- Right: 3 stacked rows -->
-    <div class="gov-right">
+    <!-- Body copy + CTA -->
+    <div class="gov-fw-body-row">
+      <p class="gov-fw-body">The DWJBA is governed by a bi-jurisdictional board of appointed representatives from the City of Detroit and Wayne County — ensuring balanced oversight, shared fiscal responsibility, and full public transparency. Board meetings are open to the public per Michigan's Open Meetings Act.</p>
+      <a href="leadership.html" class="gov-fw-btn">Meet Our Leadership Team &rarr;</a>
+    </div>
 
-      <div class="gov-row">
-        <div class="gov-row-num">01</div>
-        <div class="gov-row-content">
-          <span class="gov-row-label">City of Detroit</span>
-          <div class="gov-row-title">City Representatives</div>
-          <div class="gov-row-desc">Appointed by the Mayor of Detroit — representing City stakeholders and civic interests across all DWJBA-managed facilities.</div>
+    <!-- 3 feature cards horizontal -->
+    <div class="gov-fw-cards">
+      <div class="gov-fw-card">
+        <div class="gov-fw-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"/></svg>
         </div>
+        <div class="gov-fw-card-tag">City of Detroit</div>
+        <div class="gov-fw-card-title">City Representatives</div>
+        <p class="gov-fw-card-desc">Appointed by the Mayor — representing City stakeholders and civic interests across all DWJBA facilities.</p>
       </div>
-
-      <div class="gov-row">
-        <div class="gov-row-num">02</div>
-        <div class="gov-row-content">
-          <span class="gov-row-label">Wayne County</span>
-          <div class="gov-row-title">County Representatives</div>
-          <div class="gov-row-desc">Appointed by the Wayne County Executive — representing County interests and ensuring shared governance accountability.</div>
+      <div class="gov-fw-card">
+        <div class="gov-fw-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12"/></svg>
         </div>
+        <div class="gov-fw-card-tag">Wayne County</div>
+        <div class="gov-fw-card-title">County Representatives</div>
+        <p class="gov-fw-card-desc">Appointed by the Wayne County Executive — ensuring shared governance and bi-jurisdictional accountability.</p>
       </div>
-
-      <div class="gov-row">
-        <div class="gov-row-num">03</div>
-        <div class="gov-row-content">
-          <span class="gov-row-label">Public Transparency</span>
-          <div class="gov-row-title">Open Meetings &amp; Public Records</div>
-          <div class="gov-row-desc">All board meetings are open to the public. Agendas, minutes, and reports are publicly available per Michigan's Open Meetings Act.</div>
+      <div class="gov-fw-card">
+        <div class="gov-fw-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
         </div>
+        <div class="gov-fw-card-tag">Public Transparency</div>
+        <div class="gov-fw-card-title">Open Meetings &amp; Public Records</div>
+        <p class="gov-fw-card-desc">All meetings open per Michigan's Open Meetings Act. Agendas, minutes, and reports are publicly accessible.</p>
       </div>
-
     </div>
 
   </div>
@@ -1818,110 +2017,77 @@
 <!-- ═══════════════════════════════════════════════════════
      SECTION — INSTITUTIONAL TIMELINE
 ════════════════════════════════════════════════════════ -->
-<section class="timeline-section">
+<section class="htl-section">
   <div class="wrap">
-
-    <div class="timeline-hd">
-      <span class="timeline-eyebrow">Our History</span>
-      <h2 class="timeline-h2">A Legacy of<br>Public Stewardship</h2>
-      <p class="timeline-sub">From the construction of an iconic civic landmark to the adoption of cutting-edge technology — seven decades of serving Detroit.</p>
-    </div>
-
-    <div class="tl-track">
-
-      <!-- 1955 — LEFT -->
-      <div class="tl-item left">
-        <div class="tl-card">
-          <div class="tl-year">1955</div>
-          <div class="tl-title">Coleman A. Young Municipal Center Opens</div>
-          <p class="tl-desc">Designed by Harley, Ellington &amp; Day, the Coleman A. Young Municipal Center opens as Detroit's primary government complex — housing City and County offices in twin towers totaling 780,000 sq ft.</p>
-          <div class="tl-badge-wrap"><span class="tl-badge">Founding Milestone</span></div>
-        </div>
-        <div class="tl-dot-col">
-          <div class="tl-dot">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12" /></svg>
-          </div>
-          <div class="tl-connector"></div>
-        </div>
-        <div class="tl-empty"></div>
-      </div>
-
-      <!-- 1958 — RIGHT -->
-      <div class="tl-item right">
-        <div class="tl-empty"></div>
-        <div class="tl-dot-col">
-          <div class="tl-dot">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
-          </div>
-          <div class="tl-connector"></div>
-        </div>
-        <div class="tl-card">
-          <div class="tl-year">1958</div>
-          <div class="tl-title">Spirit of Detroit Dedicated</div>
-          <p class="tl-desc">Marshall Fredericks' iconic 26-foot bronze sculpture is dedicated on July 26, 1958, becoming Detroit's most beloved civic landmark and a symbol of the city's spirit and resilience.</p>
-          <div class="tl-badge-wrap"><span class="tl-badge">Cultural Landmark</span></div>
-        </div>
-      </div>
-
-      <!-- 1990s — LEFT -->
-      <div class="tl-item left">
-        <div class="tl-card">
-          <div class="tl-year">1990s</div>
-          <div class="tl-title">DWJBA Formally Established</div>
-          <p class="tl-desc">The Detroit-Wayne Joint Building Authority is formally constituted as a bi-jurisdictional public body, creating a unified governance structure for managing shared civic facilities across the City and County.</p>
-          <div class="tl-badge-wrap"><span class="tl-badge">Governance</span></div>
-        </div>
-        <div class="tl-dot-col">
-          <div class="tl-dot">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" /></svg>
-          </div>
-          <div class="tl-connector"></div>
-        </div>
-        <div class="tl-empty"></div>
-      </div>
-
-      <!-- 2005 — RIGHT -->
-      <div class="tl-item right">
-        <div class="tl-empty"></div>
-        <div class="tl-dot-col">
-          <div class="tl-dot">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
-          </div>
-          <div class="tl-connector"></div>
-        </div>
-        <div class="tl-card">
-          <div class="tl-year">2005</div>
-          <div class="tl-title">Hines Professional Management Partnership</div>
-          <p class="tl-desc">DWJBA partners with Hines, a world-class property management firm, to elevate building operations to Fortune 500 standards — ushering in a new era of professional facility stewardship and earning the first of three EPA Energy Star certifications.</p>
-          <div class="tl-badge-wrap"><span class="tl-badge">3× Energy Star</span></div>
-        </div>
-      </div>
-
-      <!-- 2024 — LEFT -->
-      <div class="tl-item left">
-        <div class="tl-card">
-          <div class="tl-year">2024</div>
-          <div class="tl-title">Modernization &amp; Digital Transformation</div>
-          <p class="tl-desc">Under CEO Clarinda Barnett-Harrison, DWJBA launches a comprehensive modernization initiative — introducing AI-powered visitor navigation, digital services, upgraded capital infrastructure, and expanded public transparency programs.</p>
-          <div class="tl-badge-wrap"><span class="tl-badge">Present Era</span></div>
-        </div>
-        <div class="tl-dot-col">
-          <div class="tl-dot">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" /></svg>
-          </div>
-          <div class="tl-connector"></div>
-        </div>
-        <div class="tl-empty"></div>
-      </div>
-
+    <div class="htl-header">
+      <span class="htl-eyebrow">Our History</span>
+      <h2 class="htl-h2">A Legacy of Public Stewardship</h2>
+      <p class="htl-sub">From an iconic civic landmark to a digital transformation — seven decades of serving Detroit.</p>
     </div>
   </div>
+
+  <!-- Horizontal scroll track -->
+  <div class="htl-scroll-outer">
+    <div class="htl-track">
+
+      <div class="htl-item">
+        <div class="htl-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12"/></svg>
+        </div>
+        <div class="htl-year">1955</div>
+        <div class="htl-title">CAYMC Opens</div>
+        <p class="htl-desc">Designed by Harley, Ellington &amp; Day — Detroit's primary government complex opens with 780,000 sq ft in twin towers.</p>
+        <span class="htl-badge">Founding Milestone</span>
+      </div>
+
+      <div class="htl-item">
+        <div class="htl-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg>
+        </div>
+        <div class="htl-year">1958</div>
+        <div class="htl-title">Spirit of Detroit Dedicated</div>
+        <p class="htl-desc">Marshall Fredericks' iconic 26-foot bronze sculpture is dedicated July 26 — Detroit's most beloved civic landmark.</p>
+        <span class="htl-badge">Cultural Landmark</span>
+      </div>
+
+      <div class="htl-item">
+        <div class="htl-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"/></svg>
+        </div>
+        <div class="htl-year">1990s</div>
+        <div class="htl-title">DWJBA Formally Established</div>
+        <p class="htl-desc">The Detroit-Wayne Joint Building Authority is constituted as a bi-jurisdictional public body managing shared civic facilities.</p>
+        <span class="htl-badge">Governance</span>
+      </div>
+
+      <div class="htl-item">
+        <div class="htl-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+        </div>
+        <div class="htl-year">2005</div>
+        <div class="htl-title">Hines Management Partnership</div>
+        <p class="htl-desc">DWJBA partners with Hines — elevating operations to Fortune 500 standards and earning the first of three EPA Energy Star certifications.</p>
+        <span class="htl-badge">3&times; Energy Star</span>
+      </div>
+
+      <div class="htl-item">
+        <div class="htl-dot">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z"/></svg>
+        </div>
+        <div class="htl-year">2024</div>
+        <div class="htl-title">Digital Transformation</div>
+        <p class="htl-desc">Under CEO Clarinda Barnett-Harrison, DWJBA launches AI-powered visitor navigation, digital services, and expanded public transparency.</p>
+        <span class="htl-badge">Present Era</span>
+      </div>
+
+    </div><!-- /.htl-track -->
+  </div><!-- /.htl-scroll-outer -->
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
      SECTION 6 — CTA BAR
 ════════════════════════════════════════════════════════ -->
-<section class="cta-bar">
+<section class="cta-bar cta-bar-slate">
   <div class="wrap">
     <div class="cta-bar-inner">
       <span class="cta-bar-eyebrow">Explore More</span>
