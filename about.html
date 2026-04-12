@@ -450,22 +450,14 @@
     .fac-card-cta svg { width: 12px; height: 12px; }
 
     /* ══════════════════════════════════════════════════════════
-       HOW WE OPERATE — 2-col editorial split
+       HOW WE OPERATE — 4-card grid (Doing Business style)
     ══════════════════════════════════════════════════════════ */
     .ops-section {
       background: #faf8f5;
       padding: 6rem 0;
       border-top: 1px solid var(--border);
     }
-    .ops-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 4rem;
-    }
-    @media (min-width: 960px) {
-      .ops-inner { grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
-    }
-    .ops-left { position: sticky; top: 100px; }
+    .ops-header { margin-bottom: 3rem; }
     .ops-eyebrow {
       display: block; font-size: 9px; font-weight: 700;
       text-transform: uppercase; letter-spacing: .28em;
@@ -475,45 +467,51 @@
       font-size: clamp(1.75rem, 3vw, 2.75rem);
       font-weight: 900; color: var(--fg);
       letter-spacing: -.04em; line-height: 1.05;
-      margin-bottom: 1.25rem;
+      margin-bottom: .875rem;
     }
     .ops-statement {
-      font-size: 1.0625rem; color: var(--muted);
-      line-height: 1.75; margin-bottom: 2rem;
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.75; max-width: 600px;
     }
-    /* Right: numbered items */
-    .ops-right { display: flex; flex-direction: column; gap: 0; }
-    .ops-item {
-      display: grid;
-      grid-template-columns: 40px 1fr;
+    .ops-cards {
+      display: grid; grid-template-columns: 1fr;
       gap: 1.25rem;
-      padding: 2rem 0;
-      border-top: 1px solid var(--border);
     }
-    .ops-item:last-child { border-bottom: 1px solid var(--border); }
-    .ops-num {
-      font-size: .75rem; font-weight: 800;
-      color: var(--tan); letter-spacing: .04em;
-      padding-top: .125rem;
+    @media (min-width: 640px) { .ops-cards { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .ops-cards { grid-template-columns: repeat(4, 1fr); } }
+    .ops-card {
+      background: white; border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem 1.75rem 1.75rem;
+      display: flex; flex-direction: column;
+      transition: box-shadow .2s, transform .2s;
     }
-    .ops-item-name {
-      font-size: 1.0625rem; font-weight: 800;
-      color: var(--fg); letter-spacing: -.015em;
-      margin-bottom: .5rem;
+    .ops-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.08); transform: translateY(-3px); }
+    .ops-card-icon {
+      width: 44px; height: 44px;
+      border: 1px solid var(--border); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--brown); margin-bottom: 1.25rem;
     }
-    .ops-item-desc {
-      font-size: .875rem; color: var(--muted);
-      line-height: 1.7;
+    .ops-card-icon svg { width: 20px; height: 20px; }
+    .ops-card-num {
+      font-size: .6875rem; font-weight: 800;
+      color: var(--tan); letter-spacing: .12em; margin-bottom: .625rem;
     }
-    .ops-learn {
+    .ops-card-name {
+      font-size: 1.0625rem; font-weight: 800; color: var(--fg);
+      letter-spacing: -.02em; line-height: 1.3; margin-bottom: .75rem;
+    }
+    .ops-card-desc {
+      font-size: .875rem; color: var(--muted); line-height: 1.7; flex: 1;
+    }
+    .ops-card-cta {
       display: inline-flex; align-items: center; gap: .35rem;
       font-size: 11px; font-weight: 700;
       text-transform: uppercase; letter-spacing: .1em;
-      color: var(--brown); margin-top: .75rem;
-      transition: gap .2s;
+      color: var(--brown); margin-top: 1.25rem; transition: gap .2s;
     }
-    .ops-learn:hover { gap: .6rem; }
-    .ops-learn svg { width: 12px; height: 12px; }
+    .ops-card-cta:hover { gap: .6rem; }
+    .ops-card-cta svg { width: 12px; height: 12px; }
 
     /* ══════════════════════════════════════════════════════════
        LEADERSHIP — Clean, executive, simplified
@@ -596,9 +594,15 @@
       font-size: .8125rem; color: rgba(255,255,255,.5);
       margin-top: .25rem;
     }
+    .ls-exec-photo {
+      width: 100%; overflow: hidden;
+      border-radius: 12px 12px 0 0;
+      background: #1a1410;
+      line-height: 0;
+    }
 
     /* ══════════════════════════════════════════════════════════
-       TIMELINE — Centered vertical, large milestones
+       TIMELINE — Horizontal scrolling (left to right)
     ══════════════════════════════════════════════════════════ */
     .timeline-section {
       background: var(--zinc-950);
@@ -612,7 +616,7 @@
       background-size: 36px 36px;
       pointer-events: none;
     }
-    .tl-header { margin-bottom: 4.5rem; position: relative; z-index: 1; }
+    .tl-header { margin-bottom: 3.5rem; position: relative; z-index: 1; }
     .tl-eyebrow {
       display: block; font-size: 9px; font-weight: 700;
       text-transform: uppercase; letter-spacing: .28em;
@@ -628,64 +632,47 @@
       font-size: 1rem; color: rgba(255,255,255,.4);
       line-height: 1.65; max-width: 36rem;
     }
-
-    /* The vertical track */
+    /* Horizontal scroll track */
     .tl-track {
-      position: relative;
-      max-width: 900px; margin: 0 auto;
-      z-index: 1;
+      position: relative; z-index: 1;
+      overflow-x: auto;
+      padding-bottom: 1.5rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(196,149,106,.3) transparent;
     }
-    /* Center line */
-    .tl-track::before {
+    .tl-track::-webkit-scrollbar { height: 3px; }
+    .tl-track::-webkit-scrollbar-track { background: transparent; }
+    .tl-track::-webkit-scrollbar-thumb { background: rgba(196,149,106,.3); border-radius: 2px; }
+    .tl-inner {
+      display: flex;
+      gap: 0;
+      min-width: max-content;
+      position: relative;
+      padding-top: 3rem;
+    }
+    /* Horizontal connecting line */
+    .tl-inner::before {
       content: '';
       position: absolute;
-      left: 50%; transform: translateX(-50%);
-      top: 0; bottom: 0; width: 1px;
-      background: linear-gradient(to bottom,
+      top: 26px;
+      left: 26px; right: 26px;
+      height: 1px;
+      background: linear-gradient(to right,
         transparent,
-        rgba(196,149,106,.45) 8%,
-        rgba(196,149,106,.45) 92%,
+        rgba(196,149,106,.45) 5%,
+        rgba(196,149,106,.45) 95%,
         transparent
       );
     }
-    @media (max-width: 767px) {
-      .tl-track::before { left: 20px; transform: none; }
-    }
-
     .tl-item {
-      display: grid;
-      grid-template-columns: 1fr 60px 1fr;
-      gap: 0;
-      margin-bottom: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 260px;
+      flex-shrink: 0;
+      padding: 0 1.5rem;
       position: relative;
-    }
-    @media (max-width: 767px) {
-      .tl-item {
-        grid-template-columns: 60px 1fr;
-        margin-bottom: 2.5rem;
-      }
-    }
-    /* Odd: content left, empty right */
-    .tl-item.tl-left .tl-card  { grid-column: 1; grid-row: 1; text-align: right; padding-right: 2.5rem; }
-    .tl-item.tl-left .tl-dot-col { grid-column: 2; grid-row: 1; }
-    .tl-item.tl-left .tl-empty { grid-column: 3; grid-row: 1; }
-    /* Even: empty left, content right */
-    .tl-item.tl-right .tl-empty { grid-column: 1; grid-row: 1; }
-    .tl-item.tl-right .tl-dot-col { grid-column: 2; grid-row: 1; }
-    .tl-item.tl-right .tl-card { grid-column: 3; grid-row: 1; text-align: left; padding-left: 2.5rem; }
-    /* Mobile: always left side */
-    @media (max-width: 767px) {
-      .tl-item.tl-left .tl-empty,
-      .tl-item.tl-right .tl-empty { display: none; }
-      .tl-item.tl-left .tl-dot-col,
-      .tl-item.tl-right .tl-dot-col { grid-column: 1; grid-row: 1; }
-      .tl-item.tl-left .tl-card,
-      .tl-item.tl-right .tl-card { grid-column: 2; grid-row: 1; text-align: left; padding: 0 0 0 1rem; }
-    }
-
-    .tl-dot-col {
-      display: flex; flex-direction: column; align-items: center;
-      padding-top: .25rem; position: relative; z-index: 2;
     }
     .tl-dot {
       width: 52px; height: 52px;
@@ -695,22 +682,22 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       box-shadow: 0 0 0 8px rgba(196,149,106,.08);
+      margin-bottom: 1.5rem;
+      position: relative; z-index: 2;
     }
     .tl-dot svg { width: 20px; height: 20px; color: var(--tan); }
-
-    .tl-card { padding-top: .5rem; }
     .tl-year {
-      font-size: 2.75rem; font-weight: 900;
+      font-size: 2.25rem; font-weight: 900;
       color: var(--tan); letter-spacing: -.05em; line-height: 1;
       margin-bottom: .5rem;
     }
     .tl-name {
-      font-size: 1.0625rem; font-weight: 800;
+      font-size: .9375rem; font-weight: 800;
       color: white; letter-spacing: -.01em;
       line-height: 1.3; margin-bottom: .625rem;
     }
     .tl-desc {
-      font-size: .875rem; color: rgba(255,255,255,.5);
+      font-size: .8125rem; color: rgba(255,255,255,.5);
       line-height: 1.7;
     }
     .tl-badge {
@@ -722,13 +709,140 @@
       color: var(--tan);
       border: 1px solid rgba(196,149,106,.22);
     }
-    /* Right-align badge for left items */
-    .tl-item.tl-left .tl-badge { display: block; text-align: right; }
-    @media (max-width: 767px) {
-      .tl-item.tl-left .tl-badge { text-align: left; display: inline-block; }
-    }
 
     /* ══════════════════════════════════════════════════════════
+       CTA — Light, breathable, clean
+    ══════════════════════════════════════════════════════════ */
+    .cta-section {
+      background: #faf8f5;
+      padding: 6rem 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .cta-eyebrow {
+      display: block; font-size: 9px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .28em;
+      color: var(--tan); margin-bottom: 1rem;
+    }
+    .cta-h2 {
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 900; color: var(--fg);
+      letter-spacing: -.04em; line-height: 1.0;
+      margin-bottom: 1rem;
+    }
+    .cta-sub {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.7; max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+    .cta-btns {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: .875rem;
+    }
+    .cta-btn-primary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--brown); color: white;
+      font-size: .875rem; font-weight: 700;
+      padding: .9rem 2rem; border-radius: 8px;
+      transition: background .2s;
+    }
+    .cta-btn-primary:hover { background: #2a1204; }
+    .cta-btn-secondary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: transparent; color: var(--brown);
+      font-size: .875rem; font-weight: 700;
+      padding: .9rem 2rem; border-radius: 8px;
+      border: 1.5px solid var(--border);
+      transition: border-color .2s, background .2s;
+    }
+    .cta-btn-secondary:hover { border-color: var(--brown); background: #fdf8f3; }
+    .cta-btn-secondary svg, .cta-btn-primary svg { width: 15px; height: 15px; }
+
+    /* ── Footer layout overrides ── */
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      width: 100%;
+    }
+    @media (min-width: 1024px) {
+      .footer-inner { flex-direction: row; gap: 4rem; align-items: flex-start; }
+    }
+    .footer-nav-cols {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    @media (min-width: 640px)  { .footer-nav-cols { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1024px) { .footer-nav-cols { grid-template-columns: repeat(4, 1fr); } }
+    .footer-nav-col h4 {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: white;
+      margin-bottom: 1rem;
+    }
+    .footer-nav-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-nav-col li a, .footer-nav-col li span {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-nav-col li a:hover { color: white; }
+    .footer-contact-items { display: flex; flex-direction: column; gap: 0.625rem; }
+    .footer-contact-item svg { flex-shrink: 0; color: rgba(255,255,255,0.4); }
+    /* ════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════ */
+    .site-footer { background:var(--zinc-950); color:white; }
+    .footer-main {
+      max-width: 1280px; margin: 0 auto; padding: 4rem 1rem 3rem;
+    }
+    @media (min-width:640px)  { .footer-main { padding-left:1.5rem; padding-right:1.5rem; } }
+    @media (min-width:1024px) { .footer-main { padding-left:2rem; padding-right:2rem; } }
+    .footer-top {
+      display: flex; flex-direction: column;
+      gap: 3rem; padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    @media (min-width:1024px){ .footer-top { flex-direction:row; gap:5rem; } }
+    .footer-brand { flex-shrink:0; }
+    @media (min-width:1024px){ .footer-brand { width:18rem; } }
+    .footer-logo { height:64px; width:auto; margin-bottom:1rem; }
+    .footer-desc { font-size:.875rem; color:white; line-height:1.7; margin-bottom:1.75rem; }
+    .footer-contacts { display:flex; flex-direction:column; gap:.625rem; }
+    .footer-ci { display:flex; align-items:flex-start; gap:.625rem; font-size:.875rem; color:white; }
+    .footer-ci svg { width:14px; height:14px; color:rgba(255,255,255,.3); flex-shrink:0; margin-top:3px; }
+    .footer-ci a:hover { color:white; text-decoration:underline; }
+    .footer-nav {
+      flex: 1; display: grid;
+      grid-template-columns: repeat(2,1fr); gap: 2rem;
+    }
+    @media (min-width:640px)  { .footer-nav { grid-template-columns:repeat(3,1fr); } }
+    @media (min-width:1024px) { .footer-nav { grid-template-columns:repeat(4,1fr); } }
+    .fn-col h3 { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:white; margin-bottom:1rem; }
+    .fn-col ul { display:flex; flex-direction:column; gap:.625rem; }
+    .fn-col li span,
+    .fn-col li a { font-size:.875rem; color:white; line-height:1.4; display:block; cursor:default; transition:color .15s; }
+    .fn-col li a:hover { color:rgba(255,255,255,.7); }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto; padding: 2rem 1rem 0;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    @media (min-width:640px){
+      .footer-bottom { flex-direction:row; justify-content:space-between; padding-left:1.5rem; padding-right:1.5rem; }
+    }
+    @media (min-width:1024px){ .footer-bottom { padding-left:2rem; padding-right:2rem; } }
+    .footer-copy { font-size:.75rem; color:white; }
+    .footer-legal { display:flex; align-items:center; gap:1.25rem; font-size:.75rem; color:white; }
+    .footer-legal a,
+    .footer-legal button { color:white; background:none; border:none; font-family:inherit; font-size:inherit; cursor:pointer; transition:color .15s; }
+    .footer-legal a:hover,
+    .footer-legal button:hover { color:rgba(255,255,255,.7); }
+
+        /* ══════════════════════════════════════════════════════════
        CTA — Light, breathable, clean
     ══════════════════════════════════════════════════════════ */
     .cta-section {
@@ -1009,6 +1123,23 @@
 <!-- ═══════════════════════════════════════════════════════
      2. MISSION / VISION / RESPONSIBILITY
 ════════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════
+     AUTHORITY INTRO — Opening paragraph
+════════════════════════════════════════════════════════ -->
+<section style="background:#fff; padding:5rem 0 0; border-top:1px solid #e2d9cc;">
+  <div class="wrap">
+    <div style="max-width:800px;">
+      <span style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.28em;color:#c4956a;margin-bottom:1.25rem;">About The Authority</span>
+      <p style="font-size:clamp(1.125rem,2vw,1.375rem);font-weight:300;color:#1a0d06;line-height:1.8;">
+        Since 1955, the Detroit-Wayne Joint Building Authority has served as the bi-jurisdictional steward of Detroit's most critical civic infrastructure. As a public body jointly created by the City of Detroit and Wayne County, the DWJBA is responsible for managing, maintaining, and modernizing the landmark facilities that house government services, judicial operations, and public programs — serving hundreds of thousands of residents and visitors each year.
+      </p>
+      <p style="font-size:1rem;color:#6b5a4a;line-height:1.8;margin-top:1.25rem;">
+        From the Coleman A. Young Municipal Center — one of the most architecturally significant government complexes in the Midwest — to the iconic Spirit of Detroit Plaza, the DWJBA operates at the intersection of civic excellence, public accountability, and community pride. Our mandate is simple: ensure that the spaces serving Detroit's government and its people are safe, efficient, and world-class.
+      </p>
+    </div>
+  </div>
+</section>
+
 <section class="mvr-section">
   <div class="wrap">
     <div class="mvr-header">
@@ -1127,49 +1258,53 @@
 ════════════════════════════════════════════════════════ -->
 <section class="ops-section" id="services">
   <div class="wrap">
-    <div class="ops-inner">
-
-      <!-- Left: sticky statement -->
-      <div class="ops-left">
+    <div class="ops-header">
+      <div>
         <span class="ops-eyebrow">Operations Overview</span>
-        <h2 class="ops-title">How We<br>Operate</h2>
+        <h2 class="ops-title">How We Operate</h2>
         <p class="ops-statement">Delivering the operations that keep Detroit's civic infrastructure running — every day, around the clock, across 780,000 square feet of government space.</p>
       </div>
+    </div>
+    <div class="ops-cards">
 
-      <!-- Right: numbered items -->
-      <div class="ops-right">
-        <div class="ops-item">
-          <div class="ops-num">01</div>
-          <div>
-            <div class="ops-item-name">Facility Management</div>
-            <p class="ops-item-desc">Comprehensive management of building systems, HVAC, electrical, plumbing, and janitorial services — ensuring 780,000+ sq ft of civic space remain functional and well-maintained year-round.</p>
-            <a href="directory.html" class="ops-learn">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
-          </div>
+      <div class="ops-card">
+        <div class="ops-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12"/></svg>
         </div>
-        <div class="ops-item">
-          <div class="ops-num">02</div>
-          <div>
-            <div class="ops-item-name">Safety &amp; Security</div>
-            <p class="ops-item-desc">24/7 security operations, access control, emergency preparedness, and life-safety system oversight — protecting thousands of employees, residents, and visitors each day.</p>
-            <a href="contact.html" class="ops-learn">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
-          </div>
+        <div class="ops-card-num">01</div>
+        <div class="ops-card-name">Facility Management</div>
+        <p class="ops-card-desc">Comprehensive management of building systems, HVAC, electrical, plumbing, and janitorial services — ensuring 780,000+ sq ft of civic space remain functional year-round.</p>
+        <a href="directory.html" class="ops-card-cta">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
         </div>
-        <div class="ops-item">
-          <div class="ops-num">03</div>
-          <div>
-            <div class="ops-item-name">Tenant &amp; Visitor Support</div>
-            <p class="ops-item-desc">Responsive tenant relations, visitor services, ADA compliance programs, and public amenity management — creating accessible, welcoming experiences for everyone who uses our civic spaces.</p>
-            <a href="contact.html" class="ops-learn">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
-          </div>
+        <div class="ops-card-num">02</div>
+        <div class="ops-card-name">Safety &amp; Security</div>
+        <p class="ops-card-desc">24/7 security operations, access control, emergency preparedness, and life-safety system oversight — protecting thousands of employees, residents, and visitors each day.</p>
+        <a href="contact.html" class="ops-card-cta">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>
         </div>
-        <div class="ops-item">
-          <div class="ops-num">04</div>
-          <div>
-            <div class="ops-item-name">Capital Projects &amp; Procurement</div>
-            <p class="ops-item-desc">Planning and executing major capital improvements, managing competitive procurement processes, and ensuring all contracts meet public accountability standards — investing in Detroit's civic infrastructure for generations to come.</p>
-            <a href="#" class="ops-learn">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
-          </div>
+        <div class="ops-card-num">03</div>
+        <div class="ops-card-name">Tenant &amp; Visitor Support</div>
+        <p class="ops-card-desc">Responsive tenant relations, visitor services, ADA compliance, and public amenity management — creating accessible, welcoming experiences for everyone who visits our civic spaces.</p>
+        <a href="contact.html" class="ops-card-cta">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
+      </div>
+
+      <div class="ops-card">
+        <div class="ops-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/></svg>
         </div>
+        <div class="ops-card-num">04</div>
+        <div class="ops-card-name">Capital Projects &amp; Procurement</div>
+        <p class="ops-card-desc">Planning and executing major capital improvements, managing competitive procurement, and ensuring all contracts meet public accountability standards — investing in Detroit's future.</p>
+        <a href="#" class="ops-card-cta">Learn More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg></a>
       </div>
 
     </div>
@@ -1196,17 +1331,87 @@
         </a>
       </div>
 
-      <!-- Right: featured leader -->
+      <!-- Right: Executive team board photo -->
       <div class="ls-feature">
-        <div class="ls-feature-img-wrap">
-          <div class="ls-feature-placeholder">
-            <div class="ls-feature-initials">CBH</div>
-          </div>
+        <div class="ls-exec-photo">
+          <svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;">
+            <!-- Room background -->
+            <rect width="640" height="400" fill="#1a1410"/>
+            <!-- Conference table -->
+            <ellipse cx="320" cy="310" rx="260" ry="60" fill="#2d1f14"/>
+            <ellipse cx="320" cy="295" rx="260" ry="55" fill="#3d2a1a"/>
+            <rect x="60" y="295" width="520" height="20" fill="#3d2a1a"/>
+            <!-- Table highlight -->
+            <ellipse cx="320" cy="295" rx="240" ry="18" fill="none" stroke="#c4956a" stroke-width="1" opacity="0.3"/>
+            <!-- Background gradient / ambiance -->
+            <radialGradient id="roomLight" cx="50%" cy="30%" r="60%">
+              <stop offset="0%" stop-color="#2c1f0e" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#0e0906" stop-opacity="1"/>
+            </radialGradient>
+            <rect width="640" height="300" fill="url(#roomLight)"/>
+            <!-- Window / light source behind -->
+            <rect x="220" y="20" width="200" height="160" rx="4" fill="#c4956a" opacity="0.06"/>
+            <rect x="240" y="30" width="160" height="140" rx="2" fill="#f5ede0" opacity="0.04"/>
+            <!-- Person 1 - far left -->
+            <ellipse cx="110" cy="240" rx="28" ry="32" fill="#3d2010"/>
+            <circle cx="110" cy="200" r="22" fill="#5c3218"/>
+            <ellipse cx="110" cy="195" rx="14" ry="16" fill="#8B5E3C"/>
+            <ellipse cx="110" cy="188" rx="10" ry="11" fill="#6B3A1F"/>
+            <!-- Person 2 -->
+            <ellipse cx="190" cy="250" rx="30" ry="35" fill="#2a1a0a"/>
+            <circle cx="190" cy="208" r="24" fill="#4a2c14"/>
+            <ellipse cx="190" cy="202" rx="15" ry="17" fill="#7A4E2A"/>
+            <ellipse cx="190" cy="194" rx="10" ry="12" fill="#5C3218"/>
+            <!-- Person 3 - center left (featured, slightly larger) -->
+            <ellipse cx="270" cy="258" rx="32" ry="38" fill="#1e1208"/>
+            <circle cx="270" cy="212" r="27" fill="#3d2010"/>
+            <ellipse cx="270" cy="205" rx="17" ry="19" fill="#6B3A1F"/>
+            <ellipse cx="270" cy="196" rx="11" ry="13" fill="#4a2810"/>
+            <!-- Person 4 - center (prominent) -->
+            <ellipse cx="370" cy="260" rx="34" ry="40" fill="#1a0e06"/>
+            <circle cx="370" cy="212" r="28" fill="#3d2010"/>
+            <ellipse cx="370" cy="204" rx="18" ry="20" fill="#7A4E2A"/>
+            <ellipse cx="370" cy="195" rx="12" ry="14" fill="#5C3218"/>
+            <!-- Person 5 -->
+            <ellipse cx="460" cy="252" rx="30" ry="35" fill="#221408"/>
+            <circle cx="460" cy="210" r="25" fill="#4a2c14"/>
+            <ellipse cx="460" cy="203" rx="16" ry="18" fill="#8B5E3C"/>
+            <ellipse cx="460" cy="195" rx="10" ry="12" fill="#6B3A1F"/>
+            <!-- Person 6 - far right -->
+            <ellipse cx="540" cy="242" rx="28" ry="32" fill="#2a1a0a"/>
+            <circle cx="540" cy="202" r="22" fill="#5c3218"/>
+            <ellipse cx="540" cy="196" rx="14" ry="16" fill="#7A4E2A"/>
+            <ellipse cx="540" cy="188" rx="9" ry="11" fill="#5C3218"/>
+            <!-- Suits / clothing -->
+            <ellipse cx="110" cy="252" rx="24" ry="20" fill="#1a1a2e"/>
+            <ellipse cx="190" cy="262" rx="26" ry="22" fill="#0f1520"/>
+            <ellipse cx="270" cy="270" rx="28" ry="24" fill="#1a1a2e"/>
+            <ellipse cx="370" cy="272" rx="30" ry="26" fill="#0f1520"/>
+            <ellipse cx="460" cy="264" rx="26" ry="22" fill="#1a1a2e"/>
+            <ellipse cx="540" cy="254" rx="24" ry="20" fill="#0f1520"/>
+            <!-- Shirt collars / ties -->
+            <ellipse cx="110" cy="232" rx="8" ry="6" fill="#e8e0d0" opacity="0.7"/>
+            <ellipse cx="190" cy="240" rx="8" ry="6" fill="#e8e0d0" opacity="0.7"/>
+            <ellipse cx="270" cy="248" rx="9" ry="7" fill="#e8e0d0" opacity="0.7"/>
+            <ellipse cx="370" cy="250" rx="9" ry="7" fill="#e8e0d0" opacity="0.7"/>
+            <ellipse cx="460" cy="243" rx="8" ry="6" fill="#e8e0d0" opacity="0.7"/>
+            <ellipse cx="540" cy="234" rx="8" ry="6" fill="#e8e0d0" opacity="0.7"/>
+            <!-- Table documents / folders -->
+            <rect x="140" y="280" width="80" height="10" rx="2" fill="#c4956a" opacity="0.25"/>
+            <rect x="250" y="278" width="100" height="8" rx="2" fill="#c4956a" opacity="0.2"/>
+            <rect x="380" y="279" width="90" height="9" rx="2" fill="#c4956a" opacity="0.22"/>
+            <!-- Ambient floor line -->
+            <line x1="0" y1="320" x2="640" y2="320" stroke="#3d2a1a" stroke-width="1" opacity="0.5"/>
+            <!-- Caption bar -->
+            <rect x="0" y="360" width="640" height="40" fill="rgba(10,6,3,0.85)"/>
+            <text x="32" y="385" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#c4956a" letter-spacing="2">EXECUTIVE LEADERSHIP TEAM</text>
+            <text x="32" y="399" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.45)" letter-spacing="1">Detroit-Wayne Joint Building Authority</text>
+          </svg>
         </div>
-        <div class="ls-feature-info">
-          <div class="ls-feature-role">Chief Executive Officer</div>
-          <div class="ls-feature-name">Clarinda Barnett-Harrison</div>
-          <div class="ls-feature-title">CEO — Detroit-Wayne Joint Building Authority</div>
+        <div class="ls-feature-info" style="padding-top:.5rem;">
+          <div class="ls-feature-role">DWJBA Executive Team</div>
+          <div class="ls-feature-name">Board &amp; Senior Leadership</div>
+          <div class="ls-feature-title">Bi-jurisdictional governance — City of Detroit &amp; Wayne County</div>
         </div>
       </div>
 
@@ -1215,7 +1420,7 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     7. TIMELINE — Centered vertical, large markers
+     7. TIMELINE — Horizontal left to right
 ════════════════════════════════════════════════════════ -->
 <section class="timeline-section">
   <div class="wrap">
@@ -1224,119 +1429,93 @@
       <h2 class="tl-title">A Legacy of<br>Public Stewardship</h2>
       <p class="tl-sub">From an iconic civic landmark to a digital transformation — seven decades of serving Detroit and Southeast Michigan.</p>
     </div>
+  </div>
 
-    <div class="tl-track">
+  <div class="tl-track">
+    <div class="wrap">
+      <div class="tl-inner">
 
-      <!-- 1955 — LEFT -->
-      <div class="tl-item tl-left">
-        <div class="tl-card">
-          <div class="tl-year">1955</div>
-          <div class="tl-name">Coleman A. Young Municipal Center Opens</div>
-          <p class="tl-desc">Designed by Harley, Ellington &amp; Day — Detroit's primary government complex opens with 780,000 sq ft in twin towers: a 14-floor Admin Tower and 20-floor Courts Tower.</p>
-          <span class="tl-badge">Founding Milestone</span>
-        </div>
-        <div class="tl-dot-col">
+        <!-- 1955 -->
+        <div class="tl-item">
           <div class="tl-dot">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12"/></svg>
           </div>
+          <div class="tl-year">1955</div>
+          <div class="tl-name">Coleman A. Young Municipal Center Opens</div>
+          <p class="tl-desc">Detroit's primary government complex opens with 780,000 sq ft in twin towers — 14-floor Admin Tower and 20-floor Courts Tower, designed by Harley, Ellington & Day.</p>
+          <span class="tl-badge">Founding Milestone</span>
         </div>
-        <div class="tl-empty"></div>
-      </div>
 
-      <!-- 1958 — RIGHT -->
-      <div class="tl-item tl-right">
-        <div class="tl-empty"></div>
-        <div class="tl-dot-col">
+        <!-- 1958 -->
+        <div class="tl-item">
           <div class="tl-dot">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg>
           </div>
-        </div>
-        <div class="tl-card">
           <div class="tl-year">1958</div>
           <div class="tl-name">Spirit of Detroit Dedicated</div>
-          <p class="tl-desc">Marshall Fredericks' iconic 26-foot bronze sculpture is dedicated July 26, 1958 — becoming Detroit's most beloved civic landmark and an enduring symbol of the city's spirit and resilience.</p>
+          <p class="tl-desc">Marshall Fredericks' iconic 26-foot bronze sculpture is dedicated July 26, 1958 — becoming Detroit's most beloved civic landmark and a symbol of the city's resilience.</p>
           <span class="tl-badge">Cultural Landmark</span>
         </div>
-      </div>
 
-      <!-- 1990s — LEFT -->
-      <div class="tl-item tl-left">
-        <div class="tl-card">
-          <div class="tl-year">1990s</div>
-          <div class="tl-name">DWJBA Formally Established</div>
-          <p class="tl-desc">The Detroit-Wayne Joint Building Authority is formally constituted as a bi-jurisdictional public body — creating a unified governance structure for managing shared civic facilities across City and County.</p>
-          <span class="tl-badge">Governance</span>
-        </div>
-        <div class="tl-dot-col">
+        <!-- 1990s -->
+        <div class="tl-item">
           <div class="tl-dot">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z"/></svg>
           </div>
+          <div class="tl-year">1990s</div>
+          <div class="tl-name">DWJBA Formally Established</div>
+          <p class="tl-desc">The Detroit-Wayne Joint Building Authority is formally constituted as a bi-jurisdictional public body — creating unified governance for shared civic facilities across City and County.</p>
+          <span class="tl-badge">Governance</span>
         </div>
-        <div class="tl-empty"></div>
-      </div>
 
-      <!-- 2005 — RIGHT -->
-      <div class="tl-item tl-right">
-        <div class="tl-empty"></div>
-        <div class="tl-dot-col">
+        <!-- 2005 -->
+        <div class="tl-item">
           <div class="tl-dot">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
           </div>
-        </div>
-        <div class="tl-card">
           <div class="tl-year">2005</div>
           <div class="tl-name">Hines Professional Management Partnership</div>
-          <p class="tl-desc">DWJBA partners with Hines, a world-class Fortune 500 property management firm — elevating building operations to the highest professional standards and earning the first of three consecutive EPA Energy Star certifications.</p>
+          <p class="tl-desc">DWJBA partners with Hines, a Fortune 500 property management firm — elevating operations to world-class standards and earning the first of three consecutive EPA Energy Star certifications.</p>
           <span class="tl-badge">3× Energy Star</span>
         </div>
-      </div>
 
-      <!-- 2018 — LEFT -->
-      <div class="tl-item tl-left">
-        <div class="tl-card">
-          <div class="tl-year">2018</div>
-          <div class="tl-name">BOMA TOBY Award for Excellence</div>
-          <p class="tl-desc">The Building Owners and Managers Association recognizes the Coleman A. Young Municipal Center with its prestigious The Outstanding Building of the Year (TOBY) Award — validating world-class operational standards.</p>
-          <span class="tl-badge">Industry Award</span>
-        </div>
-        <div class="tl-dot-col">
+        <!-- 2018 -->
+        <div class="tl-item">
           <div class="tl-dot">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0"/></svg>
           </div>
+          <div class="tl-year">2018</div>
+          <div class="tl-name">BOMA TOBY Award for Excellence</div>
+          <p class="tl-desc">The Building Owners and Managers Association recognizes CAYMC with the prestigious Outstanding Building of the Year (TOBY) Award — validating world-class operational standards.</p>
+          <span class="tl-badge">Industry Award</span>
         </div>
-        <div class="tl-empty"></div>
-      </div>
 
-      <!-- 2024 — RIGHT -->
-      <div class="tl-item tl-right">
-        <div class="tl-empty"></div>
-        <div class="tl-dot-col">
+        <!-- 2024 -->
+        <div class="tl-item">
           <div class="tl-dot">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z"/></svg>
           </div>
-        </div>
-        <div class="tl-card">
           <div class="tl-year">2024</div>
           <div class="tl-name">Digital Transformation &amp; AI Initiative</div>
-          <p class="tl-desc">Under CEO Clarinda Barnett-Harrison, DWJBA launches a comprehensive modernization initiative — introducing AI-powered visitor navigation, digital services, upgraded capital infrastructure, and expanded public transparency programs.</p>
+          <p class="tl-desc">Under CEO Clarinda Barnett-Harrison, DWJBA launches AI-powered visitor navigation, digital services, upgraded capital infrastructure, and expanded public transparency programs.</p>
           <span class="tl-badge">Present Era</span>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     8. CTA — Light, clean, breathable
+     8. CTA
 ════════════════════════════════════════════════════════ -->
 <section class="cta-section">
   <div class="wrap">
     <span class="cta-eyebrow">Continue Exploring</span>
-    <h2 class="cta-h2">Continue Exploring<br>the Authority</h2>
-    <p class="cta-sub">Discover our facilities, access public documents, meet our team, or get in touch with the Detroit-Wayne Joint Building Authority.</p>
+    <h2 class="cta-h2">Ready to Learn<br>More?</h2>
+    <p class="cta-sub">Explore our facilities, connect with our leadership team, or get in touch with the Detroit-Wayne Joint Building Authority.</p>
     <div class="cta-btns">
-      <a href="directory.html" class="cta-btn-primary">
+      <a href="index.html" class="cta-btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12"/></svg>
         Municipal Center
       </a>
@@ -1356,32 +1535,115 @@
      FOOTER (shared)
 ════════════════════════════════════════════════════════ -->
 <footer class="site-footer">
-  <div class="footer-top">
-    <div class="footer-inner">
+  <div class="footer-main">
+    <div class="footer-top">
+
+      <!-- Brand / Contact -->
       <div class="footer-brand">
-        <img src="images/seal-large.png" alt="DWJBA Seal" class="footer-seal" />
-        <p class="footer-brand-desc">The Detroit-Wayne Joint Building Authority manages and maintains critical public facilities for the City of Detroit and Wayne County.</p>
-        <div class="footer-contact-items">
-          <div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg><a href="tel:+13133092300">(313) 309-2300</a></div>
-          <div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg><a href="mailto:info@dwjba.com">info@dwjba.com</a></div>
-          <div class="footer-contact-item"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg><span>2 Woodward Ave, Detroit, MI 48226</span></div>
+        <img class="footer-logo" src="images/seal-large.png" alt="Detroit-Wayne Joint Building Authority" />
+        <p class="footer-desc">Managing and maintaining critical public facilities that support city and county government, court functions, and essential public services since 1924.</p>
+        <div class="footer-contacts">
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+            <span>2 Woodward Avenue, Suite 200<br>Detroit, MI 48226</span>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+            <a href="tel:+13132243540">(313) 224-3540</a>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+            <a href="mailto:info@dwjba.com">info@dwjba.com</a>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            <span>Mon–Fri, 8:00 AM to 5:00 PM</span>
+          </div>
         </div>
       </div>
-      <div class="footer-nav-cols">
-        <div class="footer-nav-col"><h4>About DWJBA</h4><ul><li><a href="about.html">Overview</a></li><li><a href="about.html#leadership">Leadership &amp; Governance</a></li><li><a href="about.html#services">Services &amp; Operations</a></li></ul></div>
-        <div class="footer-nav-col"><h4>CAYMC</h4><ul><li><a href="directory.html">Departments &amp; Offices</a></li><li><a href="contact.html">Visitor Information</a></li><li><a href="contact.html">Building Access</a></li></ul></div>
-        <div class="footer-nav-col"><h4>Spirit of Detroit</h4><ul><li><a href="spirit.html">Overview</a></li><li><a href="spirit.html#gallery">Gallery</a></li><li><a href="spirit.html#request">Request Form</a></li></ul></div>
-        <div class="footer-nav-col"><h4>Resources</h4><ul><li><a href="#">Public Documents</a></li><li><a href="#">Reports &amp; Policies</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+
+      <!-- Nav grid -->
+      <div class="footer-nav">
+        <div class="fn-col">
+          <h3>About</h3>
+          <ul>
+            <li><a href="about.html">Overview</a></li>
+            <li><a href="about.html#leadership">Leadership &amp; Governance</a></li>
+            <li><a href="about.html#services">Services &amp; Operations</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>CAYMC</h3>
+          <ul>
+            <li><a href="directory.html">Building Overview</a></li>
+            <li><a href="directory.html">Departments &amp; Offices</a></li>
+            <li><a href="contact.html">Visitor Information</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Tenants &amp; Access</h3>
+          <ul>
+            <li><a href="directory.html">Tenant Directory</a></li>
+            <li><a href="contact.html">Building Access &amp; Security</a></li>
+            <li><a href="contact.html">Visitor FAQs</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Procurement</h3>
+          <ul>
+            <li><span>Overview</span></li>
+            <li><span>Bid Opportunities</span></li>
+            <li><span>Vendor Resources</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Capital Projects</h3>
+          <ul>
+            <li><span>Current Projects</span></li>
+            <li><span>Completed Projects</span></li>
+            <li><span>Upcoming Projects</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Real Estate</h3>
+          <ul>
+            <li><span>Portfolio Overview</span></li>
+            <li><span>Properties &amp; Listings</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Documents</h3>
+          <ul>
+            <li><span>Public Documents</span></li>
+            <li><span>Reports &amp; Policies</span></li>
+            <li><span>Board Materials</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>News &amp; Contact</h3>
+          <ul>
+            <li><span>All News</span></li>
+            <li><span>Project Updates</span></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="directory.html">Department Directory</a></li>
+          </ul>
+        </div>
       </div>
+
     </div>
   </div>
+
+  <!-- Bottom bar -->
   <div class="footer-bottom">
-    <div class="footer-inner">
-      <div class="footer-legal">
-        <span>&copy; 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</span>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Accessibility</a>
-      </div>
+    <p class="footer-copy">© 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</p>
+    <div class="footer-legal">
+      <button>Accessibility</button>
+      <button>Privacy Policy</button>
+      <button>Terms of Use</button>
+      <a href="https://detroitmi.gov" target="_blank" rel="noopener" class="footer-legal-ext">
+        City of Detroit
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+      </a>
     </div>
   </div>
 </footer>
