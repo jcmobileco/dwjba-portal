@@ -1,16 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ask CAYMC — AI Demo | DWJBA</title>
-  <meta name="description" content="Experience Ask CAYMC — the AI-powered building companion and 3D Interactive Floor Navigator for the Coleman A. Young Municipal Center.">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Experience Ask CAYMC — the AI-powered building companion and 3D Interactive Floor Navigator for the Coleman A. Young Municipal Center." />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   <script src="main.js" defer></script>
+  <style>
+    /* ── Page-level overrides ──────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f9f7f4; color: #1a0d06; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
 
-<style>
+    /* ── Page-level overrides ────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f9f7f4; color: #1a0d06; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Tokens ─────────────────────────────────────────────── */
+    :root {
+      --brown:        #3d1a08;   /* brand-brown — nav, hero pill, cards */
+      --green:        #3d6b52;   /* civic-blue/brand-green */
+      --tan:          #c4956a;   /* brand-tan */
+      --cream:        #f5ede0;   /* brand-cream */
+      --zinc-950:     #0c0c0e;
+      --zinc-900:     #18181b;
+      --zinc-800:     #27272a;
+      --zinc-600:     #52525b;
+      --zinc-500:     #71717a;
+      --zinc-200:     #e4e4e7;
+      --zinc-100:     #f4f4f5;
+      --zinc-50:      #fafafa;
+      --stone-50:     #fafaf9;
+      --border:       #e2d9cc;
+      --fg:           #1a0d06;
+      --muted:        #6b5a4a;
+      --slate-accent: #5c3a22;
+      --section-alt:  #f0e8dc;
+    }
+
+    /* ── Shared utilities ───────────────────────────────────── */
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+    @media (min-width:640px)  { .wrap { padding: 0 1.5rem; } }
+    @media (min-width:1024px) { .wrap { padding: 0 2rem; } }
+
+    .eyebrow {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--zinc-500);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       TOP BAR
+    ════════════════════════════════════════════════════════ */
+    .topbar {
+      background: var(--zinc-950);
+      color: white;
+      font-size: 11px;
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .45rem 1rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    @media (min-width:640px)  { .topbar-inner { padding-left:1.5rem; padding-right:1.5rem; } }
+    @media (min-width:1024px) { .topbar-inner { padding-left:2rem; padding-right:2rem; } }
+    .topbar-left { display:flex; align-items:center; gap:1.1rem; color:rgba(255,255,255,.75); }
+    .topbar-left a { display:flex; align-items:center; gap:5px; transition:color .2s; }
+    .topbar-left a:hover { color:white; }
+    .topbar-left svg { width:11px; height:11px; color:rgba(255,255,255,.4); flex-shrink:0; }
+    .tb-address { display:none; align-items:center; gap:5px; }
+    @media (min-width:1024px){ .tb-address { display:flex; } }
+    .topbar-right { display:flex; align-items:center; gap:2px; color:rgba(255,255,255,.55); }
+    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.35); }
+    @media (min-width:640px){ .tb-connect { display:block; } }
+    .topbar-right a { padding:3px 7px; border-radius:4px; font-weight:600; transition:color .15s, background .15s; }
+    .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
+
+    /* ════════════════════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════════════════════ */
+    .site-header {
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      border-bottom: 1px solid #e2d9cc;
+      transition: box-shadow .3s;
+    }
+    .site-header.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.10); }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      height: 80px;
+      position: relative;
+    }
+    @media (min-width:640px)  { .header-inner { padding:0 1.5rem; } }
+    @media (min-width:1024px) { .header-inner { padding:0 2rem; } }
+
+    /* Left + Right nav */
+    .nav-left, .nav-right {
+      display: none;
+      align-items: center;
+      gap: 1px;
+      flex: 1;
+    }
+    @media (min-width:1280px){ .nav-left,.nav-right { display:flex; } }
+    .nav-right { justify-content:flex-end; }
+
+    /* Center logo */
+    .nav-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @media (min-width:1280px){
+      .nav-logo { position:relative; left:auto; transform:none; flex-shrink:0; }
+    }
+    .nav-logo img { height:64px; width:64px; object-fit:contain; display:block; }
+
+    /* Nav item */
+    .nav-item { position:relative; }
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 7px 9px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #2c2420;
+      border-radius: 5px;
+      white-space: nowrap;
+      cursor: default;
+      transition: color .15s;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+    .nav-btn svg { width:11px; height:11px; transition:transform .2s; }
+    .nav-item:hover .nav-btn { color: var(--brown); }
+    .nav-item:hover .nav-btn svg { transform:rotate(180deg); }
+
+    .nav-drop {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 600;
+      min-width: 210px;
+    }
+    .nav-item:hover .nav-drop { display:block; }
+    .nav-drop-inner {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+      overflow: hidden;
+    }
+    .nav-drop-inner a {
+      display: block;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(26,13,6,.8);
+      transition: background .12s;
+    }
+    .nav-drop-inner a:hover { background: var(--zinc-50); }
+
+    /* Search btn */
+    .nav-search {
+      margin-left: .4rem;
+      padding: 7px;
+      color: #2c2420;
+      border-radius: 7px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: color .15s;
+    }
+    .nav-search:hover { color: var(--brown); }
+    .nav-search svg { width:15px; height:15px; }
+
+    /* Mobile toggle */
+    .mob-controls {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin-left: auto;
+    }
+    @media (min-width:1280px){ .mob-controls { display:none; } }
+    .mob-controls button {
+      padding:7px; color: #2c2420; border-radius:7px;
+      background:none; border:none; cursor:pointer;
+      transition:color .15s;
+    }
+    .mob-controls button:hover { color: var(--brown); }
+    .mob-controls button svg { width:18px; height:18px; display:block; }
+
+    /* Mobile nav */
+    .mob-nav {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 300px;
+      background: white;
+      z-index: 700;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      box-shadow: -4px 0 30px rgba(0,0,0,.2);
+    }
+    .mob-nav.open { transform:translateX(0); }
+    .mob-nav-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      background: var(--brown);
+      color: white;
+    }
+    .mob-nav-head span { font-size:14px; font-weight:700; }
+    .mob-nav-head button { color:white; background:none; border:none; cursor:pointer; }
+    .mob-nav-head button svg { width:20px; height:20px; display:block; }
+    .mob-nav-body { padding:.75rem 0; }
+    .mob-group { border-bottom:1px solid var(--border); padding:.4rem 0; }
+    .mob-label { display:block; padding:.55rem 1.5rem; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--brown); }
+    .mob-link { display:block; padding:.45rem 1.5rem .45rem 2rem; font-size:14px; color:var(--fg); transition:background .12s; }
+    .mob-link:hover { background:var(--section-alt); }
+    .scrim {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 650;
+    }
+    .scrim.visible { display:block; }
+
+    .site-footer { background:var(--zinc-950); color:white; }
+    .footer-main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 1rem 3rem;
+    }
+    @media (min-width:640px)  { .footer-main { padding-left:1.5rem; padding-right:1.5rem; } }
+    @media (min-width:1024px) { .footer-main { padding-left:2rem; padding-right:2rem; } }
+
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    @media (min-width:1024px){ .footer-top { flex-direction:row; gap:5rem; } }
+
+    .footer-brand { flex-shrink:0; }
+    @media (min-width:1024px){ .footer-brand { width:18rem; } }
+    .footer-logo { height:64px; width:auto; margin-bottom:1rem; }
+    .footer-desc { font-size:.875rem; color:white; line-height:1.7; margin-bottom:1.75rem; }
+    .footer-contacts { display:flex; flex-direction:column; gap:.625rem; }
+    .footer-ci { display:flex; align-items:flex-start; gap:.625rem; font-size:.875rem; color:white; }
+    .footer-ci svg { width:14px; height:14px; color:rgba(255,255,255,.3); flex-shrink:0; margin-top:3px; }
+    .footer-ci a:hover { color:white; text-decoration:underline; }
+
+    .footer-nav {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 2rem;
+    }
+    @media (min-width:640px)  { .footer-nav { grid-template-columns:repeat(3,1fr); } }
+    @media (min-width:1024px) { .footer-nav { grid-template-columns:repeat(4,1fr); } }
+
+    .fn-col h3 { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:white; margin-bottom:1rem; }
+    .fn-col ul { display:flex; flex-direction:column; gap:.625rem; }
+    .fn-col li span,
+    .fn-col li a { font-size:.875rem; color:white; line-height:1.4; display:block; cursor:default; transition:color .15s; }
+    .fn-col li a:hover { color:rgba(255,255,255,.7); }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    @media (min-width:640px){
+      .footer-bottom { flex-direction:row; justify-content:space-between; padding-left:1.5rem; padding-right:1.5rem; }
+    }
+    @media (min-width:1024px){ .footer-bottom { padding-left:2rem; padding-right:2rem; } }
+    .footer-copy { font-size:.75rem; color:white; }
+    .footer-legal { display:flex; align-items:center; gap:1.25rem; font-size:.75rem; color:white; }
+    .footer-legal a,
+    .footer-legal button { color:white; background:none; border:none; font-family:inherit; font-size:inherit; cursor:pointer; transition:color .15s; }
+    .footer-legal a:hover,
+    .footer-legal button:hover { color:rgba(255,255,255,.7); }
+    .footer-legal-ext { display:flex; align-items:center; gap:3px; }
+    .footer-legal-ext svg { width:11px; height:11px; }
+
+    /* ── AI DEMO CTA Button Styles ─────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .875rem 2rem;
+      background: var(--brown); color: white;
+      font-size: .875rem; font-weight: 700;
+      border-radius: .5rem; transition: opacity .2s;
+      font-family: inherit; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { opacity: .88; }
+    .btn-outline {
+      display: inline-flex; align-items: center;
+      padding: .875rem 2rem;
+      background: transparent; color: #fff;
+      font-size: .875rem; font-weight: 600;
+      border: 1.5px solid rgba(255,255,255,.3);
+      border-radius: .5rem; transition: border-color .2s, color .2s;
+      font-family: inherit; cursor: pointer;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,.6); color: #fff; }
+
+    /* ── Reveal animation ──────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── AI-specific .section class ────────────────── */
+    .section { }
+    .section-alt { background: var(--section-alt); }
+
+    /* ── .page-hero-inner wrap ─────────────────────── */
+    .page-hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 6rem 2rem 5rem;
+    }
+
 /* ═══════════════════════════════════════════════════════════════
    AI DEMO — PREMIUM ENTERPRISE DESIGN
    DWJBA · Coleman A. Young Municipal Center
@@ -843,78 +1198,176 @@
 .ai-cta-stat-label { font-size:0.77rem; color:rgba(255,255,255,0.45); }
 .ai-cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
 </style>
+  </style>
 </head>
 <body>
 
 <!-- ═══════════════════════════════════════════════════
-     SITE HEADER
-═══════════════════════════════════════════════════ -->
-<header class="site-header" id="siteHeader">
-  <div class="topbar">
-    <div class="topbar-inner wrap">
-      <div class="topbar-contact">
-        <a href="tel:3132243540" class="topbar-item">
-          <i data-lucide="phone" class="topbar-icon"></i>313-224-3540
-        </a>
-        <a href="mailto:info@dwjba.com" class="topbar-item">
-          <i data-lucide="mail" class="topbar-icon"></i>info@dwjba.com
-        </a>
-        <span class="topbar-item topbar-addr">
-          <i data-lucide="map-pin" class="topbar-icon"></i>2 Woodward Ave, Suite 1314, Detroit, MI 48226
-        </span>
-      </div>
-      <div class="topbar-right">
-        <a href="#" class="topbar-social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-        <a href="#" class="topbar-social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-        <a href="contact.html" class="topbar-cta">Visitor Info</a>
-      </div>
+     TOP BAR
+════════════════════════════════════════════════════ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <a href="tel:+13132243540">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+        (313) 224-3540
+      </a>
+      <a href="mailto:info@dwjba.com">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+        info@dwjba.com
+      </a>
+      <span class="tb-address">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:11px;height:11px;color:rgba(255,255,255,.4)"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+        2 Woodward Ave, Suite 200, Detroit MI 48226
+      </span>
+    </div>
+    <div class="topbar-right">
+      <span class="tb-connect">Connect:</span>
+      <a href="https://facebook.com" target="_blank" rel="noopener">FB</a>
+      <a href="https://twitter.com" target="_blank" rel="noopener">X</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LI</a>
     </div>
   </div>
-  <nav class="nav-bar" id="navBar">
-    <div class="nav-inner wrap">
-      <a href="index.html" class="site-logo">
-        <img src="images/dwjba-logo.jpg" alt="DWJBA Seal" width="52" height="52">
-        <div class="logo-text">
-          <span class="logo-abbr">DWJBA</span>
-          <span class="logo-full">Detroit-Wayne Joint Building Authority</span>
-        </div>
-      </a>
-      <ul class="site-nav">
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="directory.html" class="nav-link">Tenants &amp; Access</a></li>
-        <li><a href="spirit.html" class="nav-link">Spirit of Detroit</a></li>
-        <li><a href="procurement.html" class="nav-link">Procurement</a></li>
-        <li><a href="capital-projects.html" class="nav-link">Capital Projects</a></li>
-        <li><a href="#" class="nav-link">Documents</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-      </ul>
-      <div class="nav-actions">
-        <button class="nav-search-btn" id="navSearchBtn" aria-label="Search"><i data-lucide="search"></i></button>
-        <button class="menu-btn" id="menuBtn" aria-label="Open menu"><i data-lucide="menu"></i></button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <!-- Left Nav -->
+    <nav class="nav-left">
+      <div class="nav-item">
+        <button class="nav-btn">About <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="about.html">Overview</a>
+          <a href="about.html#leadership">Leadership &amp; Governance</a>
+          <a href="about.html#services">Services &amp; Operations</a>
+        </div></div>
       </div>
+      <div class="nav-item">
+        <button class="nav-btn">CAYMC <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="directory.html">Overview</a>
+          <a href="directory.html">Departments &amp; Offices</a>
+          <a href="contact.html">Visitor Information</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Tenants &amp; Access <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="directory.html">Tenant Directory</a>
+          <a href="contact.html">Building Access &amp; Security</a>
+          <a href="contact.html">Visitor FAQs</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Spirit of Detroit <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="spirit.html">Overview</a>
+          <a href="spirit.html#request">Request Form</a>
+          <a href="spirit.html#gallery">Gallery</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Procurement <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Overview</a>
+          <a href="#">Bid Opportunities</a>
+          <a href="#">Vendor Resources</a>
+        </div></div>
+      </div>
+    </nav>
+
+    <!-- Center Logo -->
+    <div class="nav-logo">
+      <a href="index.html">
+        <img src="images/logo-nav.png" alt="Detroit-Wayne Joint Building Authority" />
+      </a>
     </div>
-  </nav>
+
+    <!-- Right Nav -->
+    <nav class="nav-right">
+      <div class="nav-item">
+        <button class="nav-btn">Capital Projects <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Current Projects</a>
+          <a href="#">Completed Projects</a>
+          <a href="#">Upcoming Projects</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Real Estate <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Portfolio Overview</a>
+          <a href="#">Properties &amp; Listings</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Documents <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Public Documents</a>
+          <a href="#">Reports &amp; Policies</a>
+          <a href="#">Procurement Documents</a>
+          <a href="#">Board Materials</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">News <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">All News</a>
+          <a href="#">Project Updates</a>
+          <a href="#">Procurement Notices</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Contact <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="contact.html">Contact Us</a>
+          <a href="directory.html">Department Directory</a>
+        </div></div>
+      </div>
+      <button class="nav-search" aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile controls -->
+    <div class="mob-controls">
+      <button aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+      </button>
+      <button id="mobMenuBtn" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+      </button>
+    </div>
+
+  </div>
 </header>
 
+<!-- Mobile nav drawer -->
+<!-- Mobile nav drawer -->
 <div class="scrim" id="scrim"></div>
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-  <div class="mobile-nav-header">
-    <img src="images/dwjba-logo.jpg" alt="DWJBA" width="40" height="40">
-    <span>DWJBA</span>
-    <button class="mobile-nav-close" id="mobileNavClose"><i data-lucide="x"></i></button>
+<nav class="mob-nav" id="mobNav">
+  <div class="mob-nav-head">
+    <span>Menu</span>
+    <button id="mobCloseBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+    </button>
   </div>
-  <a href="index.html" class="mobile-nav-link">Home</a>
-  <a href="about.html" class="mobile-nav-link">About / Leadership</a>
-  <a href="directory.html" class="mobile-nav-link">Tenants &amp; Access</a>
-  <a href="spirit.html" class="mobile-nav-link">Spirit of Detroit</a>
-  <a href="procurement.html" class="mobile-nav-link">Procurement</a>
-  <a href="contact.html" class="mobile-nav-link">Contact</a>
-  <a href="ai-demo.html" class="mobile-nav-link mobile-nav-link-accent">Ask CAYMC AI</a>
+  <div class="mob-nav-body">
+    <div class="mob-group"><span class="mob-label">About</span><a class="mob-link" href="about.html">Overview</a><a class="mob-link" href="about.html#leadership">Leadership &amp; Governance</a></div>
+    <div class="mob-group"><span class="mob-label">CAYMC</span><a class="mob-link" href="directory.html">Departments &amp; Offices</a><a class="mob-link" href="contact.html">Visitor Information</a></div>
+    <div class="mob-group"><span class="mob-label">Spirit of Detroit</span><a class="mob-link" href="spirit.html">Overview</a></div>
+    <div class="mob-group"><span class="mob-label">Procurement</span><a class="mob-link" href="#">Bid Opportunities</a><a class="mob-link" href="#">Vendor Resources</a></div>
+    <div class="mob-group"><span class="mob-label">Contact</span><a class="mob-link" href="contact.html">Contact Us</a><a class="mob-link" href="directory.html">Department Directory</a></div>
+  </div>
 </nav>
 
 <!-- ═══════════════════════════════════════════════════
-     HERO
-═══════════════════════════════════════════════════ -->
+     AI DEMO CONTENT
+════════════════════════════════════════════════════ -->
 <section class="ai-demo-hero">
   <div class="hero-grid"></div>
   <div class="wrap page-hero-inner">
@@ -1271,55 +1724,142 @@
 
 <!-- ═══════════════════════════════════════════════════
      FOOTER
-═══════════════════════════════════════════════════ -->
-<footer class="site-footer" role="contentinfo">
-  <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <a href="index.html" class="footer-logo">
-        <img src="images/dwjba-logo.jpg" alt="DWJBA Seal" width="64" height="64">
-      </a>
-      <p class="footer-brand-name">Detroit-Wayne Joint<br>Building Authority</p>
-      <p class="footer-tagline">Serving Detroit and Wayne County since 1955</p>
-      <div class="footer-social">
-        <a href="#" class="footer-social-link" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-        <a href="#" class="footer-social-link" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-top">
+
+      <!-- Brand / Contact -->
+      <div class="footer-brand">
+        <img class="footer-logo" src="images/seal-large.png" alt="Detroit-Wayne Joint Building Authority" />
+        <p class="footer-desc">Managing and maintaining critical public facilities that support city and county government, court functions, and essential public services since 1924.</p>
+        <div class="footer-contacts">
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+            <span>2 Woodward Avenue, Suite 200<br>Detroit, MI 48226</span>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+            <a href="tel:+13132243540">(313) 224-3540</a>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+            <a href="mailto:info@dwjba.com">info@dwjba.com</a>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            <span>Mon–Fri, 8:00 AM to 5:00 PM</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="footer-col">
-      <h4>The Authority</h4>
-      <ul>
-        <li><a href="about.html">About DWJBA</a></li>
-        <li><a href="about.html#leadership">Board &amp; Leadership</a></li>
-        <li><a href="about.html#history">History</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Buildings</h4>
-      <ul>
-        <li><a href="directory.html">Department Directory</a></li>
-        <li><a href="contact.html">Hours &amp; Access</a></li>
-        <li><a href="spirit.html">Spirit of Detroit</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <address class="footer-address">
-        <p>2 Woodward Ave, Suite 1314<br>Detroit, MI 48226</p>
-        <p><a href="tel:3133092300">(313) 309-2300</a></p>
-        <p><a href="mailto:info@dwjba.com">info@dwjba.com</a></p>
-      </address>
+
+      <!-- Nav grid -->
+      <div class="footer-nav">
+        <div class="fn-col">
+          <h3>About</h3>
+          <ul>
+            <li><a href="about.html">Overview</a></li>
+            <li><a href="about.html#leadership">Leadership &amp; Governance</a></li>
+            <li><a href="about.html#services">Services &amp; Operations</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>CAYMC</h3>
+          <ul>
+            <li><a href="directory.html">Building Overview</a></li>
+            <li><a href="directory.html">Departments &amp; Offices</a></li>
+            <li><a href="contact.html">Visitor Information</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Tenants &amp; Access</h3>
+          <ul>
+            <li><a href="directory.html">Tenant Directory</a></li>
+            <li><a href="contact.html">Building Access &amp; Security</a></li>
+            <li><a href="contact.html">Visitor FAQs</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Procurement</h3>
+          <ul>
+            <li><span>Overview</span></li>
+            <li><span>Bid Opportunities</span></li>
+            <li><span>Vendor Resources</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Capital Projects</h3>
+          <ul>
+            <li><span>Current Projects</span></li>
+            <li><span>Completed Projects</span></li>
+            <li><span>Upcoming Projects</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Real Estate</h3>
+          <ul>
+            <li><span>Portfolio Overview</span></li>
+            <li><span>Properties &amp; Listings</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Documents</h3>
+          <ul>
+            <li><span>Public Documents</span></li>
+            <li><span>Reports &amp; Policies</span></li>
+            <li><span>Board Materials</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>News &amp; Contact</h3>
+          <ul>
+            <li><span>All News</span></li>
+            <li><span>Project Updates</span></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="directory.html">Department Directory</a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
   </div>
+
+  <!-- Bottom bar -->
   <div class="footer-bottom">
-    <div class="wrap footer-bottom-inner">
-      <p>&copy; 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Accessibility</a>
-      </div>
+    <p class="footer-copy">© 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</p>
+    <div class="footer-legal">
+      <button>Accessibility</button>
+      <button>Privacy Policy</button>
+      <button>Terms of Use</button>
+      <a href="https://detroitmi.gov" target="_blank" rel="noopener" class="footer-legal-ext">
+        City of Detroit
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+      </a>
     </div>
   </div>
 </footer>
 
+<script>
+<script>
+// ── Header scroll shadow ───────────────────────────────────
+const hdr = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// ── Mobile nav ────────────────────────────────────────────
+const mobNav   = document.getElementById('mobNav');
+const scrim    = document.getElementById('scrim');
+const openBtn  = document.getElementById('mobMenuBtn');
+const closeBtn = document.getElementById('mobCloseBtn');
+
+function openMob()  { mobNav.classList.add('open'); scrim.classList.add('visible'); document.body.style.overflow='hidden'; }
+function closeMob() { mobNav.classList.remove('open'); scrim.classList.remove('visible'); document.body.style.overflow=''; }
+
+openBtn.addEventListener('click', openMob);
+closeBtn.addEventListener('click', closeMob);
+scrim.addEventListener('click', closeMob);
+</script>
+</script>
 </body>
 </html>
