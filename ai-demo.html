@@ -4,11 +4,845 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ask CAYMC — AI Demo | DWJBA</title>
-  <meta name="description" content="Experience Ask CAYMC — the AI-powered building companion and Interactive Floor Navigator for the Coleman A. Young Municipal Center.">
+  <meta name="description" content="Experience Ask CAYMC — the AI-powered building companion and 3D Interactive Floor Navigator for the Coleman A. Young Municipal Center.">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
   <script src="main.js" defer></script>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   AI DEMO — PREMIUM ENTERPRISE DESIGN
+   DWJBA · Coleman A. Young Municipal Center
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --brown:     #3d1a08;
+  --tan:       #c4956a;
+  --green:     #3d6b52;
+  --cream:     #f5ede0;
+  --fg:        #1a0d06;
+  --muted:     #6b5a4a;
+  --zinc-950:  #0c0c0e;
+  --zinc-900:  #111113;
+  --zinc-800:  #1a1410;
+  --zinc-700:  #261e18;
+  --border:    #e2d9cc;
+  --tan-glow:  rgba(196,149,106,0.35);
+}
+
+/* ── HERO ──────────────────────────────────────────────────────── */
+.ai-demo-hero {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  background: #0c0c0e;
+  overflow: hidden;
+}
+.ai-demo-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('images/caymc-building.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.14;
+}
+.ai-demo-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(61,26,8,0.55) 0%, rgba(12,12,14,0.9) 100%);
+}
+/* Animated grid overlay */
+.ai-demo-hero .hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(196,149,106,0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  z-index: 1;
+}
+.ai-demo-hero .page-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+.ai-demo-hero .hero-kicker {
+  color: var(--tan);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.ai-demo-hero .hero-kicker::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: var(--tan);
+  display: inline-block;
+}
+.ai-demo-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 5.5vw, 4rem);
+  color: #fff;
+  line-height: 1.08;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.5);
+}
+.ai-demo-hero .hero-sub {
+  color: rgba(255,255,255,0.65);
+  font-size: 1.05rem;
+  max-width: 580px;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+.hero-badge-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(196,149,106,0.1);
+  border: 1px solid rgba(196,149,106,0.25);
+  color: var(--tan);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+}
+.hero-badge svg { width: 12px; height: 12px; }
+
+/* ── FEATURE BAND ──────────────────────────────────────────────── */
+.ai-features-band {
+  background: #fff;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.ai-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 2rem;
+}
+@media(max-width:900px){.ai-features-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.ai-features-grid{grid-template-columns:1fr;}}
+.ai-feature-item { display:flex; flex-direction:column; gap:0.75rem; }
+.ai-feature-icon {
+  width:46px; height:46px;
+  background:var(--cream); border-radius:12px;
+  display:flex; align-items:center; justify-content:center; color:var(--brown);
+}
+.ai-feature-icon svg { width:22px; height:22px; }
+.ai-feature-item h3 { font-size:1rem; font-weight:600; color:var(--fg); }
+.ai-feature-item p { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+
+/* ── DEMO SECTION ──────────────────────────────────────────────── */
+.ai-demo-section {
+  background: var(--zinc-950);
+  padding: 5rem 0 6rem;
+}
+.ai-demo-section .section-heading { text-align:center; margin-bottom:2.5rem; }
+.ai-demo-section .section-kicker {
+  color:var(--tan); font-size:0.72rem; font-weight:600;
+  letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.75rem;
+}
+.ai-demo-section h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  color:#fff; margin-bottom:0.75rem;
+}
+.ai-demo-section .section-sub {
+  color:rgba(255,255,255,0.5); font-size:0.95rem;
+  max-width:520px; margin:0 auto;
+}
+
+/* ── TAB BAR ───────────────────────────────────────────────────── */
+.ai-tabs-bar {
+  display:flex; gap:4px;
+  background:var(--zinc-900);
+  border:1px solid rgba(196,149,106,0.15);
+  border-radius:14px; padding:4px;
+  width:fit-content; margin:0 auto 2rem;
+}
+.ai-tab-btn {
+  display:flex; align-items:center; gap:0.5rem;
+  padding:0.65rem 1.5rem; border-radius:10px; border:none;
+  background:transparent; color:rgba(255,255,255,0.4);
+  font-family:Inter,sans-serif; font-size:0.875rem; font-weight:500;
+  cursor:pointer; transition:all 0.2s;
+}
+.ai-tab-btn svg { width:15px; height:15px; }
+.ai-tab-btn.active { background:var(--brown); color:var(--tan); box-shadow:0 2px 14px rgba(61,26,8,0.6); }
+.ai-tab-btn:hover:not(.active) { color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.05); }
+@media(max-width:560px){
+  .ai-tabs-bar{width:100%;}
+  .ai-tab-btn{flex:1;justify-content:center;font-size:0.78rem;padding:0.6rem 0.5rem;}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHATBOT PANEL
+   ═══════════════════════════════════════════════════════════════ */
+.chat-layout {
+  display:grid; grid-template-columns:1fr 300px; gap:1.5rem; align-items:start;
+}
+@media(max-width:1100px){.chat-layout{grid-template-columns:1fr;}}
+
+.chat-main {
+  background:var(--zinc-900);
+  border:1px solid rgba(196,149,106,0.18);
+  border-radius:20px; overflow:hidden;
+  display:flex; flex-direction:column;
+}
+
+/* Header bar */
+.chat-header-bar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 1.25rem;
+  background:var(--zinc-800);
+  border-bottom:1px solid rgba(196,149,106,0.1);
+}
+.chat-header-left { display:flex; align-items:center; gap:0.75rem; }
+.chat-avatar-wrap { position:relative; width:40px; height:40px; flex-shrink:0; }
+.chat-avatar-img {
+  width:40px; height:40px; border-radius:50%; object-fit:cover;
+  border:2px solid rgba(196,149,106,0.4);
+}
+.chat-avatar-dot {
+  position:absolute; bottom:1px; right:1px;
+  width:10px; height:10px; background:#22c55e; border-radius:50%;
+  border:2px solid var(--zinc-800);
+  box-shadow:0 0 6px rgba(34,197,94,0.6);
+}
+.chat-header-name { font-size:0.9rem; font-weight:600; color:#fff; }
+.chat-header-status { font-size:0.72rem; color:rgba(255,255,255,0.4); }
+.chat-hdr-btn {
+  width:32px; height:32px; border-radius:8px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:transparent; color:rgba(255,255,255,0.35);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.18s;
+}
+.chat-hdr-btn:hover { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.7); }
+.chat-hdr-btn svg { width:15px; height:15px; }
+.chat-header-right { display:flex; gap:0.4rem; }
+
+/* Messages window */
+.chat-window {
+  height:420px; overflow-y:auto;
+  padding:1.25rem; display:flex; flex-direction:column; gap:1.25rem;
+  scroll-behavior:smooth;
+}
+.chat-window::-webkit-scrollbar { width:4px; }
+.chat-window::-webkit-scrollbar-track { background:transparent; }
+.chat-window::-webkit-scrollbar-thumb { background:rgba(196,149,106,0.2); border-radius:4px; }
+
+/* Message rows */
+.chat-msg-row { display:flex; gap:0.75rem; align-items:flex-start; }
+.chat-msg-row.user-row { flex-direction:row-reverse; }
+.msg-avatar {
+  width:32px; height:32px; border-radius:50%; flex-shrink:0;
+  overflow:hidden; border:1.5px solid rgba(196,149,106,0.35);
+}
+.msg-avatar img { width:100%; height:100%; object-fit:cover; }
+.msg-avatar-user {
+  width:32px; height:32px; border-radius:50%;
+  background:var(--brown); display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; color:var(--tan); font-size:0.68rem; font-weight:700; letter-spacing:0.02em;
+}
+
+/* Bot bubble */
+.chat-bubble-bot {
+  background:var(--zinc-800);
+  border:1px solid rgba(196,149,106,0.14);
+  border-left:3px solid var(--tan);
+  border-radius:4px 16px 16px 16px;
+  padding:1rem 1.1rem; max-width:80%;
+}
+.chat-bubble-user {
+  background:var(--brown); color:#fff;
+  border-radius:16px 4px 16px 16px;
+  padding:0.75rem 1.1rem; max-width:76%;
+  font-size:0.875rem; line-height:1.65;
+}
+
+/* Bubble meta */
+.bubble-meta {
+  display:flex; align-items:center; gap:0.55rem; margin-bottom:0.45rem;
+}
+.bubble-sender {
+  font-size:0.68rem; font-weight:700; color:var(--tan);
+  letter-spacing:0.06em; text-transform:uppercase;
+}
+.confidence-badge {
+  font-size:0.62rem; font-weight:600; padding:0.15rem 0.5rem;
+  border-radius:100px; letter-spacing:0.04em;
+}
+.confidence-high { background:rgba(34,197,94,0.12); color:#4ade80; border:1px solid rgba(34,197,94,0.2); }
+.confidence-suggested { background:rgba(196,149,106,0.12); color:var(--tan); border:1px solid rgba(196,149,106,0.22); }
+
+/* Bubble content */
+.bubble-content {
+  font-size:0.875rem; color:rgba(255,255,255,0.82); line-height:1.72;
+}
+.bubble-content strong { color:#fff; font-weight:600; }
+.bubble-content ul { margin:0.4rem 0; padding-left:1.15rem; display:flex; flex-direction:column; gap:0.2rem; }
+.bubble-content li { margin:0; }
+
+/* Typing indicator */
+.typing-indicator { display:flex; align-items:center; gap:4px; padding:0.1rem 0; }
+.typing-dot {
+  width:7px; height:7px; border-radius:50%; background:var(--tan);
+  animation:typeBounce 1.4s infinite ease-in-out;
+}
+.typing-dot:nth-child(2){animation-delay:.18s;}
+.typing-dot:nth-child(3){animation-delay:.36s;}
+@keyframes typeBounce{0%,60%,100%{transform:translateY(0);opacity:0.45;}30%{transform:translateY(-5px);opacity:1;}}
+
+/* Location card inside bot bubble */
+.location-card {
+  background:linear-gradient(135deg,rgba(61,26,8,0.55),rgba(61,107,82,0.18));
+  border:1px solid rgba(196,149,106,0.32);
+  border-radius:12px; padding:1rem 1.1rem;
+  margin-top:0.85rem; display:flex; gap:1rem; align-items:flex-start;
+}
+.location-card-floor {
+  font-family:'Playfair Display',serif; font-size:2.6rem; font-weight:700;
+  color:var(--tan); line-height:1; flex-shrink:0; min-width:48px; text-align:center;
+}
+.location-card-info { flex:1; min-width:0; }
+.location-card-flabel {
+  font-size:0.65rem; font-weight:600; color:rgba(255,255,255,0.35);
+  letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.2rem;
+}
+.location-card-dept { font-size:0.92rem; font-weight:600; color:#fff; margin-bottom:0.45rem; }
+.location-pills { display:flex; flex-wrap:wrap; gap:0.35rem; }
+.location-pill {
+  display:inline-flex; align-items:center; gap:0.3rem;
+  font-size:0.68rem; font-weight:500; padding:0.22rem 0.55rem;
+  border-radius:100px; background:rgba(196,149,106,0.1);
+  border:1px solid rgba(196,149,106,0.18); color:rgba(255,255,255,0.65);
+}
+.location-pill svg { width:10px; height:10px; }
+
+/* Bubble footer / time */
+.bubble-time { font-size:0.65rem; color:rgba(255,255,255,0.22); margin-top:0.5rem; }
+.user-time { font-size:0.65rem; color:rgba(255,255,255,0.28); margin-top:0.35rem; text-align:right; }
+
+/* Quick chips */
+.quick-chips-wrap {
+  padding:0.65rem 1.2rem;
+  display:flex; gap:0.45rem; flex-wrap:wrap;
+  border-top:1px solid rgba(255,255,255,0.04);
+  background:rgba(255,255,255,0.015);
+}
+.quick-chip {
+  display:inline-flex; align-items:center; gap:0.3rem;
+  padding:0.32rem 0.8rem; border-radius:100px;
+  border:1px solid rgba(196,149,106,0.28);
+  background:rgba(196,149,106,0.06);
+  color:rgba(255,255,255,0.65); font-family:Inter,sans-serif;
+  font-size:0.73rem; font-weight:500; cursor:pointer; transition:all 0.18s;
+}
+.quick-chip:hover { background:rgba(196,149,106,0.16); color:#fff; border-color:rgba(196,149,106,0.5); }
+
+/* Input area */
+.chat-input-area {
+  border-top:1px solid rgba(255,255,255,0.05);
+  padding:0.85rem 1.1rem; background:var(--zinc-800);
+}
+.chat-input-row { display:flex; align-items:flex-end; gap:0.5rem; }
+.chat-input {
+  flex:1; background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:12px; padding:0.7rem 1rem;
+  color:#fff; font-family:Inter,sans-serif; font-size:0.875rem;
+  outline:none; line-height:1.5; transition:border-color 0.2s;
+  min-height:44px;
+}
+.chat-input::placeholder { color:rgba(255,255,255,0.28); }
+.chat-input:focus { border-color:rgba(196,149,106,0.42); }
+
+.voice-btn {
+  width:42px; height:42px; border-radius:10px;
+  border:1px solid rgba(255,255,255,0.09);
+  background:rgba(255,255,255,0.04); color:rgba(255,255,255,0.4);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.2s; flex-shrink:0;
+}
+.voice-btn:hover { background:rgba(196,149,106,0.14); border-color:rgba(196,149,106,0.3); color:var(--tan); }
+.voice-btn.listening {
+  background:rgba(220,38,38,0.14); border-color:rgba(220,38,38,0.4); color:#f87171;
+  animation:voicePulse 1s infinite;
+}
+@keyframes voicePulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.4);}50%{box-shadow:0 0 0 8px rgba(220,38,38,0);}}
+.voice-btn svg { width:17px; height:17px; }
+
+.chat-send-btn {
+  width:42px; height:42px; border-radius:10px; border:none;
+  background:var(--brown); color:var(--tan);
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:background 0.2s; flex-shrink:0;
+}
+.chat-send-btn:hover { background:#5a2810; }
+.chat-send-btn svg { width:16px; height:16px; }
+
+.chat-input-footer { display:flex; align-items:center; justify-content:space-between; margin-top:0.4rem; }
+.chat-disclaimer { font-size:0.65rem; color:rgba(255,255,255,0.2); margin:0; }
+.char-counter { font-size:0.65rem; color:rgba(255,255,255,0.22); font-variant-numeric:tabular-nums; }
+
+/* ── RIGHT INFO SIDEBAR ────────────────────────────────────────── */
+.chat-info-sidebar { display:flex; flex-direction:column; gap:0.9rem; }
+@media(max-width:1100px){.chat-info-sidebar{display:none;}}
+
+.info-card {
+  background:var(--zinc-800); border:1px solid rgba(196,149,106,0.14);
+  border-radius:16px; padding:1.15rem;
+}
+.info-card-title {
+  font-size:0.65rem; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--tan); margin-bottom:0.9rem;
+}
+.agent-avatar-wrap {
+  width:52px; height:52px; border-radius:50%; overflow:hidden;
+  border:2px solid rgba(196,149,106,0.4); margin-bottom:0.7rem;
+}
+.agent-avatar-wrap img { width:100%; height:100%; object-fit:cover; }
+.agent-name { font-size:0.92rem; font-weight:600; color:#fff; margin-bottom:0.2rem; }
+.agent-online {
+  display:flex; align-items:center; gap:0.4rem;
+  font-size:0.72rem; color:rgba(255,255,255,0.4); margin-bottom:0.75rem;
+}
+.status-dot { width:7px; height:7px; border-radius:50%; background:#22c55e; box-shadow:0 0 6px #22c55e; }
+.agent-version { font-size:0.68rem; color:rgba(255,255,255,0.2); }
+
+.topic-badge {
+  display:inline-flex; align-items:center; gap:0.4rem;
+  background:rgba(196,149,106,0.1); border:1px solid rgba(196,149,106,0.22);
+  color:var(--tan); font-size:0.72rem; font-weight:500;
+  padding:0.32rem 0.75rem; border-radius:100px; margin-bottom:0.9rem;
+}
+.topic-badge svg { width:11px; height:11px; }
+
+.conv-stats { display:grid; grid-template-columns:1fr 1fr; gap:0.45rem; }
+.conv-stat {
+  background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05);
+  border-radius:10px; padding:0.55rem 0.7rem;
+}
+.conv-stat-num { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:#fff; line-height:1; }
+.conv-stat-label { font-size:0.62rem; color:rgba(255,255,255,0.3); margin-top:0.18rem; }
+
+.new-chat-btn {
+  width:100%; padding:0.6rem; border-radius:10px;
+  border:1px solid rgba(196,149,106,0.28); background:transparent;
+  color:var(--tan); font-family:Inter,sans-serif; font-size:0.78rem; font-weight:600;
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.45rem;
+  transition:all 0.18s; margin-top:0.9rem;
+}
+.new-chat-btn:hover { background:rgba(196,149,106,0.1); }
+.new-chat-btn svg { width:13px; height:13px; }
+
+.cap-list { display:flex; flex-direction:column; gap:0.45rem; }
+.cap-item { display:flex; align-items:center; gap:0.45rem; font-size:0.76rem; color:rgba(255,255,255,0.55); }
+.cap-check {
+  width:15px; height:15px; border-radius:50%;
+  background:rgba(34,197,94,0.12); display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; color:#4ade80;
+}
+.cap-check svg { width:9px; height:9px; }
+
+.mini-contact { display:flex; flex-direction:column; gap:0.45rem; }
+.mini-contact-item {
+  display:flex; align-items:center; gap:0.45rem;
+  font-size:0.76rem; color:rgba(255,255,255,0.5); text-decoration:none; transition:color 0.18s;
+}
+.mini-contact-item:hover { color:var(--tan); }
+.mini-contact-item svg { width:12px; height:12px; flex-shrink:0; color:var(--tan); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   3D ISOMETRIC FLOOR NAVIGATOR
+   ═══════════════════════════════════════════════════════════════ */
+
+.floor-nav-layout { display:flex; flex-direction:column; gap:1.5rem; }
+
+/* ── CONTROL HEADER ────────────────────────────────────────────── */
+.floor-nav-header {
+  background:var(--zinc-900);
+  border:1px solid rgba(196,149,106,0.14);
+  border-radius:16px; padding:1.1rem 1.4rem;
+  display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap;
+}
+.floor-nav-header-label {
+  font-size:0.65rem; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:rgba(255,255,255,0.3); white-space:nowrap;
+}
+.tower-selector { display:flex; gap:3px; background:var(--zinc-800); border-radius:10px; padding:3px; }
+.tower-tab {
+  padding:0.42rem 1.05rem; border-radius:8px; border:none;
+  background:transparent; color:rgba(255,255,255,0.4);
+  font-family:Inter,sans-serif; font-size:0.78rem; font-weight:500;
+  cursor:pointer; transition:all 0.18s; display:flex; align-items:center; gap:0.38rem;
+}
+.tower-tab svg { width:13px; height:13px; }
+.tower-tab.active { background:var(--brown); color:var(--tan); }
+
+.floor-search-inline {
+  display:flex; align-items:center; gap:0.5rem; flex:1; min-width:180px;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+  border-radius:10px; padding:0.45rem 0.85rem;
+}
+.floor-search-inline svg { width:14px; height:14px; color:rgba(255,255,255,0.28); flex-shrink:0; }
+.floor-search-inline input {
+  background:none; border:none; outline:none; color:#fff;
+  font-family:Inter,sans-serif; font-size:0.82rem; width:100%;
+}
+.floor-search-inline input::placeholder { color:rgba(255,255,255,0.25); }
+
+/* ── 3D BODY ───────────────────────────────────────────────────── */
+.floor-3d-body {
+  display:grid; grid-template-columns:1fr 360px; gap:1.5rem; align-items:start;
+}
+@media(max-width:960px){.floor-3d-body{grid-template-columns:1fr;}}
+
+/* ── 3D STAGE ──────────────────────────────────────────────────── */
+.iso-stage-wrap {
+  background:var(--zinc-950);
+  border:1px solid rgba(196,149,106,0.12);
+  border-radius:20px; overflow:hidden;
+  position:relative; min-height:520px;
+  display:flex; flex-direction:column;
+}
+
+/* Dot grid ambient background */
+.iso-stage-wrap::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image:
+    radial-gradient(circle, rgba(196,149,106,0.055) 1px, transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none; z-index:0;
+}
+
+/* Subtle vignette */
+.iso-stage-wrap::after {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.55) 100%);
+  pointer-events:none; z-index:0;
+}
+
+.iso-stage-label {
+  position:relative; z-index:2;
+  padding:0.85rem 1.25rem;
+  font-size:0.65rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+  display:flex; align-items:center; gap:0.6rem;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.iso-stage-label::before {
+  content:''; display:inline-block; width:6px; height:6px;
+  border-radius:50%; background:var(--tan); box-shadow:0 0 6px var(--tan);
+}
+.iso-tower-name {
+  margin-left:auto; font-size:0.65rem; color:var(--tan); font-weight:600;
+  letter-spacing:0.08em;
+}
+
+/* The actual 3D scene container */
+.iso-scene {
+  position:relative; z-index:1;
+  flex:1; display:flex; align-items:center; justify-content:center;
+  padding:2rem 1rem 2.5rem;
+  perspective:1400px;
+  perspective-origin:50% 40%;
+}
+
+/* The building container — isometric rotation applied here */
+.iso-building {
+  position:relative;
+  transform-style:preserve-3d;
+  transform:rotateX(52deg) rotateZ(-42deg);
+  transition:transform 0.7s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+  opacity:1;
+}
+.iso-building.transitioning {
+  transform:rotateX(52deg) rotateZ(-42deg) scale(0.85);
+  opacity:0;
+}
+
+/* ── FLOOR SLAB ────────────────────────────────────────────────── */
+.floor-slab {
+  position:relative;
+  width:240px;
+  height:22px;
+  margin-bottom:3px;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+             margin-bottom 0.35s ease,
+             filter 0.35s ease;
+}
+
+/* Breathing idle animation — staggered per floor via JS inline style */
+@keyframes slabBreathe {
+  0%,100% { transform:translateZ(0px); }
+  50%      { transform:translateZ(2.5px); }
+}
+
+/* Top face */
+.floor-slab .slab-top {
+  position:absolute; inset:0;
+  border-radius:3px 3px 0 0;
+  background:linear-gradient(135deg, #2a1a10 0%, #221409 100%);
+  backface-visibility:hidden;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 10px;
+  overflow:hidden;
+  transition:background 0.3s, box-shadow 0.3s;
+  /* shimmer overlay */
+}
+.floor-slab .slab-top::after {
+  content:'';
+  position:absolute; top:0; left:-100%; width:60%; height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+  pointer-events:none;
+}
+.floor-slab:hover .slab-top::after {
+  animation:shimmer 1.2s ease forwards;
+}
+@keyframes shimmer { to { left:160%; } }
+
+.slab-floor-num {
+  font-family:'Playfair Display',serif; font-size:9px; font-weight:700;
+  color:rgba(196,149,106,0.55); letter-spacing:0.04em; line-height:1; flex-shrink:0;
+}
+.slab-dept-name {
+  font-family:Inter,sans-serif; font-size:7px; font-weight:500;
+  color:rgba(255,255,255,0.45); letter-spacing:0.04em; text-align:right;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:140px;
+}
+
+/* Front face — depth edge */
+.floor-slab .slab-front {
+  position:absolute; left:0; right:0;
+  bottom:calc(-1 * var(--depth, 9px)); height:var(--depth, 9px);
+  background:linear-gradient(180deg, #3d1a08 0%, #2a0f04 100%);
+  transform-origin:top;
+  transform:rotateX(-90deg);
+  backface-visibility:hidden;
+  border-radius:0 0 2px 2px;
+  transition:background 0.3s;
+}
+
+/* Side face */
+.floor-slab .slab-side {
+  position:absolute; top:0; bottom:calc(-1 * var(--depth, 9px));
+  right:calc(-1 * var(--side-w, 9px)); width:var(--side-w, 9px);
+  background:linear-gradient(90deg, #4a2210 0%, #331608 100%);
+  transform-origin:left;
+  transform:rotateY(90deg);
+  backface-visibility:hidden;
+  transition:background 0.3s;
+}
+
+/* HOVER state */
+.floor-slab:hover { transform:translateZ(5px); margin-bottom:6px; }
+.floor-slab:hover .slab-top {
+  background:linear-gradient(135deg, #3a2015 0%, #2e1a0c 100%);
+  box-shadow:0 0 0 1px rgba(196,149,106,0.35), 0 4px 20px rgba(196,149,106,0.12);
+}
+.floor-slab:hover .slab-floor-num { color:rgba(196,149,106,0.85); }
+.floor-slab:hover .slab-dept-name { color:rgba(255,255,255,0.7); }
+
+/* ACTIVE / SELECTED state */
+.floor-slab.active {
+  transform:translateZ(24px);
+  margin-bottom:30px;
+  margin-top:8px;
+  filter:drop-shadow(0 0 16px rgba(196,149,106,0.55));
+  animation:none !important; /* stop breathing */
+}
+.floor-slab.active .slab-top {
+  background:linear-gradient(135deg, #5a2e12 0%, #4a2210 100%);
+  animation:slabGlow 2s ease-in-out infinite;
+}
+.floor-slab.active .slab-floor-num { color:var(--tan); font-size:10px; }
+.floor-slab.active .slab-dept-name { color:#fff; font-size:8px; }
+.floor-slab.active .slab-front { background:linear-gradient(180deg, #7a3c18 0%, #5a2610 100%); }
+.floor-slab.active .slab-side { background:linear-gradient(90deg, #6a3214 0%, #4a2210 100%); }
+
+@keyframes slabGlow {
+  0%,100% { box-shadow:0 0 0 1px rgba(196,149,106,0.5), 0 0 20px rgba(196,149,106,0.2); }
+  50%      { box-shadow:0 0 0 2px rgba(196,149,106,0.8), 0 0 40px rgba(196,149,106,0.45); }
+}
+
+/* Floating label above active slab */
+.slab-float-label {
+  position:absolute;
+  top:-28px; left:50%; transform:translateX(-50%);
+  background:var(--tan); color:#1a0d06;
+  font-family:Inter,sans-serif; font-size:7.5px; font-weight:700;
+  padding:3px 8px; border-radius:100px;
+  white-space:nowrap; pointer-events:none; opacity:0;
+  transition:opacity 0.3s;
+  letter-spacing:0.04em; text-transform:uppercase;
+}
+.floor-slab.active .slab-float-label { opacity:1; }
+
+/* Base / ground plate */
+.iso-ground {
+  width:240px; height:18px;
+  background:linear-gradient(135deg, #1a0d06, #0c0c0e);
+  border-radius:3px;
+  border:1px solid rgba(196,149,106,0.2);
+  display:flex; align-items:center; justify-content:center;
+  transform-style:preserve-3d;
+}
+.iso-ground-label {
+  font-family:Inter,sans-serif; font-size:6px; font-weight:700;
+  color:rgba(196,149,106,0.45); letter-spacing:0.14em; text-transform:uppercase;
+}
+
+/* Building tooltip */
+.iso-tooltip {
+  position:absolute; z-index:100;
+  background:var(--zinc-800); border:1px solid rgba(196,149,106,0.3);
+  border-radius:8px; padding:0.5rem 0.75rem;
+  pointer-events:none; opacity:0; transition:opacity 0.18s;
+  white-space:nowrap;
+  box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.iso-tooltip.visible { opacity:1; }
+.iso-tooltip-floor { font-size:0.62rem; font-weight:700; color:var(--tan); letter-spacing:0.06em; text-transform:uppercase; }
+.iso-tooltip-dept  { font-size:0.78rem; font-weight:500; color:#fff; margin-top:0.1rem; }
+
+/* Stage footer — legend */
+.iso-stage-footer {
+  position:relative; z-index:2;
+  padding:0.65rem 1.25rem;
+  border-top:1px solid rgba(255,255,255,0.04);
+  display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+}
+.iso-legend-item { display:flex; align-items:center; gap:0.38rem; font-size:0.67rem; color:rgba(255,255,255,0.35); }
+.iso-swatch { width:12px; height:8px; border-radius:2px; flex-shrink:0; }
+.iso-swatch-standard { background:#2a1a10; border:1px solid rgba(196,149,106,0.2); }
+.iso-swatch-active   { background:#5a2e12; border:1px solid rgba(196,149,106,0.6); box-shadow:0 0 6px rgba(196,149,106,0.35); }
+.iso-swatch-lobby    { background:#1a2e1a; border:1px solid rgba(61,107,82,0.4); }
+.iso-instructions {
+  margin-left:auto; font-size:0.65rem; color:rgba(255,255,255,0.2);
+  display:flex; align-items:center; gap:0.35rem;
+}
+.iso-instructions svg { width:11px; height:11px; }
+
+/* ── RIGHT COLUMN ──────────────────────────────────────────────── */
+.floor-right-col { display:flex; flex-direction:column; gap:1.1rem; }
+
+/* Need chips card */
+.floor-chips-card {
+  background:var(--zinc-900); border:1px solid rgba(196,149,106,0.14);
+  border-radius:16px; padding:1.15rem;
+}
+.floor-chips-card h3 { font-size:0.88rem; font-weight:600; color:#fff; margin-bottom:0.25rem; }
+.floor-chips-card p { font-size:0.77rem; color:rgba(255,255,255,0.38); line-height:1.55; margin-bottom:0.9rem; }
+.need-chips-label {
+  font-size:0.62rem; font-weight:700; letter-spacing:0.1em;
+  text-transform:uppercase; color:rgba(255,255,255,0.28); margin-bottom:0.5rem;
+}
+.need-chips { display:flex; flex-wrap:wrap; gap:0.38rem; }
+.need-chip {
+  padding:0.3rem 0.72rem; border-radius:100px;
+  border:1px solid rgba(196,149,106,0.18);
+  background:rgba(196,149,106,0.05);
+  color:rgba(255,255,255,0.52); font-family:Inter,sans-serif;
+  font-size:0.7rem; font-weight:500; cursor:pointer; transition:all 0.18s;
+}
+.need-chip:hover, .need-chip.active {
+  background:rgba(196,149,106,0.15); color:var(--tan);
+  border-color:rgba(196,149,106,0.4);
+}
+
+/* Navigation result card */
+.nav-result-card {
+  background:linear-gradient(135deg,rgba(61,26,8,0.6) 0%,rgba(61,107,82,0.15) 100%);
+  border:1px solid rgba(196,149,106,0.32);
+  border-radius:16px; padding:1.4rem; display:none;
+}
+.nav-result-card.visible { display:block; animation:resultSlide 0.35s ease; }
+@keyframes resultSlide { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+
+.nav-result-badge {
+  font-size:0.62rem; font-weight:700; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--tan); margin-bottom:0.8rem;
+  display:flex; align-items:center; gap:0.4rem;
+}
+.nav-result-badge svg { width:10px; height:10px; }
+
+.nav-result-main { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1rem; }
+.nav-floor-num {
+  font-family:'Playfair Display',serif; font-size:3.6rem; font-weight:700;
+  color:var(--tan); line-height:1; flex-shrink:0;
+}
+.nav-result-info { flex:1; min-width:0; }
+.nav-floor-label {
+  font-size:0.64rem; font-weight:600; color:rgba(255,255,255,0.32);
+  letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.2rem;
+}
+.nav-dept-name { font-size:1rem; font-weight:600; color:#fff; margin-bottom:0.25rem; }
+.nav-room-label { font-size:0.77rem; color:rgba(255,255,255,0.45); }
+
+.nav-details { display:flex; flex-direction:column; gap:0.38rem; margin-bottom:1.05rem; }
+.nav-detail-row { display:flex; align-items:center; gap:0.45rem; font-size:0.77rem; color:rgba(255,255,255,0.6); }
+.nav-detail-row svg { width:12px; height:12px; color:var(--tan); flex-shrink:0; }
+
+.nav-directions-btn {
+  width:100%; padding:0.65rem; border-radius:10px;
+  border:1px solid rgba(196,149,106,0.38);
+  background:rgba(196,149,106,0.09); color:var(--tan);
+  font-family:Inter,sans-serif; font-size:0.8rem; font-weight:600;
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.45rem;
+  transition:all 0.18s;
+}
+.nav-directions-btn:hover { background:rgba(196,149,106,0.18); }
+.nav-directions-btn svg { width:14px; height:14px; }
+
+/* ── TECH + CTA SECTIONS ───────────────────────────────────────── */
+.ai-tech-overview { background:var(--cream); padding:5rem 0; }
+.ai-tech-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:2.5rem;
+}
+@media(max-width:800px){.ai-tech-grid{grid-template-columns:1fr;}}
+.ai-tech-card {
+  background:#fff; border:1px solid var(--border);
+  border-radius:16px; padding:1.75rem;
+}
+.ai-tech-card svg { width:26px; height:26px; color:var(--brown); margin-bottom:0.9rem; }
+.ai-tech-card h3 { font-size:1rem; font-weight:600; color:var(--fg); margin-bottom:0.5rem; }
+.ai-tech-card p { font-size:0.875rem; color:var(--muted); line-height:1.65; }
+
+.ai-cta-section {
+  background:linear-gradient(135deg,var(--brown) 0%,#1a0d06 100%); padding:5rem 0;
+}
+.ai-cta-inner { text-align:center; max-width:760px; margin:0 auto; }
+.section-kicker-lt { color:var(--tan) !important; }
+.ai-cta-section h2 {
+  font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem);
+  color:#fff; margin:0.5rem 0 1rem;
+}
+.ai-cta-section p { color:rgba(255,255,255,0.6); font-size:0.95rem; line-height:1.72; margin-bottom:2.5rem; }
+.ai-cta-stats { display:flex; gap:2rem; justify-content:center; margin-bottom:2.5rem; flex-wrap:wrap; }
+.ai-cta-stat { text-align:center; }
+.ai-cta-stat-num { display:block; font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; color:var(--tan); }
+.ai-cta-stat-label { font-size:0.77rem; color:rgba(255,255,255,0.45); }
+.ai-cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+</style>
 </head>
 <body>
 
@@ -79,19 +913,37 @@
 </nav>
 
 <!-- ═══════════════════════════════════════════════════
-     AI DEMO HERO
+     HERO
 ═══════════════════════════════════════════════════ -->
-<section class="page-hero ai-demo-hero" style="--hero-bg:url('images/caymc-building.jpg')">
-  <div class="page-hero-overlay ai-demo-overlay"></div>
+<section class="ai-demo-hero">
+  <div class="hero-grid"></div>
   <div class="wrap page-hero-inner">
     <p class="hero-kicker">Powered by Spatial AI</p>
     <h1>Meet Ask CAYMC</h1>
-    <p class="hero-sub">Detroit's most advanced civic AI — a voice and chat companion that knows every inch of the Coleman A. Young Municipal Center, and an interactive floor navigator that guides you directly to the office you need.</p>
+    <p class="hero-sub">Detroit's most advanced civic AI — a voice-enabled chat companion that knows every inch of the Coleman A. Young Municipal Center, plus a cinematic 3D building navigator that guides you to any office with precision.</p>
+    <div class="hero-badge-row">
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        24/7 Available
+      </span>
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        25+ Service Topics
+      </span>
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        3D Floor Navigator
+      </span>
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        Voice Enabled
+      </span>
+    </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     AI FEATURE CALLOUTS
+     FEATURE CALLOUTS
 ═══════════════════════════════════════════════════ -->
 <section class="section ai-features-band">
   <div class="wrap">
@@ -99,36 +951,37 @@
       <div class="ai-feature-item reveal">
         <div class="ai-feature-icon"><i data-lucide="bot"></i></div>
         <h3>Ask CAYMC</h3>
-        <p>A conversational AI companion trained on every office, service, and procedure in the building. Ask in plain language — it knows the answer.</p>
+        <p>A conversational AI companion trained on every office, service, and procedure. Ask in plain language — streaming responses, voice input, and contextual follow-ups.</p>
       </div>
       <div class="ai-feature-item reveal reveal-delay-1">
-        <div class="ai-feature-icon"><i data-lucide="map"></i></div>
-        <h3>Floor Navigator</h3>
-        <p>Describe what you need in plain language — "I need to pay a parking ticket" — and the AI visually highlights exactly where to go on the floor map.</p>
+        <div class="ai-feature-icon"><i data-lucide="layers"></i></div>
+        <h3>3D Floor Navigator</h3>
+        <p>A cinematic isometric 3D building visualization — search your need and watch the exact floor slab light up, separate from the stack, and display your navigation card.</p>
       </div>
       <div class="ai-feature-item reveal reveal-delay-2">
         <div class="ai-feature-icon"><i data-lucide="zap"></i></div>
         <h3>Instant Answers</h3>
-        <p>No hold times, no phone trees. Citizens get immediate, accurate answers about departments, hours, procedures, and contact information.</p>
+        <p>No hold times, no phone trees. Citizens get immediate, accurate answers about departments, hours, procedures, and contact information — streamed word by word.</p>
       </div>
       <div class="ai-feature-item reveal reveal-delay-3">
-        <div class="ai-feature-icon"><i data-lucide="clock"></i></div>
-        <h3>24/7 Available</h3>
-        <p>Available around the clock — so citizens can get the information they need even outside building hours, before their visit.</p>
+        <div class="ai-feature-icon"><i data-lucide="mic"></i></div>
+        <h3>Voice Enabled</h3>
+        <p>Speak your question directly — Ask CAYMC transcribes your voice in real time and responds intelligently, with graceful fallback for unsupported browsers.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     AI DEMO TABS — MAIN INTERFACE
+     AI DEMO — MAIN INTERFACE
 ═══════════════════════════════════════════════════ -->
 <section class="section ai-demo-section" id="demo">
   <div class="wrap">
+
     <div class="section-heading reveal">
       <p class="section-kicker">Live Demo</p>
       <h2>Experience the Future of Civic Service</h2>
-      <p class="section-sub">Try Ask CAYMC — type a question, or switch to the Floor Navigator to find any office visually.</p>
+      <p class="section-sub">Type a question, use your voice, or explore the 3D tower — the AI guides you to exactly the right office.</p>
     </div>
 
     <!-- Tab Bar -->
@@ -138,222 +991,235 @@
         Ask CAYMC — AI Companion
       </button>
       <button class="ai-tab-btn" data-panel="floor-panel">
-        <i data-lucide="map"></i>
-        Interactive Floor Navigator
+        <i data-lucide="layers"></i>
+        3D Floor Navigator
       </button>
     </div>
 
-    <!-- ─── PANEL 1: ASK CAYMC CHATBOT ─── -->
+    <!-- ─── PANEL 1: CHATBOT ─── -->
     <div class="ai-panel" id="caymc-panel">
-      <div class="chat-wrap">
-        <!-- Chat Window -->
-        <div class="chat-window" id="chatMessages" role="log" aria-live="polite" aria-label="CAYMC AI conversation">
-          <!-- Welcome message rendered by JS, but provide a static fallback -->
-          <div class="chat-msg-wrap bot-wrap">
-            <div class="chat-bubble bot">
-              <span class="chat-msg-bot-label">Ask CAYMC</span>
-              Hello and welcome to the Coleman A. Young Municipal Center. I'm Ask CAYMC — your intelligent building companion. I can help you find any office or department, answer questions about services, provide building hours, guide you through processes, and much more.<br><br>What brings you to CAYMC today?
-              <span class="chat-time">Just now</span>
-            </div>
-          </div>
-        </div>
+      <div class="chat-layout">
 
-        <!-- Suggestion Chips -->
-        <div class="chat-suggestions" id="chatSuggestions">
-          <button class="suggestion-btn" data-q="How do I pay my property taxes?">Pay property taxes</button>
-          <button class="suggestion-btn" data-q="Where is the Mayor's office?">Mayor's Office</button>
-          <button class="suggestion-btn" data-q="What are the building hours?">Building hours</button>
-          <button class="suggestion-btn" data-q="Where can I get a parking ticket dismissed?">Parking ticket</button>
-          <button class="suggestion-btn" data-q="I need a copy of my birth certificate">Birth certificate</button>
-          <button class="suggestion-btn" data-q="Where is the Wayne County Treasurer?">County Treasurer</button>
-        </div>
-
-        <!-- Input -->
-        <div class="chat-input-row">
-          <input
-            type="text"
-            id="chatInput"
-            class="chat-input"
-            placeholder="Ask about any department, service, or office…"
-            autocomplete="off"
-            aria-label="Chat input"
-            maxlength="500"
-          >
-          <button id="chatSend" class="chat-send-btn" aria-label="Send message">
-            <i data-lucide="send"></i>
-          </button>
-        </div>
-        <p class="chat-disclaimer">Ask CAYMC is an AI demo. For official matters, always confirm with the relevant department directly.</p>
-      </div>
-
-      <!-- Chatbot Info Panel -->
-      <div class="chat-info-panel">
-        <div class="chat-info-header">
-          <div class="chat-info-avatar">
-            <img src="images/dwjba-logo.jpg" alt="CAYMC AI" width="48" height="48">
-          </div>
-          <div>
-            <h3>Ask CAYMC</h3>
-            <p class="chat-info-status"><span class="status-dot"></span> Online — AI Active</p>
-          </div>
-        </div>
-        <div class="chat-info-capabilities">
-          <h4>I can help you with:</h4>
-          <ul>
-            <li><i data-lucide="check"></i> Find any office or department</li>
-            <li><i data-lucide="check"></i> Building hours and access</li>
-            <li><i data-lucide="check"></i> Payment services and permits</li>
-            <li><i data-lucide="check"></i> Court schedules and procedures</li>
-            <li><i data-lucide="check"></i> Parking and transportation</li>
-            <li><i data-lucide="check"></i> Accessibility services</li>
-            <li><i data-lucide="check"></i> History of CAYMC</li>
-            <li><i data-lucide="check"></i> Spirit of Detroit information</li>
-            <li><i data-lucide="check"></i> DWJBA leadership and governance</li>
-            <li><i data-lucide="check"></i> Procurement opportunities</li>
-          </ul>
-        </div>
-        <div class="chat-info-contact">
-          <p>Need to speak to someone directly?</p>
-          <a href="tel:3133092300" class="btn-ghost btn-sm"><i data-lucide="phone"></i> (313) 309-2300</a>
-          <a href="contact.html" class="btn-ghost btn-sm"><i data-lucide="mail"></i> Send Message</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ─── PANEL 2: FLOOR NAVIGATOR ─── -->
-    <div class="ai-panel" id="floor-panel" style="display:none">
-      <div class="floor-wrap">
-
-        <!-- Search + Need Chips -->
-        <div class="floor-search-col">
-          <div class="floor-search-header">
-            <h3>Find Your Office</h3>
-            <p>Describe what you need in plain language, or select a common need below. The map will highlight the right floor and office.</p>
-          </div>
-
-          <div class="floor-search-bar">
-            <i data-lucide="search" class="floor-search-icon"></i>
-            <input
-              type="text"
-              id="floorSearch"
-              class="floor-search-input"
-              placeholder="e.g. pay property taxes, get a permit..."
-              autocomplete="off"
-              maxlength="200"
-            >
-          </div>
-
-          <div class="floor-need-chips">
-            <p class="floor-need-label">Common needs:</p>
-            <button class="floor-need-chip" data-need="property taxes">Property Taxes</button>
-            <button class="floor-need-chip" data-need="parking ticket">Parking Ticket</button>
-            <button class="floor-need-chip" data-need="birth certificate">Birth Certificate</button>
-            <button class="floor-need-chip" data-need="court hearing">Court Hearing</button>
-            <button class="floor-need-chip" data-need="business license">Business License</button>
-            <button class="floor-need-chip" data-need="mayor office">Mayor's Office</button>
-            <button class="floor-need-chip" data-need="voter registration">Voter Registration</button>
-            <button class="floor-need-chip" data-need="building permit">Building Permit</button>
-          </div>
-
-          <!-- Detail Panel -->
-          <div class="floor-detail" id="floorDetail">
-            <div class="floor-detail-header">
-              <div class="floor-detail-num-badge" id="floorDetailNum">—</div>
+        <!-- Chat main -->
+        <div class="chat-main">
+          <div class="chat-header-bar">
+            <div class="chat-header-left">
+              <div class="chat-avatar-wrap">
+                <img src="images/dwjba-logo.jpg" alt="CAYMC AI" class="chat-avatar-img">
+                <div class="chat-avatar-dot"></div>
+              </div>
               <div>
-                <div class="floor-detail-tower" id="floorDetailTower">Select a floor or need above</div>
+                <div class="chat-header-name">Ask CAYMC</div>
+                <div class="chat-header-status">AI Building Companion &middot; Online</div>
               </div>
             </div>
-            <div class="floor-detail-body" id="floorDetailBody">
-              <p>Use the search above or tap a common need to see office details, including location, phone number, and hours.</p>
+            <div class="chat-header-right">
+              <button class="chat-hdr-btn" id="clearChatBtn" title="New conversation">
+                <i data-lucide="refresh-cw"></i>
+              </button>
+              <button class="chat-hdr-btn" title="About CAYMC AI">
+                <i data-lucide="info"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="chat-window" id="chatMessages" role="log" aria-live="polite" aria-label="CAYMC AI conversation"></div>
+
+          <div class="quick-chips-wrap" id="quickChips"></div>
+
+          <div class="chat-input-area">
+            <div class="chat-input-row">
+              <button class="voice-btn" id="voiceBtn" title="Voice input" aria-label="Voice input">
+                <i data-lucide="mic"></i>
+              </button>
+              <input
+                type="text"
+                id="chatInput"
+                class="chat-input"
+                placeholder="Ask about any department, service, or office…"
+                autocomplete="off"
+                aria-label="Chat input"
+                maxlength="500"
+              >
+              <button id="chatSend" class="chat-send-btn" aria-label="Send">
+                <i data-lucide="send"></i>
+              </button>
+            </div>
+            <div class="chat-input-footer">
+              <p class="chat-disclaimer">Ask CAYMC is an AI demo. Always confirm with the department directly for official matters.</p>
+              <span class="char-counter" id="charCounter">0/500</span>
             </div>
           </div>
         </div>
 
-        <!-- SVG Floor Map -->
-        <div class="floor-map-col">
-          <div class="floor-map-header">
-            <div class="floor-tower-tabs">
-              <button class="floor-tower-tab active" data-tower="admin" id="adminTowerTab">
-                <i data-lucide="building-2"></i> Administration Tower
-              </button>
-              <button class="floor-tower-tab" data-tower="courts" id="courtsTowerTab">
-                <i data-lucide="scale"></i> Courts Tower
-              </button>
+        <!-- Right sidebar -->
+        <aside class="chat-info-sidebar">
+
+          <div class="info-card">
+            <div class="info-card-title">AI Agent</div>
+            <div class="agent-avatar-wrap"><img src="images/dwjba-logo.jpg" alt="CAYMC AI"></div>
+            <div class="agent-name">Ask CAYMC</div>
+            <div class="agent-online"><span class="status-dot"></span> Online — AI Active</div>
+            <div class="agent-version">DWJBA Intelligence System v2.0</div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-title">Currently Discussing</div>
+            <span class="topic-badge" id="currentTopicBadge">
+              <i data-lucide="message-circle" style="width:11px;height:11px;"></i>
+              General Inquiry
+            </span>
+            <div class="conv-stats">
+              <div class="conv-stat">
+                <div class="conv-stat-num" id="statMessages">0</div>
+                <div class="conv-stat-label">Messages sent</div>
+              </div>
+              <div class="conv-stat">
+                <div class="conv-stat-num" id="statTopics">0</div>
+                <div class="conv-stat-label">Topics covered</div>
+              </div>
+            </div>
+            <button class="new-chat-btn" id="newChatBtn">
+              <i data-lucide="plus"></i> Start New Conversation
+            </button>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-title">I Can Help With</div>
+            <div class="cap-list">
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>Find any office or department</div>
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>Building hours and access</div>
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>Payments, permits &amp; licenses</div>
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>Court schedules &amp; procedures</div>
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>Marriage, passport &amp; vital records</div>
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>Child support &amp; family services</div>
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>SNAP, housing &amp; social services</div>
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>Deed recording &amp; name change</div>
+              <div class="cap-item"><div class="cap-check"><i data-lucide="check" style="width:9px;height:9px;"></i></div>Juror info &amp; notary services</div>
             </div>
           </div>
 
-          <svg
-            id="floorMapSvg"
-            class="floor-map-svg"
-            viewBox="0 0 260 520"
-            xmlns="http://www.w3.org/2000/svg"
-            role="img"
-            aria-label="Interactive floor map of Coleman A. Young Municipal Center"
-          >
-            <!-- ADMIN TOWER FLOORS (14 floors, each 30px tall) -->
-            <!-- Floor 14 (top) -->
-            <rect class="floor-rect" data-floor="14" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="10" width="200" height="28" rx="3"/>
-            <text x="130" y="29" class="floor-label" text-anchor="middle">14 — Executive</text>
-            <!-- Floor 13 -->
-            <rect class="floor-rect" data-floor="13" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="42" width="200" height="28" rx="3"/>
-            <text x="130" y="61" class="floor-label" text-anchor="middle">13 — City Council / DWJBA</text>
-            <!-- Floor 12 -->
-            <rect class="floor-rect" data-floor="12" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="74" width="200" height="28" rx="3"/>
-            <text x="130" y="93" class="floor-label" text-anchor="middle">12 — City Admin</text>
-            <!-- Floor 11 -->
-            <rect class="floor-rect" data-floor="11" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="106" width="200" height="28" rx="3"/>
-            <text x="130" y="125" class="floor-label" text-anchor="middle">11 — Mayor's Office</text>
-            <!-- Floor 10 -->
-            <rect class="floor-rect" data-floor="10" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="138" width="200" height="28" rx="3"/>
-            <text x="130" y="157" class="floor-label" text-anchor="middle">10 — Law Dept.</text>
-            <!-- Floor 9 -->
-            <rect class="floor-rect" data-floor="9" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="170" width="200" height="28" rx="3"/>
-            <text x="130" y="189" class="floor-label" text-anchor="middle">9 — Budget / Law</text>
-            <!-- Floor 8 -->
-            <rect class="floor-rect" data-floor="8" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="202" width="200" height="28" rx="3"/>
-            <text x="130" y="221" class="floor-label" text-anchor="middle">8 — City Departments</text>
-            <!-- Floor 7 -->
-            <rect class="floor-rect" data-floor="7" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="234" width="200" height="28" rx="3"/>
-            <text x="130" y="253" class="floor-label" text-anchor="middle">7 — Planning &amp; Dev.</text>
-            <!-- Floor 6 -->
-            <rect class="floor-rect" data-floor="6" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="266" width="200" height="28" rx="3"/>
-            <text x="130" y="285" class="floor-label" text-anchor="middle">6 — City Depts.</text>
-            <!-- Floor 5 -->
-            <rect class="floor-rect" data-floor="5" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="298" width="200" height="28" rx="3"/>
-            <text x="130" y="317" class="floor-label" text-anchor="middle">5 — Finance / HR</text>
-            <!-- Floor 4 -->
-            <rect class="floor-rect" data-floor="4" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="330" width="200" height="28" rx="3"/>
-            <text x="130" y="349" class="floor-label" text-anchor="middle">4 — BSEED / Permits</text>
-            <!-- Floor 3 -->
-            <rect class="floor-rect" data-floor="3" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="362" width="200" height="28" rx="3"/>
-            <text x="130" y="381" class="floor-label" text-anchor="middle">3 — Treasurer / County</text>
-            <!-- Floor 2 -->
-            <rect class="floor-rect" data-floor="2" data-tower="admin" data-default-fill="#e8cdb8" x="30" y="394" width="200" height="28" rx="3"/>
-            <text x="130" y="413" class="floor-label" text-anchor="middle">2 — Services</text>
-            <!-- Floor 1 (Ground) -->
-            <rect class="floor-rect" data-floor="1" data-tower="admin" data-default-fill="#d0e8cc" x="30" y="426" width="200" height="28" rx="3"/>
-            <text x="130" y="445" class="floor-label" text-anchor="middle">1 — Lobby / Info / Security</text>
-            <!-- Ground indicator -->
-            <rect x="30" y="458" width="200" height="4" fill="#3d1a0a" rx="1"/>
-            <text x="130" y="478" class="floor-label floor-label-ground" text-anchor="middle">GROUND LEVEL — WOODWARD AVE</text>
-            <!-- Tower label -->
-            <text x="130" y="508" class="floor-label floor-tower-label" text-anchor="middle">ADMINISTRATION TOWER (14 Floors)</text>
-          </svg>
+          <div class="info-card">
+            <div class="info-card-title">Speak to Someone</div>
+            <div class="mini-contact">
+              <a href="tel:3133092300" class="mini-contact-item"><i data-lucide="phone"></i>(313) 309-2300</a>
+              <a href="tel:3132243540" class="mini-contact-item"><i data-lucide="phone"></i>(313) 224-3540 Building</a>
+              <a href="mailto:info@dwjba.com" class="mini-contact-item"><i data-lucide="mail"></i>info@dwjba.com</a>
+              <a href="contact.html" class="mini-contact-item"><i data-lucide="external-link"></i>Send a Message</a>
+            </div>
+          </div>
 
-          <div class="floor-map-legend">
-            <span class="legend-item legend-default"><span class="legend-swatch"></span>Available</span>
-            <span class="legend-item legend-highlighted"><span class="legend-swatch legend-swatch-hl"></span>Your Destination</span>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ─── PANEL 2: 3D FLOOR NAVIGATOR ─── -->
+    <div class="ai-panel" id="floor-panel" style="display:none">
+      <div class="floor-nav-layout">
+
+        <!-- Control header -->
+        <div class="floor-nav-header">
+          <span class="floor-nav-header-label">Tower</span>
+          <div class="tower-selector">
+            <button class="tower-tab active" data-tower="admin" id="adminTowerTab">
+              <i data-lucide="building-2"></i>Administration (14F)
+            </button>
+            <button class="tower-tab" data-tower="courts" id="courtsTowerTab">
+              <i data-lucide="scale"></i>Courts (20F)
+            </button>
+          </div>
+          <div class="floor-search-inline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="floorSearch" placeholder="Search a service or department…" autocomplete="off">
+          </div>
+        </div>
+
+        <!-- 3D body: isometric stage + right column -->
+        <div class="floor-3d-body">
+
+          <!-- Isometric 3D stage -->
+          <div class="iso-stage-wrap">
+            <div class="iso-stage-label">
+              CAYMC — 3D Building Visualization
+              <span class="iso-tower-name" id="isoTowerName">ADMINISTRATION TOWER</span>
+            </div>
+            <div class="iso-scene" id="isoScene">
+              <div class="iso-building" id="isoBuilding">
+                <!-- Floor slabs rendered by JS -->
+              </div>
+              <!-- Floating tooltip -->
+              <div class="iso-tooltip" id="isoTooltip">
+                <div class="iso-tooltip-floor" id="isoTooltipFloor"></div>
+                <div class="iso-tooltip-dept" id="isoTooltipDept"></div>
+              </div>
+            </div>
+            <div class="iso-stage-footer">
+              <div class="iso-legend-item"><div class="iso-swatch iso-swatch-standard"></div>Standard floor</div>
+              <div class="iso-legend-item"><div class="iso-swatch iso-swatch-lobby"></div>Lobby / Public</div>
+              <div class="iso-legend-item"><div class="iso-swatch iso-swatch-active"></div>Your destination</div>
+              <div class="iso-instructions">
+                <i data-lucide="mouse-pointer-click" style="width:11px;height:11px;"></i>
+                Click any slab to navigate
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column: chips + result card -->
+          <div class="floor-right-col">
+
+            <div class="floor-chips-card">
+              <h3>Find Your Office</h3>
+              <p>Search or tap a common need — the 3D tower will highlight your destination floor.</p>
+              <div class="need-chips-label">Common needs</div>
+              <div class="need-chips" id="needChips">
+                <button class="need-chip" data-need="property taxes">Property Taxes</button>
+                <button class="need-chip" data-need="parking ticket">Parking Ticket</button>
+                <button class="need-chip" data-need="birth certificate">Birth Certificate</button>
+                <button class="need-chip" data-need="marriage license">Marriage License</button>
+                <button class="need-chip" data-need="court hearing">Court Hearing</button>
+                <button class="need-chip" data-need="building permit">Building Permit</button>
+                <button class="need-chip" data-need="mayor office">Mayor's Office</button>
+                <button class="need-chip" data-need="voter registration">Voter Registration</button>
+                <button class="need-chip" data-need="child support">Child Support</button>
+                <button class="need-chip" data-need="passport">Passport</button>
+                <button class="need-chip" data-need="small claims">Small Claims</button>
+                <button class="need-chip" data-need="deed recording">Deed Recording</button>
+                <button class="need-chip" data-need="snap food stamps">SNAP / Food Stamps</button>
+                <button class="need-chip" data-need="eviction">Eviction / Housing</button>
+                <button class="need-chip" data-need="name change">Name Change</button>
+                <button class="need-chip" data-need="notary">Notary Services</button>
+              </div>
+            </div>
+
+            <div class="nav-result-card" id="navResultCard">
+              <div class="nav-result-badge">
+                <i data-lucide="navigation" style="width:10px;height:10px;"></i>
+                NAVIGATION RESULT
+              </div>
+              <div class="nav-result-main">
+                <div class="nav-floor-num" id="navFloorNum">—</div>
+                <div class="nav-result-info">
+                  <div class="nav-floor-label" id="navFloorLabel">Administration Tower</div>
+                  <div class="nav-dept-name" id="navDeptName">—</div>
+                  <div class="nav-room-label" id="navRoomLabel"></div>
+                </div>
+              </div>
+              <div class="nav-details" id="navDetails"></div>
+              <button class="nav-directions-btn">
+                <i data-lucide="map-pin"></i>Get Directions to This Office
+              </button>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
-    <!-- end panels -->
 
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     AI TECHNOLOGY OVERVIEW
+     TECHNOLOGY OVERVIEW
 ═══════════════════════════════════════════════════ -->
 <section class="section section-alt ai-tech-overview">
   <div class="wrap">
@@ -366,12 +1232,12 @@
       <div class="ai-tech-card reveal">
         <i data-lucide="brain"></i>
         <h3>Purpose-Built Knowledge Base</h3>
-        <p>Unlike generic AI assistants, Ask CAYMC has been trained with comprehensive, verified information about every department, office, procedure, and service in the building — with real phone numbers, accurate floor locations, and current hours.</p>
+        <p>Unlike generic AI assistants, Ask CAYMC is trained with comprehensive, verified information about every department, office, procedure, and service — with real phone numbers, accurate floor locations, and current hours.</p>
       </div>
       <div class="ai-tech-card reveal reveal-delay-1">
-        <i data-lucide="map-pin"></i>
-        <h3>Spatial Floor Intelligence</h3>
-        <p>The Interactive Floor Navigator uses spatial reasoning to interpret plain-language requests and translate them into precise physical locations — showing you exactly which floor and office to visit, not just telling you.</p>
+        <i data-lucide="layers"></i>
+        <h3>Cinematic 3D Navigation</h3>
+        <p>The 3D isometric tower visualizes the entire building in real time. Search your need and watch the exact floor slab illuminate, separate from the stack, and deliver a precise navigation card — no map reading required.</p>
       </div>
       <div class="ai-tech-card reveal reveal-delay-2">
         <i data-lucide="shield-check"></i>
@@ -383,32 +1249,22 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════
-     CTA: FULL IMPLEMENTATION
+     CTA
 ═══════════════════════════════════════════════════ -->
 <section class="section ai-cta-section">
   <div class="wrap ai-cta-inner reveal">
-    <div class="ai-cta-content">
-      <p class="section-kicker section-kicker-lt">Ready to Deploy</p>
-      <h2>Transform Civic Service at CAYMC</h2>
-      <p>This is just the demonstration. The full Ask CAYMC deployment includes voice interface, real-time database integration, multi-language support, and a 24/7 citizen service portal — reducing call center volume and improving the experience for every visitor.</p>
-      <div class="ai-cta-stats">
-        <div class="ai-cta-stat">
-          <span class="ai-cta-stat-num">70%</span>
-          <span class="ai-cta-stat-label">Reduction in "Where is...?" calls</span>
-        </div>
-        <div class="ai-cta-stat">
-          <span class="ai-cta-stat-num">&lt; 2s</span>
-          <span class="ai-cta-stat-label">Average response time</span>
-        </div>
-        <div class="ai-cta-stat">
-          <span class="ai-cta-stat-num">24/7</span>
-          <span class="ai-cta-stat-label">Availability</span>
-        </div>
-      </div>
-      <div class="ai-cta-actions">
-        <a href="contact.html" class="btn-primary">Contact DWJBA About Full Deployment</a>
-        <a href="index.html" class="btn-outline">Back to Home</a>
-      </div>
+    <p class="section-kicker section-kicker-lt">Ready to Deploy</p>
+    <h2>Transform Civic Service at CAYMC</h2>
+    <p>This is just the demonstration. The full Ask CAYMC deployment includes voice interface, real-time database integration, multi-language support, and a 24/7 citizen service portal — reducing call center volume and improving the experience for every visitor.</p>
+    <div class="ai-cta-stats">
+      <div class="ai-cta-stat"><span class="ai-cta-stat-num">70%</span><span class="ai-cta-stat-label">Reduction in "Where is…?" calls</span></div>
+      <div class="ai-cta-stat"><span class="ai-cta-stat-num">&lt; 2s</span><span class="ai-cta-stat-label">Average response time</span></div>
+      <div class="ai-cta-stat"><span class="ai-cta-stat-num">24/7</span><span class="ai-cta-stat-label">Availability</span></div>
+      <div class="ai-cta-stat"><span class="ai-cta-stat-num">25+</span><span class="ai-cta-stat-label">Service topics</span></div>
+    </div>
+    <div class="ai-cta-actions">
+      <a href="contact.html" class="btn-primary">Contact DWJBA About Full Deployment</a>
+      <a href="index.html" class="btn-outline">Back to Home</a>
     </div>
   </div>
 </section>
