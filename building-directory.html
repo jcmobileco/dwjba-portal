@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Directory — CAYMC | DWJBA</title>
+  <meta name="description" content="Interactive Building Directory for the Coleman A. Young Municipal Center. Find any office, department, or service across both towers." />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script src="main.js" defer></script>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f9f7f4; color: #1a0d06; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Design Tokens ────────────────────────────────────────── */
+    :root {
+      --brown:        #3d1a08;
+      --green:        #3d6b52;
+      --tan:          #c4956a;
+      --cream:        #f5ede0;
+      --zinc-950:     #0c0c0e;
+      --zinc-900:     #18181b;
+      --zinc-800:     #27272a;
+      --zinc-600:     #52525b;
+      --zinc-500:     #71717a;
+      --zinc-200:     #e4e4e7;
+      --zinc-100:     #f4f4f5;
+      --zinc-50:      #fafafa;
+      --stone-50:     #fafaf9;
+      --border:       #e2d9cc;
+      --fg:           #1a0d06;
+      --muted:        #6b5a4a;
+      --slate-accent: #5c3a22;
+      --section-alt:  #f0e8dc;
+      --gold:         #c9881a;
+      --gold-light:   #f5c842;
+    }
+
+    /* ── Shared Utilities ─────────────────────────────────────── */
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+    @media (min-width:640px)  { .wrap { padding: 0 1.5rem; } }
+    @media (min-width:1024px) { .wrap { padding: 0 2rem; } }
+
+    .eyebrow {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--zinc-500);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       TOP BAR
+    ════════════════════════════════════════════════════════ */
+    .topbar { background: var(--zinc-950); color: white; font-size: 11px; }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: .45rem 1rem; max-width: 1280px; margin: 0 auto;
+    }
+    @media (min-width:640px)  { .topbar-inner { padding-left:1.5rem; padding-right:1.5rem; } }
+    @media (min-width:1024px) { .topbar-inner { padding-left:2rem; padding-right:2rem; } }
+    .topbar-left { display:flex; align-items:center; gap:1.1rem; color:rgba(255,255,255,.75); }
+    .topbar-left a { display:flex; align-items:center; gap:5px; transition:color .2s; }
+    .topbar-left a:hover { color:white; }
+    .topbar-left svg { width:11px; height:11px; color:rgba(255,255,255,.4); flex-shrink:0; }
+    .tb-address { display:none; align-items:center; gap:5px; }
+    @media (min-width:1024px){ .tb-address { display:flex; } }
+    .topbar-right { display:flex; align-items:center; gap:2px; color:rgba(255,255,255,.55); }
+    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.35); }
+    @media (min-width:640px){ .tb-connect { display:block; } }
+    .topbar-right a { padding:3px 7px; border-radius:4px; font-weight:600; transition:color .15s, background .15s; }
+    .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
+
+    /* ════════════════════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════════════════════ */
+    .site-header {
+      background: #ffffff; position: sticky; top: 0; z-index: 500;
+      border-bottom: 1px solid #e2d9cc; transition: box-shadow .3s;
+    }
+    .site-header.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.10); }
+    .header-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 1rem;
+      display: flex; align-items: center; height: 80px; position: relative;
+    }
+    @media (min-width:640px)  { .header-inner { padding:0 1.5rem; } }
+    @media (min-width:1024px) { .header-inner { padding:0 2rem; } }
+    .nav-left, .nav-right { display:none; align-items:center; gap:1px; flex:1; }
+    @media (min-width:1280px){ .nav-left,.nav-right { display:flex; } }
+    .nav-right { justify-content:flex-end; }
+    .nav-logo { position:absolute; left:50%; transform:translateX(-50%); }
+    @media (min-width:1280px){ .nav-logo { position:relative; left:auto; transform:none; flex-shrink:0; } }
+    .nav-logo img { height:64px; width:64px; object-fit:contain; display:block; }
+    .nav-item { position:relative; }
+    .nav-btn {
+      display:flex; align-items:center; gap:2px; padding:7px 9px;
+      font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em;
+      color:#2c2420; border-radius:5px; white-space:nowrap; cursor:default;
+      transition:color .15s; background:none; border:none; font-family:inherit;
+    }
+    .nav-btn svg { width:11px; height:11px; transition:transform .2s; }
+    .nav-item:hover .nav-btn { color: var(--brown); }
+    .nav-item:hover .nav-btn svg { transform:rotate(180deg); }
+    .nav-drop {
+      display:none; position:absolute; top:calc(100% + 4px); left:0;
+      z-index:600; min-width:210px;
+    }
+    .nav-item:hover .nav-drop { display:block; }
+    .nav-drop-inner {
+      background:white; border:1px solid var(--border); border-radius:12px;
+      box-shadow:0 12px 40px rgba(0,0,0,.18); overflow:hidden;
+    }
+    .nav-drop-inner a {
+      display:block; padding:10px 16px; font-size:14px; font-weight:500;
+      color:rgba(26,13,6,.8); transition:background .12s;
+    }
+    .nav-drop-inner a:hover { background: var(--zinc-50); }
+    .nav-search {
+      margin-left:.4rem; padding:7px; color:#2c2420; border-radius:7px;
+      background:none; border:none; cursor:pointer; display:flex; align-items:center;
+      transition:color .15s;
+    }
+    .nav-search:hover { color: var(--brown); }
+    .nav-search svg { width:15px; height:15px; }
+    .mob-controls { display:flex; align-items:center; gap:.4rem; margin-left:auto; }
+    @media (min-width:1280px){ .mob-controls { display:none; } }
+    .mob-controls button {
+      padding:7px; color:#2c2420; border-radius:7px;
+      background:none; border:none; cursor:pointer; transition:color .15s;
+    }
+    .mob-controls button:hover { color: var(--brown); }
+    .mob-controls button svg { width:18px; height:18px; display:block; }
+    .mob-nav {
+      position:fixed; top:0; right:0; bottom:0; width:300px; background:white;
+      z-index:700; overflow-y:auto; transform:translateX(100%);
+      transition:transform .3s ease; box-shadow:-4px 0 30px rgba(0,0,0,.2);
+    }
+    .mob-nav.open { transform:translateX(0); }
+    .mob-nav-head {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.25rem 1.5rem; background:var(--brown); color:white;
+    }
+    .mob-nav-head span { font-size:14px; font-weight:700; }
+    .mob-nav-head button { color:white; background:none; border:none; cursor:pointer; }
+    .mob-nav-head button svg { width:20px; height:20px; display:block; }
+    .mob-nav-body { padding:.75rem 0; }
+    .mob-group { border-bottom:1px solid var(--border); padding:.4rem 0; }
+    .mob-label { display:block; padding:.55rem 1.5rem; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--brown); }
+    .mob-link { display:block; padding:.45rem 1.5rem .45rem 2rem; font-size:14px; color:var(--fg); transition:background .12s; }
+    .mob-link:hover { background:var(--section-alt); }
+    .scrim { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:650; }
+    .scrim.visible { display:block; }
+
+    /* ════════════════════════════════════════════════════════
+       HERO — Directory
+    ════════════════════════════════════════════════════════ */
+    .dir-hero {
+      background: linear-gradient(135deg, #2a1105 0%, #3d1a08 40%, #2d4a38 100%);
+      padding: 4.5rem 0 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .dir-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(61,107,82,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 15% 30%, rgba(196,149,106,0.12) 0%, transparent 60%);
+    }
+    .dir-hero-inner {
+      position: relative; z-index: 2;
+      text-align: center;
+    }
+    .dir-hero-eyebrow {
+      display: inline-block;
+      font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--tan); margin-bottom: 1rem;
+    }
+    .dir-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 700; color: #fff; line-height: 1.1;
+      letter-spacing: -.01em; margin-bottom: 1.1rem;
+    }
+    .dir-hero-sub {
+      font-size: clamp(.9rem, 1.5vw, 1.05rem); color: rgba(255,255,255,.75);
+      max-width: 560px; margin: 0 auto; line-height: 1.7;
+    }
+    .dir-hero-badges {
+      display: flex; align-items: center; justify-content: center;
+      gap: .6rem; margin-top: 1.75rem; flex-wrap: wrap;
+    }
+    .dir-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .35rem .85rem; border-radius: 100px;
+      font-size: 11px; font-weight: 600; letter-spacing: .04em;
+      background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.85);
+    }
+    .dir-badge svg { width: 11px; height: 11px; }
+
+    /* ════════════════════════════════════════════════════════
+       MAIN DIRECTORY SECTION
+    ════════════════════════════════════════════════════════ */
+    .dir-main {
+      padding: 3rem 0 4rem;
+      background: #f9f7f4;
+    }
+    .dir-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      .dir-layout {
+        grid-template-columns: 55% 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       3D BUILDING — Left Column
+    ════════════════════════════════════════════════════════ */
+    .building-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .building-labels {
+      display: flex;
+      gap: 1rem;
+      padding: 0 1rem;
+    }
+    .tower-label {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: .5rem 0;
+    }
+    .tower-label.active-label { color: var(--brown); }
+    .tower-label-sub {
+      display: block;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      color: var(--muted);
+      margin-top: 2px;
+      opacity: .7;
+    }
+
+    .building-scene-wrap {
+      background: linear-gradient(160deg, #e8f4ed 0%, #d4edd9 30%, #b8d4c0 60%, #95b89f 100%);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(0,0,0,.10);
+      padding: 2rem 1rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* Grass ground */
+    .building-scene-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to top, #3d6b52 0%, #4a7d5f 40%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Sky subtle gradient */
+    .building-scene-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, rgba(200,220,230,.3) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .ground-label {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.85);
+      background: rgba(0,0,0,.3);
+      padding: .2rem .8rem;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    /* 3D Scene Container */
+    .building-scene {
+      perspective: 1400px;
+      perspective-origin: 50% 35%;
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 60px;
+    }
+    .building-model {
+      transform-style: preserve-3d;
+      transform: rotateX(-16deg) rotateY(-22deg);
+      animation: buildingFloat 5s ease-in-out infinite;
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+    }
+    @keyframes buildingFloat {
+      0%, 100% { transform: rotateX(-16deg) rotateY(-22deg) translateY(0); }
+      50%       { transform: rotateX(-16deg) rotateY(-22deg) translateY(-6px); }
+    }
+
+    /* Tower wrappers */
+    .tower {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    /* Each floor slab — CSS 3D box */
+    .floor-slab {
+      position: relative;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), filter .2s;
+    }
+    .floor-slab:hover {
+      filter: brightness(1.08);
+    }
+    .floor-slab.selected {
+      transform: translateZ(28px) translateY(-4px);
+      filter: brightness(1.15);
+    }
+
+    /* Slab faces */
+    .slab-front, .slab-top, .slab-right {
+      position: absolute;
+      background: #d4c8b0;
+    }
+
+    /* Front face */
+    .slab-front {
+      width: 100%;
+      height: 100%;
+      transform-origin: top;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 6px;
+      overflow: hidden;
+      /* Window grid pattern */
+      background-image:
+        repeating-linear-gradient(90deg,
+          rgba(61,26,8,.07) 0px, rgba(61,26,8,.07) 1px,
+          transparent 1px, transparent 22px),
+        repeating-linear-gradient(0deg,
+          rgba(61,26,8,.06) 0px, rgba(61,26,8,.06) 1px,
+          transparent 1px, transparent 10px);
+      background-color: #cfc3a8;
+      border-top: 1px solid rgba(255,255,255,.5);
+      border-left: 1px solid rgba(255,255,255,.25);
+    }
+    .slab-front.lobby-floor {
+      background-color: #b8a88a;
+      background-image:
+        repeating-linear-gradient(90deg,
+          rgba(61,26,8,.10) 0px, rgba(61,26,8,.10) 1px,
+          transparent 1px, transparent 18px),
+        repeating-linear-gradient(0deg,
+          rgba(61,26,8,.08) 0px, rgba(61,26,8,.08) 1px,
+          transparent 1px, transparent 10px);
+    }
+    .slab-front.exec-floor {
+      background-color: #c8b898;
+      background-image:
+        repeating-linear-gradient(90deg,
+          rgba(61,26,8,.09) 0px, rgba(61,26,8,.09) 1px,
+          transparent 1px, transparent 20px),
+        repeating-linear-gradient(0deg,
+          rgba(61,26,8,.07) 0px, rgba(61,26,8,.07) 1px,
+          transparent 1px, transparent 10px);
+    }
+
+    /* Top face */
+    .slab-top {
+      width: 100%;
+      transform-origin: top;
+      backface-visibility: hidden;
+      background: #e0d5be;
+      border-top: 1px solid rgba(255,255,255,.7);
+    }
+
+    /* Right side face */
+    .slab-right {
+      top: 0;
+      transform-origin: right;
+      backface-visibility: hidden;
+      background: #b8ad98;
+      background-image:
+        repeating-linear-gradient(0deg,
+          rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 1px,
+          transparent 1px, transparent 10px);
+    }
+
+    /* Selected state — warm amber glow */
+    .floor-slab.selected .slab-front {
+      background-color: #d4a050 !important;
+      background-image:
+        repeating-linear-gradient(90deg,
+          rgba(255,255,255,.2) 0px, rgba(255,255,255,.2) 1px,
+          transparent 1px, transparent 22px),
+        repeating-linear-gradient(0deg,
+          rgba(255,255,255,.15) 0px, rgba(255,255,255,.15) 1px,
+          transparent 1px, transparent 10px) !important;
+      box-shadow: inset 0 0 0 2px #f5c842, 0 0 20px rgba(212,160,80,.5);
+    }
+    .floor-slab.selected .slab-top {
+      background: #e8b860 !important;
+    }
+    .floor-slab.selected .slab-right {
+      background: #c49040 !important;
+    }
+
+    /* Hover glow */
+    .floor-slab:hover .slab-front {
+      box-shadow: inset 0 0 0 1px rgba(212,160,80,.6), 0 0 10px rgba(212,160,80,.3);
+    }
+
+    /* Floor number on slab */
+    .slab-num {
+      font-size: 8px;
+      font-weight: 800;
+      color: rgba(61,26,8,.6);
+      letter-spacing: .04em;
+      line-height: 1;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 2;
+      position: relative;
+    }
+    .floor-slab.selected .slab-num {
+      color: rgba(255,255,255,.9);
+    }
+
+    /* Glass connector between towers */
+    .tower-connector {
+      width: 20px;
+      align-self: flex-end;
+      transform-style: preserve-3d;
+    }
+    .connector-piece {
+      width: 20px;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+    .connector-front {
+      width: 20px;
+      position: absolute;
+      background: linear-gradient(to bottom,
+        rgba(180,220,255,.35) 0%,
+        rgba(160,200,240,.5) 100%);
+      border-top: 1px solid rgba(255,255,255,.6);
+      border-left: 1px solid rgba(255,255,255,.3);
+      backdrop-filter: blur(2px);
+    }
+
+    /* Tooltip */
+    .slab-tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(26,13,6,.92);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: .35rem .7rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .15s;
+      z-index: 20;
+      box-shadow: 0 4px 16px rgba(0,0,0,.3);
+    }
+    .slab-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: rgba(26,13,6,.92);
+    }
+    .floor-slab:hover .slab-tooltip { opacity: 1; }
+
+    /* Tower base platform */
+    .tower-base {
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .base-front {
+      position: absolute;
+      background: #8a7d6b;
+    }
+    .base-top {
+      position: absolute;
+      background: #9e9080;
+    }
+    .base-right {
+      position: absolute;
+      background: #6e6358;
+    }
+
+    /* Legend */
+    .building-legend {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: .6rem 1rem;
+      background: rgba(255,255,255,.7);
+      border-radius: 100px;
+      position: relative;
+      z-index: 10;
+      margin-top: .5rem;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+    .legend-swatch {
+      width: 12px; height: 8px; border-radius: 2px;
+    }
+    .legend-swatch-std  { background: #cfc3a8; border: 1px solid #b8aa92; }
+    .legend-swatch-lob  { background: #b8a88a; border: 1px solid #a0967c; }
+    .legend-swatch-sel  { background: #d4a050; border: 1px solid #f5c842; }
+
+    /* Tower tabs */
+    .tower-tabs {
+      display: flex; gap: .5rem; padding: .5rem;
+      background: rgba(255,255,255,.7); border-radius: 12px;
+      position: relative; z-index: 10;
+    }
+    .tower-tab-btn {
+      flex: 1; padding: .5rem 1rem;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      border-radius: 8px; border: none; cursor: pointer;
+      background: transparent; color: var(--muted);
+      transition: all .2s;
+    }
+    .tower-tab-btn.active {
+      background: var(--brown); color: #fff;
+    }
+
+    /* Mobile building placeholder */
+    @media (max-width: 767px) {
+      .building-scene-wrap { min-height: 380px; }
+      .building-model { transform: rotateX(-12deg) rotateY(-18deg) scale(0.85); }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       RIGHT PANEL — Info
+    ════════════════════════════════════════════════════════ */
+    .panel-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: sticky;
+      top: 96px;
+    }
+
+    /* Search bar */
+    .dir-search-wrap {
+      position: relative;
+    }
+    .dir-search-wrap svg {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 16px; height: 16px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .dir-search {
+      width: 100%;
+      padding: .85rem 1rem .85rem 2.75rem;
+      font-size: .9rem; font-family: inherit;
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 12px; color: var(--fg);
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .dir-search:focus {
+      border-color: var(--brown);
+      box-shadow: 0 0 0 3px rgba(61,26,8,.08), 0 2px 8px rgba(0,0,0,.05);
+    }
+    .dir-search::placeholder { color: var(--muted); }
+    .search-results-list {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px); left: 0; right: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.12);
+      z-index: 100;
+      overflow: hidden;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+    .search-results-list.open { display: block; }
+    .search-result-item {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .65rem 1rem; cursor: pointer;
+      font-size: .875rem; transition: background .12s;
+      border-bottom: 1px solid var(--border);
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: var(--section-alt); }
+    .sri-floor { font-size: .75rem; font-weight: 700; color: var(--tan); min-width: 56px; }
+    .sri-dept { font-weight: 600; color: var(--fg); }
+    .sri-tower { font-size: .75rem; color: var(--muted); margin-left: auto; }
+
+    /* Tower toggle */
+    .tower-toggle {
+      display: flex;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .tower-toggle-btn {
+      flex: 1; padding: .7rem 1rem;
+      font-size: .8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      border: none; cursor: pointer; background: transparent;
+      color: var(--muted); transition: all .2s;
+      font-family: inherit;
+    }
+    .tower-toggle-btn.active {
+      background: var(--brown); color: #fff;
+    }
+
+    /* Quick need chips */
+    .chips-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .chips-title {
+      font-size: .8rem; font-weight: 700; color: var(--fg); margin-bottom: .3rem;
+    }
+    .chips-sub {
+      font-size: .75rem; color: var(--muted); line-height: 1.5; margin-bottom: .9rem;
+    }
+    .chips-label {
+      font-size: 9px; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .5rem;
+    }
+    .need-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .need-chip {
+      display: inline-flex; align-items: center;
+      padding: .3rem .7rem;
+      font-size: .75rem; font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: var(--cream); color: var(--fg);
+      cursor: pointer; transition: all .2s;
+      font-family: inherit;
+    }
+    .need-chip:hover {
+      background: var(--brown); color: #fff; border-color: var(--brown);
+    }
+    .need-chip.active {
+      background: var(--brown); color: #fff; border-color: var(--brown);
+    }
+
+    /* Navigation result card */
+    .nav-result {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      overflow: hidden;
+      display: none;
+    }
+    .nav-result.visible {
+      display: block;
+      animation: resultSlide .3s ease;
+    }
+    @keyframes resultSlide {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .nav-result-header {
+      background: var(--brown);
+      padding: 1.25rem 1.25rem .9rem;
+      color: #fff;
+    }
+    .nav-result-badge {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: 9px; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: rgba(255,255,255,.6);
+      margin-bottom: .6rem;
+    }
+    .nav-result-badge svg { width: 10px; height: 10px; }
+    .nav-result-main {
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .nav-floor-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 700; color: #fff;
+      line-height: 1; min-width: 64px;
+    }
+    .nav-floor-label {
+      font-size: .75rem; font-weight: 600;
+      color: rgba(255,255,255,.6); margin-bottom: .2rem;
+    }
+    .nav-dept-name {
+      font-size: 1rem; font-weight: 700; color: #fff;
+      line-height: 1.3; margin-bottom: .2rem;
+    }
+    .nav-room-label {
+      font-size: .8rem; color: rgba(255,255,255,.7);
+    }
+    .nav-result-body { padding: 1rem 1.25rem; }
+    .nav-detail-row {
+      display: flex; align-items: flex-start; gap: .6rem;
+      padding: .5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .85rem;
+    }
+    .nav-detail-row:last-child { border-bottom: none; }
+    .nav-detail-icon { width: 16px; height: 16px; color: var(--tan); flex-shrink: 0; margin-top: 2px; }
+    .nav-detail-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--muted); min-width: 56px;
+    }
+    .nav-detail-val { color: var(--fg); font-weight: 500; line-height: 1.45; }
+    .nav-services-list {
+      display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .3rem;
+    }
+    .nav-service-tag {
+      font-size: .7rem; padding: .2rem .55rem;
+      background: var(--cream); color: var(--fg);
+      border-radius: 100px; font-weight: 600;
+      border: 1px solid var(--border);
+    }
+    .nav-directions-btn {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      width: calc(100% - 2.5rem); margin: 0 1.25rem 1.25rem;
+      padding: .75rem 1rem;
+      background: var(--green); color: #fff;
+      font-size: .85rem; font-weight: 700;
+      border: none; border-radius: 10px; cursor: pointer;
+      font-family: inherit; transition: opacity .2s;
+    }
+    .nav-directions-btn:hover { opacity: .88; }
+    .nav-directions-btn svg { width: 14px; height: 14px; }
+
+    /* Empty state */
+    .nav-empty {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+    .nav-empty-icon {
+      width: 48px; height: 48px;
+      background: var(--cream);
+      border-radius: 50%; margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-empty-icon svg { width: 22px; height: 22px; color: var(--tan); }
+    .nav-empty h3 {
+      font-size: .95rem; font-weight: 700; color: var(--fg); margin-bottom: .4rem;
+    }
+    .nav-empty p {
+      font-size: .83rem; color: var(--muted); line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       TECHNOLOGY SECTION
+    ════════════════════════════════════════════════════════ */
+    .tech-section {
+      background: var(--cream);
+      padding: 5rem 0;
+    }
+    .tech-heading { margin-bottom: 2.5rem; }
+    .tech-kicker {
+      display: block;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--brown); margin-bottom: .5rem;
+    }
+    .tech-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--fg); margin-bottom: .75rem;
+    }
+    .tech-sub {
+      color: var(--muted); font-size: .95rem;
+      max-width: 520px; line-height: 1.7;
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    @media (max-width: 800px) { .tech-grid { grid-template-columns: 1fr; } }
+    .tech-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .tech-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+    .tech-card svg { width: 26px; height: 26px; color: var(--brown); margin-bottom: .9rem; }
+    .tech-card h3 { font-size: 1rem; font-weight: 600; color: var(--fg); margin-bottom: .5rem; }
+    .tech-card p { font-size: .875rem; color: var(--muted); line-height: 1.65; }
+
+    /* ════════════════════════════════════════════════════════
+       CTA SECTION
+    ════════════════════════════════════════════════════════ */
+    .cta-section { background: var(--green); padding: 5rem 0; }
+    .cta-inner { text-align: center; max-width: 760px; margin: 0 auto; }
+    .cta-kicker {
+      display: block;
+      font-size: .72rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: .5rem;
+    }
+    .cta-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: #fff; margin-bottom: 1rem;
+    }
+    .cta-p { color: rgba(255,255,255,.8); font-size: .95rem; line-height: 1.72; margin-bottom: 2.5rem; }
+    .cta-stats { display: flex; gap: 2rem; justify-content: center; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .cta-stat { text-align: center; }
+    .cta-stat-num {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; font-weight: 700; color: #fff;
+    }
+    .cta-stat-label { font-size: .77rem; color: rgba(255,255,255,.65); }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .cta-btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      padding: .8rem 1.75rem;
+      font-size: .875rem; font-weight: 700;
+      border-radius: .5rem;
+      background: #fff; color: var(--green);
+      border: none; cursor: pointer; font-family: inherit;
+      transition: opacity .2s;
+    }
+    .cta-btn-primary:hover { opacity: .92; }
+    .cta-btn-outline {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: .8rem 1.75rem;
+      font-size: .875rem; font-weight: 600;
+      border-radius: .5rem;
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,.3);
+      cursor: pointer; font-family: inherit; transition: border-color .2s, color .2s;
+    }
+    .cta-btn-outline:hover { border-color: #fff; color: #fff; }
+
+    /* ════════════════════════════════════════════════════════
+       MOBILE LIST VIEW
+    ════════════════════════════════════════════════════════ */
+    .mobile-list-section {
+      display: none;
+    }
+    @media (max-width: 767px) {
+      .mobile-list-section { display: block; }
+      .building-scene-wrap { display: none; }
+      .building-labels { display: none; }
+      .building-legend { display: none; }
+    }
+    .mobile-list-header {
+      display: flex; gap: .5rem; margin-bottom: 1rem;
+    }
+    .mobile-tower-tab {
+      flex: 1; padding: .65rem;
+      font-size: .75rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase;
+      border: 1px solid var(--border); border-radius: 10px;
+      background: #fff; color: var(--muted);
+      cursor: pointer; font-family: inherit; transition: all .2s;
+    }
+    .mobile-tower-tab.active {
+      background: var(--brown); color: #fff; border-color: var(--brown);
+    }
+    .floor-list-item {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .75rem 1rem;
+      background: #fff; border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: .4rem; cursor: pointer;
+      transition: all .2s;
+    }
+    .floor-list-item:hover { border-color: var(--tan); }
+    .floor-list-item.selected { border-color: var(--brown); background: var(--cream); }
+    .fli-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--tan);
+      min-width: 32px;
+    }
+    .fli-name { font-size: .875rem; font-weight: 600; color: var(--fg); }
+    .fli-type { font-size: .75rem; color: var(--muted); }
+    .fli-arrow { margin-left: auto; color: var(--muted); width: 14px; height: 14px; }
+
+    /* ── Footer icon fix (override base img/svg rules) ──────── */
+    .footer-ci { display: flex; align-items: flex-start; gap: .6rem; }
+    .footer-ci svg { width: 16px !important; height: 16px !important; flex-shrink: 0; color: rgba(255,255,255,.4); margin-top: 2px; }
+    .footer-ci span, .footer-ci a { font-size: .8rem; color: rgba(255,255,255,.7); line-height: 1.55; }
+    .footer-ci a:hover { color: white; }
+    .footer-contacts { display: flex; flex-direction: column; gap: .6rem; margin-top: 1rem; }
+
+    /* ════════════════════════════════════════════════════════
+       REVEAL ANIMATION
+    ════════════════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     TOP BAR
+════════════════════════════════════════════════════════ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <a href="tel:+13132243540">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+        (313) 224-3540
+      </a>
+      <a href="mailto:info@dwjba.com">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+        info@dwjba.com
+      </a>
+      <span class="tb-address">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:11px;height:11px;color:rgba(255,255,255,.4)"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+        2 Woodward Ave, Suite 200, Detroit MI 48226
+      </span>
+    </div>
+    <div class="topbar-right">
+      <span class="tb-connect">Connect:</span>
+      <a href="https://facebook.com" target="_blank" rel="noopener">FB</a>
+      <a href="https://twitter.com" target="_blank" rel="noopener">X</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener">LI</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+
+    <!-- Left Nav -->
+    <nav class="nav-left">
+      <div class="nav-item">
+        <button class="nav-btn">About <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="about.html">Overview</a>
+          <a href="about.html#leadership">Leadership &amp; Governance</a>
+          <a href="about.html#services">Services &amp; Operations</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">CAYMC <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="building-directory.html">Building Directory</a>
+          <a href="directory.html">Departments &amp; Offices</a>
+          <a href="contact.html">Visitor Information</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Tenants &amp; Access <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="directory.html">Tenant Directory</a>
+          <a href="contact.html">Building Access &amp; Security</a>
+          <a href="contact.html">Visitor FAQs</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Spirit of Detroit <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="spirit.html">Overview</a>
+          <a href="spirit.html#request">Request Form</a>
+          <a href="spirit.html#gallery">Gallery</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Procurement <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Overview</a>
+          <a href="#">Bid Opportunities</a>
+          <a href="#">Vendor Resources</a>
+        </div></div>
+      </div>
+    </nav>
+
+    <!-- Center Logo -->
+    <div class="nav-logo">
+      <a href="index.html">
+        <img src="images/logo-nav.png" alt="Detroit-Wayne Joint Building Authority" />
+      </a>
+    </div>
+
+    <!-- Right Nav -->
+    <nav class="nav-right">
+      <div class="nav-item">
+        <button class="nav-btn">Capital Projects <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Current Projects</a>
+          <a href="#">Completed Projects</a>
+          <a href="#">Upcoming Projects</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Real Estate <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Portfolio Overview</a>
+          <a href="#">Properties &amp; Listings</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Documents <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">Public Documents</a>
+          <a href="#">Reports &amp; Policies</a>
+          <a href="#">Board Materials</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">News <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="#">All News</a>
+          <a href="#">Project Updates</a>
+          <a href="#">Procurement Notices</a>
+        </div></div>
+      </div>
+      <div class="nav-item">
+        <button class="nav-btn">Contact <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+        <div class="nav-drop"><div class="nav-drop-inner">
+          <a href="contact.html">Contact Us</a>
+          <a href="directory.html">Department Directory</a>
+        </div></div>
+      </div>
+      <button class="nav-search" aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile controls -->
+    <div class="mob-controls">
+      <button aria-label="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+      </button>
+      <button id="mobMenuBtn" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile nav drawer -->
+<div class="scrim" id="scrim"></div>
+<nav class="mob-nav" id="mobNav">
+  <div class="mob-nav-head">
+    <span>Menu</span>
+    <button id="mobCloseBtn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+    </button>
+  </div>
+  <div class="mob-nav-body">
+    <div class="mob-group"><span class="mob-label">About</span><a class="mob-link" href="about.html">Overview</a><a class="mob-link" href="about.html#leadership">Leadership &amp; Governance</a></div>
+    <div class="mob-group"><span class="mob-label">CAYMC</span><a class="mob-link" href="building-directory.html">Building Directory</a><a class="mob-link" href="directory.html">Departments &amp; Offices</a><a class="mob-link" href="contact.html">Visitor Information</a></div>
+    <div class="mob-group"><span class="mob-label">Spirit of Detroit</span><a class="mob-link" href="spirit.html">Overview</a></div>
+    <div class="mob-group"><span class="mob-label">Procurement</span><a class="mob-link" href="#">Bid Opportunities</a><a class="mob-link" href="#">Vendor Resources</a></div>
+    <div class="mob-group"><span class="mob-label">Contact</span><a class="mob-link" href="contact.html">Contact Us</a><a class="mob-link" href="directory.html">Department Directory</a></div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section class="dir-hero">
+  <div class="wrap dir-hero-inner">
+    <span class="dir-hero-eyebrow">Coleman A. Young Municipal Center</span>
+    <h1>Navigate CAYMC</h1>
+    <p class="dir-hero-sub">Find any office, department, or service across both towers — just search or explore the interactive 3D model below.</p>
+    <div class="dir-hero-badges">
+      <span class="dir-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" /></svg>
+        Administration Tower — 14 Floors
+      </span>
+      <span class="dir-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 5.491Z" /></svg>
+        Courts Tower — 20 Floors
+      </span>
+      <span class="dir-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+        2 Woodward Avenue, Detroit
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN DIRECTORY
+════════════════════════════════════════════════════════ -->
+<section class="dir-main">
+  <div class="wrap">
+    <div class="dir-layout">
+
+      <!-- LEFT: 3D Building -->
+      <div class="building-col">
+
+        <div class="building-labels" id="buildingLabels">
+          <div class="tower-label active-label" id="adminLabel">
+            Administration Tower
+            <span class="tower-label-sub">14 Floors · 197 ft</span>
+          </div>
+          <div class="tower-label" id="courtsLabel">
+            Courts Tower
+            <span class="tower-label-sub">20 Floors · 318 ft</span>
+          </div>
+        </div>
+
+        <div class="building-scene-wrap">
+          <div class="building-scene" id="buildingScene">
+            <div class="building-model" id="buildingModel">
+              <!-- Admin Tower -->
+              <div class="tower" id="adminTower" data-tower="admin">
+                <!-- Floors rendered by JS -->
+              </div>
+              <!-- Glass Connector -->
+              <div class="tower-connector" id="towerConnector">
+                <!-- rendered by JS -->
+              </div>
+              <!-- Courts Tower -->
+              <div class="tower" id="courtsTower" data-tower="courts">
+                <!-- Floors rendered by JS -->
+              </div>
+            </div>
+          </div>
+          <div class="ground-label">2 Woodward Avenue · Detroit, MI</div>
+        </div>
+
+        <div class="building-legend">
+          <div class="legend-item">
+            <div class="legend-swatch legend-swatch-std"></div>Standard Floor
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch legend-swatch-lob"></div>Lobby / Public
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch legend-swatch-sel"></div>Selected Floor
+          </div>
+        </div>
+
+        <!-- Mobile list fallback -->
+        <div class="mobile-list-section" id="mobileList">
+          <div class="mobile-list-header">
+            <button class="mobile-tower-tab active" id="mobileAdminTab" data-tower="admin">Administration (14F)</button>
+            <button class="mobile-tower-tab" id="mobileCourtsTab" data-tower="courts">Courts (20F)</button>
+          </div>
+          <div id="mobileFloorList"></div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Info Panel -->
+      <div class="panel-col">
+
+        <!-- Search -->
+        <div class="dir-search-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+          <input type="text" class="dir-search" id="dirSearch" placeholder="Search a department, service, or need…" autocomplete="off" />
+          <div class="search-results-list" id="searchResultsList"></div>
+        </div>
+
+        <!-- Tower Toggle -->
+        <div class="tower-toggle">
+          <button class="tower-toggle-btn active" id="toggleAdmin" data-tower="admin">Administration Tower</button>
+          <button class="tower-toggle-btn" id="toggleCourts" data-tower="courts">Courts Tower</button>
+        </div>
+
+        <!-- Chips -->
+        <div class="chips-card">
+          <div class="chips-title">Find Your Office</div>
+          <p class="chips-sub">Search or tap a common need — the 3D building will highlight your destination floor.</p>
+          <div class="chips-label">Common Needs</div>
+          <div class="need-chips" id="needChips">
+            <button class="need-chip" data-need="property taxes">Property Taxes</button>
+            <button class="need-chip" data-need="parking ticket">Parking Ticket</button>
+            <button class="need-chip" data-need="birth certificate">Birth Certificate</button>
+            <button class="need-chip" data-need="marriage license">Marriage License</button>
+            <button class="need-chip" data-need="court hearing">Court Hearing</button>
+            <button class="need-chip" data-need="building permit">Building Permit</button>
+            <button class="need-chip" data-need="mayor office">Mayor's Office</button>
+            <button class="need-chip" data-need="voter registration">Voter Registration</button>
+            <button class="need-chip" data-need="child support">Child Support</button>
+            <button class="need-chip" data-need="passport">Passport</button>
+            <button class="need-chip" data-need="small claims">Small Claims</button>
+            <button class="need-chip" data-need="deed recording">Deed Recording</button>
+            <button class="need-chip" data-need="snap food stamps">SNAP / Food Stamps</button>
+            <button class="need-chip" data-need="eviction">Eviction / Housing</button>
+            <button class="need-chip" data-need="name change">Name Change</button>
+            <button class="need-chip" data-need="notary">Notary Services</button>
+          </div>
+        </div>
+
+        <!-- Navigation Result Card -->
+        <div class="nav-result" id="navResult">
+          <div class="nav-result-header">
+            <div class="nav-result-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+              NAVIGATION RESULT
+            </div>
+            <div class="nav-result-main">
+              <div class="nav-floor-num" id="navFloorNum">—</div>
+              <div class="nav-result-info">
+                <div class="nav-floor-label" id="navFloorLabel">Administration Tower</div>
+                <div class="nav-dept-name" id="navDeptName">—</div>
+                <div class="nav-room-label" id="navRoomLabel"></div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-result-body" id="navResultBody">
+            <!-- Details injected by JS -->
+          </div>
+          <button class="nav-directions-btn" onclick="window.open('https://maps.google.com/?q=2+Woodward+Avenue+Detroit+MI', '_blank')">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+            Get Directions to This Office
+          </button>
+        </div>
+
+        <!-- Empty state -->
+        <div class="nav-empty" id="navEmpty">
+          <div class="nav-empty-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21" /></svg>
+          </div>
+          <h3>Select a floor or search for a service</h3>
+          <p>Click any floor on the 3D building model, use the search bar, or tap a quick-need chip above to find your destination.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     TECHNOLOGY SECTION
+════════════════════════════════════════════════════════ -->
+<section class="tech-section">
+  <div class="wrap">
+    <div class="tech-heading reveal">
+      <span class="tech-kicker">The Technology</span>
+      <h2 class="tech-h2">Built for Detroit. Designed for Citizens.</h2>
+      <p class="tech-sub">The CAYMC Building Directory is a purpose-built navigation tool trained specifically on the Coleman A. Young Municipal Center — not a generic map.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card reveal">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" /></svg>
+        <h3>Purpose-Built Knowledge Base</h3>
+        <p>Unlike generic maps, this directory contains comprehensive, verified information about every department, office, procedure, and service — with real phone numbers, accurate floor locations, and current hours.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-1">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" /></svg>
+        <h3>Cinematic 3D Navigation</h3>
+        <p>The 3D building model visualizes both towers in real time. Search your need and watch the exact floor slab illuminate, separate from the stack, and deliver a precise navigation card — no map reading required.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
+        <h3>Government-Grade Accuracy</h3>
+        <p>Every entry is grounded in verified DWJBA data. The system is designed for government use — prioritizing accuracy, clarity, and citizen trust above all else. Inquiries are always referred to human staff.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CTA
+════════════════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="wrap cta-inner reveal">
+    <span class="cta-kicker">Ready to Deploy</span>
+    <h2 class="cta-h2">Transform Civic Service at CAYMC</h2>
+    <p class="cta-p">This is just the demonstration. The full Ask CAYMC deployment includes voice interface, real-time database integration, multi-language support, and a 24/7 citizen service portal — reducing call center volume and improving the experience for every visitor.</p>
+    <div class="cta-stats">
+      <div class="cta-stat"><span class="cta-stat-num">70%</span><span class="cta-stat-label">Reduction in "Where is…?" calls</span></div>
+      <div class="cta-stat"><span class="cta-stat-num">&lt; 2s</span><span class="cta-stat-label">Average response time</span></div>
+      <div class="cta-stat"><span class="cta-stat-num">24/7</span><span class="cta-stat-label">Availability</span></div>
+      <div class="cta-stat"><span class="cta-stat-num">25+</span><span class="cta-stat-label">Service topics</span></div>
+    </div>
+    <div class="cta-actions">
+      <a href="contact.html" class="cta-btn-primary">Contact DWJBA About Full Deployment</a>
+      <a href="index.html" class="cta-btn-outline">Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-top">
+
+      <!-- Brand / Contact -->
+      <div class="footer-brand">
+        <img class="footer-logo" src="images/seal-large.png" alt="Detroit-Wayne Joint Building Authority" />
+        <p class="footer-desc">Managing and maintaining critical public facilities that support city and county government, court functions, and essential public services since 1924.</p>
+        <div class="footer-contacts">
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+            <span>2 Woodward Avenue, Suite 200<br>Detroit, MI 48226</span>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+            <a href="tel:+13132243540">(313) 224-3540</a>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+            <a href="mailto:info@dwjba.com">info@dwjba.com</a>
+          </div>
+          <div class="footer-ci">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            <span>Mon–Fri, 8:00 AM to 5:00 PM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav grid -->
+      <div class="footer-nav">
+        <div class="fn-col">
+          <h3>About</h3>
+          <ul>
+            <li><a href="about.html">Overview</a></li>
+            <li><a href="about.html#leadership">Leadership &amp; Governance</a></li>
+            <li><a href="about.html#services">Services &amp; Operations</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>CAYMC</h3>
+          <ul>
+            <li><a href="building-directory.html">Building Directory</a></li>
+            <li><a href="directory.html">Departments &amp; Offices</a></li>
+            <li><a href="contact.html">Visitor Information</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Tenants &amp; Access</h3>
+          <ul>
+            <li><a href="directory.html">Tenant Directory</a></li>
+            <li><a href="contact.html">Building Access &amp; Security</a></li>
+            <li><a href="contact.html">Visitor FAQs</a></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Procurement</h3>
+          <ul>
+            <li><span>Overview</span></li>
+            <li><span>Bid Opportunities</span></li>
+            <li><span>Vendor Resources</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Capital Projects</h3>
+          <ul>
+            <li><span>Current Projects</span></li>
+            <li><span>Completed Projects</span></li>
+            <li><span>Upcoming Projects</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Real Estate</h3>
+          <ul>
+            <li><span>Portfolio Overview</span></li>
+            <li><span>Properties &amp; Listings</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>Documents</h3>
+          <ul>
+            <li><span>Public Documents</span></li>
+            <li><span>Reports &amp; Policies</span></li>
+            <li><span>Board Materials</span></li>
+          </ul>
+        </div>
+        <div class="fn-col">
+          <h3>News &amp; Contact</h3>
+          <ul>
+            <li><span>All News</span></li>
+            <li><span>Project Updates</span></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="directory.html">Department Directory</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</p>
+    <div class="footer-legal">
+      <button>Accessibility</button>
+      <button>Privacy Policy</button>
+      <button>Terms of Use</button>
+      <a href="https://detroitmi.gov" target="_blank" rel="noopener" class="footer-legal-ext">
+        City of Detroit
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE-SPECIFIC SCRIPTS
+════════════════════════════════════════════════════════ -->
+<script>
+
+// ══════════════════════════════════════════════════
+// FLOOR DATA
+// ══════════════════════════════════════════════════
+const FLOOR_DATA = {
+  admin: [
+    { floor: 1,  dept: 'Lobby / Security / Information', room: 'Ground Floor', address: 'Woodward Ave Entrance', phone: '(313) 224-3540', hours: 'Mon–Fri 7 AM – 6 PM', services: ['Security', 'Vital Records', 'Parking Violations', 'City Clerk', 'Info Desk'], type: 'lobby' },
+    { floor: 2,  dept: 'Public Services', room: '2nd Floor', address: '', phone: '(313) 224-3540', hours: 'Mon–Fri 8 AM – 5 PM', services: ['HR Services', 'City Services', 'Public Assistance'], type: 'public' },
+    { floor: 3,  dept: 'Wayne County Treasurer', room: 'Room 300', address: '', phone: '(313) 224-5990', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Property Tax Payments', 'Tax Certificates', 'Delinquent Taxes'], type: 'standard' },
+    { floor: 4,  dept: 'BSEED / Building Permits', room: '4th Floor', address: '', phone: '(313) 224-3158', hours: 'Mon–Fri 8 AM – 5 PM', services: ['Building Permits', 'Safety Engineering', 'Zoning'], type: 'standard' },
+    { floor: 5,  dept: 'Finance / Human Resources', room: '5th Floor', address: '', phone: '(313) 224-3263', hours: 'Mon–Fri 8 AM – 5 PM', services: ['Finance Dept', 'Human Resources', 'Payroll'], type: 'standard' },
+    { floor: 6,  dept: 'City Departments', room: '6th Floor', address: '', phone: '(313) 224-3540', hours: 'Mon–Fri 8 AM – 5 PM', services: ['General Administration'], type: 'standard' },
+    { floor: 7,  dept: 'Planning & Development', room: '7th Floor', address: '', phone: '(313) 224-6225', hours: 'Mon–Fri 8 AM – 5 PM', services: ['City Planning', 'Neighborhood Development', 'Land Use'], type: 'standard' },
+    { floor: 8,  dept: 'City Departments', room: '8th Floor', address: '', phone: '(313) 224-3540', hours: 'Mon–Fri 8 AM – 5 PM', services: ['General Administration'], type: 'standard' },
+    { floor: 9,  dept: 'Budget / Law Department', room: '9th Floor', address: '', phone: '(313) 224-4550', hours: 'Mon–Fri 8 AM – 5 PM', services: ['Budget Office', 'Corporation Counsel'], type: 'standard' },
+    { floor: 10, dept: 'Law Department', room: '10th Floor', address: '', phone: '(313) 224-4550', hours: 'Mon–Fri 8 AM – 5 PM', services: ['Corporation Counsel', 'Legal Services'], type: 'standard' },
+    { floor: 11, dept: "Mayor's Office", room: 'Room 1100', address: '', phone: '(313) 224-3400', hours: 'Mon–Fri 8 AM – 5 PM', services: ["Mayor's Office", 'Executive Staff'], type: 'executive' },
+    { floor: 12, dept: 'City Administration', room: '12th Floor', address: '', phone: '(313) 224-3540', hours: 'Mon–Fri 8 AM – 5 PM', services: ['Administrative Offices'], type: 'executive' },
+    { floor: 13, dept: 'City Council / DWJBA', room: 'Suite 1314', address: '', phone: '(313) 309-2300', hours: 'Mon–Fri 8 AM – 5 PM', services: ['City Council Chambers', 'DWJBA Suite 1314'], type: 'executive' },
+    { floor: 14, dept: 'Executive / Commissioners', room: '14th Floor', address: '', phone: '(313) 224-3540', hours: 'Mon–Fri 8 AM – 5 PM', services: ['Executive Offices', 'City Commissioners'], type: 'executive' },
+  ],
+  courts: [
+    { floor: 1,  dept: 'Courts Lobby / Security', room: 'Ground Floor', address: 'Courts Entrance', phone: '(313) 224-5261', hours: 'Mon–Fri 7 AM – 6 PM', services: ['Courts Entrance', 'Security Checkpoint'], type: 'lobby' },
+    { floor: 2,  dept: 'Probate Court / Clerk', room: '2nd Floor', address: '', phone: '(313) 224-5706', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Probate Court', 'Court Clerk', 'Filing', 'Name Change', 'Small Claims', 'Eviction/Housing'], type: 'public' },
+    { floor: 3,  dept: 'Friend of the Court', room: '3rd Floor', address: '', phone: '(313) 224-2390', hours: 'Mon–Fri 8 AM – 4:30 PM', services: ['Child Support', 'Custody Orders', 'FOC'], type: 'public' },
+    { floor: 4,  dept: 'Circuit Court — Criminal', room: '4th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Criminal Division', 'Court Hearings', 'Arraignments'], type: 'standard' },
+    { floor: 5,  dept: 'Circuit Court — Civil', room: '5th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Civil Division', 'Jury Services'], type: 'standard' },
+    { floor: 6,  dept: 'Circuit Court — Family', room: '6th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Family Division', 'Domestic Relations'], type: 'standard' },
+    { floor: 7,  dept: 'Circuit Court — Courtrooms', room: '7th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 700–710'], type: 'standard' },
+    { floor: 8,  dept: 'Circuit Court — Courtrooms', room: '8th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 800–810'], type: 'standard' },
+    { floor: 9,  dept: 'Circuit Court — Courtrooms', room: '9th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 900–910'], type: 'standard' },
+    { floor: 10, dept: 'Circuit Court — Courtrooms', room: '10th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1000–1010'], type: 'standard' },
+    { floor: 11, dept: 'Circuit Court — Courtrooms', room: '11th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1100–1110'], type: 'standard' },
+    { floor: 12, dept: 'Circuit Court — Courtrooms', room: '12th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1200–1210'], type: 'standard' },
+    { floor: 13, dept: 'Circuit Court — Courtrooms', room: '13th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1300–1310'], type: 'standard' },
+    { floor: 14, dept: 'Circuit Court — Courtrooms', room: '14th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1400–1410'], type: 'standard' },
+    { floor: 15, dept: 'Circuit Court — Courtrooms', room: '15th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1500–1510'], type: 'standard' },
+    { floor: 16, dept: 'Circuit Court — Courtrooms', room: '16th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1600–1610'], type: 'standard' },
+    { floor: 17, dept: 'Circuit Court — Courtrooms', room: '17th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1700–1710'], type: 'standard' },
+    { floor: 18, dept: 'Circuit Court — Courtrooms', room: '18th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1800–1810'], type: 'standard' },
+    { floor: 19, dept: 'Circuit Court — Courtrooms', room: '19th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Courtrooms 1900–1910'], type: 'standard' },
+    { floor: 20, dept: 'Chief Judges / Administration', room: '20th Floor', address: '', phone: '(313) 224-5261', hours: 'Mon–Fri 8 AM – 4 PM', services: ['Chief Judges Office', 'Judicial Council'], type: 'executive' },
+  ]
+};
+
+const NEEDS_MAP = {
+  'property taxes':    { tower: 'admin',  floor: 3  },
+  'parking ticket':    { tower: 'admin',  floor: 1  },
+  'birth certificate': { tower: 'admin',  floor: 1  },
+  'marriage license':  { tower: 'admin',  floor: 2  },
+  'court hearing':     { tower: 'courts', floor: 4  },
+  'building permit':   { tower: 'admin',  floor: 4  },
+  'mayor office':      { tower: 'admin',  floor: 11 },
+  "mayor's office":    { tower: 'admin',  floor: 11 },
+  'voter registration':{ tower: 'admin',  floor: 1  },
+  'child support':     { tower: 'courts', floor: 3  },
+  'passport':          { tower: 'admin',  floor: 1  },
+  'small claims':      { tower: 'courts', floor: 2  },
+  'eviction':          { tower: 'courts', floor: 2  },
+  'eviction housing':  { tower: 'courts', floor: 2  },
+  'name change':       { tower: 'courts', floor: 2  },
+  'deed recording':    { tower: 'admin',  floor: 1  },
+  'snap food stamps':  { tower: 'admin',  floor: 1  },
+  'snap':              { tower: 'admin',  floor: 1  },
+  'food stamps':       { tower: 'admin',  floor: 1  },
+  'notary':            { tower: 'admin',  floor: 1  },
+  'notary services':   { tower: 'admin',  floor: 1  },
+};
+
+// ══════════════════════════════════════════════════
+// 3D BUILDING CONSTRUCTION
+// ══════════════════════════════════════════════════
+
+// Dimensions (px) for each tower's floor slabs
+const ADMIN_CONFIG  = { slabW: 110, slabH: 14, slabD: 8,  sideW: 30 };
+const COURTS_CONFIG = { slabW: 140, slabH: 11, slabD: 8,  sideW: 36 };
+
+let activeTower  = 'admin';
+let activeFloor  = null;
+let selectedSlab = null;
+
+function buildTower(towerId, config, floors) {
+  const towerEl = document.getElementById(towerId + 'Tower');
+  towerEl.innerHTML = '';
+
+  const { slabW, slabH, slabD, sideW } = config;
+
+  // Build base platform
+  const base = document.createElement('div');
+  base.className = 'tower-base';
+  base.style.cssText = `
+    width: ${slabW + sideW}px;
+    height: ${slabH + slabD}px;
+    position: relative;
+    transform-style: preserve-3d;
+    margin-bottom: 0;
+  `;
+
+  const baseFront = document.createElement('div');
+  baseFront.className = 'base-front';
+  baseFront.style.cssText = `
+    width: ${slabW}px; height: ${slabH + 4}px;
+    top: ${slabD}px; left: 0;
+  `;
+
+  const baseTop = document.createElement('div');
+  baseTop.className = 'base-top';
+  baseTop.style.cssText = `
+    width: ${slabW}px; height: ${sideW}px;
+    top: 0; left: 0;
+    transform: rotateX(90deg);
+    transform-origin: top;
+  `;
+
+  const baseRight = document.createElement('div');
+  baseRight.className = 'base-right';
+  baseRight.style.cssText = `
+    width: ${sideW}px; height: ${slabH + 4}px;
+    top: ${slabD}px; left: ${slabW}px;
+    transform: rotateY(-90deg);
+    transform-origin: left;
+  `;
+
+  base.appendChild(baseFront);
+  base.appendChild(baseTop);
+  base.appendChild(baseRight);
+  towerEl.appendChild(base);
+
+  // Build floor slabs (from bottom up = floor 1 at bottom)
+  floors.forEach((floorData, index) => {
+    const slab = document.createElement('div');
+    slab.className = 'floor-slab';
+    slab.dataset.tower = towerId;
+    slab.dataset.floor = floorData.floor;
+
+    const typeClass = floorData.type === 'lobby' ? 'lobby-floor'
+                    : floorData.type === 'executive' ? 'exec-floor'
+                    : '';
+
+    slab.style.cssText = `
+      width: ${slabW + sideW}px;
+      height: ${slabH + slabD}px;
+      position: relative;
+      transform-style: preserve-3d;
+    `;
+
+    // Front face
+    const front = document.createElement('div');
+    front.className = `slab-front ${typeClass}`;
+    front.style.cssText = `
+      width: ${slabW}px;
+      height: ${slabH}px;
+      position: absolute;
+      top: ${slabD}px;
+      left: 0;
+    `;
+
+    // Floor number label on front face
+    const numLabel = document.createElement('span');
+    numLabel.className = 'slab-num';
+    numLabel.textContent = `${floorData.floor}`;
+    front.appendChild(numLabel);
+
+    // Top face
+    const top = document.createElement('div');
+    top.className = 'slab-top';
+    top.style.cssText = `
+      width: ${slabW}px;
+      height: ${slabD}px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: rotateX(90deg);
+      transform-origin: bottom;
+    `;
+
+    // Right face
+    const right = document.createElement('div');
+    right.className = 'slab-right';
+    right.style.cssText = `
+      width: ${sideW}px;
+      height: ${slabH}px;
+      position: absolute;
+      top: ${slabD}px;
+      left: ${slabW}px;
+      transform: rotateY(-90deg);
+      transform-origin: left;
+    `;
+
+    // Tooltip
+    const tooltip = document.createElement('div');
+    tooltip.className = 'slab-tooltip';
+    tooltip.innerHTML = `<strong>Floor ${floorData.floor}</strong> — ${floorData.dept}`;
+
+    slab.appendChild(top);
+    slab.appendChild(front);
+    slab.appendChild(right);
+    slab.appendChild(tooltip);
+
+    slab.addEventListener('click', () => selectFloor(towerId, floorData.floor));
+
+    towerEl.appendChild(slab);
+  });
+}
+
+function buildConnector() {
+  const conn = document.getElementById('towerConnector');
+  conn.innerHTML = '';
+
+  const lobbyH = 4; // 4 lobby-height connector slabs
+  for (let i = 0; i < lobbyH; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'connector-piece';
+    piece.style.cssText = `
+      width: 20px;
+      height: 22px;
+      position: relative;
+      transform-style: preserve-3d;
+    `;
+
+    const front = document.createElement('div');
+    front.className = 'connector-front';
+    front.style.cssText = `
+      width: 20px; height: 14px;
+      position: absolute;
+      top: 8px; left: 0;
+    `;
+
+    piece.appendChild(front);
+    conn.appendChild(piece);
+  }
+}
+
+function selectFloor(tower, floorNum) {
+  // Clear previous selection
+  document.querySelectorAll('.floor-slab').forEach(s => s.classList.remove('selected'));
+  document.querySelectorAll('.floor-list-item').forEach(s => s.classList.remove('selected'));
+  document.querySelectorAll('.need-chip').forEach(c => c.classList.remove('active'));
+
+  // Switch tower toggle if needed
+  if (tower !== activeTower) {
+    switchTower(tower);
+  }
+
+  // Mark new selection
+  const slabs = document.querySelectorAll(`.floor-slab[data-tower="${tower}"][data-floor="${floorNum}"]`);
+  slabs.forEach(s => s.classList.add('selected'));
+
+  const listItem = document.querySelector(`.floor-list-item[data-tower="${tower}"][data-floor="${floorNum}"]`);
+  if (listItem) listItem.classList.add('selected');
+
+  activeFloor = floorNum;
+
+  // Update info panel
+  const data = FLOOR_DATA[tower].find(f => f.floor === floorNum);
+  if (data) showFloorResult(tower, data);
+}
+
+function showFloorResult(tower, data) {
+  const towerLabel = tower === 'admin' ? 'Administration Tower' : 'Courts Tower';
+  const floorSuffix = data.floor === 1 ? 'st' : data.floor === 2 ? 'nd' : data.floor === 3 ? 'rd' : 'th';
+
+  document.getElementById('navFloorNum').textContent = data.floor;
+  document.getElementById('navFloorLabel').textContent = towerLabel;
+  document.getElementById('navDeptName').textContent = data.dept;
+  document.getElementById('navRoomLabel').textContent = data.room;
+
+  const body = document.getElementById('navResultBody');
+  body.innerHTML = `
+    ${data.phone ? `
+    <div class="nav-detail-row">
+      <svg class="nav-detail-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" /></svg>
+      <div>
+        <div class="nav-detail-label">Phone</div>
+        <div class="nav-detail-val"><a href="tel:${data.phone.replace(/[^+\d]/g,'')}" style="color:inherit">${data.phone}</a></div>
+      </div>
+    </div>` : ''}
+    ${data.hours ? `
+    <div class="nav-detail-row">
+      <svg class="nav-detail-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+      <div>
+        <div class="nav-detail-label">Hours</div>
+        <div class="nav-detail-val">${data.hours}</div>
+      </div>
+    </div>` : ''}
+    ${data.services && data.services.length ? `
+    <div class="nav-detail-row">
+      <svg class="nav-detail-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" /></svg>
+      <div>
+        <div class="nav-detail-label">Services</div>
+        <div class="nav-services-list">
+          ${data.services.map(s => `<span class="nav-service-tag">${s}</span>`).join('')}
+        </div>
+      </div>
+    </div>` : ''}
+  `;
+
+  document.getElementById('navResult').classList.add('visible');
+  document.getElementById('navEmpty').style.display = 'none';
+
+  // Scroll result into view on mobile
+  if (window.innerWidth < 1024) {
+    document.getElementById('navResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function clearSelection() {
+  document.querySelectorAll('.floor-slab').forEach(s => s.classList.remove('selected'));
+  document.querySelectorAll('.floor-list-item').forEach(s => s.classList.remove('selected'));
+  document.querySelectorAll('.need-chip').forEach(c => c.classList.remove('active'));
+  activeFloor = null;
+  document.getElementById('navResult').classList.remove('visible');
+  document.getElementById('navEmpty').style.display = '';
+}
+
+// ══════════════════════════════════════════════════
+// TOWER SWITCHING
+// ══════════════════════════════════════════════════
+function switchTower(tower) {
+  activeTower = tower;
+
+  // Update toggle buttons
+  document.getElementById('toggleAdmin').classList.toggle('active', tower === 'admin');
+  document.getElementById('toggleCourts').classList.toggle('active', tower === 'courts');
+  document.getElementById('mobileAdminTab').classList.toggle('active', tower === 'admin');
+  document.getElementById('mobileCourtsTab').classList.toggle('active', tower === 'courts');
+
+  // Update tower labels
+  document.getElementById('adminLabel').classList.toggle('active-label', tower === 'admin');
+  document.getElementById('courtsLabel').classList.toggle('active-label', tower === 'courts');
+
+  // Highlight active tower in building
+  document.getElementById('adminTower').style.opacity = tower === 'admin' ? '1' : '0.6';
+  document.getElementById('courtsTower').style.opacity = tower === 'courts' ? '1' : '0.6';
+
+  // Rebuild mobile list
+  buildMobileList(tower);
+}
+
+// ══════════════════════════════════════════════════
+// MOBILE LIST
+// ══════════════════════════════════════════════════
+function buildMobileList(tower) {
+  const list = document.getElementById('mobileFloorList');
+  list.innerHTML = '';
+  const floors = FLOOR_DATA[tower];
+  floors.forEach(f => {
+    const item = document.createElement('div');
+    item.className = 'floor-list-item';
+    item.dataset.tower = tower;
+    item.dataset.floor = f.floor;
+    item.innerHTML = `
+      <div class="fli-num">${f.floor}</div>
+      <div>
+        <div class="fli-name">${f.dept}</div>
+        <div class="fli-type">${f.room}</div>
+      </div>
+      <svg class="fli-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+    `;
+    item.addEventListener('click', () => selectFloor(tower, f.floor));
+    list.appendChild(item);
+  });
+}
+
+// ══════════════════════════════════════════════════
+// SEARCH
+// ══════════════════════════════════════════════════
+function buildSearchIndex() {
+  const index = [];
+  Object.keys(FLOOR_DATA).forEach(tower => {
+    FLOOR_DATA[tower].forEach(f => {
+      index.push({
+        tower, floor: f.floor,
+        text: `${f.dept} ${f.services.join(' ')} ${f.room}`.toLowerCase(),
+        dept: f.dept,
+        room: f.room
+      });
+    });
+  });
+  return index;
+}
+
+const SEARCH_INDEX = buildSearchIndex();
+
+const dirSearch = document.getElementById('dirSearch');
+const resultsList = document.getElementById('searchResultsList');
+
+dirSearch.addEventListener('input', () => {
+  const q = dirSearch.value.trim().toLowerCase();
+  if (q.length < 2) { resultsList.classList.remove('open'); return; }
+
+  // Check needs map first
+  const needKey = Object.keys(NEEDS_MAP).find(k => k.includes(q) || q.includes(k));
+
+  const matches = SEARCH_INDEX.filter(item => item.text.includes(q)).slice(0, 8);
+
+  if (matches.length === 0) { resultsList.classList.remove('open'); return; }
+
+  resultsList.innerHTML = matches.map(m => `
+    <div class="search-result-item" data-tower="${m.tower}" data-floor="${m.floor}">
+      <span class="sri-floor">Floor ${m.floor}</span>
+      <span class="sri-dept">${m.dept}</span>
+      <span class="sri-tower">${m.tower === 'admin' ? 'Admin' : 'Courts'}</span>
+    </div>
+  `).join('');
+
+  resultsList.querySelectorAll('.search-result-item').forEach(item => {
+    item.addEventListener('click', () => {
+      selectFloor(item.dataset.tower, parseInt(item.dataset.floor));
+      dirSearch.value = '';
+      resultsList.classList.remove('open');
+    });
+  });
+
+  resultsList.classList.add('open');
+});
+
+dirSearch.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { resultsList.classList.remove('open'); dirSearch.blur(); }
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.dir-search-wrap')) resultsList.classList.remove('open');
+});
+
+// ══════════════════════════════════════════════════
+// NEED CHIPS
+// ══════════════════════════════════════════════════
+document.querySelectorAll('.need-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const need = chip.dataset.need.toLowerCase();
+    const match = NEEDS_MAP[need];
+    if (match) {
+      document.querySelectorAll('.need-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      selectFloor(match.tower, match.floor);
+    }
+  });
+});
+
+// ══════════════════════════════════════════════════
+// TOWER TOGGLE BUTTONS
+// ══════════════════════════════════════════════════
+document.getElementById('toggleAdmin').addEventListener('click', () => {
+  clearSelection();
+  switchTower('admin');
+});
+document.getElementById('toggleCourts').addEventListener('click', () => {
+  clearSelection();
+  switchTower('courts');
+});
+document.getElementById('mobileAdminTab').addEventListener('click', () => {
+  clearSelection();
+  switchTower('admin');
+});
+document.getElementById('mobileCourtsTab').addEventListener('click', () => {
+  clearSelection();
+  switchTower('courts');
+});
+
+// ══════════════════════════════════════════════════
+// HEADER SCROLL SHADOW
+// ══════════════════════════════════════════════════
+const hdr = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  hdr.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// ══════════════════════════════════════════════════
+// MOBILE NAV
+// ══════════════════════════════════════════════════
+const mobNav   = document.getElementById('mobNav');
+const scrim    = document.getElementById('scrim');
+const openBtn  = document.getElementById('mobMenuBtn');
+const closeBtn = document.getElementById('mobCloseBtn');
+
+function openMob()  { mobNav.classList.add('open'); scrim.classList.add('visible'); document.body.style.overflow='hidden'; }
+function closeMob() { mobNav.classList.remove('open'); scrim.classList.remove('visible'); document.body.style.overflow=''; }
+
+openBtn.addEventListener('click', openMob);
+closeBtn.addEventListener('click', closeMob);
+scrim.addEventListener('click', closeMob);
+
+// ══════════════════════════════════════════════════
+// REVEAL ON SCROLL
+// ══════════════════════════════════════════════════
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+}, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ══════════════════════════════════════════════════
+// INIT — Build the 3D building
+// ══════════════════════════════════════════════════
+(function init() {
+  buildTower('admin', ADMIN_CONFIG, FLOOR_DATA.admin);
+  buildTower('courts', COURTS_CONFIG, FLOOR_DATA.courts);
+  buildConnector();
+  buildMobileList('admin');
+
+  // Set initial tower opacity
+  document.getElementById('adminTower').style.opacity = '1';
+  document.getElementById('courtsTower').style.opacity = '0.65';
+})();
+
+</script>
+<script src="chat-widget.js" defer></script>
+</body>
+</html>
