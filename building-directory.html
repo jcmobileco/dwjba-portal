@@ -227,7 +227,7 @@
     }
 
     /* ════════════════════════════════════════════════════════
-       3D BUILDING — Left Column
+       BUILDING ILLUSTRATION — Left Column
     ════════════════════════════════════════════════════════ */
     .building-col {
       display: flex;
@@ -260,38 +260,19 @@
       opacity: .7;
     }
 
+    /* ── Building Scene (Illustration) ─────────────────────── */
     .building-scene-wrap {
-      background: linear-gradient(160deg, #e8f4ed 0%, #d4edd9 30%, #b8d4c0 60%, #95b89f 100%);
+      background: #ffffff;
       border-radius: 20px;
       border: 1px solid var(--border);
-      box-shadow: 0 8px 40px rgba(0,0,0,.10);
-      padding: 2rem 1rem 1.5rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,.08);
+      padding: 1.5rem;
       position: relative;
       overflow: hidden;
-      min-height: 520px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
-    /* Grass ground */
-    .building-scene-wrap::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 80px;
-      background: linear-gradient(to top, #3d6b52 0%, #4a7d5f 40%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    /* Sky subtle gradient */
-    .building-scene-wrap::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 120px;
-      background: linear-gradient(to bottom, rgba(200,220,230,.3) 0%, transparent 100%);
-      pointer-events: none;
-    }
+    .building-scene-wrap::after,
+    .building-scene-wrap::before { display: none; }
+
     .ground-label {
       position: absolute;
       bottom: 18px;
@@ -309,198 +290,82 @@
       white-space: nowrap;
     }
 
-    /* 3D Scene Container */
-    .building-scene {
-      perspective: 1400px;
-      perspective-origin: 50% 35%;
+    /* ── Illustration container + overlay system ─────────── */
+    .building-illustration-container {
       position: relative;
-      z-index: 2;
-      flex: 1;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      padding-bottom: 60px;
+      width: 100%;
+      animation: illustrationFloat 6s ease-in-out infinite;
     }
-    .building-model {
-      transform-style: preserve-3d;
-      transform: rotateX(-16deg) rotateY(-22deg);
-      animation: buildingFloat 5s ease-in-out infinite;
-      display: flex;
-      align-items: flex-end;
-      gap: 12px;
+    .building-illustration {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
     }
-    @keyframes buildingFloat {
-      0%, 100% { transform: rotateX(-16deg) rotateY(-22deg) translateY(0); }
-      50%       { transform: rotateX(-16deg) rotateY(-22deg) translateY(-6px); }
+    @keyframes illustrationFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-4px); }
     }
 
-    /* Tower wrappers */
-    .tower {
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: center;
-      transform-style: preserve-3d;
-      position: relative;
-    }
-
-    /* Each floor slab — CSS 3D box */
-    .floor-slab {
-      position: relative;
-      transform-style: preserve-3d;
-      cursor: pointer;
-      transition: transform .25s cubic-bezier(.34,1.56,.64,1), filter .2s;
-    }
-    .floor-slab:hover {
-      filter: brightness(1.08);
-    }
-    .floor-slab.selected {
-      transform: translateZ(28px) translateY(-4px);
-      filter: brightness(1.15);
-    }
-
-    /* Slab faces */
-    .slab-front, .slab-top, .slab-right {
+    /* Tower dim overlays */
+    .tower-dim-overlay {
       position: absolute;
-      background: #d4c8b0;
+      background: rgba(255,255,255,0.45);
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      opacity: 0;
+      z-index: 4;
     }
 
-    /* Front face */
-    .slab-front {
-      width: 100%;
-      height: 100%;
-      transform-origin: top;
-      backface-visibility: hidden;
-      display: flex;
-      align-items: center;
-      padding: 0 6px;
-      overflow: hidden;
-      /* Window grid pattern */
-      background-image:
-        repeating-linear-gradient(90deg,
-          rgba(61,26,8,.07) 0px, rgba(61,26,8,.07) 1px,
-          transparent 1px, transparent 22px),
-        repeating-linear-gradient(0deg,
-          rgba(61,26,8,.06) 0px, rgba(61,26,8,.06) 1px,
-          transparent 1px, transparent 10px);
-      background-color: #cfc3a8;
-      border-top: 1px solid rgba(255,255,255,.5);
-      border-left: 1px solid rgba(255,255,255,.25);
+    /* Floor zones */
+    .floor-zone {
+      border-bottom: 1px solid rgba(255,255,255,0);
+      z-index: 5;
     }
-    .slab-front.lobby-floor {
-      background-color: #b8a88a;
-      background-image:
-        repeating-linear-gradient(90deg,
-          rgba(61,26,8,.10) 0px, rgba(61,26,8,.10) 1px,
-          transparent 1px, transparent 18px),
-        repeating-linear-gradient(0deg,
-          rgba(61,26,8,.08) 0px, rgba(61,26,8,.08) 1px,
-          transparent 1px, transparent 10px);
+    .floor-zone:hover {
+      background: rgba(212, 160, 80, 0.18);
+      border-bottom-color: rgba(212, 160, 80, 0.3);
+      backdrop-filter: brightness(1.08);
     }
-    .slab-front.exec-floor {
-      background-color: #c8b898;
-      background-image:
-        repeating-linear-gradient(90deg,
-          rgba(61,26,8,.09) 0px, rgba(61,26,8,.09) 1px,
-          transparent 1px, transparent 20px),
-        repeating-linear-gradient(0deg,
-          rgba(61,26,8,.07) 0px, rgba(61,26,8,.07) 1px,
-          transparent 1px, transparent 10px);
+    .floor-zone.selected {
+      background: rgba(212, 160, 80, 0.35);
+      border-bottom-color: rgba(245, 200, 66, 0.5);
+      box-shadow: inset 0 0 15px rgba(245, 200, 66, 0.5), 0 0 25px rgba(212, 160, 80, 0.35);
+      animation: floorPulse 2s ease-in-out infinite;
     }
-
-    /* Top face */
-    .slab-top {
-      width: 100%;
-      transform-origin: top;
-      backface-visibility: hidden;
-      background: #e0d5be;
-      border-top: 1px solid rgba(255,255,255,.7);
+    @keyframes floorPulse {
+      0%, 100% { box-shadow: inset 0 0 15px rgba(245, 200, 66, 0.5), 0 0 25px rgba(212, 160, 80, 0.35); }
+      50%       { box-shadow: inset 0 0 20px rgba(245, 200, 66, 0.7), 0 0 35px rgba(212, 160, 80, 0.5); }
     }
-
-    /* Right side face */
-    .slab-right {
-      top: 0;
-      transform-origin: right;
-      backface-visibility: hidden;
-      background: #b8ad98;
-      background-image:
-        repeating-linear-gradient(0deg,
-          rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 1px,
-          transparent 1px, transparent 10px);
-    }
-
-    /* Selected state — warm amber glow */
-    .floor-slab.selected .slab-front {
-      background-color: #d4a050 !important;
-      background-image:
-        repeating-linear-gradient(90deg,
-          rgba(255,255,255,.2) 0px, rgba(255,255,255,.2) 1px,
-          transparent 1px, transparent 22px),
-        repeating-linear-gradient(0deg,
-          rgba(255,255,255,.15) 0px, rgba(255,255,255,.15) 1px,
-          transparent 1px, transparent 10px) !important;
-      box-shadow: inset 0 0 0 2px #f5c842, 0 0 20px rgba(212,160,80,.5);
-    }
-    .floor-slab.selected .slab-top {
-      background: #e8b860 !important;
-    }
-    .floor-slab.selected .slab-right {
-      background: #c49040 !important;
-    }
-
-    /* Hover glow */
-    .floor-slab:hover .slab-front {
-      box-shadow: inset 0 0 0 1px rgba(212,160,80,.6), 0 0 10px rgba(212,160,80,.3);
-    }
-
-    /* Floor number on slab */
-    .slab-num {
+    .zone-label {
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
       font-size: 8px;
       font-weight: 800;
-      color: rgba(61,26,8,.6);
-      letter-spacing: .04em;
-      line-height: 1;
-      white-space: nowrap;
+      color: rgba(61,26,8,0.5);
+      opacity: 0;
+      transition: opacity 0.2s;
       pointer-events: none;
-      z-index: 2;
-      position: relative;
     }
-    .floor-slab.selected .slab-num {
-      color: rgba(255,255,255,.9);
+    .floor-zone:hover .zone-label,
+    .floor-zone.selected .zone-label {
+      opacity: 1;
     }
-
-    /* Glass connector between towers */
-    .tower-connector {
-      width: 20px;
-      align-self: flex-end;
-      transform-style: preserve-3d;
+    .floor-zone.selected .zone-label {
+      color: rgba(61,26,8,0.9);
     }
-    .connector-piece {
-      width: 20px;
-      position: relative;
-      transform-style: preserve-3d;
-    }
-    .connector-front {
-      width: 20px;
+    .zone-tooltip {
       position: absolute;
-      background: linear-gradient(to bottom,
-        rgba(180,220,255,.35) 0%,
-        rgba(160,200,240,.5) 100%);
-      border-top: 1px solid rgba(255,255,255,.6);
-      border-left: 1px solid rgba(255,255,255,.3);
-      backdrop-filter: blur(2px);
-    }
-
-    /* Tooltip */
-    .slab-tooltip {
-      position: absolute;
-      bottom: calc(100% + 8px);
+      bottom: calc(100% + 6px);
       left: 50%;
       transform: translateX(-50%);
       background: rgba(26,13,6,.92);
       color: #fff;
       font-size: 11px;
       font-weight: 600;
-      padding: .35rem .7rem;
+      padding: .3rem .65rem;
       border-radius: 8px;
       white-space: nowrap;
       pointer-events: none;
@@ -509,7 +374,7 @@
       z-index: 20;
       box-shadow: 0 4px 16px rgba(0,0,0,.3);
     }
-    .slab-tooltip::after {
+    .zone-tooltip::after {
       content: '';
       position: absolute;
       top: 100%; left: 50%;
@@ -517,25 +382,7 @@
       border: 5px solid transparent;
       border-top-color: rgba(26,13,6,.92);
     }
-    .floor-slab:hover .slab-tooltip { opacity: 1; }
-
-    /* Tower base platform */
-    .tower-base {
-      transform-style: preserve-3d;
-      position: relative;
-    }
-    .base-front {
-      position: absolute;
-      background: #8a7d6b;
-    }
-    .base-top {
-      position: absolute;
-      background: #9e9080;
-    }
-    .base-right {
-      position: absolute;
-      background: #6e6358;
-    }
+    .floor-zone:hover .zone-tooltip { opacity: 1; }
 
     /* Legend */
     .building-legend {
@@ -563,32 +410,12 @@
     .legend-swatch {
       width: 12px; height: 8px; border-radius: 2px;
     }
-    .legend-swatch-std  { background: #cfc3a8; border: 1px solid #b8aa92; }
-    .legend-swatch-lob  { background: #b8a88a; border: 1px solid #a0967c; }
     .legend-swatch-sel  { background: #d4a050; border: 1px solid #f5c842; }
-
-    /* Tower tabs */
-    .tower-tabs {
-      display: flex; gap: .5rem; padding: .5rem;
-      background: rgba(255,255,255,.7); border-radius: 12px;
-      position: relative; z-index: 10;
-    }
-    .tower-tab-btn {
-      flex: 1; padding: .5rem 1rem;
-      font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .08em;
-      border-radius: 8px; border: none; cursor: pointer;
-      background: transparent; color: var(--muted);
-      transition: all .2s;
-    }
-    .tower-tab-btn.active {
-      background: var(--brown); color: #fff;
-    }
+    .legend-icon { font-size: 11px; line-height: 1; }
 
     /* Mobile building placeholder */
     @media (max-width: 767px) {
-      .building-scene-wrap { min-height: 380px; }
-      .building-model { transform: rotateX(-12deg) rotateY(-18deg) scale(0.85); }
+      .building-scene-wrap { padding: 1rem; }
     }
 
     /* ════════════════════════════════════════════════════════
@@ -1172,7 +999,7 @@
   <div class="wrap">
     <div class="dir-layout">
 
-      <!-- LEFT: 3D Building -->
+      <!-- LEFT: Building Illustration -->
       <div class="building-col">
 
         <div class="building-labels" id="buildingLabels">
@@ -1187,34 +1014,22 @@
         </div>
 
         <div class="building-scene-wrap">
-          <div class="building-scene" id="buildingScene">
-            <div class="building-model" id="buildingModel">
-              <!-- Admin Tower -->
-              <div class="tower" id="adminTower" data-tower="admin">
-                <!-- Floors rendered by JS -->
-              </div>
-              <!-- Glass Connector -->
-              <div class="tower-connector" id="towerConnector">
-                <!-- rendered by JS -->
-              </div>
-              <!-- Courts Tower -->
-              <div class="tower" id="courtsTower" data-tower="courts">
-                <!-- Floors rendered by JS -->
-              </div>
-            </div>
+          <div class="building-illustration-container" id="buildingOverlayContainer">
+            <img src="images/caymc-illustration.jpg" alt="Coleman A. Young Municipal Center" class="building-illustration" />
+            <!-- Tower dim overlays -->
+            <div class="tower-dim-overlay" id="adminDimOverlay" style="left:0;top:0;width:50%;height:100%;"></div>
+            <div class="tower-dim-overlay" id="courtsDimOverlay" style="left:50%;top:0;width:50%;height:100%;"></div>
+            <!-- Floor zones rendered by JS -->
           </div>
           <div class="ground-label">2 Woodward Avenue · Detroit, MI</div>
         </div>
 
         <div class="building-legend">
           <div class="legend-item">
-            <div class="legend-swatch legend-swatch-std"></div>Standard Floor
+            <span class="legend-icon">👆</span>Tap a floor to explore
           </div>
           <div class="legend-item">
-            <div class="legend-swatch legend-swatch-lob"></div>Lobby / Public
-          </div>
-          <div class="legend-item">
-            <div class="legend-swatch legend-swatch-sel"></div>Selected Floor
+            <div class="legend-swatch legend-swatch-sel"></div>Glowing = Selected floor
           </div>
         </div>
 
@@ -1248,7 +1063,7 @@
         <!-- Chips -->
         <div class="chips-card">
           <div class="chips-title">Find Your Office</div>
-          <p class="chips-sub">Search or tap a common need — the 3D building will highlight your destination floor.</p>
+          <p class="chips-sub">Search or tap a common need — the building will highlight your destination floor.</p>
           <div class="chips-label">Common Needs</div>
           <div class="need-chips" id="needChips">
             <button class="need-chip" data-need="property taxes">Property Taxes</button>
@@ -1301,7 +1116,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21" /></svg>
           </div>
           <h3>Select a floor or search for a service</h3>
-          <p>Click any floor on the 3D building model, use the search bar, or tap a quick-need chip above to find your destination.</p>
+          <p>Click any floor on the building illustration, use the search bar, or tap a quick-need chip above to find your destination.</p>
         </div>
 
       </div>
@@ -1551,172 +1366,74 @@ const NEEDS_MAP = {
 };
 
 // ══════════════════════════════════════════════════
-// 3D BUILDING CONSTRUCTION
+// STATE
 // ══════════════════════════════════════════════════
-
-// Dimensions (px) for each tower's floor slabs
-const ADMIN_CONFIG  = { slabW: 110, slabH: 14, slabD: 8,  sideW: 30 };
-const COURTS_CONFIG = { slabW: 140, slabH: 11, slabD: 8,  sideW: 36 };
-
 let activeTower  = 'admin';
 let activeFloor  = null;
-let selectedSlab = null;
 
-function buildTower(towerId, config, floors) {
-  const towerEl = document.getElementById(towerId + 'Tower');
-  towerEl.innerHTML = '';
+// ══════════════════════════════════════════════════
+// BUILD FLOOR OVERLAYS
+// ══════════════════════════════════════════════════
+function buildFloorOverlays() {
+  const container = document.getElementById('buildingOverlayContainer');
 
-  const { slabW, slabH, slabD, sideW } = config;
+  // Administration Tower zones (left tall building)
+  const adminZones = {
+    left: 5, right: 47, top: 4, bottom: 80,
+    floors: 14
+  };
 
-  // Build base platform
-  const base = document.createElement('div');
-  base.className = 'tower-base';
-  base.style.cssText = `
-    width: ${slabW + sideW}px;
-    height: ${slabH + slabD}px;
-    position: relative;
-    transform-style: preserve-3d;
-    margin-bottom: 0;
-  `;
+  // Courts Tower zones (right shorter building)
+  const courtsZones = {
+    left: 53, right: 95, top: 33, bottom: 80,
+    floors: 20
+  };
 
-  const baseFront = document.createElement('div');
-  baseFront.className = 'base-front';
-  baseFront.style.cssText = `
-    width: ${slabW}px; height: ${slabH + 4}px;
-    top: ${slabD}px; left: 0;
-  `;
+  function createZones(tower, config, floorData) {
+    const floorHeight = (config.bottom - config.top) / config.floors;
+    floorData.forEach((fd, i) => {
+      const zone = document.createElement('div');
+      zone.className = 'floor-zone';
+      zone.dataset.tower = tower;
+      zone.dataset.floor = fd.floor;
+      const topPct = config.bottom - (i + 1) * floorHeight;
+      zone.style.cssText = `
+        position: absolute;
+        left: ${config.left}%;
+        top: ${topPct}%;
+        width: ${config.right - config.left}%;
+        height: ${floorHeight}%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      `;
 
-  const baseTop = document.createElement('div');
-  baseTop.className = 'base-top';
-  baseTop.style.cssText = `
-    width: ${slabW}px; height: ${sideW}px;
-    top: 0; left: 0;
-    transform: rotateX(90deg);
-    transform-origin: top;
-  `;
+      // Floor number label
+      const label = document.createElement('span');
+      label.className = 'zone-label';
+      label.textContent = fd.floor;
+      zone.appendChild(label);
 
-  const baseRight = document.createElement('div');
-  baseRight.className = 'base-right';
-  baseRight.style.cssText = `
-    width: ${sideW}px; height: ${slabH + 4}px;
-    top: ${slabD}px; left: ${slabW}px;
-    transform: rotateY(-90deg);
-    transform-origin: left;
-  `;
+      // Tooltip
+      const tooltip = document.createElement('div');
+      tooltip.className = 'zone-tooltip';
+      tooltip.innerHTML = `<strong>Floor ${fd.floor}</strong> — ${fd.dept}`;
+      zone.appendChild(tooltip);
 
-  base.appendChild(baseFront);
-  base.appendChild(baseTop);
-  base.appendChild(baseRight);
-  towerEl.appendChild(base);
-
-  // Build floor slabs (from bottom up = floor 1 at bottom)
-  floors.forEach((floorData, index) => {
-    const slab = document.createElement('div');
-    slab.className = 'floor-slab';
-    slab.dataset.tower = towerId;
-    slab.dataset.floor = floorData.floor;
-
-    const typeClass = floorData.type === 'lobby' ? 'lobby-floor'
-                    : floorData.type === 'executive' ? 'exec-floor'
-                    : '';
-
-    slab.style.cssText = `
-      width: ${slabW + sideW}px;
-      height: ${slabH + slabD}px;
-      position: relative;
-      transform-style: preserve-3d;
-    `;
-
-    // Front face
-    const front = document.createElement('div');
-    front.className = `slab-front ${typeClass}`;
-    front.style.cssText = `
-      width: ${slabW}px;
-      height: ${slabH}px;
-      position: absolute;
-      top: ${slabD}px;
-      left: 0;
-    `;
-
-    // Floor number label on front face
-    const numLabel = document.createElement('span');
-    numLabel.className = 'slab-num';
-    numLabel.textContent = `${floorData.floor}`;
-    front.appendChild(numLabel);
-
-    // Top face
-    const top = document.createElement('div');
-    top.className = 'slab-top';
-    top.style.cssText = `
-      width: ${slabW}px;
-      height: ${slabD}px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform: rotateX(90deg);
-      transform-origin: bottom;
-    `;
-
-    // Right face
-    const right = document.createElement('div');
-    right.className = 'slab-right';
-    right.style.cssText = `
-      width: ${sideW}px;
-      height: ${slabH}px;
-      position: absolute;
-      top: ${slabD}px;
-      left: ${slabW}px;
-      transform: rotateY(-90deg);
-      transform-origin: left;
-    `;
-
-    // Tooltip
-    const tooltip = document.createElement('div');
-    tooltip.className = 'slab-tooltip';
-    tooltip.innerHTML = `<strong>Floor ${floorData.floor}</strong> — ${floorData.dept}`;
-
-    slab.appendChild(top);
-    slab.appendChild(front);
-    slab.appendChild(right);
-    slab.appendChild(tooltip);
-
-    slab.addEventListener('click', () => selectFloor(towerId, floorData.floor));
-
-    towerEl.appendChild(slab);
-  });
-}
-
-function buildConnector() {
-  const conn = document.getElementById('towerConnector');
-  conn.innerHTML = '';
-
-  const lobbyH = 4; // 4 lobby-height connector slabs
-  for (let i = 0; i < lobbyH; i++) {
-    const piece = document.createElement('div');
-    piece.className = 'connector-piece';
-    piece.style.cssText = `
-      width: 20px;
-      height: 22px;
-      position: relative;
-      transform-style: preserve-3d;
-    `;
-
-    const front = document.createElement('div');
-    front.className = 'connector-front';
-    front.style.cssText = `
-      width: 20px; height: 14px;
-      position: absolute;
-      top: 8px; left: 0;
-    `;
-
-    piece.appendChild(front);
-    conn.appendChild(piece);
+      zone.addEventListener('click', () => selectFloor(tower, fd.floor));
+      container.appendChild(zone);
+    });
   }
+
+  createZones('admin', adminZones, FLOOR_DATA.admin);
+  createZones('courts', courtsZones, FLOOR_DATA.courts);
 }
 
+// ══════════════════════════════════════════════════
+// SELECT FLOOR
+// ══════════════════════════════════════════════════
 function selectFloor(tower, floorNum) {
   // Clear previous selection
-  document.querySelectorAll('.floor-slab').forEach(s => s.classList.remove('selected'));
+  document.querySelectorAll('.floor-zone').forEach(s => s.classList.remove('selected'));
   document.querySelectorAll('.floor-list-item').forEach(s => s.classList.remove('selected'));
   document.querySelectorAll('.need-chip').forEach(c => c.classList.remove('active'));
 
@@ -1726,8 +1443,8 @@ function selectFloor(tower, floorNum) {
   }
 
   // Mark new selection
-  const slabs = document.querySelectorAll(`.floor-slab[data-tower="${tower}"][data-floor="${floorNum}"]`);
-  slabs.forEach(s => s.classList.add('selected'));
+  const zones = document.querySelectorAll(`.floor-zone[data-tower="${tower}"][data-floor="${floorNum}"]`);
+  zones.forEach(s => s.classList.add('selected'));
 
   const listItem = document.querySelector(`.floor-list-item[data-tower="${tower}"][data-floor="${floorNum}"]`);
   if (listItem) listItem.classList.add('selected');
@@ -1788,7 +1505,7 @@ function showFloorResult(tower, data) {
 }
 
 function clearSelection() {
-  document.querySelectorAll('.floor-slab').forEach(s => s.classList.remove('selected'));
+  document.querySelectorAll('.floor-zone').forEach(s => s.classList.remove('selected'));
   document.querySelectorAll('.floor-list-item').forEach(s => s.classList.remove('selected'));
   document.querySelectorAll('.need-chip').forEach(c => c.classList.remove('active'));
   activeFloor = null;
@@ -1812,9 +1529,19 @@ function switchTower(tower) {
   document.getElementById('adminLabel').classList.toggle('active-label', tower === 'admin');
   document.getElementById('courtsLabel').classList.toggle('active-label', tower === 'courts');
 
-  // Highlight active tower in building
-  document.getElementById('adminTower').style.opacity = tower === 'admin' ? '1' : '0.6';
-  document.getElementById('courtsTower').style.opacity = tower === 'courts' ? '1' : '0.6';
+  // Dim inactive tower zones
+  document.querySelectorAll('.floor-zone[data-tower="admin"]').forEach(z => {
+    z.style.opacity = tower === 'admin' ? '1' : '0.4';
+    z.style.pointerEvents = tower === 'admin' ? 'auto' : 'none';
+  });
+  document.querySelectorAll('.floor-zone[data-tower="courts"]').forEach(z => {
+    z.style.opacity = tower === 'courts' ? '1' : '0.4';
+    z.style.pointerEvents = tower === 'courts' ? 'auto' : 'none';
+  });
+
+  // Also add a visual tower dim overlay
+  document.getElementById('adminDimOverlay').style.opacity = tower === 'admin' ? '0' : '1';
+  document.getElementById('courtsDimOverlay').style.opacity = tower === 'courts' ? '0' : '1';
 
   // Rebuild mobile list
   buildMobileList(tower);
@@ -1973,17 +1700,18 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ══════════════════════════════════════════════════
-// INIT — Build the 3D building
+// INIT — Build floor overlays on illustration
 // ══════════════════════════════════════════════════
 (function init() {
-  buildTower('admin', ADMIN_CONFIG, FLOOR_DATA.admin);
-  buildTower('courts', COURTS_CONFIG, FLOOR_DATA.courts);
-  buildConnector();
+  buildFloorOverlays();
   buildMobileList('admin');
 
-  // Set initial tower opacity
-  document.getElementById('adminTower').style.opacity = '1';
-  document.getElementById('courtsTower').style.opacity = '0.65';
+  // Set initial tower state — courts zones start dimmed
+  document.querySelectorAll('.floor-zone[data-tower="courts"]').forEach(z => {
+    z.style.opacity = '0.4';
+    z.style.pointerEvents = 'none';
+  });
+  document.getElementById('courtsDimOverlay').style.opacity = '1';
 })();
 
 </script>

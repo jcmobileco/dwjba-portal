@@ -3,62 +3,466 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CAYMC Overview — Detroit-Wayne Joint Building Authority</title>
+  <title>About the Authority — Detroit-Wayne Joint Building Authority</title>
+  <meta name="description" content="Since 1955, the Detroit-Wayne Joint Building Authority has served as the bi-jurisdictional steward of Detroit's most critical civic infrastructure." />
+
+  <!-- Base styles -->
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="main.js" defer></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
-    /* ══════════════════════════════════════════════════════════
-       PAGE TOKENS & BASE
-    ══════════════════════════════════════════════════════════ */
+    /* ── Brand Tokens ─────────────────────────────────────── */
     :root {
-      --brown:        #3d1a08;
-      --green:        #3d6b52;
-      --tan:          #c4956a;
-      --cream:        #f5ede0;
-      --zinc-950:     #0c0c0e;
-      --zinc-900:     #18181b;
-      --zinc-800:     #27272a;
-      --zinc-600:     #52525b;
-      --zinc-500:     #71717a;
-      --zinc-200:     #e4e4e7;
-      --zinc-100:     #f4f4f5;
-      --zinc-50:      #fafafa;
-      --stone-50:     #fafaf9;
-      --border:       #e2d9cc;
-      --fg:           #1a0d06;
-      --muted:        #6b5a4a;
-      --slate-accent: #5c3a22;
-      --section-alt:  #f0e8dc;
-      --pf: 'Playfair Display', Georgia, serif;
-      --inter: 'Inter', system-ui, sans-serif;
+      --zinc-950: #09090b;
+      --zinc-50:  #fafafa;
+      --border:   #e2d9cc;
+      --fg:       #1a0d06;
+      --section-alt: #f5ede0;
+      --brown:   #3d1a08;
+      --zinc-500: #71717a;
+      --tan:     #c4956a;
+      --green:   #3d6b52;
+      --cream:   #f5ede0;
+      --bg:      #f9f7f4;
+      --ink:     #1a0d06;
+      --muted:   #6b5a4a;
+      --rule:    #d6ccc0;
+      --white:   #ffffff;
+
+      --ff-display: 'Playfair Display', Georgia, serif;
+      --ff-body:    'Inter', system-ui, sans-serif;
+
+      --section-pad: clamp(64px, 8vw, 120px);
+      --page-pad:    clamp(20px, 5vw, 80px);
+      --max-w:       1200px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    /* ── Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: var(--inter);
-      background: #f9f7f4;
-      color: var(--fg);
+      font-family: var(--ff-body);
+      background: var(--bg);
+      color: var(--ink);
       -webkit-font-smoothing: antialiased;
-      line-height: 1.6;
     }
-    img { display: block; max-width: 100%; }
-    a { text-decoration: none; color: inherit; }
 
-    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
-    @media (min-width:640px)  { .wrap { padding: 0 1.5rem; } }
-    @media (min-width:1024px) { .wrap { padding: 0 2rem; } }
+    .page-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--page-pad);
+    }
 
-    .highlight { color: var(--tan); }
+    /* ── NAV CSS ──────────────────────────────────────────── */
+    /* Footer */
+    /* ── Section Label ────────────────────────────────────── */
+    .section-label {
+      display: inline-block;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 20px;
+    }
 
-    /* ══════════════════════════════════════════════════════════
-       TOP BAR
-    ══════════════════════════════════════════════════════════ */
-    .topbar { background: var(--zinc-950); color: white; font-size: 11px; }
+    /* ── Horizontal Rule ──────────────────────────────────── */
+    .h-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       1. INTRO SECTION
+    ═══════════════════════════════════════════════════════ */
+    .intro-section {
+      padding: clamp(56px, 7vw, 100px) 0 clamp(48px, 6vw, 80px);
+    }
+
+    .intro-inner {
+      max-width: 780px;
+    }
+
+    .intro-lead {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--ink);
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .intro-sub {
+      font-family: var(--ff-body);
+      font-size: clamp(13px, 1.4vw, 15px);
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 660px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       2. MISSION / VISION / RESPONSIBILITY
+    ═══════════════════════════════════════════════════════ */
+    .foundation-section {
+      padding: var(--section-pad) 0;
+      background: var(--white);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .foundation-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 36px;
+      letter-spacing: -0.01em;
+    }
+
+    .foundation-rule {
+      border: none;
+      border-top: 2px solid var(--brown);
+      margin-bottom: 48px;
+    }
+
+    .foundation-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 48px;
+    }
+
+    .foundation-card .card-label {
+      font-family: var(--ff-body);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .foundation-card .card-title {
+      font-family: var(--ff-display);
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .foundation-card .card-body {
+      font-family: var(--ff-body);
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       3. BUILDING FEATURE
+    ═══════════════════════════════════════════════════════ */
+    .building-section {
+      padding: var(--section-pad) 0;
+      background: var(--bg);
+    }
+
+    .building-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    /* Left: name + address */
+    .building-identity {}
+
+    .building-name {
+      font-family: var(--ff-display);
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    .building-name-rule {
+      border: none;
+      border-top: 2px solid var(--brown);
+      margin-bottom: 24px;
+    }
+
+    .building-address {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.5vw, 17px);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    /* Right: stats */
+    .building-stats {}
+
+    .stats-row {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 36px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .stat-item {}
+
+    .stat-number {
+      font-family: var(--ff-display);
+      font-size: clamp(32px, 4vw, 54px);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-number sup {
+      font-size: 0.45em;
+      vertical-align: super;
+      font-weight: 600;
+      color: var(--tan);
+    }
+
+    .stat-label {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .building-desc {
+      font-family: var(--ff-body);
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 460px;
+    }
+
+    .building-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--brown);
+      border: none;
+      padding: 14px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .building-cta:hover { background: var(--ink); }
+
+    .building-cta .arrow {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       4. PHOTO FEATURE
+    ═══════════════════════════════════════════════════════ */
+    .photo-section {
+      padding: 0 0 var(--section-pad);
+      background: var(--bg);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+
+    .photo-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-item:hover img { transform: scale(1.03); }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 24px 18px;
+      background: linear-gradient(transparent, rgba(26,13,6,0.72));
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       5. CTA SECTION
+    ═══════════════════════════════════════════════════════ */
+    .cta-section {
+      background: var(--cream);
+      padding: var(--section-pad) 0;
+      border-top: 1px solid #e0d4c4;
+      border-bottom: 1px solid #e0d4c4;
+      text-align: center;
+    }
+
+    .cta-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.15;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-desc {
+      font-family: var(--ff-body);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--white);
+      background: var(--green);
+      border: 2px solid var(--green);
+      padding: 13px 22px;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { background: #2f5440; border-color: #2f5440; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--brown);
+      background: transparent;
+      border: 2px solid var(--brown);
+      padding: 13px 22px;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover { background: var(--brown); color: var(--white); }
+
+    /* ═══════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .foundation-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .building-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .building-name {
+        font-size: clamp(36px, 8vw, 54px);
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-item { aspect-ratio: 16/9; }
+    }
+
+    @media (max-width: 640px) {
+      .stats-row {
+        gap: 24px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-primary,
+      .btn-outline {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+
+    /* ═══════ SHARED: Topbar + Header + Nav (from homepage) ═══════ */
+    .topbar {
+      background: var(--zinc-950);
+      color: white;
+      font-size: 11px;
+    }
     .topbar-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 1rem; padding: .45rem 1rem; max-width: 1280px; margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .45rem 1rem;
+      max-width: 1280px;
+      margin: 0 auto;
     }
     @media (min-width:640px)  { .topbar-inner { padding-left:1.5rem; padding-right:1.5rem; } }
     @media (min-width:1024px) { .topbar-inner { padding-left:2rem; padding-right:2rem; } }
@@ -74,73 +478,153 @@
     .topbar-right a { padding:3px 7px; border-radius:4px; font-weight:600; transition:color .15s, background .15s; }
     .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
 
-    /* ══════════════════════════════════════════════════════════
-       HEADER / NAV
-    ══════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════
+       HEADER
+    ════════════════════════════════════════════════════════ */
     .site-header {
       background: #ffffff;
-      position: sticky; top: 0; z-index: 500;
+      position: sticky;
+      top: 0;
+      z-index: 500;
       border-bottom: 1px solid #e2d9cc;
       transition: box-shadow .3s;
     }
     .site-header.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.10); }
     .header-inner {
-      max-width: 1280px; margin: 0 auto; padding: 0 1rem;
-      display: flex; align-items: center; height: 80px; position: relative;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      height: 80px;
+      position: relative;
     }
     @media (min-width:640px)  { .header-inner { padding:0 1.5rem; } }
     @media (min-width:1024px) { .header-inner { padding:0 2rem; } }
-    .nav-left, .nav-right { display:none; align-items:center; gap:1px; flex:1; }
+
+    /* Left + Right nav */
+    .nav-left, .nav-right {
+      display: none;
+      align-items: center;
+      gap: 1px;
+      flex: 1;
+    }
     @media (min-width:1280px){ .nav-left,.nav-right { display:flex; } }
     .nav-right { justify-content:flex-end; }
-    .nav-logo { position:absolute; left:50%; transform:translateX(-50%); }
-    @media (min-width:1280px){ .nav-logo { position:relative; left:auto; transform:none; flex-shrink:0; } }
+
+    /* Center logo */
+    .nav-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @media (min-width:1280px){
+      .nav-logo { position:relative; left:auto; transform:none; flex-shrink:0; }
+    }
     .nav-logo img { height:64px; width:64px; object-fit:contain; display:block; }
+
+    /* Nav item */
     .nav-item { position:relative; }
     .nav-btn {
-      display:flex; align-items:center; gap:2px; padding:7px 9px;
-      font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em;
-      color:#2c2420; border-radius:5px; white-space:nowrap;
-      cursor:default; transition:color .15s; background:none; border:none; font-family:inherit;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 7px 9px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #2c2420;
+      border-radius: 5px;
+      white-space: nowrap;
+      cursor: default;
+      transition: color .15s;
+      background: none;
+      border: none;
+      font-family: inherit;
     }
     .nav-btn svg { width:11px; height:11px; transition:transform .2s; }
     .nav-item:hover .nav-btn { color: var(--brown); }
     .nav-item:hover .nav-btn svg { transform:rotate(180deg); }
-    .nav-drop { display:none; position:absolute; top:calc(100% + 4px); left:0; z-index:600; min-width:210px; }
+
+    .nav-drop {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 600;
+      min-width: 210px;
+    }
     .nav-item:hover .nav-drop { display:block; }
     .nav-drop-inner {
-      background:white; border:1px solid var(--border); border-radius:12px;
-      box-shadow:0 12px 40px rgba(0,0,0,.18); overflow:hidden;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.18);
+      overflow: hidden;
     }
     .nav-drop-inner a {
-      display:block; padding:10px 16px; font-size:14px; font-weight:500;
-      color:rgba(26,13,6,.8); transition:background .12s;
+      display: block;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(26,13,6,.8);
+      transition: background .12s;
     }
-    .nav-drop-inner a:hover { background:var(--zinc-50); }
+    .nav-drop-inner a:hover { background: var(--zinc-50); }
+
+    /* Search btn */
     .nav-search {
-      margin-left:.4rem; padding:7px; color:#2c2420; border-radius:7px;
-      background:none; border:none; cursor:pointer; display:flex; align-items:center; transition:color .15s;
+      margin-left: .4rem;
+      padding: 7px;
+      color: #2c2420;
+      border-radius: 7px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: color .15s;
     }
-    .nav-search:hover { color:var(--brown); }
+    .nav-search:hover { color: var(--brown); }
     .nav-search svg { width:15px; height:15px; }
-    .mob-controls { display:flex; align-items:center; gap:.4rem; margin-left:auto; }
+
+    /* Mobile toggle */
+    .mob-controls {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      margin-left: auto;
+    }
     @media (min-width:1280px){ .mob-controls { display:none; } }
     .mob-controls button {
-      padding:7px; color:#2c2420; border-radius:7px;
-      background:none; border:none; cursor:pointer; transition:color .15s;
+      padding:7px; color: #2c2420; border-radius:7px;
+      background:none; border:none; cursor:pointer;
+      transition:color .15s;
     }
-    .mob-controls button:hover { color:var(--brown); }
+    .mob-controls button:hover { color: var(--brown); }
     .mob-controls button svg { width:18px; height:18px; display:block; }
+
+    /* Mobile nav */
     .mob-nav {
-      position:fixed; top:0; right:0; bottom:0; width:300px;
-      background:white; z-index:700; overflow-y:auto;
-      transform:translateX(100%); transition:transform .3s ease;
-      box-shadow:-4px 0 30px rgba(0,0,0,.2);
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 300px;
+      background: white;
+      z-index: 700;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      box-shadow: -4px 0 30px rgba(0,0,0,.2);
     }
     .mob-nav.open { transform:translateX(0); }
     .mob-nav-head {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:1.25rem 1.5rem; background:var(--brown); color:white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      background: var(--brown);
+      color: white;
     }
     .mob-nav-head span { font-size:14px; font-weight:700; }
     .mob-nav-head button { color:white; background:none; border:none; cursor:pointer; }
@@ -150,18 +634,34 @@
     .mob-label { display:block; padding:.55rem 1.5rem; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--brown); }
     .mob-link { display:block; padding:.45rem 1.5rem .45rem 2rem; font-size:14px; color:var(--fg); transition:background .12s; }
     .mob-link:hover { background:var(--section-alt); }
-    .scrim { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:650; }
+    .scrim {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 650;
+    }
     .scrim.visible { display:block; }
 
-    /* ══════════════════════════════════════════════════════════
-       FOOTER (copied from homepage)
-    ══════════════════════════════════════════════════════════ */
-    .site-footer { background: var(--zinc-950); color: white; }
-    .footer-main { max-width:1280px; margin:0 auto; padding:4rem 1rem 3rem; }
+    /* ═══════ SHARED: Footer (from homepage) ═══════ */
+    .site-footer { background:var(--zinc-950); color:white; }
+    .footer-main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 1rem 3rem;
+    }
     @media (min-width:640px)  { .footer-main { padding-left:1.5rem; padding-right:1.5rem; } }
     @media (min-width:1024px) { .footer-main { padding-left:2rem; padding-right:2rem; } }
-    .footer-top { display:flex; flex-direction:column; gap:3rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.1); }
+
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
     @media (min-width:1024px){ .footer-top { flex-direction:row; gap:5rem; } }
+
     .footer-brand { flex-shrink:0; }
     @media (min-width:1024px){ .footer-brand { width:18rem; } }
     .footer-logo { height:64px; width:auto; margin-bottom:1rem; }
@@ -170,561 +670,52 @@
     .footer-ci { display:flex; align-items:flex-start; gap:.625rem; font-size:.875rem; color:white; }
     .footer-ci svg { width:14px; height:14px; color:rgba(255,255,255,.3); flex-shrink:0; margin-top:3px; }
     .footer-ci a:hover { color:white; text-decoration:underline; }
-    .footer-nav { flex:1; display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; }
+
+    .footer-nav {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 2rem;
+    }
     @media (min-width:640px)  { .footer-nav { grid-template-columns:repeat(3,1fr); } }
     @media (min-width:1024px) { .footer-nav { grid-template-columns:repeat(4,1fr); } }
+
     .fn-col h3 { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.15em; color:white; margin-bottom:1rem; }
-    .fn-col ul { display:flex; flex-direction:column; gap:.625rem; list-style:none; }
-    .fn-col li span, .fn-col li a { font-size:.875rem; color:white; line-height:1.4; display:block; cursor:default; transition:color .15s; }
+    .fn-col ul { display:flex; flex-direction:column; gap:.625rem; }
+    .fn-col li span,
+    .fn-col li a { font-size:.875rem; color:white; line-height:1.4; display:block; cursor:default; transition:color .15s; }
     .fn-col li a:hover { color:rgba(255,255,255,.7); }
-    .footer-bottom { max-width:1280px; margin:0 auto; padding:2rem 1rem 0; display:flex; flex-direction:column; align-items:center; gap:1rem; }
-    @media (min-width:640px){ .footer-bottom { flex-direction:row; justify-content:space-between; padding-left:1.5rem; padding-right:1.5rem; } }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    @media (min-width:640px){
+      .footer-bottom { flex-direction:row; justify-content:space-between; padding-left:1.5rem; padding-right:1.5rem; }
+    }
     @media (min-width:1024px){ .footer-bottom { padding-left:2rem; padding-right:2rem; } }
     .footer-copy { font-size:.75rem; color:white; }
     .footer-legal { display:flex; align-items:center; gap:1.25rem; font-size:.75rem; color:white; }
-    .footer-legal a, .footer-legal button { color:white; background:none; border:none; font-family:inherit; font-size:inherit; cursor:pointer; transition:color .15s; }
-    .footer-legal a:hover, .footer-legal button:hover { color:rgba(255,255,255,.7); }
+    .footer-legal a,
+    .footer-legal button { color:white; background:none; border:none; font-family:inherit; font-size:inherit; cursor:pointer; transition:color .15s; }
+    .footer-legal a:hover,
+    .footer-legal button:hover { color:rgba(255,255,255,.7); }
     .footer-legal-ext { display:flex; align-items:center; gap:3px; }
     .footer-legal-ext svg { width:11px; height:11px; }
 
-    /* ══════════════════════════════════════════════════════════
-       SECTION 1 — HERO
-    ══════════════════════════════════════════════════════════ */
-    .ov-hero {
-      background: #f9f7f4;
-      padding: 6rem 0 5rem;
-    }
-    @media (min-width:768px) { .ov-hero { padding: 7rem 0 6rem; } }
-    @media (min-width:1024px) { .ov-hero { padding: 8rem 0 7rem; } }
-
-    .ov-hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    @media (min-width:768px) {
-      .ov-hero-grid {
-        grid-template-columns: 55% 1fr;
-        gap: 3.5rem;
-      }
-    }
-    @media (min-width:1024px) {
-      .ov-hero-grid { gap: 4rem; }
-    }
-
-    .ov-hero-heading {
-      font-family: var(--pf);
-      font-size: clamp(2.75rem, 6vw, 4.5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--fg);
-      margin-bottom: 1.5rem;
-    }
-
-    .ov-hero-body {
-      font-size: 1.0625rem;
-      color: var(--muted);
-      line-height: 1.75;
-      max-width: 540px;
-      margin-bottom: 2.5rem;
-    }
-
-    .ov-hero-stats {
-      display: flex;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-    }
-    .ov-hero-stat {
-      display: flex;
-      flex-direction: column;
-    }
-    .ov-hero-stat-val {
-      font-family: var(--pf);
-      font-size: 2.25rem;
-      font-weight: 700;
-      color: var(--fg);
-      line-height: 1;
-      letter-spacing: -0.03em;
-    }
-    .ov-hero-stat-label {
-      font-size: .8125rem;
-      font-weight: 500;
-      color: var(--muted);
-      margin-top: .35rem;
-    }
-
-    .ov-video-wrap {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 */
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.12), 0 4px 16px rgba(0,0,0,.06);
-    }
-    .ov-video-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       SECTION 2 — PHOTO MOSAIC STRIP
-    ══════════════════════════════════════════════════════════ */
-    .ov-mosaic {
-      padding: 0;
-      overflow: hidden;
-    }
-    .ov-mosaic-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: 360px;
-      gap: 4px;
-    }
-    @media (max-width:1023px) {
-      .ov-mosaic-grid {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: 280px 280px;
-      }
-      .ov-mosaic-item:nth-child(4) { display: block; }
-      .ov-mosaic-item:nth-child(5) { display: block; }
-    }
-    @media (max-width:767px) {
-      .ov-mosaic-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 3px;
-      }
-      .ov-mosaic-item { height: 240px; }
-    }
-
-    .ov-mosaic-item {
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-    }
-    .ov-mosaic-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform .6s ease;
-    }
-    .ov-mosaic-item:hover img {
-      transform: scale(1.03);
-    }
-    .ov-mosaic-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 1.25rem 1rem .875rem;
-      background: linear-gradient(to top, rgba(0,0,0,.65), transparent);
-      color: white;
-      font-size: .8125rem;
-      font-weight: 600;
-      letter-spacing: .02em;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity .3s, transform .3s;
-    }
-    .ov-mosaic-item:hover .ov-mosaic-caption {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       SECTION 3 — BUILDING FACTS (DARK)
-    ══════════════════════════════════════════════════════════ */
-    .ov-facts {
-      background: var(--fg);
-      padding: 6rem 0;
-    }
-    @media (min-width:768px) { .ov-facts { padding: 7rem 0; } }
-    @media (min-width:1024px) { .ov-facts { padding: 7.5rem 0; } }
-
-    .ov-facts-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
-      align-items: start;
-    }
-    @media (min-width:768px) {
-      .ov-facts-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 5rem;
-      }
-    }
-
-    .ov-facts-heading {
-      font-family: var(--pf);
-      font-size: clamp(2.25rem, 5vw, 3.5rem);
-      font-weight: 700;
-      color: white;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-    }
-    .ov-facts-body {
-      font-size: 1rem;
-      color: rgba(255,255,255,.6);
-      line-height: 1.75;
-    }
-
-    .ov-specs-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 1rem;
-      overflow: hidden;
-    }
-    .ov-spec {
-      padding: 1.75rem 1.5rem;
-      border-right: 1px solid rgba(255,255,255,.1);
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-    .ov-spec:nth-child(2n) { border-right: none; }
-    .ov-spec:nth-last-child(-n+2) { border-bottom: none; }
-
-    .ov-spec-val {
-      font-family: var(--pf);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: white;
-      line-height: 1.2;
-      margin-bottom: .25rem;
-    }
-    .ov-spec-label {
-      font-size: .75rem;
-      font-weight: 500;
-      color: rgba(255,255,255,.4);
-      line-height: 1.4;
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       SECTION 4 — STATS BAND
-    ══════════════════════════════════════════════════════════ */
-    .ov-stats-band {
-      background: var(--cream);
-      padding: 5rem 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    @media (min-width:768px) { .ov-stats-band { padding: 6rem 0; } }
-
-    .ov-stats-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2.5rem 1.5rem;
-      text-align: center;
-    }
-    @media (min-width:768px) {
-      .ov-stats-row {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-      }
-    }
-
-    .ov-counter-num {
-      font-family: var(--pf);
-      font-size: clamp(3rem, 5vw, 4.5rem);
-      font-weight: 700;
-      color: var(--fg);
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-    .ov-counter-suffix {
-      font-family: var(--pf);
-      font-size: clamp(2rem, 3vw, 3rem);
-      font-weight: 600;
-      color: var(--tan);
-    }
-    .ov-counter-label {
-      font-size: .875rem;
-      font-weight: 500;
-      color: var(--muted);
-      margin-top: .5rem;
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       SECTION 5 — SPIRIT OF DETROIT
-    ══════════════════════════════════════════════════════════ */
-    .ov-spirit {
-      background: #f9f7f4;
-      padding: 6rem 0;
-    }
-    @media (min-width:768px) { .ov-spirit { padding: 7rem 0; } }
-    @media (min-width:1024px) { .ov-spirit { padding: 7.5rem 0; } }
-
-    .ov-spirit-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-    @media (min-width:768px) {
-      .ov-spirit-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-      }
-    }
-
-    .ov-spirit-img {
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,.15);
-    }
-    .ov-spirit-img img {
-      width: 100%;
-      height: 480px;
-      object-fit: cover;
-    }
-    @media (min-width:1024px) {
-      .ov-spirit-img img { height: 560px; }
-    }
-
-    .ov-spirit-heading {
-      font-family: var(--pf);
-      font-size: clamp(2.25rem, 5vw, 3.5rem);
-      font-weight: 700;
-      color: var(--fg);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-    }
-    .ov-spirit-body {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 2rem;
-    }
-    .ov-spirit-link {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      font-size: .875rem;
-      font-weight: 700;
-      color: var(--brown);
-      transition: gap .2s;
-    }
-    .ov-spirit-link:hover { gap: .75rem; }
-    .ov-spirit-link svg { width: 16px; height: 16px; }
-
-    /* ══════════════════════════════════════════════════════════
-       SECTION 6 — OPERATIONS & LEADERSHIP
-    ══════════════════════════════════════════════════════════ */
-    .ov-ops {
-      background: var(--cream);
-      padding: 6rem 0;
-      border-top: 1px solid var(--border);
-    }
-    @media (min-width:768px) { .ov-ops { padding: 7rem 0; } }
-
-    .ov-ops-header {
-      max-width: 640px;
-      margin-bottom: 3.5rem;
-    }
-    .ov-ops-heading {
-      font-family: var(--pf);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      color: var(--fg);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-    }
-    .ov-ops-sub {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .ov-ops-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-    @media (min-width:640px)  { .ov-ops-cards { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width:1024px) { .ov-ops-cards { grid-template-columns: repeat(4, 1fr); } }
-
-    .ov-ops-card {
-      background: white;
-      border-radius: 1rem;
-      padding: 2rem 1.75rem;
-      border: 1px solid var(--border);
-      transition: box-shadow .3s, transform .3s;
-    }
-    .ov-ops-card:hover {
-      box-shadow: 0 12px 40px rgba(0,0,0,.08);
-      transform: translateY(-2px);
-    }
-    .ov-ops-card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.25rem;
-      color: var(--brown);
-      transition: border-color .2s;
-    }
-    .ov-ops-card:hover .ov-ops-card-icon { border-color: var(--tan); }
-    .ov-ops-card-icon svg { width: 20px; height: 20px; }
-    .ov-ops-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--fg);
-      margin-bottom: .625rem;
-    }
-    .ov-ops-card p {
-      font-size: .8125rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       SECTION 7 — PHOTO + QUOTE
-    ══════════════════════════════════════════════════════════ */
-    .ov-quote {
-      position: relative;
-      min-height: 440px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .ov-quote-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 35%;
-    }
-    .ov-quote-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(26,13,6,.78);
-    }
-    .ov-quote-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 5rem 1.5rem;
-      max-width: 740px;
-    }
-    .ov-quote-text {
-      font-family: var(--pf);
-      font-size: clamp(2rem, 4.5vw, 3.25rem);
-      font-weight: 400;
-      font-style: italic;
-      color: white;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
-    }
-    .ov-quote-attr {
-      font-size: .875rem;
-      color: rgba(255,255,255,.5);
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       SECTION 8 — CTA
-    ══════════════════════════════════════════════════════════ */
-    .ov-cta {
-      background: var(--green);
-      padding: 5rem 0;
-      text-align: center;
-    }
-    @media (min-width:768px) { .ov-cta { padding: 6rem 0; } }
-
-    .ov-cta-heading {
-      font-family: var(--pf);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      color: white;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 1rem;
-    }
-    .ov-cta-sub {
-      font-size: 1.0625rem;
-      color: rgba(255,255,255,.75);
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
-      line-height: 1.7;
-    }
-    .ov-cta-btns {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: .875rem;
-    }
-    .ov-cta-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      padding: .9375rem 2.25rem;
-      background: white;
-      color: var(--green);
-      font-size: .9375rem;
-      font-weight: 700;
-      border-radius: .5rem;
-      transition: opacity .2s;
-      box-shadow: 0 4px 16px rgba(0,0,0,.15);
-    }
-    .ov-cta-btn-primary:hover { opacity: .92; }
-    .ov-cta-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      padding: .9375rem 2.25rem;
-      border: 1.5px solid rgba(255,255,255,.35);
-      color: white;
-      font-size: .9375rem;
-      font-weight: 600;
-      border-radius: .5rem;
-      transition: background .2s, border-color .2s;
-    }
-    .ov-cta-btn-secondary:hover {
-      border-color: rgba(255,255,255,.6);
-      background: rgba(255,255,255,.08);
-    }
-
-    /* ══════════════════════════════════════════════════════════
-       ANIMATIONS
-    ══════════════════════════════════════════════════════════ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .reveal.in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════
-     TOP BAR
-════════════════════════════════════════════════════════ -->
-<div class="topbar">
+  <!-- ═══════════════════════════════════════════════════════
+       NAV — exact from nav-template.html
+  ═══════════════════════════════════════════════════════ -->
+  <div class="topbar">
   <div class="topbar-inner">
     <div class="topbar-left">
       <a href="tel:+13132243540">
@@ -800,388 +791,206 @@
       </div>
     </nav>
 
-    <!-- Center Logo -->
-    <div class="nav-logo">
-      <a href="index.html">
-        <img src="images/logo-nav.png" alt="Detroit-Wayne Joint Building Authority" />
-      </a>
-    </div>
-
-    <!-- Right Nav -->
-    <nav class="nav-right">
-      <div class="nav-item">
-        <button class="nav-btn">Capital Projects <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
-        <div class="nav-drop"><div class="nav-drop-inner">
-          <a href="#">Current Projects</a>
-          <a href="#">Completed Projects</a>
-          <a href="#">Upcoming Projects</a>
-        </div></div>
-      </div>
-      <div class="nav-item">
-        <button class="nav-btn">Real Estate <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
-        <div class="nav-drop"><div class="nav-drop-inner">
-          <a href="#">Portfolio Overview</a>
-          <a href="#">Properties &amp; Listings</a>
-        </div></div>
-      </div>
-      <div class="nav-item">
-        <button class="nav-btn">Documents <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
-        <div class="nav-drop"><div class="nav-drop-inner">
-          <a href="#">Public Documents</a>
-          <a href="#">Reports &amp; Policies</a>
-          <a href="#">Procurement Documents</a>
-          <a href="#">Board Materials</a>
-        </div></div>
-      </div>
-      <div class="nav-item">
-        <button class="nav-btn">News <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
-        <div class="nav-drop"><div class="nav-drop-inner">
-          <a href="#">All News</a>
-          <a href="#">Project Updates</a>
-          <a href="#">Procurement Notices</a>
-        </div></div>
-      </div>
-      <div class="nav-item">
-        <button class="nav-btn">Contact <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
-        <div class="nav-drop"><div class="nav-drop-inner">
-          <a href="contact.html">Contact Us</a>
-          <a href="directory.html">Department Directory</a>
-        </div></div>
-      </div>
-      <button class="nav-search" aria-label="Search">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
-      </button>
-    </nav>
-
-    <!-- Mobile controls -->
-    <div class="mob-controls">
-      <button aria-label="Search">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
-      </button>
-      <button id="mobMenuBtn" aria-label="Open menu">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-      </button>
-    </div>
-
-  </div>
-</header>
-
-<!-- Mobile nav drawer -->
-<div class="scrim" id="scrim"></div>
-<nav class="mob-nav" id="mobNav">
-  <div class="mob-nav-head">
-    <span>Menu</span>
-    <button id="mobCloseBtn">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
-    </button>
-  </div>
-  <div class="mob-nav-body">
-    <div class="mob-group"><span class="mob-label">About</span><a class="mob-link" href="about.html">Overview</a><a class="mob-link" href="about.html#leadership">Leadership &amp; Governance</a></div>
-    <div class="mob-group"><span class="mob-label">CAYMC</span><a class="mob-link" href="directory.html">Departments &amp; Offices</a><a class="mob-link" href="building-directory.html">Building Directory</a><a class="mob-link" href="contact.html">Visitor Information</a></div>
-    <div class="mob-group"><span class="mob-label">Spirit of Detroit</span><a class="mob-link" href="spirit.html">Overview</a></div>
-    <div class="mob-group"><span class="mob-label">Procurement</span><a class="mob-link" href="#">Bid Opportunities</a><a class="mob-link" href="#">Vendor Resources</a></div>
-    <div class="mob-group"><span class="mob-label">Contact</span><a class="mob-link" href="contact.html">Contact Us</a><a class="mob-link" href="directory.html">Department Directory</a></div>
-  </div>
-</nav>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 1 — HERO
-═══════════════════════════════════════════════════════════ -->
-<section class="ov-hero">
-  <div class="wrap">
-    <div class="ov-hero-grid">
-
-      <!-- LEFT — Typography + Stats -->
-      <div>
-        <h1 class="ov-hero-heading reveal">
-          Detroit's <span class="highlight">civic heart</span><br>since 1955.
-        </h1>
-        <p class="ov-hero-body reveal reveal-delay-1">
-          The Coleman A. Young Municipal Center is the seat of government for both the City of Detroit and Wayne County — a 780,000-square-foot civic landmark on Woodward Avenue housing over 70 departments, courts, and public agencies.
-        </p>
-        <div class="ov-hero-stats reveal reveal-delay-2">
-          <div class="ov-hero-stat">
-            <span class="ov-hero-stat-val">70</span>
-            <span class="ov-hero-stat-label">Years of Service</span>
-          </div>
-          <div class="ov-hero-stat">
-            <span class="ov-hero-stat-val">780K</span>
-            <span class="ov-hero-stat-label">Square Feet</span>
-          </div>
-          <div class="ov-hero-stat">
-            <span class="ov-hero-stat-val">70+</span>
-            <span class="ov-hero-stat-label">Departments</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT — YouTube Video -->
-      <div class="reveal reveal-delay-2">
-        <div class="ov-video-wrap">
-          <iframe
-            src="https://www.youtube-nocookie.com/embed/4W1VYLVdZhg"
-            title="Coleman A. Young Municipal Center turns 70"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 2 — PHOTO MOSAIC STRIP
-═══════════════════════════════════════════════════════════ -->
-<section class="ov-mosaic">
-  <div class="ov-mosaic-grid">
-    <div class="ov-mosaic-item">
-      <img src="images/caymc-snow.jpg" alt="CAYMC in winter from Jefferson Avenue" loading="lazy" />
-      <div class="ov-mosaic-caption">Winter at CAYMC</div>
-    </div>
-    <div class="ov-mosaic-item">
-      <img src="images/caymc-hines-1.jpg" alt="CAYMC exterior — Administration Tower" loading="lazy" />
-      <div class="ov-mosaic-caption">Administration Tower</div>
-    </div>
-    <div class="ov-mosaic-item">
-      <img src="images/caymc-historic.jpg" alt="Historic photograph of the Municipal Center" loading="lazy" />
-      <div class="ov-mosaic-caption">Historic City-County Building</div>
-    </div>
-    <div class="ov-mosaic-item">
-      <img src="images/spirit-night.jpg" alt="Spirit of Detroit at night" loading="lazy" />
-      <div class="ov-mosaic-caption">Spirit of Detroit Plaza</div>
-    </div>
-    <div class="ov-mosaic-item">
-      <img src="images/caymc-sah.jpg" alt="Architectural perspective of CAYMC" loading="lazy" />
-      <div class="ov-mosaic-caption">Architectural Perspective</div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 3 — BUILDING FACTS (DARK)
-═══════════════════════════════════════════════════════════ -->
-<section class="ov-facts" id="building">
-  <div class="wrap">
-    <div class="ov-facts-grid">
-
-      <div>
-        <h2 class="ov-facts-heading reveal">
-          Two towers.<br>One <span class="highlight">mission</span>.
-        </h2>
-        <p class="ov-facts-body reveal reveal-delay-1">
-          The Municipal Center comprises two interconnected towers rising above Woodward Avenue — the 14-floor Administration Tower housing city and county executive offices, and the 20-floor Courts Tower serving the 3rd Judicial Circuit Court and 36th District Court. Together, they form the largest civic complex in Michigan, purpose-built to unite government under one roof.
-        </p>
-      </div>
-
-      <div class="reveal reveal-delay-2">
-        <div class="ov-specs-grid">
-          <div class="ov-spec">
-            <div class="ov-spec-val">14 Floors</div>
-            <div class="ov-spec-label">Administration Tower</div>
-          </div>
-          <div class="ov-spec">
-            <div class="ov-spec-val">20 Floors</div>
-            <div class="ov-spec-label">Courts Tower</div>
-          </div>
-          <div class="ov-spec">
-            <div class="ov-spec-val">197 ft</div>
-            <div class="ov-spec-label">Admin Tower Height</div>
-          </div>
-          <div class="ov-spec">
-            <div class="ov-spec-val">318 ft</div>
-            <div class="ov-spec-label">Courts Tower Height</div>
-          </div>
-          <div class="ov-spec">
-            <div class="ov-spec-val">780K sq ft</div>
-            <div class="ov-spec-label">Total Building Area</div>
-          </div>
-          <div class="ov-spec">
-            <div class="ov-spec-val">70+</div>
-            <div class="ov-spec-label">Departments &amp; Offices</div>
-          </div>
-          <div class="ov-spec">
-            <div class="ov-spec-val">Harley, Ellington &amp; Day</div>
-            <div class="ov-spec-label">Architects — Completed 1955</div>
-          </div>
-          <div class="ov-spec">
-            <div class="ov-spec-val">Mayor Coleman A. Young</div>
-            <div class="ov-spec-label">Named in honor, 1976</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 4 — STATS BAND
-═══════════════════════════════════════════════════════════ -->
-<section class="ov-stats-band" id="stats-band">
-  <div class="wrap">
-    <div class="ov-stats-row">
-      <div class="reveal">
-        <div class="ov-counter-num">
-          <span class="ov-counter" data-target="70" data-suffix="">0</span><span class="ov-counter-suffix"></span>
-        </div>
-        <div class="ov-counter-label">Years of Service</div>
-      </div>
-      <div class="reveal reveal-delay-1">
-        <div class="ov-counter-num">
-          <span class="ov-counter" data-target="780" data-suffix="K">0</span><span class="ov-counter-suffix">K</span>
-        </div>
-        <div class="ov-counter-label">Square Feet</div>
-      </div>
-      <div class="reveal reveal-delay-2">
-        <div class="ov-counter-num">
-          <span class="ov-counter" data-target="70" data-suffix="+">0</span><span class="ov-counter-suffix">+</span>
-        </div>
-        <div class="ov-counter-label">Departments &amp; Offices</div>
-      </div>
-      <div class="reveal reveal-delay-3">
-        <div class="ov-counter-num">
-          <span class="ov-counter" data-target="2" data-suffix="M+">0</span><span class="ov-counter-suffix">M+</span>
-        </div>
-        <div class="ov-counter-label">Annual Visitors</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 5 — SPIRIT OF DETROIT
-═══════════════════════════════════════════════════════════ -->
-<section class="ov-spirit">
-  <div class="wrap">
-    <div class="ov-spirit-grid">
-
-      <!-- LEFT — Image -->
-      <div class="ov-spirit-img reveal">
-        <img src="images/spirit-night.jpg" alt="The Spirit of Detroit sculpture at night" loading="lazy" />
-      </div>
-
-      <!-- RIGHT — Text -->
-      <div>
-        <h2 class="ov-spirit-heading reveal">
-          The <span class="highlight">Spirit</span><br>of Detroit
-        </h2>
-        <p class="ov-spirit-body reveal reveal-delay-1">
-          Standing 26 feet tall on the Woodward Avenue plaza, Marshall Fredericks' 1958 bronze masterpiece is one of the most recognized public artworks in America. The seated figure holds a gilded sphere representing God in the left hand and a family group in the right — symbolizing the relationship between the divine and the human family. The Spirit of Detroit plaza hosts civic celebrations, jersey dressings for Detroit sports championships, and is the most photographed landmark in the city.
-        </p>
-        <a href="spirit.html" class="ov-spirit-link reveal reveal-delay-2">
-          Visit the Plaza
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
+      <div class="nav-logo">
+        <a href="index.html">
+          <img src="images/logo-nav.png" alt="Detroit-Wayne Joint Building Authority" />
         </a>
       </div>
 
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 6 — OPERATIONS & LEADERSHIP
-═══════════════════════════════════════════════════════════ -->
-<section class="ov-ops" id="services">
-  <div class="wrap">
-
-    <div class="ov-ops-header">
-      <h2 class="ov-ops-heading reveal">
-        Managed by <span class="highlight">DWJBA</span>
-      </h2>
-      <p class="ov-ops-sub reveal reveal-delay-1">
-        The Detroit-Wayne Joint Building Authority oversees all operations, maintenance, and capital improvements for the Coleman A. Young Municipal Center — ensuring world-class facility management for the public buildings that serve Detroit and Wayne County.
-      </p>
-    </div>
-
-    <div class="ov-ops-cards">
-
-      <div class="ov-ops-card reveal">
-        <div class="ov-ops-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3H21m-3.75 3H21" /></svg>
+      <nav class="nav-right">
+        <div class="nav-item">
+          <button class="nav-btn">Capital Projects <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+          <div class="nav-drop"><div class="nav-drop-inner">
+            <a href="#">Current Projects</a>
+            <a href="#">Completed Projects</a>
+            <a href="#">Upcoming Projects</a>
+          </div></div>
         </div>
-        <h3>Property Management</h3>
-        <p>Hines, a global real estate leader, has managed CAYMC operations since 2005 — delivering institutional-grade facility services to one of Michigan's most complex public buildings.</p>
-      </div>
-
-      <div class="ov-ops-card reveal reveal-delay-1">
-        <div class="ov-ops-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>
+        <div class="nav-item">
+          <button class="nav-btn">Real Estate <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+          <div class="nav-drop"><div class="nav-drop-inner">
+            <a href="#">Portfolio Overview</a>
+            <a href="#">Properties &amp; Listings</a>
+          </div></div>
         </div>
-        <h3>Energy &amp; Sustainability</h3>
-        <p>Three consecutive EPA Energy Star certifications and a BOMA TOBY Award recognize CAYMC's commitment to energy efficiency and sustainable building operations.</p>
-      </div>
-
-      <div class="ov-ops-card reveal reveal-delay-2">
-        <div class="ov-ops-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
+        <div class="nav-item">
+          <button class="nav-btn">Documents <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+          <div class="nav-drop"><div class="nav-drop-inner">
+            <a href="#">Public Documents</a>
+            <a href="#">Reports &amp; Policies</a>
+            <a href="#">Procurement Documents</a>
+            <a href="#">Board Materials</a>
+          </div></div>
         </div>
-        <h3>Security &amp; Access</h3>
-        <p>24/7 security operations, visitor screening, access control systems, and emergency management protocols protect thousands of daily building occupants and visitors.</p>
-      </div>
-
-      <div class="ov-ops-card reveal reveal-delay-3">
-        <div class="ov-ops-card-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" /></svg>
+        <div class="nav-item">
+          <button class="nav-btn">News <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+          <div class="nav-drop"><div class="nav-drop-inner">
+            <a href="#">All News</a>
+            <a href="#">Project Updates</a>
+            <a href="#">Procurement Notices</a>
+          </div></div>
         </div>
-        <h3>Capital Projects</h3>
-        <p>Ongoing modernization and infrastructure improvements — from elevator systems and HVAC upgrades to ADA compliance and life-safety enhancements across both towers.</p>
-      </div>
+        <div class="nav-item">
+          <button class="nav-btn">Contact <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg></button>
+          <div class="nav-drop"><div class="nav-drop-inner">
+            <a href="contact.html">Contact Us</a>
+            <a href="directory.html">Department Directory</a>
+          </div></div>
+        </div>
+        <button class="nav-search" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+        </button>
+      </nav>
 
+      <div class="mob-controls">
+        <button aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+        </button>
+        <button id="mobMenuBtn" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+        </button>
+      </div>
     </div>
-  </div>
-</section>
+  </header>
 
-
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 7 — PHOTO + QUOTE
-═══════════════════════════════════════════════════════════ -->
-<section class="ov-quote">
-  <img class="ov-quote-bg" src="images/detroit-skyline.jpg" alt="Downtown Detroit skyline" loading="lazy" />
-  <div class="ov-quote-overlay"></div>
-  <div class="ov-quote-content">
-    <blockquote class="ov-quote-text reveal">
-      &ldquo;Where the people's work gets done.&rdquo;
-    </blockquote>
-    <p class="ov-quote-attr reveal reveal-delay-1">
-      Coleman A. Young Municipal Center &middot; 2 Woodward Avenue, Detroit, MI 48226
-    </p>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION 8 — CTA
-═══════════════════════════════════════════════════════════ -->
-<section class="ov-cta">
-  <div class="wrap">
-    <h2 class="ov-cta-heading reveal">Experience CAYMC</h2>
-    <p class="ov-cta-sub reveal reveal-delay-1">
-      Visit us, explore the building directory, or talk to our AI assistant.
-    </p>
-    <div class="ov-cta-btns reveal reveal-delay-2">
-      <a href="directory.html" class="ov-cta-btn-primary">
-        Building Directory
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:15px;height:15px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-      </a>
-      <a href="contact.html" class="ov-cta-btn-secondary">Contact Us</a>
+  <div class="scrim" id="scrim"></div>
+  <nav class="mob-nav" id="mobNav">
+    <div class="mob-nav-head">
+      <span>Menu</span>
+      <button id="mobCloseBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+      </button>
     </div>
-  </div>
-</section>
+    <div class="mob-nav-body">
+      <div class="mob-group"><span class="mob-label">About</span><a class="mob-link" href="about.html">Overview</a><a class="mob-link" href="leadership.html">Leadership &amp; Governance</a></div>
+      <div class="mob-group"><span class="mob-label">CAYMC</span><a class="mob-link" href="directory.html">Departments &amp; Offices</a><a class="mob-link" href="building-directory.html">Building Directory</a><a class="mob-link" href="contact.html">Visitor Information</a></div>
+      <div class="mob-group"><span class="mob-label">Spirit of Detroit</span><a class="mob-link" href="spirit.html">Overview</a></div>
+      <div class="mob-group"><span class="mob-label">Procurement</span><a class="mob-link" href="#">Bid Opportunities</a><a class="mob-link" href="#">Vendor Resources</a></div>
+      <div class="mob-group"><span class="mob-label">Contact</span><a class="mob-link" href="contact.html">Contact Us</a><a class="mob-link" href="directory.html">Department Directory</a></div>
+    </div>
+  </nav>
 
+  <!-- ═══════════════════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════════════════ -->
+  <main>
 
-<!-- ═══════════════════════════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════════════════════════ -->
-<footer class="site-footer">
+    <!-- ── 1. INTRO ─────────────────────────────────────── -->
+    <section class="intro-section">
+      <div class="page-wrap">
+        <div class="intro-inner">
+          <span class="section-label">About the Authority</span>
+          <h1 class="intro-lead">Since 1955, the Detroit-Wayne Joint Building Authority has served as the bi-jurisdictional steward of Detroit's most critical civic infrastructure. As a public body jointly created by the City of Detroit and Wayne County, the DWJBA is responsible for managing, maintaining, and modernizing the landmark facilities that house government services, judicial operations, and public programs — serving hundreds of thousands of residents and visitors each year.</h1>
+          <p class="intro-sub">From the Coleman A. Young Municipal Center — one of the most architecturally significant government complexes in the Midwest — to the iconic Spirit of Detroit Plaza, the DWJBA operates at the intersection of civic excellence, public accountability, and community pride. Our mandate is simple: ensure that the spaces serving Detroit's government and its people are safe, efficient, and world-class.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 2. MISSION / VISION / RESPONSIBILITY ─────────── -->
+    <section class="foundation-section">
+      <div class="page-wrap">
+        <span class="section-label">Our Foundation</span>
+        <h2 class="foundation-heading">Our Mission, Vision &amp; Responsibility</h2>
+        <hr class="foundation-rule" />
+        <div class="foundation-grid">
+
+          <div class="foundation-card">
+            <span class="card-label">Mission</span>
+            <div class="card-title">Manage. Maintain.<br>Serve Detroit.</div>
+            <p class="card-body">To manage and maintain critical public facilities with excellence — ensuring safe, efficient, and reliable operations for the City of Detroit and Wayne County, every single day.</p>
+          </div>
+
+          <div class="foundation-card">
+            <span class="card-label">Vision</span>
+            <div class="card-title">A National Model for Civic Excellence.</div>
+            <p class="card-body">To set the standard for modern public infrastructure management through innovation, accountability, and an unwavering commitment to the communities we serve in Southeast Michigan.</p>
+          </div>
+
+          <div class="foundation-card">
+            <span class="card-label">Core Responsibility</span>
+            <div class="card-title">Accountable to Both City &amp; County.</div>
+            <p class="card-body">From daily operations to large-scale capital projects, we ensure that the spaces serving government, courts, and the public operate at the highest level — accountable to both governments and the public they represent.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 3. BUILDING FEATURE ───────────────────────────── -->
+    <section class="building-section">
+      <div class="page-wrap">
+        <div class="building-inner">
+
+          <!-- Left: Identity -->
+          <div class="building-identity">
+            <h2 class="building-name">Coleman A. Young<br>Municipal Center</h2>
+            <hr class="building-name-rule" />
+            <p class="building-address">2 Woodward Avenue,<br>Detroit, MI 48226</p>
+          </div>
+
+          <!-- Right: Stats + description -->
+          <div class="building-stats">
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-number">780,000<sup>SF</sup></div>
+                <div class="stat-label">Building Area</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">70</div>
+                <div class="stat-label">Years of Service</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Tower Complex</div>
+              </div>
+            </div>
+            <p class="building-desc">The Coleman A. Young Municipal Center stands as Detroit's civic crown — a twin-tower complex housing the Mayor's office, city departments, Wayne County courts, and dozens of essential public services. Managed by the DWJBA since its opening, CAYMC remains the operational heart of Detroit's government and one of the most visited buildings in Michigan.</p>
+            <a href="directory.html" class="building-cta">
+              Explore Building
+              <span class="arrow">›</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 4. PHOTO FEATURE ──────────────────────────────── -->
+    <section class="photo-section">
+      <div class="page-wrap">
+        <div class="photo-grid">
+          <div class="photo-item">
+            <img src="images/caymc-hines-1.jpg" alt="Coleman A. Young Municipal Center — exterior view" loading="lazy" />
+            <div class="photo-caption">CAYMC — Woodward Avenue Facade</div>
+          </div>
+          <div class="photo-item">
+            <img src="images/caymc-hines-2.jpg" alt="Coleman A. Young Municipal Center — architectural detail" loading="lazy" />
+            <div class="photo-caption">CAYMC — Twin Tower Complex</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 5. CTA SECTION ────────────────────────────────── -->
+    <section class="cta-section">
+      <div class="page-wrap">
+        <span class="section-label">Continue Exploring</span>
+        <h2 class="cta-heading">Learn More About<br>the Authority</h2>
+        <p class="cta-desc">Discover our facilities, review public documents, meet our leadership, or get in touch with the Detroit-Wayne Joint Building Authority.</p>
+        <div class="cta-buttons">
+          <a href="about.html" class="btn-primary">About DWJBA →</a>
+          <a href="leadership.html" class="btn-outline">Leadership &amp; Governance</a>
+          <a href="contact.html" class="btn-outline">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER — exact from footer-template.html
+  ═══════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
   <div class="footer-main">
     <div class="footer-top">
 
@@ -1296,18 +1105,18 @@
   </div>
 </footer>
 
+  <!-- Inline nav JS -->
+  
 
-<!-- ═══════════════════════════════════════════════════════════
-     SCRIPTS
-═══════════════════════════════════════════════════════════ -->
-<script>
-// ── Header scroll shadow ────────────────────────────────────
+  <!-- Chat widget -->
+  <script>
+// ── Header scroll shadow ───────────────────────────────────
 const hdr = document.getElementById('siteHeader');
 window.addEventListener('scroll', () => {
   hdr.classList.toggle('scrolled', window.scrollY > 10);
 }, { passive: true });
 
-// ── Mobile nav ──────────────────────────────────────────────
+// ── Mobile nav ────────────────────────────────────────────
 const mobNav   = document.getElementById('mobNav');
 const scrim    = document.getElementById('scrim');
 const openBtn  = document.getElementById('mobMenuBtn');
@@ -1319,55 +1128,8 @@ function closeMob() { mobNav.classList.remove('open'); scrim.classList.remove('v
 openBtn.addEventListener('click', openMob);
 closeBtn.addEventListener('click', closeMob);
 scrim.addEventListener('click', closeMob);
-
-// ── Scroll reveal ───────────────────────────────────────────
-(function initReveal() {
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        observer.unobserve(entry.target);
-      }
-    }),
-    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-  );
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-})();
-
-// ── Stat counter animation ─────────────────────────────────
-(function initCounters() {
-  const counters = document.querySelectorAll('.ov-counter');
-
-  function animateCounter(el) {
-    const target = parseInt(el.dataset.target, 10);
-    const duration = 2000; // ms
-    const startTime = performance.now();
-
-    function step(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // Ease-out cubic
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * target);
-      el.textContent = current.toLocaleString();
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        observer.unobserve(entry.target);
-      }
-    }),
-    { threshold: 0.3 }
-  );
-
-  counters.forEach(el => observer.observe(el));
-})();
 </script>
 <script src="chat-widget.js" defer></script>
+
 </body>
 </html>
