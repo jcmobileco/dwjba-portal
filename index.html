@@ -83,6 +83,34 @@
     .topbar-right a { padding:3px 7px; border-radius:4px; font-weight:600; transition:color .15s, background .15s; }
     .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
 
+    /* Google Translate Widget — Brand Styled */
+    .topbar-translate { display:flex; align-items:center; gap:6px; margin-left:12px; padding-left:12px; border-left:1px solid rgba(255,255,255,.15); }
+    .topbar-translate svg { width:13px; height:13px; color:rgba(255,255,255,.55); flex-shrink:0; }
+    #google_translate_element { line-height:1; }
+    #google_translate_element .goog-te-gadget { font-family:'Inter',sans-serif !important; color:transparent !important; font-size:0 !important; }
+    #google_translate_element .goog-te-gadget-simple { background:transparent !important; border:none !important; padding:0 !important; display:flex !important; align-items:center !important; cursor:pointer; }
+    #google_translate_element .goog-te-gadget-simple > span { display:flex !important; align-items:center !important; }
+    #google_translate_element .goog-te-gadget-simple a { color:rgba(255,255,255,.75) !important; font-size:11px !important; font-family:'Inter',sans-serif !important; font-weight:600 !important; letter-spacing:.03em; text-decoration:none !important; white-space:nowrap; }
+    #google_translate_element .goog-te-gadget-simple a span { color:rgba(255,255,255,.75) !important; font-size:11px !important; border:none !important; }
+    #google_translate_element .goog-te-gadget-simple:hover a,
+    #google_translate_element .goog-te-gadget-simple:hover a span { color:white !important; }
+    #google_translate_element .goog-te-gadget-icon { display:none !important; }
+    #google_translate_element img { display:none !important; }
+    .goog-te-menu-frame { box-shadow:0 8px 32px rgba(0,0,0,.18) !important; }
+    body > .skiptranslate { display:none !important; }
+    body { top:0 !important; }
+    /* Mobile: show only globe icon, hide text */
+    @media (max-width:639px) {
+      .topbar-translate { margin-left:8px; padding-left:8px; gap:0; }
+      #google_translate_element .goog-te-gadget-simple a span { font-size:0 !important; }
+      #google_translate_element .goog-te-gadget-simple a span:last-child { font-size:11px !important; }
+    }
+    /* Tablet: compact spacing */
+    @media (min-width:640px) and (max-width:1023px) {
+      .topbar-translate { margin-left:10px; padding-left:10px; }
+    }
+
+
     /* ════════════════════════════════════════════════════════
        HEADER
     ════════════════════════════════════════════════════════ */
@@ -1098,6 +1126,10 @@
       <a href="https://facebook.com" target="_blank" rel="noopener">FB</a>
       <a href="https://twitter.com" target="_blank" rel="noopener">X</a>
       <a href="https://linkedin.com" target="_blank" rel="noopener">LI</a>
+      <div class="topbar-translate">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <div id="google_translate_element"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -1919,5 +1951,19 @@ closeBtn.addEventListener('click', closeMob);
 scrim.addEventListener('click', closeMob);
 </script>
 <script src="chat-widget.js" defer></script>
+
+<!-- Google Translate -->
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: 'ar,bn,es,fr,hi,ja,ko,pl,pt,ro,so,sw,tl,ur,vi,zh-CN,zh-TW,am,my,ne,yo,hmn',
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
