@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About the Authority — Detroit-Wayne Joint Building Authority</title>
+  <title>CAYMC Overview — Detroit-Wayne Joint Building Authority</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     /* ═══════════════════════════════════════════════════════
        RESET & TOKENS
@@ -34,7 +34,7 @@
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--fg);
-      background: #ffffff;
+      background: #f9f7f4;
       -webkit-font-smoothing: antialiased;
       line-height: 1.6;
     }
@@ -298,84 +298,127 @@
 
 
     /* ═══════════════════════════════════════════════════════
-       ABOUT PAGE — EDITORIAL STYLES
+       SECTION 1: HERO — Full-bleed two-column
     ═══════════════════════════════════════════════════════ */
-
-    /* Section 1: Hero — Two-column */
     .about-hero {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 4rem 2rem 5rem;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
+      min-height: 70vh;
+      background: white;
     }
     @media (min-width:900px) {
       .about-hero {
         grid-template-columns: 1fr 1fr;
-        padding: 5rem 2rem 6rem;
-        gap: 4rem;
+        min-height: 80vh;
       }
-    }
-
-    .about-hero-eyebrow {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--tan);
-      margin-bottom: 1.5rem;
     }
 
     .about-hero-img {
       position: relative;
       overflow: hidden;
-      border-radius: 4px;
+      min-height: 400px;
     }
     .about-hero-img img {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
-    /* Subtle label overlay on hero image */
     .hero-img-label {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 1.5rem 2rem;
-      background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 100%);
+      padding: 2rem 2.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 100%);
       color: white;
     }
     .hero-img-label span {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .08em;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
       text-transform: uppercase;
-      opacity: .8;
+      opacity: .85;
+    }
+
+    .about-hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3.5rem 2rem;
+    }
+    @media (min-width:900px) {
+      .about-hero-content {
+        padding: 5rem 4rem 5rem 3.5rem;
+      }
+    }
+
+    .about-hero-eyebrow {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 2rem;
+      padding-bottom: .75rem;
+      border-bottom: 2px solid var(--tan);
+      align-self: flex-start;
     }
 
     .about-hero-content h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 900;
       line-height: 1.08;
       color: var(--fg);
-      margin-bottom: 1.75rem;
-      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
     }
 
     .about-hero-address {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
       font-weight: 500;
       color: var(--muted);
-      line-height: 1.35;
+      line-height: 1.5;
+      margin-bottom: 2.5rem;
     }
 
-    /* Section 2: Dual paragraph foundation story */
+    .hero-desc {
+      font-size: .925rem;
+      line-height: 1.85;
+      color: var(--fg);
+      max-width: 46ch;
+      margin-bottom: 2rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .hero-stat-num {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: var(--brown);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: .35rem;
+    }
+    .hero-stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 2: CAYMC Story — Dual paragraph
+    ═══════════════════════════════════════════════════════ */
     .about-story {
       background: var(--section-alt);
       border-top: 1px solid var(--border);
@@ -387,13 +430,15 @@
       padding: 5rem 2rem;
     }
     .about-story-eyebrow {
-      display: block;
+      display: inline-block;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: .2em;
       text-transform: uppercase;
       color: var(--tan);
       margin-bottom: 2.5rem;
+      padding-bottom: .75rem;
+      border-bottom: 2px solid var(--tan);
     }
     .about-story-cols {
       display: grid;
@@ -407,52 +452,102 @@
       }
     }
     .about-story-cols p {
-      font-size: 1rem;
-      line-height: 1.85;
+      font-size: .95rem;
+      line-height: 1.9;
       color: var(--fg);
     }
 
-    /* Section 3: Image collage strip */
+    /* ═══════════════════════════════════════════════════════
+       SECTION 3: Image Collage — 6 images, B&W, creative layout
+    ═══════════════════════════════════════════════════════ */
     .about-collage {
-      padding: 0;
+      background: var(--zinc-950);
+      padding: 5rem 0;
       overflow: hidden;
     }
+    .collage-header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .collage-header h2 {
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.02em;
+    }
+    .collage-header p {
+      font-size: .8rem;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
     .collage-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 0;
+      grid-template-rows: auto auto;
+      gap: 6px;
     }
     @media (min-width:768px) {
       .collage-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 280px 280px;
       }
     }
+
     .collage-item {
       position: relative;
       overflow: hidden;
-      aspect-ratio: 4/3;
+      border-radius: 3px;
       cursor: pointer;
+      min-height: 180px;
+    }
+    @media (min-width:768px) {
+      .collage-item:first-child {
+        grid-row: 1 / 3;
+        min-height: auto;
+      }
     }
     .collage-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform .55s cubic-bezier(.25,.46,.45,.94);
+      filter: grayscale(1) contrast(1.05);
+      transition: filter .5s cubic-bezier(.25,.46,.45,.94), transform .55s cubic-bezier(.25,.46,.45,.94);
     }
     .collage-item:hover img {
-      transform: scale(1.08);
+      filter: grayscale(0) contrast(1);
+      transform: scale(1.06);
     }
+    .collage-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.55) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .collage-item:hover .collage-item-overlay { opacity: 1; }
     .collage-item-label {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 1.25rem 1.5rem;
-      background: linear-gradient(to top, rgba(0,0,0,.6) 0%, transparent 100%);
+      padding: 1.25rem 1.25rem;
       color: white;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .05em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
       text-transform: uppercase;
       opacity: 0;
       transform: translateY(8px);
@@ -463,117 +558,123 @@
       transform: translateY(0);
     }
 
-    /* Fourth collage slot: CTA overlay */
-    .collage-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--brown);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-      cursor: pointer;
-      transition: background .3s;
-    }
-    .collage-cta:hover { background: #2a1106; }
-    .collage-cta-inner h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: .75rem;
-      line-height: 1.25;
-    }
-    .collage-cta-inner p {
-      font-size: .8rem;
-      opacity: .7;
-      margin-bottom: 1rem;
-    }
-    .collage-cta-arrow {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(255,255,255,.4);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color .3s, background .3s;
-    }
-    .collage-cta:hover .collage-cta-arrow {
-      border-color: white;
-      background: rgba(255,255,255,.12);
-    }
-    .collage-cta-arrow svg { width: 14px; height: 14px; }
 
-    /* Section 4: Building Information data grid */
+    /* ═══════════════════════════════════════════════════════
+       SECTION 4: Building Information — Creative editorial
+    ═══════════════════════════════════════════════════════ */
     .about-info {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-    }
-    .about-info-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 3.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .about-info-header h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      font-weight: 700;
-      color: var(--fg);
-      line-height: 1.15;
-    }
-    .about-info-header p {
-      font-size: .875rem;
-      color: var(--muted);
-      max-width: 32ch;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 4px;
+      background: white;
       overflow: hidden;
     }
-    @media (min-width:640px) {
-      .info-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .about-info-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width:900px) {
+      .about-info-inner {
+        grid-template-columns: 1fr 1fr;
       }
-    }
-    @media (min-width:1024px) {
-      .info-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-    .info-cell {
-      background: white;
-      padding: 2rem 1.5rem;
-    }
-    .info-cell-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: .75rem;
-    }
-    .info-cell-value {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--fg);
-      line-height: 1.4;
     }
 
-    /* Section 5: Dark map + editorial copy */
-    .about-map {
-      background: var(--zinc-950);
+    /* Left: Large feature stat */
+    .info-feature {
+      background: var(--brown);
       color: white;
+      padding: 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .info-feature::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -30%;
+      width: 70%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(196,149,106,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .info-feature-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 2rem;
+    }
+    .info-feature-num {
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: .9;
+      letter-spacing: -0.04em;
+      margin-bottom: .75rem;
+    }
+    .info-feature-unit {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.6);
+      margin-bottom: 2.5rem;
+    }
+    .info-feature-detail {
+      font-size: .875rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,.7);
+      max-width: 36ch;
+    }
+
+    /* Right: Data items */
+    .info-data {
+      padding: 4rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .info-data-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 2.5rem;
+      padding-bottom: .75rem;
+      border-bottom: 2px solid var(--tan);
+      display: inline-block;
+      align-self: flex-start;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row-label {
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .info-row-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--fg);
+      text-align: right;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 5: Location Map — Illuminated, bright
+    ═══════════════════════════════════════════════════════ */
+    .about-map {
+      background: #1a1612;
       overflow: hidden;
     }
     .about-map-inner {
@@ -591,7 +692,7 @@
 
     .about-map-visual {
       position: relative;
-      min-height: 350px;
+      min-height: 380px;
     }
     .about-map-visual iframe {
       position: absolute;
@@ -599,7 +700,14 @@
       width: 100%;
       height: 100%;
       border: 0;
-      filter: grayscale(1) invert(1) contrast(.85) brightness(.7);
+      filter: saturate(.3) brightness(1.1) contrast(1.1);
+    }
+    /* Warm glow overlay */
+    .map-glow {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(196,149,106,.12) 0%, transparent 60%);
+      pointer-events: none;
     }
 
     .about-map-content {
@@ -607,29 +715,72 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      position: relative;
     }
     @media (min-width:900px) {
       .about-map-content {
         padding: 5rem 4rem;
       }
     }
-    .about-map-content h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-      font-weight: 600;
-      font-style: italic;
-      line-height: 1.2;
+    /* Ambient glow behind text */
+    .about-map-content::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: -10%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(196,149,106,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .map-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--tan);
       margin-bottom: 2rem;
-      letter-spacing: -0.01em;
+    }
+    .about-map-content h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+      color: white;
+    }
+    .about-map-content h2 span {
+      color: var(--tan);
     }
     .about-map-content p {
-      font-size: .95rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,.72);
+      font-size: .9rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,.65);
       max-width: 44ch;
     }
+    .map-address-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      margin-top: 2rem;
+      padding: .75rem 1.25rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      color: rgba(255,255,255,.8);
+      font-size: .8rem;
+      font-weight: 600;
+    }
+    .map-address-badge svg {
+      width: 14px;
+      height: 14px;
+      color: var(--tan);
+      flex-shrink: 0;
+    }
 
-    /* Section 6: CTA section */
+    /* ═══════════════════════════════════════════════════════
+       SECTION 6: CTA
+    ═══════════════════════════════════════════════════════ */
     .about-cta {
       background: var(--section-alt);
       border-top: 1px solid var(--border);
@@ -641,7 +792,7 @@
       text-align: center;
     }
     .about-cta-eyebrow {
-      display: block;
+      display: inline-block;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: .2em;
@@ -650,19 +801,19 @@
       margin-bottom: 1.25rem;
     }
     .about-cta-inner h2 {
-      font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(1.75rem, 3vw, 2.5rem);
-      font-weight: 700;
+      font-weight: 800;
       color: var(--fg);
       margin-bottom: 1.25rem;
       line-height: 1.15;
+      letter-spacing: -0.02em;
     }
     .about-cta-inner > p {
-      font-size: .95rem;
+      font-size: .9rem;
       color: var(--muted);
       max-width: 48ch;
       margin: 0 auto 2.5rem;
-      line-height: 1.7;
+      line-height: 1.75;
     }
     .cta-buttons {
       display: flex;
@@ -883,64 +1034,35 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 1: HERO — Two-column editorial
+     SECTION 1: HERO — Full-bleed illustration left, copy right
 ═══════════════════════════════════════════════════════ -->
 <section class="about-hero">
-  <div class="about-hero-img fade-up">
-    <span class="about-hero-eyebrow">About the Authority</span>
+  <div class="about-hero-img">
     <img src="images/caymc-illustration.jpg" alt="Coleman A. Young Municipal Center — Architectural illustration" />
     <div class="hero-img-label">
       <span>Coleman A. Young Municipal Center</span>
     </div>
   </div>
-  <div class="about-hero-content fade-up" style="transition-delay:.12s">
+  <div class="about-hero-content fade-up">
+    <span class="about-hero-eyebrow">CAYMC Overview</span>
     <h1>Coleman A. Young<br>Municipal Center</h1>
     <p class="about-hero-address">
       1000 Woodward Avenue,<br>
       Detroit, MI 48226, USA
     </p>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 2: DUAL PARAGRAPH — Foundation story
-═══════════════════════════════════════════════════════ -->
-<section class="about-story">
-  <div class="about-story-inner">
-    <span class="about-story-eyebrow fade-up">About the Authority</span>
-    <div class="about-story-cols">
-      <p class="fade-up">Since 1955, the Detroit-Wayne Joint Building Authority has served as the bi-jurisdictional steward of Detroit's most critical civic infrastructure. As a public body jointly created by the City of Detroit and Wayne County, the DWJBA is responsible for managing, maintaining, and modernizing the landmark facilities that house government services, judicial operations, and public programs&nbsp;&mdash; serving hundreds of thousands of residents and visitors each year.</p>
-      <p class="fade-up" style="transition-delay:.1s">The Coleman A. Young Municipal Center stands as the architectural centerpiece of this mandate: a 670,000-square-foot complex at the foot of Woodward Avenue, flanked by the Detroit River and the city's resurgent downtown core. Since its completion in 1955, the building has anchored Detroit's civic life, housing the offices of the Mayor, City Council, 36th District Court, and dozens of essential departments that serve Wayne County's 1.7 million residents.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 3: IMAGE COLLAGE STRIP
-═══════════════════════════════════════════════════════ -->
-<section class="about-collage">
-  <div class="collage-grid">
-    <div class="collage-item fade-up">
-      <img src="images/caymc-hines-1.jpg" alt="CAYMC Exterior — Woodward Avenue" loading="lazy" />
-      <div class="collage-item-label">Woodward Facade</div>
-    </div>
-    <div class="collage-item fade-up" style="transition-delay:.08s">
-      <img src="images/caymc-historic.jpg" alt="CAYMC Historic View" loading="lazy" />
-      <div class="collage-item-label">Historic View</div>
-    </div>
-    <div class="collage-item fade-up" style="transition-delay:.16s">
-      <img src="images/caymc-snow.jpg" alt="CAYMC Winter" loading="lazy" />
-      <div class="collage-item-label">Winter on Woodward</div>
-    </div>
-    <div class="collage-cta fade-up" style="transition-delay:.24s" onclick="window.location.href='building-directory.html'">
-      <div class="collage-cta-inner">
-        <h3>Explore the Building</h3>
-        <p>Interactive floor-by-floor directory</p>
-        <span class="collage-cta-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-        </span>
+    <p class="hero-desc">The architectural centerpiece of Detroit's civic infrastructure. A 670,000-square-foot landmark complex at the foot of Woodward Avenue, housing the offices of the Mayor, City Council, 36th District Court, and over 40 departments serving Wayne County's 1.7 million residents.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">670K</div>
+        <div class="hero-stat-label">Square Feet</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">1955</div>
+        <div class="hero-stat-label">Year Built</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">40+</div>
+        <div class="hero-stat-label">Departments</div>
       </div>
     </div>
   </div>
@@ -948,52 +1070,110 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 4: BUILDING INFORMATION — Structured data grid
+     SECTION 2: CAYMC Story — About the Building
 ═══════════════════════════════════════════════════════ -->
-<section class="about-info">
-  <div class="about-info-header fade-up">
-    <h2>Building Information</h2>
-    <p>Key facts about the Coleman A. Young Municipal Center.</p>
-  </div>
-  <div class="info-grid fade-up" style="transition-delay:.1s">
-    <div class="info-cell">
-      <div class="info-cell-label">Year Built</div>
-      <div class="info-cell-value">1955</div>
-    </div>
-    <div class="info-cell">
-      <div class="info-cell-label">Architect</div>
-      <div class="info-cell-value">Harley, Ellington &amp; Day</div>
-    </div>
-    <div class="info-cell">
-      <div class="info-cell-label">Total Area</div>
-      <div class="info-cell-value">670,000 SF</div>
-    </div>
-    <div class="info-cell">
-      <div class="info-cell-label">Floors</div>
-      <div class="info-cell-value">19 Stories</div>
-    </div>
-    <div class="info-cell">
-      <div class="info-cell-label">Jurisdiction</div>
-      <div class="info-cell-value">City of Detroit &amp; Wayne County</div>
-    </div>
-    <div class="info-cell">
-      <div class="info-cell-label">Primary Use</div>
-      <div class="info-cell-value">Government &amp; Judicial</div>
-    </div>
-    <div class="info-cell">
-      <div class="info-cell-label">Annual Visitors</div>
-      <div class="info-cell-value">500,000+</div>
-    </div>
-    <div class="info-cell">
-      <div class="info-cell-label">Tenants</div>
-      <div class="info-cell-value">40+ Departments</div>
+<section class="about-story">
+  <div class="about-story-inner">
+    <span class="about-story-eyebrow fade-up">The Building</span>
+    <div class="about-story-cols">
+      <p class="fade-up">The Coleman A. Young Municipal Center stands as Detroit's premier civic landmark. Completed in 1955 and designed by the firm of Harley, Ellington &amp; Day, the 19-story tower anchors the southern terminus of Woodward Avenue&nbsp;&mdash; the city's principal boulevard and the nation's first paved highway. Its mid-century modernist design reflects the optimism of postwar Detroit, with clean limestone facades, a commanding river-facing presence, and interiors built to project institutional permanence.</p>
+      <p class="fade-up" style="transition-delay:.1s">Today, the CAYMC remains the operational core of Detroit's government. It houses the Mayor's Office, Detroit City Council chambers, the 36th District Court, the City Clerk, and dozens of departments that deliver essential services&nbsp;&mdash; from property assessments and building permits to public safety and human services. The building also serves as a civic gathering point, welcoming over 500,000 residents and visitors annually through its doors for court proceedings, municipal services, public hearings, and community events.</p>
     </div>
   </div>
 </section>
 
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 5: LOCATION MAP + Editorial Copy
+     SECTION 3: IMAGE COLLAGE — 6 images, B&W creative
+═══════════════════════════════════════════════════════ -->
+<section class="about-collage">
+  <div class="collage-header fade-up">
+    <h2>Through the Decades</h2>
+    <p>Hover to reveal</p>
+  </div>
+  <div class="collage-grid">
+    <div class="collage-item fade-up">
+      <img src="images/caymc-buildingsdb.jpg" alt="CAYMC full exterior view" loading="lazy" />
+      <div class="collage-item-overlay"></div>
+      <div class="collage-item-label">Full Exterior</div>
+    </div>
+    <div class="collage-item fade-up" style="transition-delay:.06s">
+      <img src="images/caymc-hines-1.jpg" alt="CAYMC from Woodward Avenue" loading="lazy" />
+      <div class="collage-item-overlay"></div>
+      <div class="collage-item-label">Woodward Facade</div>
+    </div>
+    <div class="collage-item fade-up" style="transition-delay:.12s">
+      <img src="images/caymc-1957-exterior.jpg" alt="CAYMC 1957 Exterior" loading="lazy" />
+      <div class="collage-item-overlay"></div>
+      <div class="collage-item-label">1957 Exterior</div>
+    </div>
+    <div class="collage-item fade-up" style="transition-delay:.18s">
+      <img src="images/caymc-construction.jpg" alt="CAYMC Under Construction ca.1953" loading="lazy" />
+      <div class="collage-item-overlay"></div>
+      <div class="collage-item-label">Construction ca. 1953</div>
+    </div>
+    <div class="collage-item fade-up" style="transition-delay:.24s">
+      <img src="images/caymc-pano-exterior.jpg" alt="CAYMC Panoramic View" loading="lazy" />
+      <div class="collage-item-overlay"></div>
+      <div class="collage-item-label">Panoramic View</div>
+    </div>
+    <div class="collage-item fade-up" style="transition-delay:.30s">
+      <img src="images/caymc-snow.jpg" alt="CAYMC Winter Scene" loading="lazy" />
+      <div class="collage-item-overlay"></div>
+      <div class="collage-item-label">Winter on Woodward</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 4: BUILDING INFORMATION — Creative split layout
+═══════════════════════════════════════════════════════ -->
+<section class="about-info">
+  <div class="about-info-inner">
+    <div class="info-feature fade-up">
+      <div class="info-feature-eyebrow">At a Glance</div>
+      <div class="info-feature-num">670,000</div>
+      <div class="info-feature-unit">Total Square Feet</div>
+      <p class="info-feature-detail">One of the largest municipal complexes in the Midwest, anchoring Detroit's civic core at the foot of Woodward Avenue since 1955.</p>
+    </div>
+    <div class="info-data fade-up" style="transition-delay:.1s">
+      <span class="info-data-title">Building Data</span>
+      <div class="info-row">
+        <span class="info-row-label">Year Completed</span>
+        <span class="info-row-value">1955</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">Architect</span>
+        <span class="info-row-value">Harley, Ellington &amp; Day</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">Height</span>
+        <span class="info-row-value">19 Stories</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">Jurisdiction</span>
+        <span class="info-row-value">City of Detroit &amp; Wayne County</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">Primary Use</span>
+        <span class="info-row-value">Government &amp; Judicial</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">Annual Visitors</span>
+        <span class="info-row-value">500,000+</span>
+      </div>
+      <div class="info-row">
+        <span class="info-row-label">Active Tenants</span>
+        <span class="info-row-value">40+ Departments</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 5: LOCATION MAP — Illuminated, bright
 ═══════════════════════════════════════════════════════ -->
 <section class="about-map">
   <div class="about-map-inner">
@@ -1005,17 +1185,23 @@
         referrerpolicy="no-referrer-when-downgrade"
         title="CAYMC Location Map">
       </iframe>
+      <div class="map-glow"></div>
     </div>
     <div class="about-map-content fade-up">
-      <h2>An unrivaled building at the foot of Woodward Avenue, anchoring Detroit's civic heart</h2>
-      <p>Bordered by the Detroit River to the south and the city's resurgent downtown core, the Coleman A. Young Municipal Center stands at the terminus of Woodward Avenue&nbsp;&mdash; Detroit's principal boulevard and the nation's first paved highway. The building commands a presence that reflects the authority and permanence of the institutions it houses.</p>
+      <div class="map-eyebrow">Location</div>
+      <h2>At the terminus of <span>Woodward Avenue</span>, anchoring Detroit's civic heart</h2>
+      <p>Bordered by the Detroit River to the south and the city's resurgent downtown core, the CAYMC stands at the foot of Woodward Avenue&nbsp;&mdash; Detroit's principal boulevard and the nation's first paved highway. The building commands a presence that reflects the authority and permanence of the institutions it houses.</p>
+      <div class="map-address-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+        1000 Woodward Avenue, Detroit, MI 48226
+      </div>
     </div>
   </div>
 </section>
 
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 6: CTA + Footer
+     SECTION 6: CTA
 ═══════════════════════════════════════════════════════ -->
 <section class="about-cta">
   <div class="about-cta-inner">
@@ -1062,77 +1248,18 @@
           </div>
         </div>
       </div>
-
       <div class="footer-nav">
-        <div class="fn-col">
-          <h3>About</h3>
-          <ul>
-            <li><a href="about.html">Overview</a></li>
-            <li><a href="about.html#leadership">Leadership &amp; Governance</a></li>
-            <li><a href="about.html#services">Services &amp; Operations</a></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>CAYMC</h3>
-          <ul>
-            <li><a href="directory.html">Building Overview</a></li>
-            <li><a href="directory.html">Departments &amp; Offices</a></li>
-            <li><a href="building-directory.html">Interactive Building Directory</a></li>
-            <li><a href="contact.html">Visitor Information</a></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>Tenants &amp; Access</h3>
-          <ul>
-            <li><a href="directory.html">Tenant Directory</a></li>
-            <li><a href="contact.html">Building Access &amp; Security</a></li>
-            <li><a href="contact.html">Visitor FAQs</a></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>Procurement</h3>
-          <ul>
-            <li><span>Overview</span></li>
-            <li><span>Bid Opportunities</span></li>
-            <li><span>Vendor Resources</span></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>Capital Projects</h3>
-          <ul>
-            <li><span>Current Projects</span></li>
-            <li><span>Completed Projects</span></li>
-            <li><span>Upcoming Projects</span></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>Real Estate</h3>
-          <ul>
-            <li><span>Portfolio Overview</span></li>
-            <li><span>Properties &amp; Listings</span></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>Documents</h3>
-          <ul>
-            <li><span>Public Documents</span></li>
-            <li><span>Reports &amp; Policies</span></li>
-            <li><span>Board Materials</span></li>
-          </ul>
-        </div>
-        <div class="fn-col">
-          <h3>News &amp; Contact</h3>
-          <ul>
-            <li><span>All News</span></li>
-            <li><span>Project Updates</span></li>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="directory.html">Department Directory</a></li>
-          </ul>
-        </div>
+        <div class="fn-col"><h3>About</h3><ul><li><a href="about.html">Overview</a></li><li><a href="about.html#leadership">Leadership &amp; Governance</a></li><li><a href="about.html#services">Services &amp; Operations</a></li></ul></div>
+        <div class="fn-col"><h3>CAYMC</h3><ul><li><a href="directory.html">Building Overview</a></li><li><a href="directory.html">Departments &amp; Offices</a></li><li><a href="building-directory.html">Interactive Building Directory</a></li><li><a href="contact.html">Visitor Information</a></li></ul></div>
+        <div class="fn-col"><h3>Tenants &amp; Access</h3><ul><li><a href="directory.html">Tenant Directory</a></li><li><a href="contact.html">Building Access &amp; Security</a></li><li><a href="contact.html">Visitor FAQs</a></li></ul></div>
+        <div class="fn-col"><h3>Procurement</h3><ul><li><span>Overview</span></li><li><span>Bid Opportunities</span></li><li><span>Vendor Resources</span></li></ul></div>
+        <div class="fn-col"><h3>Capital Projects</h3><ul><li><span>Current Projects</span></li><li><span>Completed Projects</span></li><li><span>Upcoming Projects</span></li></ul></div>
+        <div class="fn-col"><h3>Real Estate</h3><ul><li><span>Portfolio Overview</span></li><li><span>Properties &amp; Listings</span></li></ul></div>
+        <div class="fn-col"><h3>Documents</h3><ul><li><span>Public Documents</span></li><li><span>Reports &amp; Policies</span></li><li><span>Board Materials</span></li></ul></div>
+        <div class="fn-col"><h3>News &amp; Contact</h3><ul><li><span>All News</span></li><li><span>Project Updates</span></li><li><a href="contact.html">Contact Us</a></li><li><a href="directory.html">Department Directory</a></li></ul></div>
       </div>
     </div>
   </div>
-
   <div class="footer-bottom">
     <p class="footer-copy">&copy; 2026 Detroit-Wayne Joint Building Authority. All rights reserved.</p>
     <div class="footer-legal">
