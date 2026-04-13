@@ -86,7 +86,7 @@
     .tb-address { display:none; align-items:center; gap:5px; }
     @media (min-width:1024px){ .tb-address { display:flex; } }
     .topbar-right { display:flex; align-items:center; gap:2px; color:rgba(255,255,255,.55); }
-    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.35); }
+    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.55); }
     @media (min-width:640px){ .tb-connect { display:block; } }
     .topbar-right a { padding:3px 7px; border-radius:4px; font-weight:600; transition:color .15s, background .15s; }
     .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
@@ -656,7 +656,7 @@
   font-size:0.62rem; font-weight:600; padding:0.15rem 0.5rem;
   border-radius:100px; letter-spacing:0.04em;
 }
-.confidence-high { background:rgba(34,197,94,0.1); color:#16a34a; border:1px solid rgba(34,197,94,0.2); }
+.confidence-high { background:rgba(34,197,94,0.1); color:#0d7a35; border:1px solid rgba(34,197,94,0.2); }
 .confidence-suggested { background:rgba(196,149,106,0.1); color:#92600a; border:1px solid rgba(196,149,106,0.22); }
 
 /* Bubble content — LIGHT */
@@ -704,7 +704,7 @@
 .location-pill svg { width:10px; height:10px; }
 
 /* Bubble footer / time */
-.bubble-time { font-size:0.65rem; color:var(--muted); margin-top:0.5rem; opacity:0.6; }
+.bubble-time { font-size:0.65rem; color:#756b62; margin-top:0.5rem; }
 .user-time { font-size:0.65rem; color:rgba(255,255,255,0.5); margin-top:0.35rem; text-align:right; }
 
 /* Quick chips — LIGHT */
@@ -738,7 +738,7 @@
   outline:none; line-height:1.5; transition:border-color 0.2s;
   min-height:44px;
 }
-.chat-input::placeholder { color:var(--muted); opacity:0.5; }
+.chat-input::placeholder { color:#9a8b7c; }
 .chat-input:focus { border-color:var(--brown); }
 
 .voice-btn {
@@ -766,8 +766,8 @@
 .chat-send-btn svg { width:16px; height:16px; }
 
 .chat-input-footer { display:flex; align-items:center; justify-content:space-between; margin-top:0.4rem; }
-.chat-disclaimer { font-size:0.65rem; color:var(--muted); margin:0; opacity:0.5; }
-.char-counter { font-size:0.65rem; color:var(--muted); font-variant-numeric:tabular-nums; opacity:0.5; }
+.chat-disclaimer { font-size:0.65rem; color:#756b62; margin:0; }
+.char-counter { font-size:0.65rem; color:#756b62; font-variant-numeric:tabular-nums; }
 
 /* ── RIGHT INFO SIDEBAR — LIGHT ───────────────────────────────── */
 .chat-info-sidebar { display:flex; flex-direction:column; gap:0.9rem; }
@@ -793,7 +793,7 @@
   font-size:0.72rem; color:var(--muted); margin-bottom:0.75rem;
 }
 .status-dot { width:7px; height:7px; border-radius:50%; background:#22c55e; box-shadow:0 0 6px #22c55e; }
-.agent-version { font-size:0.68rem; color:var(--muted); opacity:0.5; }
+.agent-version { font-size:0.68rem; color:#756b62; }
 
 .topic-badge {
   display:inline-flex; align-items:center; gap:0.4rem;
@@ -877,7 +877,7 @@
   background:none; border:none; outline:none; color:var(--fg);
   font-family:Inter,sans-serif; font-size:0.82rem; width:100%;
 }
-.floor-search-inline input::placeholder { color:var(--muted); opacity:0.5; }
+.floor-search-inline input::placeholder { color:#9a8b7c; }
 
 /* ── 3D BODY ───────────────────────────────────────────────────── */
 .floor-3d-body {
@@ -1225,7 +1225,7 @@
   background:var(--green); padding:5rem 0;
 }
 .ai-cta-inner { text-align:center; max-width:760px; margin:0 auto; }
-.section-kicker-lt { color:rgba(255,255,255,0.7) !important; }
+.section-kicker-lt { color:rgba(255,255,255,0.88) !important; }
 .ai-cta-section h2 {
   font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem);
   color:#fff; margin:0.5rem 0 1rem;
@@ -1234,16 +1234,19 @@
 .ai-cta-stats { display:flex; gap:2rem; justify-content:center; margin-bottom:2.5rem; flex-wrap:wrap; }
 .ai-cta-stat { text-align:center; }
 .ai-cta-stat-num { display:block; font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:700; color:#fff; }
-.ai-cta-stat-label { font-size:0.77rem; color:rgba(255,255,255,0.65); }
+.ai-cta-stat-label { font-size:0.77rem; color:rgba(255,255,255,0.85); }
 .ai-cta-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
 .ai-cta-section .btn-primary { background:#fff; color:var(--green); }
 .ai-cta-section .btn-primary:hover { opacity:0.92; }
 .ai-cta-section .btn-outline { color:#fff; border-color:rgba(255,255,255,0.3); }
 .ai-cta-section .btn-outline:hover { border-color:#fff; color:#fff; }
 
-  </style>
+  
+    .skip-to-content:focus { left:0; top:0; width:auto; height:auto; overflow:visible; }
+    </style>
 </head>
 <body>
+<a href="#main-content" class="skip-to-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;padding:12px 24px;background:#3d1a08;color:#fff;font-weight:600;font-size:14px;text-decoration:none;border-radius:0 0 4px 0;transition:all .15s;">Skip to main content</a>
 
 <!-- ═══════════════════════════════════════════════════
      TOP BAR
@@ -1375,7 +1378,7 @@
           <a href="directory.html">Department Directory</a>
         </div></div>
       </div>
-      <button class="nav-search" aria-label="Search">
+      <button class="nav-search" aria-label="Search" aria-label="Search">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
       </button>
     </nav>
@@ -1399,7 +1402,7 @@
 <nav class="mob-nav" id="mobNav">
   <div class="mob-nav-head">
     <span>Menu</span>
-    <button id="mobCloseBtn">
+    <button id="mobCloseBtn" aria-label="Close menu">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
     </button>
   </div>

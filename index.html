@@ -78,7 +78,7 @@
     .tb-address { display:none; align-items:center; gap:5px; }
     @media (min-width:1024px){ .tb-address { display:flex; } }
     .topbar-right { display:flex; align-items:center; gap:2px; color:rgba(255,255,255,.55); }
-    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.35); }
+    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.55); }
     @media (min-width:640px){ .tb-connect { display:block; } }
     .topbar-right a { padding:3px 7px; border-radius:4px; font-weight:600; transition:color .15s, background .15s; }
     .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
@@ -439,7 +439,7 @@
       margin-bottom: auto;
     }
     .qa-tag { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; }
-    .qa-tag-light { color:rgba(255,255,255,.5); }
+    .qa-tag-light { color:rgba(255,255,255,.9); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
     .qa-tag-dark  { color:var(--muted); }
 
     .qa-arrow {
@@ -464,7 +464,7 @@
       margin: 1rem 0 .75rem;
       user-select: none;
     }
-    .qa-num-light { color:rgba(255,255,255,.5); }
+    .qa-num-light { color:#fff; }
     .qa-num-dark  { color:var(--muted); }
 
     .qa-title { font-size:1.125rem; font-weight:700; line-height:1.3; margin-bottom:.5rem; }
@@ -472,7 +472,7 @@
     .qa-title-dark  { color:var(--fg); }
 
     .qa-desc { font-size:.875rem; line-height:1.6; }
-    .qa-desc-light { color:rgba(255,255,255,.5); }
+    .qa-desc-light { color:rgba(255,255,255,.85); }
     .qa-desc-dark  { color:var(--muted); }
 
     /* ════════════════════════════════════════════════════════
@@ -525,7 +525,7 @@
     .about-stat-icon svg { width:32px; height:32px; color:white; }
     .about-stat-val { font-size:clamp(1.75rem,3vw,2.25rem); font-weight:900; color:white; line-height:1; margin-bottom:4px; }
     .about-stat-lbl { font-size:.875rem; font-weight:700; color:white; margin-bottom:2px; }
-    .about-stat-sub { font-size:.75rem; color:rgba(255,255,255,.7); }
+    .about-stat-sub { font-size:.75rem; color:#e8ede9; }
 
     /* ════════════════════════════════════════════════════════
        FEATURED FACILITIES
@@ -1047,10 +1047,7 @@
       font-size: .8125rem; font-weight: 600;
       color: rgba(255,255,255,.5); line-height: 1.4;
     }
-    .auth-stat-sub {
-      font-size: .6875rem; color: rgba(255,255,255,.28);
-      margin-top: .2rem; font-weight: 500;
-    }
+    .auth-stat-sub { font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.6); }
 
     /* ════════════════════════════════════════════════════════
        CTA CLOSE (new)
@@ -1064,7 +1061,7 @@
     .cta-eyebrow {
       display: block; font-size: 9px; font-weight: 700;
       text-transform: uppercase; letter-spacing: .28em;
-      color: var(--tan); margin-bottom: 1.25rem;
+      color: #8a5d36; margin-bottom: 1.25rem;
     }
     .cta-h2 {
       font-size: clamp(2rem, 4vw, 3rem);
@@ -1099,9 +1096,12 @@
     }
     .cta-btn-secondary:hover { border-color: var(--brown); color: var(--brown); }
 
-  </style>
+  
+    .skip-to-content:focus { left:0; top:0; width:auto; height:auto; overflow:visible; }
+    </style>
 </head>
 <body>
+<a href="#main-content" class="skip-to-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;padding:12px 24px;background:#3d1a08;color:#fff;font-weight:600;font-size:14px;text-decoration:none;border-radius:0 0 4px 0;transition:all .15s;">Skip to main content</a>
 
 <!-- ═══════════════════════════════════════════════════════
      TOP BAR
@@ -1234,7 +1234,7 @@
           <a href="directory.html">Department Directory</a>
         </div></div>
       </div>
-      <button class="nav-search" aria-label="Search">
+      <button class="nav-search" aria-label="Search" aria-label="Search">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
       </button>
     </nav>
@@ -1257,7 +1257,7 @@
 <nav class="mob-nav" id="mobNav">
   <div class="mob-nav-head">
     <span>Menu</span>
-    <button id="mobCloseBtn">
+    <button id="mobCloseBtn" aria-label="Close menu">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
     </button>
   </div>

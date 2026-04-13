@@ -19,7 +19,7 @@
       --cream:   #f9f7f4;
       --ink:     #1a0d06;
       --ink-mid: #5a4535;
-      --ink-lt:  #8c7360;
+      --ink-lt:  #6b5545;
       --rule:    #e5dfd8;
       --card-bg: #ffffff;
       --photo-bg:#d5d0cb;
@@ -93,7 +93,7 @@
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--tan);
+      color: #8a5d36;
       margin-bottom: 20px;
     }
     .intro-text {
@@ -238,7 +238,7 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--tan);
+      color: #8a5d36;
       margin-bottom: 3px;
     }
     .person-title {
@@ -256,13 +256,13 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--tan);
+      color: #8a5d36;
       text-decoration: none;
-      transition: gap 0.2s ease, opacity 0.2s ease;
+      transition: gap 0.2s ease, color 0.2s ease;
     }
     .view-bio:hover {
       gap: 8px;
-      opacity: 0.8;
+      color: #6d4829;
     }
     .view-bio svg {
       width: 12px;
@@ -289,7 +289,7 @@
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--tan);
+      color: #8a5d36;
       margin-bottom: 18px;
     }
     .cta-title {
@@ -386,7 +386,7 @@
     .tb-address { display:none; align-items:center; gap:5px; }
     @media (min-width:1024px){ .tb-address { display:flex; } }
     .topbar-right { display:flex; align-items:center; gap:2px; color:rgba(255,255,255,.55); }
-    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.35); }
+    .tb-connect { display:none; margin-right:.5rem; color:rgba(255,255,255,.55); }
     @media (min-width:640px){ .tb-connect { display:block; } }
     .topbar-right a { padding:3px 7px; border-radius:4px; font-weight:600; transition:color .15s, background .15s; }
     .topbar-right a:hover { color:white; background:rgba(255,255,255,.1); }
@@ -650,9 +650,12 @@
     .footer-legal-ext { display:flex; align-items:center; gap:3px; }
     .footer-legal-ext svg { width:11px; height:11px; }
 
-  </style>
+  
+    .skip-to-content:focus { left:0; top:0; width:auto; height:auto; overflow:visible; }
+    </style>
 </head>
 <body>
+<a href="#main-content" class="skip-to-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;padding:12px 24px;background:#3d1a08;color:#fff;font-weight:600;font-size:14px;text-decoration:none;border-radius:0 0 4px 0;transition:all .15s;">Skip to main content</a>
 
   <!-- ═══════════════════════════════════════════════════════
        TOPBAR + NAV
@@ -785,7 +788,7 @@
             <a href="directory.html">Department Directory</a>
           </div></div>
         </div>
-        <button class="nav-search" aria-label="Search">
+        <button class="nav-search" aria-label="Search" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
         </button>
       </nav>
@@ -808,7 +811,7 @@
   <nav class="mob-nav" id="mobNav">
     <div class="mob-nav-head">
       <span>Menu</span>
-      <button id="mobCloseBtn">
+      <button id="mobCloseBtn" aria-label="Close menu">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
       </button>
     </div>
